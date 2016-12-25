@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>basic</class>
+ <widget class="QWidget" name="basic">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>604</width>
+    <height>570</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>0</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>16777215</width>
+    <height>16777215</height>
+   </size>
+  </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string/>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>2</number>
+   </property>
+   <property name="topMargin">
+    <number>2</number>
+   </property>
+   <property name="rightMargin">
+    <number>2</number>
+   </property>
+   <property name="bottomMargin">
+    <number>2</number>
+   </property>
+   <item>
+    <widget class="QWidget" name="title" native="true">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>16777215</width>
+       <height>40</height>
+      </size>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,0,0,0,0">
+      <property name="spacing">
+       <number>12</number>
+      </property>
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>15</number>
+      </property>
+      <property name="bottomMargin">
+       <number>3</number>
+      </property>
+      <item>
+       <widget class="QWidget" name="widget" native="true">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>0</number>
+         </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="IDBImageButton" name="btn_func">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1111</width>
+          <height>1111</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="IDBImageButton" name="btn_min">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1111</width>
+          <height>1111</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="IDBImageButton" name="btn_restore">
+        <property name="maximumSize">
+         <size>
+          <width>1111</width>
+          <height>1111</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="IDBImageButton" name="btn_max">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1111</width>
+          <height>1111</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="IDBImageButton" name="btn_close">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>1111</width>
+          <height>1111</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gl_body">
+     <property name="leftMargin">
+      <number>0</number>
+     </property>
+     <property name="topMargin">
+      <number>0</number>
+     </property>
+     <property name="rightMargin">
+      <number>0</number>
+     </property>
+     <property name="bottomMargin">
+      <number>0</number>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>IDBImageButton</class>
+   <extends>QPushButton</extends>
+   <header>idbimagebutton.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
