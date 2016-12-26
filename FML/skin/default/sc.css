@@ -151,23 +151,43 @@ QSplitter::handle:vertical {
 	background-color:#323438;
 }
 
+
+QMenuBar {
+    background: transparent;
+    border:none;
+}
+QMenuBar::hover{
+    background:#505057;
+}
+QMenuBar::item {
+    spacing: 10px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    background: #3f4247;
+}
+ QMenuBar::item:selected {
+     background: #007b7a;
+ }
+ QMenuBar::item:pressed {
+     background: #046e70;
+ }
+ QMenuBar::item:hover{
+    background: #11acae;
+ }
+ 
 QMenu {
     background-color:#3f4247;
 }
-
 QMenu::item {
     background: transparent;
     padding: 4px 25px 2px 20px;
 }
-
 QMenu::item:selected {
     background:#007b7a;
 }
-
 QMenu::item:!enabled {
     color:#75777e;
 }
-
 QMenu::separator {
     height:1px;
     background:#75777e;

@@ -20,6 +20,11 @@ private slots:
 	void slotPushDemoData(const demoStruct &val);
 
 private:
+	void init();
+	void initMenuFunc();
+	void setMenu(QMenu *menu, const QString funcid);
+
+private:
     Ui::FMLClass ui;
 	bool m_showFunc;
 	DemoWebview *m_pWeball;
