@@ -59,6 +59,7 @@ namespace qutil
 
 	// »ñÈ¡xmlµÄDomÊ÷
 	const QDomDocument GetXmlDom(const QString &path);
+
 }
 
 

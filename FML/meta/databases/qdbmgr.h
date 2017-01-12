@@ -4,6 +4,7 @@
 #include <QSqlDatabase> 
 #include <QVariant>
 #include <QMap>
+#include <QMutex>
 #include "db_def.h"
 
 class QSqlQuery;
@@ -30,4 +31,5 @@ private:
 	QSqlDatabase m_sqldb;
 	QSqlQuery* m_sqlQuery;
 	QMap<QString, QString> m_tables;
+	QMutex m_dbLock;
 };

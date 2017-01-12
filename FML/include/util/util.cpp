@@ -307,6 +307,7 @@ namespace qutil
 		xmlFile.close();
 		return doc;
 	}
+
 }
 
 namespace json

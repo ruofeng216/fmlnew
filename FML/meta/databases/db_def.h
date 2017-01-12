@@ -1,3 +1,6 @@
+#pragma once
+#include <QString>
+
 #define  DB_HasTable "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='%1' AND TABLE_NAME='%2'"
 
 /////////////////////table name///////////////////////////
@@ -7,11 +10,11 @@
 
 //////////////////////////////////////////////////////////
 //////////////////////table sqls////////////////////////////////////
-#define  DB_TBSQL_LOGIN "CREATE TABLE `login` ( \
+#define  DB_TBSQL_LOGIN QString("CREATE TABLE `%1` ( \
 `user` char(50) NOT NULL, \
 `pswd` char(50) NOT NULL, \
 PRIMARY KEY(`user`) \
-) ENGINE = InnoDB DEFAULT CHARSET = utf8; "
+); ").arg(DB_TBNAME_LOGIN)
 
 
 

@@ -49,12 +49,6 @@
     <Filter Include="controller">
       <UniqueIdentifier>{71d0e5fc-c9af-43d5-bc03-6692ba7dd2b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="meta">
-      <UniqueIdentifier>{d4ed8645-222d-437f-9098-2003c4eeff8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="meta\db">
-      <UniqueIdentifier>{7995864d-ade3-4148-9a2d-8e38951f0a5d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="view\mainframe">
       <UniqueIdentifier>{5974e951-ff48-4bc2-ba20-4373cb6e2e0e}</UniqueIdentifier>
     </Filter>
@@ -72,6 +66,12 @@
     </Filter>
     <Filter Include="view\webview">
       <UniqueIdentifier>{ff7cb1c0-95ff-4345-9c90-d336f6eab87e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="meta">
+      <UniqueIdentifier>{d4ed8645-222d-437f-9098-2003c4eeff8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="meta\db">
+      <UniqueIdentifier>{7995864d-ade3-4148-9a2d-8e38951f0a5d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
