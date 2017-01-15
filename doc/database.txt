@@ -21,6 +21,38 @@ qsqlmysql.dll    release编译驱动
 
 版本文件放在对应 debug/release环境 sqldrivers 目录下面。
 
+important！！！
+驱动文件编译方式：
+
+1. 找到“Developer Command Prompt for VS2015”也即是对应的“vcvarsall.bat”路径（C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\）并cd到此处。
+2. 执行命令 vcvarsall.bat x64
+3. cd %QTDIR%\qtbase\src\plugins\sqldrivers\mysql
+qmake "INCLUDEPATH+=C:/MySQL/include" "LIBS+=C:/MYSQL/MySQL Server <version>/lib/opt/libmysql.lib" mysql.pro
+nmake 
+
+
+在nmake时，出现link fatal error时，修改Makefile.Release和Makefile.Debug（关键） 略
+INCPATH = 略 -I"c:\Program Files\MySQL\MySQL Server 5.1\include" 略 略
+LIBS = "C:\Program Files\MYSQL\MySQL Server 5.1\lib\opt\libmysql.lib" 略 略
+只要是有这个路径的地方都要加引号不然之后编译报错
+.\../../../sql/drivers/mysql/qsql_mysql.h(54) : fatal error C1083: Cannot open include file: 'mysql. h': No such file or directory
+NMAKE : fatal error U1077: 'cl' : return code '0x2'
+Stop.
+NMAKE : fatal error U1077: 'D:\c++\c++\VC98\bin\NMAKE.EXE' : return code '0x2' Stop.
+没有修改第二个则报：
+LINK : fatal error LNK1104: cannot open file "C:\Program.obj"
+NMAKE : fatal error U1077: 'link' : return code '0x450'
+Stop.
+NMAKE : fatal error U1077: 'D:\c++\c++\VC98\bin\NMAKE.EXE' : return code '0x2' Stop.
+
+
+
+
+
+
+
+
+
 //------------------------------------------------------------------
 登录前配置本地mysql环境
 数据库提前创建。
