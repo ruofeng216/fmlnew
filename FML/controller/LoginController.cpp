@@ -1,9 +1,9 @@
 #include "LoginController.h"
-
+#include "metadatabase.h"
+#include "util/pro.h"
 
 CLoginController::CLoginController()
 {
-	init();
 }
 CLoginController::~CLoginController()
 {
@@ -11,15 +11,18 @@ CLoginController::~CLoginController()
 // µÇÂ¼ÑéÖ¤
 eERR CLoginController::chkLogin(const QString &uname, const QString &pswd)
 {
-	for (QVector<CLogin>::const_iterator itor = m_logins.begin();
-		itor != m_logins.end(); itor++)
+	FUNCLOG("CLoginController::chkLogin(const QString &uname, const QString &pswd)");
+	CLogin cinfo;
+	if (METADATABASE->getLoginInfo(uname, cinfo))
 	{
-		QString u = itor->getUname();
+		const QString &u = cinfo.getUname();
 		if (u == uname)
 		{
-			QString p = itor->getPassword();
+			const QString &p = cinfo.getPassword();
 			if (p == pswd)
 			{
+				m_curLogin.setUname(uname);
+				m_curLogin.setPassword(pswd);
 				return e_Success;
 			}
 			else
@@ -31,14 +34,16 @@ eERR CLoginController::chkLogin(const QString &uname, const QString &pswd)
 // ×¢²á
 eERR CLoginController::regLogin(const QString &uname, const QString &pswd)
 {
+	FUNCLOG("CLoginController::regLogin(const QString &uname, const QString &pswd)");
 	eERR e = chkLogin(uname, pswd);
 	if (e == e_Success)
 		return e_Success;
 	if (e == e_NoUser)
 	{
-		m_logins.append(CLogin(uname, pswd));
-		// TODO: update db
-
+		if (!METADATABASE->setLoginInfo(CLogin(uname, pswd)))
+			return e_RegErr;
+		m_curLogin.setUname(uname);
+		m_curLogin.setPassword(pswd);
 		return e_Success;
 	}
 	if (e == e_ErrPswd)
@@ -48,11 +53,13 @@ eERR CLoginController::regLogin(const QString &uname, const QString &pswd)
 // ÐÞ¸ÄÃÜÂë
 eERR CLoginController::modifyLogin(const QString &uname, const QString &pswd)
 {
-	return e_Success;
-}
-
-void CLoginController::init()
-{
-	// load from database
-	m_logins.append(CLogin("root", "123456"));
+	FUNCLOG("CLoginController::modifyLogin(const QString &uname, const QString &pswd)");
+	CLogin cinfo;
+	if (METADATABASE->getLoginInfo(uname, cinfo))
+	{
+		if (!METADATABASE->updateLoginInfo(CLogin(uname, pswd)))
+			return e_ModifyErr;
+		return e_Success;
+	}
+	return e_NoUser;
 }

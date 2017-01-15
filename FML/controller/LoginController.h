@@ -15,10 +15,8 @@ public:
 	// ĞŞ¸ÄÃÜÂë
 	eERR modifyLogin(const QString &uname, const QString &pswd);
 
-protected:
-	void init();
 
 private:
-	QVector<CLogin> m_logins;
+	CLogin m_curLogin;
 };
 

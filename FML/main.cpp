@@ -57,11 +57,10 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
 		ts << _TIME_ << QString("[%1:%2:%3]").arg(context.file).arg(context.function).arg(context.line) << QString("[%1]").arg(logStr[_log]) << "[" << QThread::currentThreadId() << "]" << msg << endl;
 	}
 }
-#include "meta\databases\qdbmgr.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-	QDBMgr s("ss");
 	qInstallMessageHandler(customMessageHandler);
 #ifdef _DEBUG
 	qputenv("QTWEBENGINE_REMOTE_DEBUGGING", "9000");

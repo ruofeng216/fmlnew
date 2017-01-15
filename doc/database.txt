@@ -1,0 +1,49 @@
+//------------------------------------------------------------------
+FML\meta\databases
+	qdbmgr.h 里面的 QDBMgr 实现数据库操作封装（包括数据库持久化升级）。
+	此处持久化仅包含字段增量升级。索引与分区没有加入，逻辑比较复杂，代码难以控制。避免后面造成数据的丢失，没有加入。
+	对这部分升级，建议用sql脚本本地升级。
+	
+FML\meta\databases
+	metadatabase.h 里面的 MetaDatabase 实现数据库的操作
+	
+FML\meta\databases
+	db_def.h 里面 定义所有操作sql
+	
+
+//------------------------------------------------------------------	
+关联mysql数据库 mysql-essential-6.0.11-alpha-winx64.msi
+
+
+//------------------------------------------------------------------
+qsqlmysqld.dll   debug编译驱动
+qsqlmysql.dll    release编译驱动
+
+版本文件放在对应 debug/release环境 sqldrivers 目录下面。
+
+//------------------------------------------------------------------
+登录前配置本地mysql环境
+数据库提前创建。
+配置文件地址  config/config.ini
+配置如下：
+[DataBase]
+dbname=test                 
+host=localhost
+port=3306
+user=root
+password=123456
+DropUselessTable=false
+
+@dbname               数据库文件名               
+@host                 地址
+@port                 端口
+@user                 用户名
+@password             密码
+@DropUselessTable     是否删除无效表，默认不删，删的前提是已有版本备份。或确实不需要。此处具体逻辑，查看代码，逻辑很清晰。
+
+
+
+
+
+
+

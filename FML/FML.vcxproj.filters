@@ -55,9 +55,6 @@
     <Filter Include="view\login">
       <UniqueIdentifier>{ecd2f157-2172-49f8-99fe-52ab48d5dd09}</UniqueIdentifier>
     </Filter>
-    <Filter Include="view\viewsignalmanager">
-      <UniqueIdentifier>{2cbe2c2e-d79d-45ca-898e-417ec6993d46}</UniqueIdentifier>
-    </Filter>
     <Filter Include="view\commonui">
       <UniqueIdentifier>{89209f32-3808-4cae-946e-148c3de66b34}</UniqueIdentifier>
     </Filter>
@@ -72,6 +69,9 @@
     </Filter>
     <Filter Include="meta\db">
       <UniqueIdentifier>{7995864d-ade3-4148-9a2d-8e38951f0a5d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="viewsignalmanager">
+      <UniqueIdentifier>{2cbe2c2e-d79d-45ca-898e-417ec6993d46}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -157,15 +157,6 @@
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_view_controller.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="view\viewsignalmanager\viewsignalmanager.cpp">
-      <Filter>view\viewsignalmanager</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_viewsignalmanager.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_viewsignalmanager.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_login.cpp">
@@ -288,6 +279,24 @@
     <ClCompile Include="controller\globalsetcontroller.cpp">
       <Filter>controller</Filter>
     </ClCompile>
+    <ClCompile Include="viewsignalmanager\viewsignalmanager.cpp">
+      <Filter>viewsignalmanager</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_viewsignalmanager.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_viewsignalmanager.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_metadatabase.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_metadatabase.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="meta\databases\metadatabase.cpp">
+      <Filter>meta\db</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -331,9 +340,6 @@
     </CustomBuild>
     <CustomBuild Include="view\view_controller.h">
       <Filter>view</Filter>
-    </CustomBuild>
-    <CustomBuild Include="view\viewsignalmanager\viewsignalmanager.h">
-      <Filter>view\viewsignalmanager</Filter>
     </CustomBuild>
     <CustomBuild Include="view\login\login.ui">
       <Filter>Form Files</Filter>
@@ -421,6 +427,12 @@
     </CustomBuild>
     <CustomBuild Include="controller\globalsetcontroller.h">
       <Filter>controller</Filter>
+    </CustomBuild>
+    <CustomBuild Include="viewsignalmanager\viewsignalmanager.h">
+      <Filter>viewsignalmanager</Filter>
+    </CustomBuild>
+    <CustomBuild Include="meta\databases\metadatabase.h">
+      <Filter>meta\db</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
