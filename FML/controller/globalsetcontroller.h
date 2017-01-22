@@ -18,6 +18,8 @@ public:
 	// 获取功能info菜单
 	void getFuncInfo(const QString &funcid, CFuncInfo &funcinfo);
 
+	// 是否存在功能
+	bool isExistFuncID(const QString &funcid);
 
 	// 初始化
 	void init();

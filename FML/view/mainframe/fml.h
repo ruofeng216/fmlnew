@@ -15,9 +15,10 @@ class FML : public QMainWindow
 
 public:
     FML(QWidget *parent = Q_NULLPTR);
+	QTabWidget *getMainTab();
 	
 private slots:
-	void slotPushDemoData(const demoStruct &val);
+	void slotPopSignalWnd(int nIndex);
 
 private:
 	void init();
@@ -26,7 +27,4 @@ private:
 
 private:
     Ui::FMLClass ui;
-	bool m_showFunc;
-	DemoWebview *m_pWeball;
-	DemoWebview1 *m_pWebAdd;
 };

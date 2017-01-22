@@ -27,8 +27,12 @@ public:
 							bool bModality = false /* 是否模态 */, 
 							const QVariant& valin = QVariant()/*传入数据*/,
 							int timeout = 0);
-	QWidget* create(const QString &id, const QString &title, const QVariant &valin, const QVariant &valout);
+	QWidget* create(const QString &id, const QString &title, const QVariant &valin, QVariant &valout);
+	void createChild(const QString &id, const QString &title, const QVariant &valin);
+
+	void popOutWndFromTab(const QString &id, QWidget *wnd, QPoint p);
 	
+
 	QWidget* getWidget(const QString &id);
 	QString getIdFromContentWidget(const QWidget *contentWidget);
 
@@ -69,9 +73,12 @@ signals:
 
 	// 功能导航
 	void sigGotoFunc(const QString &funcid);
+	// 合并窗口
+	void sigMoveInWndToTab(const QString &id, QWidget *wnd);
 
 public slots:
 	void closewnd(const QString &id /* 窗口ID */, bool bdestory = true);
+	void moveInWndToTab(const QString &id, QWidget *wnd);
 	
 private slots:
 	// 退出

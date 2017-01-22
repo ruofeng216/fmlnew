@@ -31,6 +31,7 @@ ViewController::ViewController(QObject *parent)
 
 	connect(VIEWSIGNAL, &ViewSignalManager::callBackUI, this, &ViewController::slotCallBackUI, Qt::QueuedConnection);
 	connect(this, &ViewController::sigGotoFunc, this, &ViewController::slotGotoFunc);
+	connect(this, &ViewController::sigMoveInWndToTab, this, &ViewController::moveInWndToTab);
 }
 
 ViewController::~ViewController()
@@ -65,6 +66,8 @@ void ViewController::openwnd(const QString &id, const QString &title, bool bModa
 			} else {
 				pwnd->show();
 			}
+		} else {
+			createChild(id, title, valin);
 		}
 	}
 	if (m_widgets.contains(id))
@@ -86,7 +89,7 @@ void ViewController::openwndNonblocking(const QString& id, const QString& title,
 }
 
 
-QWidget* ViewController::create(const QString &id, const QString &title, const QVariant &valin, const QVariant &valout)
+QWidget* ViewController::create(const QString &id, const QString &title, const QVariant &valin, QVariant &valout)
 {
 	basicui *pwnd = NULL;
 	if (LOGIN_WINDOW_ID == id){ // 登录
@@ -114,8 +117,134 @@ QWidget* ViewController::create(const QString &id, const QString &title, const Q
 	return pwnd;
 }
 
+void ViewController::createChild(const QString &id, const QString &title, const QVariant &valin)
+{
+	// 获取主窗口
+	FML *mainWidget = (FML *)(((basicui*)getWidget(MAIN_WINDOW_ID))->getContentWidget());
+	int nCount = mainWidget->getMainTab()->count();
+	for (int i = 0; i < nCount; i++)
+	{
+		if (mainWidget->getMainTab()->widget(i) &&
+			mainWidget->getMainTab()->widget(i)->property("subwndid").toString() == id)
+		{
+			mainWidget->getMainTab()->setCurrentIndex(i);
+			showTop(MAIN_WINDOW_ID);
+			return;
+		}
+	}
+	// 创建
+	if (CONTROLMGR->getGlobalSettingInst()->isExistFuncID(id))
+	{
+		QWidget* pWidget = NULL;
+		if (id == "SysMgr_User")
+			pWidget = new QWidget;
+		else if (id == "SysMgr_WorkDay")
+			pWidget = new QWidget;
+		else if (id == "ParaMgr_Holiday")
+			pWidget = new QWidget;
+		else if (id == "ParaMgr_Union")
+			pWidget = new QWidget;
+		else if (id == "ParaMgr_Products")
+			pWidget = new QWidget;
+		else if (id == "ParaMgr_Dict")
+			pWidget = new QWidget;
+		else if (id == "YieldCurveSet_Market")
+			pWidget = new QWidget;
+		else if (id == "YieldCurveSet_Point")
+			pWidget = new QWidget;
+		else if (id == "YieldCurveSet_YieldCurve")
+			pWidget = new QWidget;
+		else if (id == "YieldCurveSet_TimeCurve")
+			pWidget = new QWidget;
+		else if (id == "YieldCurveMgr_TimeCurve")
+			pWidget = new QWidget;
+		else if (id == "YieldCurveMgr_YieldCurve")
+			pWidget = new QWidget;
+		else if (id == "YieldCurveMgr_YieldCurveAna")
+			pWidget = new QWidget;
+		else if (id == "DataImport_BondInfo")
+			pWidget = new QWidget;
+		else if (id == "DataImport_HisYieldCurve")
+			pWidget = new QWidget;
+		else if (id == "TradingParameter_BondDeal")
+			pWidget = new QWidget;
+		else if (id == "TradingParameter_BondSearch")
+			pWidget = new QWidget;
+		else if (id == "TradingParameter_IRS")
+			pWidget = new QWidget;
+		else if (id == "TradingParameter_IRSSearch")
+			pWidget = new QWidget;
+		else if (id == "TradingParameter_TBF")
+			pWidget = new QWidget;
+		else if (id == "TradingParameter_TBFSearch")
+			pWidget = new QWidget;
+		else if (id == "PortfolioMgr_UnionSearch")
+			pWidget = new QWidget;
+		else if (id == "PortfolioMgr_ScenarioAnalysis")
+			pWidget = new QWidget;
+		else if (id == "PortfolioMgr_CD")
+			pWidget = new QWidget;
+		else if (id == "PortfolioMgr_DISCD")
+			pWidget = new QWidget;
+		else if (id == "Monitor_All")
+			pWidget = new QWidget;
+		else if (id == "Monitor_WarnSet")
+			pWidget = new QWidget;
+		if (pWidget)
+		{
+			QPushButton *pp = new QPushButton(pWidget);
+			pp->setText("haha");
+			pWidget->setProperty("subwndid", id);
+			CFuncInfo finfo;
+			CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
+			int nIndex = mainWidget->getMainTab()->addTab(pWidget, finfo.getFuncName().getVal().toString());
+			mainWidget->getMainTab()->setCurrentIndex(nIndex);
+		}
+	}
+}
+
+void ViewController::popOutWndFromTab(const QString &id, QWidget *wnd, QPoint p)
+{
+	if (!m_widgets.contains(id) && 
+		CONTROLMGR->getGlobalSettingInst()->isExistFuncID(id))
+	{
+		CFuncInfo finfo;
+		CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
+		SubWidget *pwnd = new SubWidget(NULL, wnd, id, finfo.getFuncName().getVal().toString(), basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_MIN | basicui::TS_LEFT | basicui::TS_LOGO);
+		connect(pwnd, &SubWidget::sigWndMove, this, &ViewController::moveInWndToTab);
+		connect(pwnd, &SubWidget::sigClose, this, &ViewController::closewnd);
+		//获取可用桌面大小
+		QRect deskRect = QApplication::desktop()->availableGeometry();
+		pwnd->move(p);
+		pwnd->show();
+		m_widgets[id] = pwnd;
+	}
+}
+void ViewController::moveInWndToTab(const QString &id, QWidget *wnd)
+{
+	FML *mainWidget = (FML *)(((basicui*)getWidget(MAIN_WINDOW_ID))->getContentWidget());
+	if (mainWidget && 
+		m_widgets.contains(id) &&
+		CONTROLMGR->getGlobalSettingInst()->isExistFuncID(id))
+	{
+		QPoint wPos = m_widgets[id]->pos();
+		int nInsert = mainWidget->getMainTab()->tabBar()->tabAt(mainWidget->getMainTab()->tabBar()->mapFromGlobal(wPos));
+		if (nInsert != -1)
+		{
+			CFuncInfo finfo;
+			CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
+			wnd->setProperty("subwndid", id);
+			int nIndex = mainWidget->getMainTab()->insertTab(nInsert, wnd, finfo.getFuncName().getVal().toString());
+			mainWidget->getMainTab()->setCurrentIndex(nIndex);
+			mainWidget->update();
+			closewnd(id);
+		}
+	}
+}
+
 QWidget* ViewController::getWidget(const QString &id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (!id.isEmpty() && 
 		m_widgets.contains(id)) {
 		return m_widgets[id];
@@ -125,6 +254,7 @@ QWidget* ViewController::getWidget(const QString &id)
 
 QString ViewController::getIdFromContentWidget(const QWidget *contentWidget)
 {
+	QMutexLocker locker(&m_mutex);
 	QMapIterator<QString, QWidget*> iter(m_widgets);
 	while (iter.hasNext()) {
 		iter.next();
@@ -138,6 +268,7 @@ QString ViewController::getIdFromContentWidget(const QWidget *contentWidget)
 
 void ViewController::movewnd(const QString &id, const QPoint &pos)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id))
 	{
 		QWidget* pwnd = m_widgets[id];
@@ -152,6 +283,7 @@ void ViewController::movewndToCenter(const QString &id)
 
 void ViewController::movewndToCenter(const QString &id, QWidget *toWidget)
 {
+	QMutexLocker locker(&m_mutex);
 	if (!m_widgets.contains(MAIN_WINDOW_ID)) {
 		return;
 	}
@@ -177,6 +309,7 @@ void ViewController::movewndToCenter(const QString &id, QWidget *toWidget)
 
 void ViewController::resizewnd(const QString &id, const QSize &size)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id))
 	{
 		QWidget* pwnd = m_widgets[id];
@@ -186,6 +319,7 @@ void ViewController::resizewnd(const QString &id, const QSize &size)
 
 void ViewController::alertwnd(const QString &id, bool isStart)
 {
+	QMutexLocker locker(&m_mutex);
     if (m_widgets.contains(id))
 	{
 		if (isStart) {
@@ -199,6 +333,7 @@ void ViewController::alertwnd(const QString &id, bool isStart)
 
 QSize ViewController::wndsize(const QString &id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id)) {
 		return m_widgets[id]->size();
 	}
@@ -207,6 +342,7 @@ QSize ViewController::wndsize(const QString &id)
 
 QRect ViewController::wndGlobalRect(const QString &id)
 {
+	QMutexLocker locker(&m_mutex);
 	QRect globalRect;
 	if (m_widgets.contains(id)) {
 		QWidget *wnd = m_widgets[id];
@@ -220,6 +356,7 @@ QRect ViewController::wndGlobalRect(const QString &id)
 
 void ViewController::showwnd(const QString &id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id)) {
 		basicui *p = static_cast<basicui*>(m_widgets[id]);
 		p->show();
@@ -228,6 +365,7 @@ void ViewController::showwnd(const QString &id)
 
 void ViewController::hidewnd(const QString &id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id)) {
 		basicui *p = static_cast<basicui*>(m_widgets[id]);
 		p->hide();
@@ -237,6 +375,7 @@ void ViewController::hidewnd(const QString &id)
 // 窗口置顶展示
 void ViewController::showTop(const QString &wid)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(wid)) {
 		if (m_widgets[wid]->isMinimized()) {
 			qutil::showWnd((HWND)m_widgets[wid]->winId());
@@ -249,6 +388,7 @@ void ViewController::showTop(const QString &wid)
 
 void ViewController::showTopMost(const QString &wid)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(wid)) {
 		if (m_widgets[wid]->isMinimized()) {
 			qutil::showWnd((HWND)m_widgets[wid]->winId());
@@ -259,6 +399,7 @@ void ViewController::showTopMost(const QString &wid)
 
 void ViewController::cancelShowTopMost( const QString &wid )
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(wid)) {
 		qutil::cancelTopMost((HWND)m_widgets[wid]->winId());
 	}
@@ -266,6 +407,7 @@ void ViewController::cancelShowTopMost( const QString &wid )
 
 QPixmap ViewController::render(const QString &id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id)) {
 		QPixmap pixmap(m_widgets[id]->size());
 		m_widgets[id]->render(&pixmap);
@@ -313,9 +455,10 @@ void ViewController::slotCallBackUI(const CMyBasePtr val)
 // 功能导航
 void ViewController::slotGotoFunc(const QString &funcid)
 {
-	CFuncInfo cf;
-	GLBSETCTL->getFuncInfo(funcid, cf);
-	ShowWarnMessage(tr("func"), cf.getFuncName().getVal().toString(), NULL);
+	if (CONTROLMGR->getGlobalSettingInst()->isExistFuncID(funcid))
+	{
+		openwnd(funcid);
+	}
 }
 
 
@@ -324,7 +467,7 @@ void ViewController::exitProgramme(bool btips)
 	if (btips)
 	{
 	}
-
+	QMutexLocker locker(&m_mutex);
 	// 删除所有信号槽
 	disconnect(VIEWSIGNAL, 0, 0, 0);
 	for (auto iter=m_widgets.begin(); iter != m_widgets.end(); ++iter) {
@@ -347,6 +490,7 @@ void ViewController::exitProgramme(bool btips)
 // 模态显示窗口
 void ViewController::showWndModality(const QString &id /* 窗口ID */, QVariant &valout)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id))
 	{
 		QEventLoop eventLoop;
@@ -367,6 +511,7 @@ void ViewController::showWndModality(const QString &id /* 窗口ID */, QVariant &v
 // 判断主界面是否隐藏 true:hide
 bool ViewController::isMainWidgetHide(const QString id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id) && m_widgets[id]->isHidden())
 	{
 		return true;
@@ -376,6 +521,7 @@ bool ViewController::isMainWidgetHide(const QString id)
 
 bool ViewController::isMainWidgetMinimized(const QString id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id) && m_widgets[id]->isMinimized())
 	{
 		return true;
@@ -385,6 +531,7 @@ bool ViewController::isMainWidgetMinimized(const QString id)
 
 bool ViewController::isMainWidgetMaximized(const QString id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id)) {
 		return m_widgets[id]->isMaximized();
 	}
@@ -393,6 +540,7 @@ bool ViewController::isMainWidgetMaximized(const QString id)
 
 void ViewController::setMainWidgetMinimum(QSize size,const QString id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id)) {
 		m_widgets[id]->setMinimumSize(size);
 	}
@@ -400,6 +548,7 @@ void ViewController::setMainWidgetMinimum(QSize size,const QString id)
 
 void ViewController::setMainWidgetMaximum(QSize size,const QString id)
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id)) {
 		m_widgets[id]->setMaximumSize(size);
 	}
@@ -407,6 +556,7 @@ void ViewController::setMainWidgetMaximum(QSize size,const QString id)
 
 QPoint ViewController::wndpos( const QString &id )
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id))
 	{
 		return m_widgets[id]->pos();
@@ -416,6 +566,7 @@ QPoint ViewController::wndpos( const QString &id )
 
 bool ViewController::IsExist( const QString &id )
 {
+	QMutexLocker locker(&m_mutex);
 	if (m_widgets.contains(id))
 	{
 		return true;

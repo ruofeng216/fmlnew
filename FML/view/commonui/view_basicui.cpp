@@ -22,6 +22,7 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 {
 	this->setObjectName(wndid);
 	m_ui->setupUi(this);
+	
 	bool isNoTitle = m_titlestyle & TS_NONE;
 	if (!isNoTitle)
 	{
@@ -43,8 +44,8 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 	// 设置窗口销毁策略
 	setAttribute(Qt::WA_DeleteOnClose);
 	// 设置body
-	m_ui->gl_body->addWidget(contentWidget);
-	contentWidget->setMouseTracking(true);
+	m_ui->gl_body->addWidget(m_contentWidget);
+	m_contentWidget->setMouseTracking(true);
 	setWindowTitle(m_title);
 	
 	m_ui->btn_min->init(IDBResourceNS::BASICUI_TITLE_MIN);
@@ -401,4 +402,34 @@ MainWidget::MainWidget(QWidget *parent, QWidget *contentWidget, const QString &w
 }
 MainWidget::~MainWidget()
 {
+}
+
+///////////////////////////////////////////////////////////////////
+SubWidget::SubWidget(QWidget *parent, QWidget *contentWidget, const QString &wndid,
+	const QString &title, int titlestyle)
+	: basicui(parent, contentWidget, wndid, title, titlestyle)
+{
+	m_contentWidget->show();
+	m_move = startTimer(500);
+	m_pos = pos();
+}
+SubWidget::~SubWidget()
+{
+}
+void SubWidget::moveEvent(QMoveEvent *event)
+{
+	m_pos = pos();
+	QWidget::moveEvent(event);
+}
+void SubWidget::timerEvent(QTimerEvent *event)
+{
+	if (event->timerId() == m_move)
+	{
+		if (pos() == m_pos)
+		{
+			m_pos = QPoint(-9999, -9999);
+			emit sigWndMove(m_wndid, m_contentWidget);
+		}
+	}
+	QWidget::timerEvent(event);
 }

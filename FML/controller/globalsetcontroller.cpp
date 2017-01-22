@@ -44,6 +44,13 @@ void GlobalSetController::getFuncInfo(const QString &funcid, CFuncInfo &funcinfo
 	if (m_AllFunc.contains(funcid))
 		funcinfo = m_AllFunc[funcid];
 }
+
+// 是否存在功能
+bool GlobalSetController::isExistFuncID(const QString &funcid)
+{
+	return m_AllFunc.contains(funcid);
+}
+
 // 初始化
 void GlobalSetController::init()
 {

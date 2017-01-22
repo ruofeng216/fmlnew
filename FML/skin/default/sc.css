@@ -153,48 +153,57 @@ QSplitter::handle:vertical {
 
 
 QMenuBar {
-    background: transparent;
+    background: #0a2d3c;
     border:none;
+	text-align: center;
+	font-size: 14px;
 }
-QMenuBar::hover{
-    background:#505057;
-}
+
 QMenuBar::item {
-    spacing: 10px;
-    padding: 1px 5px;
-    border-radius: 2px;
-    background: #3f4247;
+    padding: 0px 10px 3px 10px;
+	margin: 3px 2px;
+    border-radius: 5px;
+    background: transparent;
 }
- QMenuBar::item:selected {
-     background: #007b7a;
- }
- QMenuBar::item:pressed {
-     background: #046e70;
- }
- QMenuBar::item:hover{
-    background: #11acae;
- }
- 
+QMenuBar::item:selected
+{
+    background: #1b4d63;
+}
+QMenuBar::item:pressed
+{
+    background: #1b4b63;
+}
+QMenuBar::item:hover
+{
+    background: #206c93;
+}
 QMenu {
-    background-color:#3f4247;
+	font-size:14px;
+	color:#e8e5d5;
+    background-color:#1b4d63;
+    text-align:center;
+    display:block;
+    float:left;
 }
 QMenu::item {
-    background: transparent;
-    padding: 4px 25px 2px 20px;
+    padding: 3px 25px 5px 20px;
+}
+QMenu::item:hover {
+    background: #fe900d;
+	margin: 0px;
+	color: #000;
 }
 QMenu::item:selected {
-    background:#007b7a;
+    background:#fe900d;
+	margin: 0px;
+	color: #000;
 }
 QMenu::item:!enabled {
     color:#75777e;
 }
 QMenu::separator {
     height:1px;
-    background:#75777e;
-}
-
-QTabWidget::pane {
-    border: 0px;
+    background:#1D99A9;
 }
 
 QLineEdit{
@@ -218,17 +227,48 @@ QLineEdit::disabled{
     color:#aaaaaa
 }
 
-QTableWidget QHeaderView::section {
-    background-color: #232326;
-
-    padding-left:20px;
-    padding-top:5px;
-    padding-bottom:5px;
-    border-top: 1px solid #3c3c41;
-    border-left:none;
-    border-right:none;
-    border-bottom: 1px solid #3c3c41;
+DragInOutTabWidget{
+    background: #000;
 }
+DragInOutTabWidget::tab-bar {
+    left: 5px;
+    height: 25px;
+}
+
+DragInOutTabBar::tab{
+    height: 25px;
+}
+
+/*
+DragInOutTabWidget{
+    background: transparent;
+    border: none;
+}
+DragInOutTabWidget::pane {
+    border-top: 2px solid #fe900d;
+}
+
+DragInOutTabBar::tab{
+    height: 25px;
+    padding: 1px 10px;
+    background: #1b4d63;
+}
+DragInOutTabBar::tab:selected{
+    color: #0b2c3d;
+    background-color: #fe900d;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+DragInOutTabBar::tab:first-child:selected{
+    color: #0b2c3d;
+    background-color: #fe900d;
+    margin-left: 0px;
+}
+DragInOutTabBar::tab:hover {
+	color: #0b2c3d;
+    background-color: #fe900d;
+}*/
+
 
 
 QTreeWidget::focus{
@@ -358,4 +398,10 @@ QListView#listDetailFunc {
 	border:none;
 }
 
+QToolTip {
+    color: #FFFFFF;
+    border-style: none;
+    background-color: #1e1e1e;
+    font-size: 12px;
+}
 

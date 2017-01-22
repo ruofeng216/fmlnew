@@ -3,35 +3,30 @@
 #include "controller/qcontrollermanager.h"
 #include "view/view_controller.h"
 
-
 FML::FML(QWidget *parent)
 	: QMainWindow(parent)
-	, m_showFunc(false)
-	, m_pWeball(NULL)
-	, m_pWebAdd(NULL)
 {
 	ui.setupUi(this);
-
-	m_pWeball = new DemoWebview(this);
-	m_pWebAdd = new DemoWebview1(this);
-
-	ui.gridLayout_3->addWidget(m_pWeball);
-	ui.gridLayout_4->addWidget(m_pWebAdd);
-
-	connect(ViewController::instance(), &ViewController::pushDemoData, this, &FML::slotPushDemoData);
-
-	m_pWeball->loadHtml(qutil::websrc("web/demo/1.html"));
-	m_pWebAdd->loadHtml(qutil::websrc("web/demo/2.html"));
+	connect(ui.tabWidget, &DragInOutTabWidget::popSignalWnd, this, &FML::slotPopSignalWnd);
+	connect(ui.tabWidget, &DragInOutTabWidget::tabCloseRequested, [this](int nIndex) {
+		ui.tabWidget->removeTab(nIndex);
+	});
 
 	init();
 }
 
-void FML::slotPushDemoData(const demoStruct &val)
+QTabWidget *FML::getMainTab()
 {
-	if (m_pWeball)
-	{
-		m_pWeball->pushDemoData(val);
-	}
+	return (QTabWidget *)ui.tabWidget;
+}
+
+void FML::slotPopSignalWnd(int nIndex)
+{
+	QString id = ui.tabWidget->currentWidget()->property("subwndid").toString();
+	ViewController::instance()->popOutWndFromTab(id, ui.tabWidget->currentWidget(), QCursor::pos());
+	qDebug() << qMax(0, qMin(nIndex, ui.tabWidget->count() - 1));
+	ui.tabWidget->setCurrentIndex(qMax(0,qMin(nIndex-1, ui.tabWidget->count()-1)));
+	update();
 }
 
 void FML::init()

@@ -297,6 +297,24 @@
     <ClCompile Include="meta\databases\metadatabase.cpp">
       <Filter>meta\db</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_draginouttabbar.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_draginouttabbar.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\commonui\draginouttabbar.cpp">
+      <Filter>view\commonui</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_draginouttabwidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_draginouttabwidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\commonui\draginouttabwidget.cpp">
+      <Filter>view\commonui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -433,6 +451,12 @@
     </CustomBuild>
     <CustomBuild Include="meta\databases\metadatabase.h">
       <Filter>meta\db</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\commonui\draginouttabbar.h">
+      <Filter>view\commonui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\commonui\draginouttabwidget.h">
+      <Filter>view\commonui</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

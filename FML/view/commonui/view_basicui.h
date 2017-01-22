@@ -37,10 +37,8 @@ public:
 	void setForbidMove(bool forbidMove);				// 禁止窗口移动
 	void setBackground(const QPixmap &bg);
 	QWidget *getContentWidget() const;
-	void setSize(QSize size);
-	void setFrameHighlight(bool isHighlight);			// 设置背景高亮
-	void forceEnableStretch();							// 强制允许拉伸，不受UI按钮影响
 
+	
 signals:
 	void sigClose(const QString &id="", bool isExit=true);
 
@@ -84,10 +82,28 @@ protected:
 
 class MainWidget : public basicui
 {
+	Q_OBJECT
 public:
 	MainWidget(QWidget *parent, QWidget *contentWidget, const QString &wndid,
 		const QString &title, int titlestyle = TS_LOGO | TS_MAX | TS_CLOSE | TS_MIN | TS_LEFT);
 	~MainWidget();
 
 
+};
+
+class SubWidget : public basicui
+{
+	Q_OBJECT
+public:
+	SubWidget(QWidget *parent, QWidget *contentWidget, const QString &wndid,
+		const QString &title, int titlestyle = TS_LOGO | TS_MAX | TS_CLOSE | TS_MIN | TS_LEFT);
+	~SubWidget();
+protected:
+	void moveEvent(QMoveEvent *event);
+	void timerEvent(QTimerEvent *event);
+signals:
+	void sigWndMove(const QString &id, QWidget *pWnd);
+private:
+	int m_move;
+	QPoint m_pos;
 };
