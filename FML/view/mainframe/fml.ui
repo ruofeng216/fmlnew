@@ -63,7 +63,7 @@
        <bool>true</bool>
       </property>
       <property name="documentMode">
-       <bool>false</bool>
+       <bool>true</bool>
       </property>
       <property name="tabsClosable">
        <bool>true</bool>
@@ -156,8 +156,6 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="fml.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

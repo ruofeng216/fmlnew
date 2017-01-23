@@ -190,10 +190,14 @@ void ViewController::createChild(const QString &id, const QString &title, const 
 			pWidget = new QWidget;
 		else if (id == "Monitor_WarnSet")
 			pWidget = new QWidget;
+		else if (id == "Monitor_TradingStrategies")
+			pWidget = new QWidget;
+		else if (id == "Monitor_MFAM")
+			pWidget = new QWidget;
 		if (pWidget)
 		{
 			QPushButton *pp = new QPushButton(pWidget);
-			pp->setText("haha");
+			pp->setText(id);
 			pWidget->setProperty("subwndid", id);
 			CFuncInfo finfo;
 			CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
@@ -211,10 +215,8 @@ void ViewController::popOutWndFromTab(const QString &id, QWidget *wnd, QPoint p)
 		CFuncInfo finfo;
 		CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
 		SubWidget *pwnd = new SubWidget(NULL, wnd, id, finfo.getFuncName().getVal().toString(), basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_MIN | basicui::TS_LEFT | basicui::TS_LOGO);
-		connect(pwnd, &SubWidget::sigWndMove, this, &ViewController::moveInWndToTab);
+		connect(pwnd, &SubWidget::sigWndMove, this, &ViewController::moveInWndToTab, Qt::QueuedConnection);
 		connect(pwnd, &SubWidget::sigClose, this, &ViewController::closewnd);
-		//获取可用桌面大小
-		QRect deskRect = QApplication::desktop()->availableGeometry();
 		pwnd->move(p);
 		pwnd->show();
 		m_widgets[id] = pwnd;
@@ -236,7 +238,6 @@ void ViewController::moveInWndToTab(const QString &id, QWidget *wnd)
 			wnd->setProperty("subwndid", id);
 			int nIndex = mainWidget->getMainTab()->insertTab(nInsert, wnd, finfo.getFuncName().getVal().toString());
 			mainWidget->getMainTab()->setCurrentIndex(nIndex);
-			mainWidget->update();
 			closewnd(id);
 		}
 	}

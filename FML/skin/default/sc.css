@@ -227,47 +227,9 @@ QLineEdit::disabled{
     color:#aaaaaa
 }
 
-DragInOutTabWidget{
-    background: #000;
-}
-DragInOutTabWidget::tab-bar {
-    left: 5px;
-    height: 25px;
-}
 
-DragInOutTabBar::tab{
-    height: 25px;
-}
 
-/*
-DragInOutTabWidget{
-    background: transparent;
-    border: none;
-}
-DragInOutTabWidget::pane {
-    border-top: 2px solid #fe900d;
-}
 
-DragInOutTabBar::tab{
-    height: 25px;
-    padding: 1px 10px;
-    background: #1b4d63;
-}
-DragInOutTabBar::tab:selected{
-    color: #0b2c3d;
-    background-color: #fe900d;
-    margin-left: -5px;
-    margin-right: -5px;
-}
-DragInOutTabBar::tab:first-child:selected{
-    color: #0b2c3d;
-    background-color: #fe900d;
-    margin-left: 0px;
-}
-DragInOutTabBar::tab:hover {
-	color: #0b2c3d;
-    background-color: #fe900d;
-}*/
 
 
 
@@ -399,9 +361,168 @@ QListView#listDetailFunc {
 }
 
 QToolTip {
-    color: #FFFFFF;
-    border-style: none;
+    color: white;
+    border: 1px solid #76797c;
     background-color: #1e1e1e;
     font-size: 12px;
+    padding: 2px;
+    opacity: 200;
 }
 
+DragInOutTabWidget{
+    border: 1px transparent;
+    background: transparent;
+}
+
+DragInOutTabWidget::pane {
+    border-top: 2px solid #ff900d;
+    border-radius: 3px;
+    padding: 5px;
+    margin: 0px;
+    background: #000;
+}
+
+DragInOutTabWidget::tab-bar{
+    height: 25px;
+    left: 5px;
+}
+DragInOutTabBar
+{
+    qproperty-drawBase: 0;
+    left: 5px; /* move to the right by 5px */
+    border-radius: 3px;
+    height: 25px;
+}
+
+DragInOutTabBar:focus
+{
+    border: 0px transparent;
+}
+
+DragInOutTabBar::close-button  {
+    image: url(:/skin/default/close);
+    background: transparent;
+}
+
+DragInOutTabBar::close-button:hover
+{
+    image: url(:/skin/default/close-hover);
+    background: transparent;
+}
+
+DragInOutTabBar::close-button:pressed {
+    image: url(:/skin/default/close-pressed);
+    background: transparent;
+}
+
+/*
+DragInOutTabBar::tab{
+    margin: 0 -5px;
+}
+DragInOutTabBar::tab:first{
+    margin: 0px;
+}*/
+/* TOP TABS */
+DragInOutTabBar::tab:top {
+    color: #0b2c3d;
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 132px;
+}
+
+DragInOutTabBar::tab:top:!selected
+{
+    color: #eff0f1;
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+}
+
+DragInOutTabBar::tab:top:!selected:hover {
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+    color: #0b2c3d;
+}
+
+/* BOTTOM TABS */
+DragInOutTabBar::tab:bottom {
+    color: #0b2c3d;
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 132px;
+}
+
+DragInOutTabBar::tab:bottom:!selected
+{
+    color: #eff0f1;
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+}
+
+DragInOutTabBar::tab:bottom:!selected:hover {
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+    color: #0b2c3d;
+}
+
+/* LEFT TABS */
+DragInOutTabBar::tab:left {
+    color: #0b2c3d;
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 132px;
+}
+
+DragInOutTabBar::tab:left:!selected
+{
+    color: #eff0f1;
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+}
+
+DragInOutTabBar::tab:left:!selected:hover {
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+    color: #0b2c3d;
+}
+
+
+/* RIGHT TABS */
+DragInOutTabBar::tab:right {
+    color: #0b2c3d;
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+    height: 25px;
+    width: 132px;
+}
+
+DragInOutTabBar::tab:right:!selected
+{
+    color: #eff0f1;
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+}
+
+DragInOutTabBar::tab:right:!selected:hover {
+    background-image: url(:/skin/default/tab);
+    background-repeat:no-repeat;
+    color: #0b2c3d;
+}
+
+DragInOutTabBar QToolButton::right-arrow:enabled {
+    image: url(:/skin/default/right_arrow);
+}
+
+DragInOutTabBar QToolButton::left-arrow:enabled {
+    image: url(:/skin/default/left_arrow);
+}
+
+DragInOutTabBar QToolButton::right-arrow:disabled {
+    image: url(:/skin/default/right_arrow_disabled);
+}
+
+DragInOutTabBar QToolButton::left-arrow:disabled {
+    image: url(:/skin/default/left_arrow_disabled);
+}

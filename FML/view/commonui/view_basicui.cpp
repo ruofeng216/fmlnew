@@ -411,7 +411,7 @@ SubWidget::SubWidget(QWidget *parent, QWidget *contentWidget, const QString &wnd
 {
 	m_contentWidget->show();
 	m_move = startTimer(500);
-	m_pos = pos();
+	m_pos = QPoint(-9999, -9999);
 }
 SubWidget::~SubWidget()
 {

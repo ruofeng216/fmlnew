@@ -7,11 +7,11 @@ FML::FML(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	connect(ui.tabWidget, &DragInOutTabWidget::popSignalWnd, this, &FML::slotPopSignalWnd);
+	connect(ui.tabWidget, &DragInOutTabWidget::popSignalWnd, this, &FML::slotPopSignalWnd, Qt::QueuedConnection);
 	connect(ui.tabWidget, &DragInOutTabWidget::tabCloseRequested, [this](int nIndex) {
 		ui.tabWidget->removeTab(nIndex);
 	});
-
+	connect(ui.tabWidget, &DragInOutTabWidget::tabBarDoubleClicked, this, &FML::slotPopSignalWndDBClk, Qt::QueuedConnection);
 	init();
 }
 
@@ -24,9 +24,14 @@ void FML::slotPopSignalWnd(int nIndex)
 {
 	QString id = ui.tabWidget->currentWidget()->property("subwndid").toString();
 	ViewController::instance()->popOutWndFromTab(id, ui.tabWidget->currentWidget(), QCursor::pos());
-	qDebug() << qMax(0, qMin(nIndex, ui.tabWidget->count() - 1));
 	ui.tabWidget->setCurrentIndex(qMax(0,qMin(nIndex-1, ui.tabWidget->count()-1)));
-	update();
+}
+void FML::slotPopSignalWndDBClk(int nIndex)
+{
+	QString id = ui.tabWidget->currentWidget()->property("subwndid").toString();
+	ViewController::instance()->popOutWndFromTab(id, ui.tabWidget->currentWidget(), 
+		QPoint(QCursor::pos().x(), QCursor::pos().y()+ ui.tabWidget->tabBar()->height() * 2));
+	ui.tabWidget->setCurrentIndex(qMax(0, qMin(nIndex - 1, ui.tabWidget->count() - 1)));
 }
 
 void FML::init()

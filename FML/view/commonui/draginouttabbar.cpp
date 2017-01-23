@@ -9,10 +9,12 @@
 DragInOutTabBar::DragInOutTabBar(QWidget *parent)
 	: QTabBar(parent)
 {
-	//setUsesScrollButtons(true);
-	//setTabsClosable(true);
-	//setMovable(true);
-	//setShape(QTabBar::TriangularNorth);
+	setUsesScrollButtons(true);
+	setTabsClosable(true);
+	setMovable(true);
+	setShape(QTabBar::TriangularNorth);
+	setElideMode(Qt::ElideRight);
+	setExpanding(true);
 	
 	m_HaveDraged = false;
 	m_MovingWidget = new QWidget;
@@ -20,7 +22,7 @@ DragInOutTabBar::DragInOutTabBar(QWidget *parent)
 	QGridLayout* layout = new QGridLayout;
 	layout->addWidget(m_MovingPic);
 	m_MovingWidget->setLayout(layout);
-	QString style = "QWidget{background-color:rgba(255,255,255,50%)};";
+	QString style = "QWidget{background-color:rgba(0,0,0,50%);background:transparent;};QLabel{background:transparent};";
 	m_MovingWidget->setStyleSheet(style);
 	m_MovingWidget->setWindowFlags(Qt::FramelessWindowHint);
 	m_MovingWidget->hide();
@@ -59,7 +61,10 @@ void DragInOutTabBar::mouseMoveEvent(QMouseEvent * event)
 void DragInOutTabBar::mouseReleaseEvent(QMouseEvent * event)
 {
 	if (event->pos().y() > height() || event->pos().y() < 0)
+	{
 		emit popSignalWnd(currentIndex());
+	}
+		
 	m_HaveDraged = false;
 	unsetCursor();
 	m_MovingWidget->hide();

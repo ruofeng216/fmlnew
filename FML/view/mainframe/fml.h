@@ -19,7 +19,7 @@ public:
 	
 private slots:
 	void slotPopSignalWnd(int nIndex);
-
+	void slotPopSignalWndDBClk(int nIndex);
 private:
 	void init();
 	void initMenuFunc();
