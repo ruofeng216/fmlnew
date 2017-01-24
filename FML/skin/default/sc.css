@@ -370,33 +370,33 @@ QToolTip {
 }
 
 DragInOutTabWidget{
-    border: 1px transparent;
     background: transparent;
 }
 
 DragInOutTabWidget::pane {
     border-top: 2px solid #ff900d;
-    border-radius: 3px;
+    border-radius: 1px;
     padding: 5px;
-    margin: 0px;
-    background: #000;
 }
 
 DragInOutTabWidget::tab-bar{
     height: 25px;
     left: 5px;
+
 }
 DragInOutTabBar
 {
     qproperty-drawBase: 0;
     left: 5px; /* move to the right by 5px */
-    border-radius: 3px;
+    border-radius: 1px;
+    background: #0a2d3c;
     height: 25px;
+    border-bottom: 2px solid #ff900d;
 }
 
 DragInOutTabBar:focus
 {
-    border: 0px transparent;
+    border-bottom: 2px solid #ff900d;
 }
 
 DragInOutTabBar::close-button  {
