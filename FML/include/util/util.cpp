@@ -5,6 +5,7 @@
 #include <QDesktopWidget>
 #include <QJsonObject>
 #include <QJsonDocument>
+#include <QSettings>
 
 namespace qutil
 {
@@ -21,18 +22,23 @@ namespace qutil
 	QString skin(const QString &name)
 	{
 		// later get skin set, now default datas
-		QString strtype = "default";
-		return QString(":/skin/%1/%2").arg(strtype).arg(name);
+		QSettings configIniRead(qBaseConfigPath(), QSettings::IniFormat);
+		QString strskin = configIniRead.value("/skin/curskin").toString().toLower();
+		QString strtype = "dark";
+		if (strskin == "dark" ||
+			strskin == "light")
+			strtype = strskin;
+		return QString(":/%1/%2").arg(strtype).arg(name);
 	}
 	QString websrc(const QString &name)
 	{
-		QString strtype = "default";
-		return QString(":/web/%1/%2").arg(strtype).arg(name);
-	}
-	QString setDef(const QString &name)
-	{
-		QString strtype = "default";
-		return QString(":/set/%1/%2").arg(strtype).arg(name);
+		QSettings configIniRead(qBaseConfigPath(), QSettings::IniFormat);
+		QString strskin = configIniRead.value("/skin/curskin").toString().toLower();
+		QString strtype = "dark";
+		if (strskin == "dark" ||
+			strskin == "light")
+			strtype = strskin;
+		return QString(":/%1/web/%2").arg(strtype).arg(name);
 	}
 
 	// ÄÚ´æÕûÀí

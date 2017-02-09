@@ -49,7 +49,7 @@ bool QmPreload::init(int argc, char *argv[])
 	//LOG_DEBUG << "qm load qss";
 
 	// qcss ╪сть
-	QFile file(qutil::skin("sc"));
+	QFile file(qutil::skin("sc.css"));
 	if (!file.exists())
 	{
 		//LOG_ERROR << "no skin file!!!";

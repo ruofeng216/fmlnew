@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>录入数据</title>
+		<link href="qrc:/web/default/web/commoncss/webkit.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="qrc:/web/default/web/commonjs/jquery.js"></script>
+		<script type="text/javascript" src="qrc:/web/default/web/commonjs/qwebchannel.js"></script>
+		<script type="text/javascript" src="qrc:/web/default/web/commonjs/webgetway.js"></script>
+        <script type="text/javascript">
+		var ismonitor = false;
+		function monitoring(obj)
+		{
+			ismonitor = !ismonitor;
+			if (ismonitor)
+			    $(obj).text("监控中");
+			else 
+			    $(obj).text("开始监控");
+			
+			var monitor = {};
+			monitor["function"] = "monitoring";
+			monitor["ismonitor"] = ismonitor;
+			CallCpp.slotHandle(monitor, function(val){});
+		};
+		
+		function adding(obj)
+		{
+			var bondid = document.getElementById("bond").value;
+			var bid = document.getElementById("bid").value;
+			var volbid = document.getElementById("volbid").value;
+			var ofr = document.getElementById("ofr").value;
+			var volofr = document.getElementById("volofr").value;
+			if (bondid.length==0 || 
+			    bid.length==0 ||
+				volbid.length==0 ||
+				ofr.length==0 ||
+				volofr.length==0)
+				alert("值不能为空！");
+			var addtail = {};
+			addtail["function"] = "adding";
+			addtail["classname"] = "DEMOSTRUCT";
+			addtail["bondid"] = bondid;
+			addtail["bid"] = bid;
+			addtail["volbid"] = volbid;
+			addtail["ofr"] = ofr;
+			addtail["volofr"] = volofr;
+			CallCpp.slotHandle(addtail, function(val){});
+		};
+            //END SETUP
+        </script>
+        <style type="text/css">
+            html {
+                height: 100%;
+                width: 100%;
+				color: white;
+				background: black;
+            }
+        </style>
+    </head>
+    <body>
+		<div style="margin: 5px auto;">
+		<button id="monitor" onclick="monitoring(this);">监控</button>
+		</div>
+		<div style="margin: 5px auto;">
+		<a>债券：</a><input id="bond"/>
+		</div>
+		<div style="margin: 5px auto;">
+		<a>Bid：</a><input id="bid"/>
+		<a>volbid：</a><input id="volbid"/>
+		</div>
+		<div style="margin: 5px auto;">
+		<a>ofr：</a><input id="ofr"/>
+		<a>volofr：</a><input id="volofr"/>
+		</div>
+		<div style="margin: 5px auto;">
+		<button id="add" onclick="adding(this);">添加</button>
+		</div>
+    </body>
+</html>

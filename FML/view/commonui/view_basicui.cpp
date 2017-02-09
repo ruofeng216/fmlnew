@@ -29,7 +29,7 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 		TitleWidget *ptitle = new TitleWidget(this);
 		bool isLogoVisible = (m_titlestyle & TS_LOGO);
 		bool isCenter = (m_titlestyle & TS_CENTER);
-		ptitle->init(isLogoVisible ? QPixmap(qutil::skin("logo")) : QPixmap(), m_title, isCenter);
+		ptitle->init(isLogoVisible ? QPixmap(qutil::skin("logo.png")) : QPixmap(), m_title, isCenter);
 		m_ui->horizontalLayout_2->addWidget(ptitle);
 	}
 	
@@ -397,7 +397,7 @@ MainWidget::MainWidget(QWidget *parent, QWidget *contentWidget, const QString &w
 	m_titlestyle = titlestyle;
 	MainTitle *ptitle = new MainTitle(this);
 	bool isLogoVisible = (m_titlestyle & TS_LOGO);
-	ptitle->init(isLogoVisible ? QPixmap(qutil::skin("logo")) : QPixmap(), m_title);
+	ptitle->init(isLogoVisible ? QPixmap(qutil::skin("logo.png")) : QPixmap(), m_title);
 	m_ui->horizontalLayout_2->addWidget(ptitle);
 }
 MainWidget::~MainWidget()

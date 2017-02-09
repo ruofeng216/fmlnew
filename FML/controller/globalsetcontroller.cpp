@@ -61,7 +61,7 @@ void GlobalSetController::init()
 // 初始化功能菜单
 void GlobalSetController::initFunc()
 {
-	QDomDocument doc = qutil::GetXmlDom(qutil::setDef("func.xml"));
+	QDomDocument doc = qutil::GetXmlDom(qutil::skin("func.xml"));
 	if (doc.isNull())
 	{
 		qDebug() << "wrong function menu settings!";

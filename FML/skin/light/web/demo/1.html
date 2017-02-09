@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>监控</title>
+		<link href="qrc:/web/default/web/commoncss/webkit.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="qrc:/web/default/web/commonjs/jquery.js"></script>
+		<script type="text/javascript" src="qrc:/web/default/web/commonjs/qwebchannel.js"></script>
+		<script type="text/javascript" src="qrc:/web/default/web/commonjs/webgetway.js"></script>
+        <script type="text/javascript">
+		$(document).ready(function () {
+			$("table").delegate("tr","click", function () {
+				$(this).parent().find("tr.focus").toggleClass("focus");//取消原先选中行
+				$(this).toggleClass("focus");//设定当前行为选中行
+			});
+			$("table").delegate("tr","webkitAnimationEnd", function () {
+				this.className = this.className.replace(/blink/g, "");
+			});
+		});
+
+            //BEGIN SETUP
+            function updateData(message)
+            {  
+                var output = document.getElementById("keylists");
+				
+				if (output.rows.length > 1000)
+				{
+					for (var i = output.rows.length-1; i >= 800; i--)
+					{
+						output.deleteRow(i);
+					}
+				}
+				
+                var datas  = $.parseJSON(message);
+
+				var row = output.insertRow(0);
+				row.className += " blink ";
+				var cell0 = row.insertCell(0);
+				cell0.innerHTML = datas.bondid;
+				var cell1 = row.insertCell(1);
+				cell1.innerHTML = datas.bid;
+				var cell2 = row.insertCell(2);
+				cell2.innerHTML = datas.volbid;
+				var cell3 = row.insertCell(3);
+				cell3.innerHTML = datas.ofr;
+				var cell4 = row.insertCell(4);
+				cell4.innerHTML = datas.volofr;
+				var cell5 = row.insertCell(5);
+				cell5.innerHTML = datas.sn;
+            } 
+            //END SETUP
+        </script>
+		
+        <style type="text/css">
+            html {
+                height: 100%;
+                width: 100%;
+				color: white;
+            }
+			table {
+    background-color:#161819;
+    color: #ffebc8;
+    width: 100%;
+	max-height: 900px;
+    text-align: center;
+    border-collapse: collapse;
+    border-spacing: 0px;
+}
+table thead th {
+    background-color:#161819;
+    color: #7B8082;
+	height: 40px;
+}
+table thead tr {
+    background-color:#161819;
+    height: 40px;
+}
+
+table tbody tr {
+    background-color:#161819;
+    height: 40px;
+}
+table tbody tr:nth-child(2n){
+    background-color:#232628;
+}
+table tbody tr:nth-child(2n+1){
+    background-color:#191b1c;
+}
+table tbody tr:nth-child(2n):hover,
+table tbody tr:nth-child(2n+1):hover {
+    background-color:#1d4243;
+}
+table tbody tr:nth-child(2n).focus,
+table tbody tr:nth-child(2n+1).focus {
+    background-color:#0d7b7b;
+}
+
+
+table tbody tr td {
+    word-break: break-all;
+}
+
+/* 定义keyframe动画，命名为blink */
+@keyframes blink{
+    0%{opacity: 1;}
+    100%{opacity: 0.5;}
+}
+/* 添加兼容性前缀 */
+@-webkit-keyframes blink {
+    0%{opacity: 1;}
+    100%{opacity: 0.5;}
+}
+@-moz-keyframes blink {
+    0%{opacity: 1;}
+    100%{opacity: 0.5;}
+}
+@-ms-keyframes blink {
+    0%{opacity: 1;}
+    100%{opacity: 0.5;}
+}
+@-o-keyframes blink {
+    0%{opacity: 1;}
+    100%{opacity: 0.5;}
+}
+/* 定义blink类*/
+.blink{
+    /* 其它浏览器兼容性前缀 */
+    -webkit-animation: blink .75s linear 3;
+    -moz-animation: blink .75s linear 3;
+    -ms-animation: blink .75s linear 3;
+    -o-animation: blink .75s linear 3;
+    animation: blink .75s linear 3;
+    background: #dd4814 !important;
+}
+
+        </style>
+    </head>
+    <body>
+		<table id="keylists">
+        </table>
+    </body>
+</html>

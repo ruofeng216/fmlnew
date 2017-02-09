@@ -315,6 +315,9 @@
     <ClCompile Include="view\commonui\draginouttabwidget.cpp">
       <Filter>view\commonui</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\qrc_skin.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -457,6 +460,9 @@
     </CustomBuild>
     <CustomBuild Include="view\commonui\draginouttabwidget.h">
       <Filter>view\commonui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="skin.qrc">
+      <Filter>Resource Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

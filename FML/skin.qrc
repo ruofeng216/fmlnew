@@ -1,0 +1,26 @@
+<RCC>
+    <qresource prefix="/dark">
+        <file alias="active.png">skin/dark/active.png</file>
+        <file alias="normal.png">skin/dark/normal.png</file>
+        <file alias="sc.css">skin/dark/sc.css</file>
+        <file alias="func.xml">skin/dark/func.xml</file>
+        <file alias="web/webkit.css">skin/dark/web/commoncss/webkit.css</file>
+        <file alias="web/jquery.js">skin/dark/web/commonjs/jquery.js</file>
+        <file alias="web/qwebchannel.js">skin/dark/web/commonjs/qwebchannel.js</file>
+        <file alias="web/uuid.js">skin/dark/web/commonjs/uuid.js</file>
+        <file alias="web/webgetway.js">skin/dark/web/commonjs/webgetway.js</file>
+        <file alias="logo.png">skin/dark/logo.png</file>
+    </qresource>
+    <qresource prefix="/light">
+        <file alias="active.png">skin/light/active.png</file>
+        <file alias="normal.png">skin/light/normal.png</file>
+        <file alias="sc.css">skin/light/sc.css</file>
+        <file alias="func.xml">skin/light/func.xml</file>
+        <file alias="web/webkit.css">skin/light/web/commoncss/webkit.css</file>
+        <file alias="web/jquery.js">skin/light/web/commonjs/jquery.js</file>
+        <file alias="web/qwebchannel.js">skin/light/web/commonjs/qwebchannel.js</file>
+        <file alias="web/uuid.js">skin/light/web/commonjs/uuid.js</file>
+        <file alias="web/webgetway.js">skin/light/web/commonjs/webgetway.js</file>
+        <file alias="logo.png">skin/light/logo.png</file>
+    </qresource>
+</RCC>
