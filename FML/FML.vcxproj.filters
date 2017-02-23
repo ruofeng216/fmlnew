@@ -318,6 +318,27 @@
     <ClCompile Include="GeneratedFiles\qrc_skin.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_mainhomepage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_mainhomepage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\mainhomepage.cpp">
+      <Filter>view\mainframe</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_paramgrholiday.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_paramgrholiday.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\paramgrholiday.cpp">
+      <Filter>view\mainframe</Filter>
+    </ClCompile>
+    <ClCompile Include="controller\ParameterSetting.cpp">
+      <Filter>controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -398,9 +419,6 @@
     <CustomBuild Include="view\commonui\message_box_widget.h">
       <Filter>view\commonui</Filter>
     </CustomBuild>
-    <CustomBuild Include="view\commonui\message_box_widget.ui">
-      <Filter>view\commonui</Filter>
-    </CustomBuild>
     <CustomBuild Include="view\mainframe\fml.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
@@ -464,8 +482,34 @@
     <CustomBuild Include="skin.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="view\mainframe\mainhomepage.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\mainhomepage.h">
+      <Filter>view\mainframe</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\paramgrholiday.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\paramgrholiday.h">
+      <Filter>view\mainframe</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\commonui\message_box_widget.ui">
+      <Filter>view\commonui</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FML.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GeneratedFiles\ui_mainhomepage.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_paramgrholiday.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controller\ParameterSetting.h">
+      <Filter>controller</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -4,6 +4,7 @@
 class QMouseEvent;
 class QLabel;
 class QWidget;
+class QPushButton;
 class DragInOutTabBar : public QTabBar
 {
 	Q_OBJECT

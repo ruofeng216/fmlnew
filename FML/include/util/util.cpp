@@ -191,6 +191,11 @@ namespace qutil
 	QString logDir() {
 		return QCoreApplication::applicationDirPath() + "/log";
 	}
+	// 获取存储配置信息
+	const QString qBaseSettingPath()
+	{
+		return QCoreApplication::applicationDirPath() + "/config/settings.xml";
+	}
 
 	// 编码转换
 	std::wstring ansi2unicode(const STRINGANSI& ansi){

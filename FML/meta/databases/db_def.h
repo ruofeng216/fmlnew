@@ -13,6 +13,7 @@
 /////////////////////table name///////////////////////////
 #ifndef TB_NAME
 #define  DB_TBNAME_LOGIN "login"
+#define  DB_TBNAME_FINANCIALCALENDAR "financialholiday"
 
 #endif // !TB_NAME
 //////////////////////////////////////////////////////////
@@ -24,14 +25,27 @@
 PRIMARY KEY(`user`) \
 ); ").arg(DB_TBNAME_LOGIN)
 
+#define  DB_TBSQL_FINANCIALCALENDAR QString("CREATE TABLE IF NOT EXISTS `%1` ( \
+`bwyear` int NOT NULL, \
+`bwdate` int NOT NULL, \
+`daytype` int NOT NULL, \
+`annotation` text NOT NULL, \
+constraint pk_finholiday PRIMARY KEY(`bwdate`) \
+); ").arg(DB_TBNAME_FINANCIALCALENDAR)
 
 #endif // !TB_CREATE
 /////////////////////////////////////////////////////////////
 ///////////////////operate sqls/////////////////////
 #ifndef TB_OPERATE
-#define DB_SQL_SelectLoginUser "SELECT * from login where `user`=?; "
-#define DB_SQL_InsertLoginUser "INSERT login(`user`, `pswd`) VALUES(?,?);"
-#define DB_SQL_UpdateLoginUser "UPDATE login SET `pswd`=? WHERE `user`=?;"
+// login
+#define DB_SQL_SelectLoginUser QString("SELECT * from %1 where `user`=?; ").arg(DB_TBNAME_LOGIN)
+#define DB_SQL_InsertLoginUser QString("INSERT %1(`user`, `pswd`) VALUES(?,?);").arg(DB_TBNAME_LOGIN)
+#define DB_SQL_UpdateLoginUser QString("UPDATE %1 SET `pswd`=? WHERE `user`=?;").arg(DB_TBNAME_LOGIN)
+
+// ½ðÈÚÈÕÀú
+#define DB_SQL_SelectFinancialHolidayByDate QString("SELECT bwdate from %1 where `bwdate`=?; ").arg(DB_TBNAME_FINANCIALCALENDAR)
+#define DB_SQL_ReplaceFinancialHoliday QString("replace into %1(bwyear,bwdate,daytype,annotation) values(?,?,?,?);").arg(DB_TBNAME_FINANCIALCALENDAR)
+#define DB_SQL_DeleteFinancialHoliday QString("delete from %1 where `bwdate`=?;").arg(DB_TBNAME_FINANCIALCALENDAR)
 #endif // !TB_OPERATE
 
 

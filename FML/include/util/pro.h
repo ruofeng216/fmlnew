@@ -59,7 +59,7 @@ typedef enum e_ErrType
 
 
 
-//////////////////////////////////
-// color
-const QString c_282D31 = "#282D31";
-const QString c_323232 = "#323232";
+/////////////////////////////////////////////////////
+// 窗口id
+const QString Main_HomePage = QString("Main_HomePage"); // home
+const QString ParaMgr_Holiday = QString("ParaMgr_Holiday"); // 金融日历

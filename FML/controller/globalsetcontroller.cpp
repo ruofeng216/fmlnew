@@ -76,8 +76,6 @@ void GlobalSetController::initFunc()
 		QDomElement itemNode = nodes.at(i).toElement();
 		getFunc(itemNode);
 	}
-
-	qDebug() << m_FuncLevel;
 }
 
 void GlobalSetController::getFunc(const QDomElement &el)

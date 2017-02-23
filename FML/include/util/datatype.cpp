@@ -192,7 +192,61 @@ bool CFuncInfo::fromJson(const QVariantMap &val)
 	return false;
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////
+CFinancialCalendar::CFinancialCalendar(int _y, int _d, EHType e, const QString &val)
+	:m_year(_y)
+	,m_date(_d)
+	,m_holidayinfo(val)
+	,m_holidayType(e)
+{
+}
+CFinancialCalendar::~CFinancialCalendar()
+{
+}
+void CFinancialCalendar::setYear(const int &val)
+{
+	m_year = val;
+}
+const int &CFinancialCalendar::getYear() const
+{
+	return m_year;
+}
+void CFinancialCalendar::setDate(const int &val)
+{
+	m_date = val;
+}
+const int &CFinancialCalendar::getDate() const
+{
+	return m_date;
+}
+void CFinancialCalendar::setHolidayType(const int &val)
+{
+	m_holidayType = EHType(val);
+}
+const int &CFinancialCalendar::CFinancialCalendar::getHolidayType() const
+{
+	return m_holidayType;
+}
+const QString CFinancialCalendar::getHolidayTypeStr() const
+{
+	switch (m_holidayType)
+	{
+	case eHoliday:
+		return QObject::tr("holiday");
+	case eWorkDay:
+		return QObject::tr("workday");
+	default:
+		return "";
+	}
+}
+void CFinancialCalendar::setHolidayinfo(const QString &val)
+{
+	m_holidayinfo = val;
+}
+const QString &CFinancialCalendar::getHolidayinfo() const
+{
+	return m_holidayinfo;
+}
 
 
 

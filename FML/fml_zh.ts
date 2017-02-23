@@ -2,32 +2,37 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="zh_CN">
 <context>
+    <name>FML</name>
+    <message>
+        <location filename="view/mainframe/fml.cpp" line="125"/>
+        <source>homepage</source>
+        <translation type="unfinished">主页</translation>
+    </message>
+</context>
+<context>
     <name>FMLClass</name>
     <message>
         <location filename="view/mainframe/fml.ui" line="20"/>
         <source>FML</source>
         <translation type="unfinished"></translation>
     </message>
+</context>
+<context>
+    <name>MainHomePage</name>
     <message>
-        <location filename="view/mainframe/fml.ui" line="52"/>
-        <source>监控</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="view/mainframe/fml.ui" line="74"/>
-        <source>录入</source>
+        <location filename="view/mainframe/mainhomepage.ui" line="14"/>
+        <source>MainHomePage</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>MainTitle</name>
     <message>
-        <location filename="view/commonui/title_widget.cpp" line="91"/>
         <source>SysBook</source>
-        <translation type="unfinished">功能目录</translation>
+        <translation type="obsolete">功能目录</translation>
     </message>
     <message>
-        <location filename="view/commonui/title_widget.cpp" line="97"/>
+        <location filename="view/commonui/title_widget.cpp" line="92"/>
         <source>Navigation function</source>
         <translation type="unfinished">功能导航</translation>
     </message>
@@ -61,6 +66,112 @@
     </message>
 </context>
 <context>
+    <name>ParaMgrHoliday</name>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.ui" line="14"/>
+        <source>ParaMgrHoliday</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.ui" line="118"/>
+        <source>年度</source>
+        <translation>年度</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.ui" line="156"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="236"/>
+        <source>TextLabel</source>
+        <translation>日期</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.ui" line="273"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="285"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="297"/>
+        <source>PushButton</source>
+        <translation>增加</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="11"/>
+        <source>add</source>
+        <translation>增加</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="12"/>
+        <source>modify</source>
+        <translation>修改</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="13"/>
+        <source>delete</source>
+        <translation>删除</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="31"/>
+        <source>hyear</source>
+        <translation>年份</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="31"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="62"/>
+        <source>holiday</source>
+        <translation>假日</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="31"/>
+        <source>holidayinfo</source>
+        <translation>假日说明</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="62"/>
+        <source>workday</source>
+        <translation type="unfinished">工作日</translation>
+    </message>
+</context>
+<context>
+    <name>QDBMgr</name>
+    <message>
+        <location filename="meta/databases/qdbmgr.cpp" line="21"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="55"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="65"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="85"/>
+        <source>Database</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="meta/databases/qdbmgr.cpp" line="21"/>
+        <source>Open DataBase Faile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="meta/databases/qdbmgr.cpp" line="55"/>
+        <source>Update DataBase Faile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="meta/databases/qdbmgr.cpp" line="65"/>
+        <source>Create table Faile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="meta/databases/qdbmgr.cpp" line="85"/>
+        <source>Get tables Faile.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>QObject</name>
+    <message>
+        <location filename="include/util/datatype.cpp" line="235"/>
+        <source>holiday</source>
+        <translation>假日</translation>
+    </message>
+    <message>
+        <location filename="include/util/datatype.cpp" line="237"/>
+        <source>workday</source>
+        <translation>工作日</translation>
+    </message>
+</context>
+<context>
     <name>QmPreload</name>
     <message>
         <location filename="qmpreload.cpp" line="73"/>
@@ -71,27 +182,19 @@
 <context>
     <name>ReloginMessageBoxWidget</name>
     <message>
-        <location filename="view/commonui/message_box_widget.cpp" line="185"/>
+        <location filename="view/commonui/message_box_widget.cpp" line="184"/>
         <source>in other terminal login</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/commonui/message_box_widget.cpp" line="186"/>
+        <location filename="view/commonui/message_box_widget.cpp" line="185"/>
         <source>switch to the computer terminal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/commonui/message_box_widget.cpp" line="195"/>
+        <location filename="view/commonui/message_box_widget.cpp" line="194"/>
         <source>login</source>
         <translation type="unfinished">登录</translation>
-    </message>
-</context>
-<context>
-    <name>ViewController</name>
-    <message>
-        <location filename="view/view_controller.cpp" line="318"/>
-        <source>func</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -110,7 +213,7 @@
         <location filename="view/login/login.cpp" line="76"/>
         <location filename="view/login/login.cpp" line="83"/>
         <source>login</source>
-        <translation>登录</translation>
+        <translation type="unfinished">登录</translation>
     </message>
     <message>
         <location filename="view/login/login.cpp" line="10"/>

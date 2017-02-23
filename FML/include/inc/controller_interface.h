@@ -30,6 +30,17 @@ public:
 	virtual bool isExistFuncID(const QString &funcid) = 0;
 };
 
+class IParameterSetting
+{
+public:
+	virtual ~IParameterSetting() = 0;
+	//////½ğÈÚÈÕÀú////
+	virtual bool isExistFinancialCalendar(const CFinancialCalendar &val) = 0;
+	virtual bool setFinancialCalendar(const CFinancialCalendar &val) = 0;
+	virtual bool removeFinancialCalendar(int val) = 0;
+	virtual bool getFinancialCalendar(QMap<int, CFinancialCalendar> &val) = 0;
+};
+
 
 
 

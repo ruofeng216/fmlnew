@@ -62,3 +62,62 @@ bool MetaDatabase::updateLoginInfo(const CLogin &uinfo)
 		return true;
 	return false;
 }
+
+// ½ðÈÚÈÕÀú
+bool MetaDatabase::isExistFinancialCalendar(const CFinancialCalendar &val)
+{
+	FUNCLOG("MetaDatabase::isExistFinancialCalendar(const CFinancialCalendar &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	paramList << val.getDate();
+	QStringList fieldList;
+	fieldList << "bwdate";
+	QList<QVariantList> results;
+	m_DbMgr->QueryFields(DB_SQL_SelectLoginUser, paramList, fieldList, results);
+	if (results.isEmpty()) return false;
+	return true;
+}
+bool MetaDatabase::setFinancialCalendar(const CFinancialCalendar &val)
+{
+	FUNCLOG("MetaDatabase::setFinancialCalendar(const CFinancialCalendar &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	paramList << val.getYear() << val.getDate() << val.getHolidayType() << val.getHolidayinfo();
+	if (m_DbMgr->ExecuteSQL(DB_SQL_ReplaceFinancialHoliday, paramList))
+		return true;
+	return false;
+}
+bool MetaDatabase::removeFinancialCalendar(int val)
+{
+	FUNCLOG("MetaDatabase::removeFinancialCalendar(int val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	paramList << val;
+	if (m_DbMgr->ExecuteSQL(DB_SQL_DeleteFinancialHoliday, paramList))
+		return true;
+	return false;
+}
+bool MetaDatabase::getFinancialCalendar(QMap<int, CFinancialCalendar> &val)
+{
+	FUNCLOG("MetaDatabase::getFinancialCalendar(const QMap<int, CFinancialCalendar> &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	QStringList fieldList;
+	fieldList << "bwyear" << "bwdate" << "daytype" << "annotation";
+	QList<QVariantList> results;
+	m_DbMgr->QueryFields(DB_SQL_SelectLoginUser, paramList, fieldList, results);
+	if (results.isEmpty()) return false;
+	for (int i = 0; i < results.size(); i++)
+	{
+		if (results[i].size() == 4)
+		{
+			CFinancialCalendar fc;
+			fc.setYear(results[i][0].toInt());
+			fc.setDate(results[i][1].toInt());
+			fc.setHolidayType(results[i][2].toInt());
+			fc.setHolidayinfo(results[i][3].toString());
+			val[fc.getDate()] = fc;
+		}
+	}
+	return true;
+}

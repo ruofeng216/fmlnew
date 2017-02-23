@@ -15,16 +15,21 @@ class FML : public QMainWindow
 
 public:
     FML(QWidget *parent = Q_NULLPTR);
+	~FML();
 	QTabWidget *getMainTab();
-	
+	void init();
+
 private slots:
 	void slotPopSignalWnd(int nIndex);
 	void slotPopSignalWndDBClk(int nIndex);
 private:
-	void init();
 	void initMenuFunc();
+	void initWidget();
 	void setMenu(QMenu *menu, const QString funcid);
+
+	void saveWidget();
 
 private:
     Ui::FMLClass ui;
+	
 };

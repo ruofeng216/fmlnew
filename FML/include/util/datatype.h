@@ -99,7 +99,28 @@ protected:
 };
 
 
-
+// ½ğÈÚÈÕÀú
+class CFinancialCalendar
+{
+public:
+	enum EHType { eHoliday=0, eWorkDay };
+	CFinancialCalendar(int _y = 0, int _d = 0, EHType e = eHoliday, const QString &val = QString());
+	~CFinancialCalendar();
+	void setYear(const int &val);
+	const int &getYear() const;
+	void setDate(const int &val);
+	const int &getDate() const;
+	void setHolidayType(const int &val);
+	const int &getHolidayType() const;
+	const QString getHolidayTypeStr() const;
+	void setHolidayinfo(const QString &val);
+	const QString &getHolidayinfo() const;
+protected:
+	int m_year;
+	int m_date;
+	EHType m_holidayType;
+	QString m_holidayinfo;
+};
 
 
 

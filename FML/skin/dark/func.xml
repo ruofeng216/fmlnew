@@ -6,7 +6,7 @@
 			<function funcid="SysMgr_WorkDay" funcname="工作日切换" funcdesc="" order="200002"/>
 		</function>
 		<function funcid="ParaMgr" funcname="参数管理" funcdesc="" order="100002">
-			<function funcid="ParaMgr_Holiday" funcname="假日管理" funcdesc="" order="200001"/>
+			<function funcid="ParaMgr_Holiday" funcname="金融日历" funcdesc="" order="200001"/>
 			<function funcid="ParaMgr_Union" funcname="组合管理" funcdesc="" order="200002"/>
 			<function funcid="ParaMgr_Products" funcname="产品管理" funcdesc="" order="200003"/>
 			<function funcid="ParaMgr_Dict" funcname="参数字典" funcdesc="" order="200004"/>

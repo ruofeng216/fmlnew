@@ -31,7 +31,7 @@ void login::loginSys()
 		ui.btn_login->setFocus();
 		return;
 	}
-	eERR er = QControllerManager::instance()->getLoginInst()->chkLogin(username, password);
+	eERR er = LONGINCTL->chkLogin(username, password);
 	if (e_Success == er)
 	{
 		ViewController::instance()->closewnd(LOGIN_WINDOW_ID);
@@ -64,7 +64,7 @@ void login::registerSys()
 		ui.btn_login->setFocus();
 		return;
 	}
-	eERR er = QControllerManager::instance()->getLoginInst()->regLogin(username, password);
+	eERR er = LONGINCTL->regLogin(username, password);
 	if (e_Success == er)
 	{
 		ViewController::instance()->closewnd(LOGIN_WINDOW_ID);

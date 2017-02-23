@@ -48,11 +48,11 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 	m_contentWidget->setMouseTracking(true);
 	setWindowTitle(m_title);
 	
-	m_ui->btn_min->init(IDBResourceNS::BASICUI_TITLE_MIN);
+	/*m_ui->btn_min->init(IDBResourceNS::BASICUI_TITLE_MIN);
 	m_ui->btn_max->init(IDBResourceNS::BASICUI_TITLE_MAX);
 	m_ui->btn_close->init(IDBResourceNS::BASICUI_TITLE_CLOSE);
 	m_ui->btn_restore->init(IDBResourceNS::BASICUI_TITLE_RESTORE);
-	m_ui->btn_func->init(IDBResourceNS::SINGLESESSION_MENU);
+	m_ui->btn_func->init(IDBResourceNS::SINGLESESSION_MENU);*/
 
 	// 最小化信号槽
 	connect(m_ui->btn_min, SIGNAL(clicked()), this, SLOT(min()));
@@ -91,10 +91,6 @@ void basicui::setTitleStyle(int titlestyle)
 	m_ui->btn_close->setVisible(m_titlestyle & TS_CLOSE);
 	bool isLogoVisible = (m_titlestyle & TS_LOGO);
 
-	if (m_titlestyle != basicui::TS_CENTER) {
-		m_ui->horizontalLayout->setContentsMargins(isLogoVisible ? 8 : 18, 0, 15, 3); // 再加上边框2px
-	}
-
 	if (TS_NONE == titlestyle) {
 		m_ui->title->hide();
 	}
@@ -122,27 +118,6 @@ QWidget *basicui::getContentWidget() const
 void basicui::paintEvent(QPaintEvent *event)
 {
 	QPainter painter(this);
-	if (TS_NONE == m_titlestyle) {
-		painter.drawPixmap(0, 0, this->width(), this->height(), m_bgImage.copy(0, m_bgImage.height()-1, m_bgImage.width(), 1));
-		return;
-	}
-	// 原图
-	painter.drawPixmap(0, 0, qMin(width(), m_bgImage.width()), qMin(height(), m_bgImage.height()), m_bgImage);
-	// 横向填充 图片宽度
-	if (m_bgImage.width() < width())
-	{
-		painter.drawPixmap(m_bgImage.width()/2, 0, width()- m_bgImage.width(), m_bgImage.height(), m_bgImage.copy(m_bgImage.width()/2, 0, 1, m_bgImage.height()));
-		painter.drawPixmap(width()- m_bgImage.width()/2-1, 0, m_bgImage.width()/2+1, m_bgImage.height(), m_bgImage.copy(m_bgImage.width()/2, 0, m_bgImage.width()/2+1, m_bgImage.height()));
-	}
-	// 纵向填充 图片长度
-	if (m_bgImage.height() < height())
-	{
-		painter.drawPixmap(1, m_bgImage.height()-1, width()-2, height()- m_bgImage.height(), m_bgImage.copy(m_bgImage.width()/2, m_bgImage.height()-2, 1, 1));
-		painter.drawPixmap(0, m_bgImage.height()-1, 1, height()- m_bgImage.height(), m_bgImage.copy(0, m_bgImage.height()-1, 1, 1));
-		painter.drawPixmap(width()-1, m_bgImage.height()-1, 1, height()- m_bgImage.height(), m_bgImage.copy(0, m_bgImage.height()-1, 1, 1));
-		painter.drawPixmap(0, height()-1, width(), 1, m_bgImage.copy(0, m_bgImage.height()-1, 1, 1));
-	}
-
 	// 窗口top圆角处理
 	int radius = 5;
 	QSize maskSize(this->size().width(), this->size().height() + radius);
@@ -307,14 +282,14 @@ bool basicui::nativeEvent(const QByteArray &eventType, void *message, long *resu
 			*result = HTBOTTOMRIGHT;
 			return true;
 		}
-		return false;
+		return QWidget::nativeEvent(eventType, message, result);
 	}
 	else if (msg->message == WM_LBUTTONUP) 
 	{
 		// 解决mouseReleaseEvent在特殊情况没有响应的问题，导致鼠标已经弹起了界面还跟着鼠标移动
 		m_blpressdown = false;
 	}
-	return false;
+	return QWidget::nativeEvent(eventType, message, result);
 }
 
 void basicui::setMaxRestoreVisible()

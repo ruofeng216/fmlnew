@@ -4,6 +4,9 @@
 #include <QGridLayout>
 #include <QMouseEvent>
 #include <QTabWidget>
+#include <QPushButton>
+#include <QDebug>
+#include "util/pro.h"
 #define MOVING_PIXMAP_SIZE 300
 
 DragInOutTabBar::DragInOutTabBar(QWidget *parent)
@@ -15,7 +18,7 @@ DragInOutTabBar::DragInOutTabBar(QWidget *parent)
 	setShape(QTabBar::TriangularNorth);
 	setElideMode(Qt::ElideRight);
 	setExpanding(true);
-	
+
 	m_HaveDraged = false;
 	m_MovingWidget = new QWidget;
 	m_MovingPic = new QLabel(m_MovingWidget);
@@ -26,10 +29,6 @@ DragInOutTabBar::DragInOutTabBar(QWidget *parent)
 	m_MovingWidget->setStyleSheet(style);
 	m_MovingWidget->setWindowFlags(Qt::FramelessWindowHint);
 	m_MovingWidget->hide();
-
-	
-
-
 }
 
 DragInOutTabBar::~DragInOutTabBar()
@@ -40,7 +39,8 @@ DragInOutTabBar::~DragInOutTabBar()
 
 void DragInOutTabBar::mousePressEvent(QMouseEvent * event)
 {
-	bool bPressedTab = event->pos().x()>0 && event->pos().x()<width() && event->pos().y()>0 && event->pos().y()<height();
+	bool bPressedTab = ((QTabWidget*)(this->parentWidget()))->currentWidget()->rect().contains(mapFromGlobal(event->pos())) &&
+		((QTabWidget*)(this->parentWidget()))->currentWidget()->property("subwndid").toString() != Main_HomePage;
 	if (bPressedTab)
 		m_HaveDraged = true;
 	QTabBar::mousePressEvent(event);

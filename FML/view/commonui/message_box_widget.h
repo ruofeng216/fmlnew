@@ -68,7 +68,7 @@ private:
 	Result m_result;
 };
 
-const QString DefaultTitle(QStringLiteral("QM提示"));
+const QString DefaultTitle(QStringLiteral("提示"));
 void ShowWarnMessage(const QString &title, const QString &content, QWidget *parent=NULL);
 void ShowErrorMessage(const QString &title, const QString &content, QWidget *parent=NULL);
 void ShowSuccessMessage(const QString &title, const QString &content, QWidget *parent=NULL);

@@ -19,7 +19,8 @@
 #include "mainframe/fml.h"
 #include "webview/webviewsever.h"
 #include "view/commonui/message_box_widget.h"
-
+#include "mainframe/paramgrholiday.h"
+#include "mainframe/mainhomepage.h"
 
 ViewController::ViewController(QObject *parent)
 	: QObject(parent)
@@ -75,6 +76,11 @@ void ViewController::openwnd(const QString &id, const QString &title, bool bModa
 		m_widgets[id]->raise();
 		m_widgets[id]->activateWindow();
 	}
+	if (id == MAIN_WINDOW_ID)
+	{
+		FML *mainWidget = (FML *)(((basicui*)getWidget(MAIN_WINDOW_ID))->getContentWidget());
+		mainWidget->init();
+	}
 }
 
 void ViewController::openwndNonblocking(const QString& id, const QString& title, bool bModality, const QVariant& valin, int timeout)
@@ -97,7 +103,6 @@ QWidget* ViewController::create(const QString &id, const QString &title, const Q
 		pwnd->resize(LOGIN_INIT_WIDTH, LOGIN_INIT_HEIGHT);
 	} else if (MAIN_WINDOW_ID == id) { // 主窗口
 		pwnd = new MainWidget(NULL, new FML(), id, title, basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_MIN | basicui::TS_LEFT | basicui::TS_LOGO);
-		//pwnd->setCloseIsHide(true);
 		//获取可用桌面大小
 		QRect deskRect = QApplication::desktop()->availableGeometry();
 		pwnd->resize(deskRect.width()*0.8>MAIN_INIT_WIDTH ? deskRect.width()*0.8 : MAIN_INIT_WIDTH,
@@ -133,15 +138,18 @@ void ViewController::createChild(const QString &id, const QString &title, const 
 		}
 	}
 	// 创建
-	if (CONTROLMGR->getGlobalSettingInst()->isExistFuncID(id))
+	if (CONTROLMGR->getGlobalSettingInst()->isExistFuncID(id) ||
+		id == Main_HomePage)
 	{
 		QWidget* pWidget = NULL;
-		if (id == "SysMgr_User")
+		if (id == Main_HomePage)
+			pWidget = new MainHomePage;
+		else if (id == "SysMgr_User")
 			pWidget = new QWidget;
 		else if (id == "SysMgr_WorkDay")
 			pWidget = new QWidget;
-		else if (id == "ParaMgr_Holiday")
-			pWidget = new QWidget;
+		else if (id == ParaMgr_Holiday)
+			pWidget = new ParaMgrHoliday;
 		else if (id == "ParaMgr_Union")
 			pWidget = new QWidget;
 		else if (id == "ParaMgr_Products")
@@ -196,8 +204,6 @@ void ViewController::createChild(const QString &id, const QString &title, const 
 			pWidget = new QWidget;
 		if (pWidget)
 		{
-			QPushButton *pp = new QPushButton(pWidget);
-			pp->setText(id);
 			pWidget->setProperty("subwndid", id);
 			CFuncInfo finfo;
 			CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
@@ -225,7 +231,7 @@ void ViewController::popOutWndFromTab(const QString &id, QWidget *wnd, QPoint p)
 void ViewController::moveInWndToTab(const QString &id, QWidget *wnd)
 {
 	FML *mainWidget = (FML *)(((basicui*)getWidget(MAIN_WINDOW_ID))->getContentWidget());
-	if (mainWidget && 
+	if (mainWidget && getWidget(MAIN_WINDOW_ID)->isVisible() && !getWidget(MAIN_WINDOW_ID)->isMinimized() &&
 		m_widgets.contains(id) &&
 		CONTROLMGR->getGlobalSettingInst()->isExistFuncID(id))
 	{
@@ -456,7 +462,8 @@ void ViewController::slotCallBackUI(const CMyBasePtr val)
 // 功能导航
 void ViewController::slotGotoFunc(const QString &funcid)
 {
-	if (CONTROLMGR->getGlobalSettingInst()->isExistFuncID(funcid))
+	if (CONTROLMGR->getGlobalSettingInst()->isExistFuncID(funcid) || 
+		funcid == Main_HomePage)
 	{
 		openwnd(funcid);
 	}

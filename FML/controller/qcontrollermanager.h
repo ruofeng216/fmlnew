@@ -2,7 +2,6 @@
 
 #include <QObject>
 #include "inc/controller_interface.h"
-#include "globalsetcontroller.h"
 
 
 #include "democrawler.h"
@@ -13,7 +12,7 @@
 #define CONTROLMGR QControllerManager::instance()
 #define LONGINCTL QControllerManager::instance()->getLoginInst()
 #define GLBSETCTL QControllerManager::instance()->getGlobalSettingInst()
-
+#define PARASETCTL QControllerManager::instance()->getParameterSetting()
 
 class QControllerManager : public QObject
 {
@@ -30,7 +29,7 @@ public:
 
 	ILogin *getLoginInst();
 	IGlobalSetting *getGlobalSettingInst();
-
+	IParameterSetting *getParameterSetting();
 
 	IDemo *getDemoInst();
 
@@ -42,7 +41,7 @@ private:
 
 	ILogin *m_pLoginCtrl;
 	IGlobalSetting *m_pGlobalSetting;
-
+	IParameterSetting *m_pParameterSetting;
 
 
 	IDemo *m_pDemo;

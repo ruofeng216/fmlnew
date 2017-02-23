@@ -42,6 +42,8 @@ namespace qutil
 	STRINGUTF8 getExceptionHandlerPath();
 	// 日志路径
 	QString logDir();
+	// 获取存储配置信息
+	const QString qBaseSettingPath();
 
 	// 编码转换
 	std::wstring ansi2unicode(const STRINGANSI& ansi);

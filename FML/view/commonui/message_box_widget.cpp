@@ -31,19 +31,19 @@ void MessageBoxWidget::setIconType(IconType type)
 	QPixmap pixmap;
 	if (Question == type)
 	{
-		pixmap.load(qutil::skin("msgbox_confirm"));
+		pixmap.load(qutil::skin("msgbox_confirm.png"));
 	}
 	else if (Information == type)
 	{
-		pixmap.load(qutil::skin("msgbox_success"));
+		pixmap.load(qutil::skin("msgbox_success.png"));
 	}
 	else if (Warning == type)
 	{
-		pixmap.load(qutil::skin("msgbox_caution"));
+		pixmap.load(qutil::skin("msgbox_caution.png"));
 	}
 	else if (Critical == type)
 	{
-		pixmap.load(qutil::skin("msgbox_error"));
+		pixmap.load(qutil::skin("msgbox_error.png"));
 	}
 	pixmap=pixmap.scaled(QSize(24,24),Qt::KeepAspectRatio);
 	ui->labelIcon->setPixmap(pixmap);
@@ -109,7 +109,6 @@ static MessageBoxWidget::Result ShowMessage(const QString &title, const QString 
 {
 	MessageBoxWidget *msgBox = new MessageBoxWidget(parent);
 	QPointer<MessageBoxWidget> pMsgBox(msgBox); 
-	msgBox->setBackgroundColor(QColor(c_323232));
 	msgBox->setAttribute(Qt::WA_ShowModal, true);
 	msgBox->setIconType(iconType);
 	msgBox->setButtonType(buttonType);

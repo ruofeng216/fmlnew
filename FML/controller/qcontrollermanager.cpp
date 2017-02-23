@@ -1,6 +1,10 @@
 #include "qcontrollermanager.h"
 #include "LoginController.h"
+#include "globalsetcontroller.h"
+#include "ParameterSetting.h"
+
 #include "DemoController.h"
+
 
 QControllerManager* QControllerManager::s_instance = NULL;
 QControllerManager::QControllerManager(QObject *parent)
@@ -8,6 +12,7 @@ QControllerManager::QControllerManager(QObject *parent)
 	, m_pLoginCtrl(NULL)
 	, m_pDemo(NULL)
 	, m_pGlobalSetting(NULL)
+	, m_pParameterSetting(NULL)
 {
 }
 
@@ -18,6 +23,19 @@ QControllerManager::~QControllerManager()
 		delete m_pLoginCtrl;
 		m_pLoginCtrl = NULL;
 	}
+	if (m_pGlobalSetting)
+	{
+		delete m_pGlobalSetting;
+		m_pGlobalSetting = NULL;
+	}
+	if (m_pParameterSetting)
+	{
+		delete m_pParameterSetting;
+		m_pParameterSetting = NULL;
+	}
+
+
+
 	if (m_pDemo)
 	{
 		delete m_pDemo;
@@ -28,6 +46,7 @@ QControllerManager::~QControllerManager()
 		m_DemoCrawler.terminate();
 		m_DemoCrawler.wait();
 	}
+	
 }
 
 // »ñÈ¡ÊµÀý
@@ -66,6 +85,14 @@ IGlobalSetting *QControllerManager::getGlobalSettingInst()
 	return m_pGlobalSetting;
 }
 
+IParameterSetting *QControllerManager::getParameterSetting()
+{
+	if (m_pParameterSetting == NULL)
+	{
+		m_pParameterSetting = new CParameterSetting();
+	}
+	return m_pParameterSetting;
+}
 
 
 IDemo *QControllerManager::getDemoInst()
