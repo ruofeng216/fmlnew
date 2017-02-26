@@ -3,6 +3,8 @@
 #include "controller/qcontrollermanager.h"
 #include <QStandardItemModel>
 #include "util/util.h"
+#include "view/commonui/message_box_widget.h"
+
 
 ParaMgrHoliday::ParaMgrHoliday(QWidget *parent)
 	: QWidget(parent)
@@ -56,24 +58,78 @@ void ParaMgrHoliday::init()
 			items.at(0)->appendRow(childItems);
 		}
 	}
-	
 
 	{
 		ui.comboBox->addItems(QStringList() << tr("holiday") << tr("workday"));
 		ui.comboBox->view()->setAlternatingRowColors(true);
 	}
+	connect(ui.dateEdit, &QDateTimeEdit::dateChanged, [this](const QDate &date) {
+		ui.lineEdit_year->setText(QString::number(date.year()));
+	});
 }
 
 void ParaMgrHoliday::addHoliday()
 {
-	QString _y = ui.lineEdit_year->text();
-	qint64 _d = ui.dateEdit->date().toJulianDay();
+	qint64 _d = ui.dateEdit->date().toJulianDay(); // 单位1为 一天
+	QString strDayType = ui.comboBox->currentText();
+	QString strDayInfo = ui.textEdit_def->toPlainText();
+	int _y = ui.dateEdit->date().year();
+	CFinancialCalendar::EHType e = CFinancialCalendar::eWorkDay;
+	if (tr("holiday") == strDayType) e = CFinancialCalendar::eHoliday;
+	CFinancialCalendar fc(_y, _d, e, strDayInfo);
+	if (PARASETCTL->isExistFinancialCalendar(fc))
+		ShowWarnMessage(tr("add"), tr("the time is existing."), this);
+	else
+	{
+		if (PARASETCTL->setFinancialCalendar(fc))
+		{
+			ShowSuccessMessage(tr("add"), tr("add success."), this);
+			// 同步
+		}
+		else
+			ShowWarnMessage(tr("add"), tr("add fail."), this);
+	}
 }
 void ParaMgrHoliday::modifyHoliday()
 {
-
+	qint64 _d = ui.dateEdit->date().toJulianDay(); // 单位1为 一天
+	QString strDayType = ui.comboBox->currentText();
+	QString strDayInfo = ui.textEdit_def->toPlainText();
+	int _y = ui.dateEdit->date().year();
+	CFinancialCalendar::EHType e = CFinancialCalendar::eWorkDay;
+	if (tr("holiday") == strDayType) e = CFinancialCalendar::eHoliday;
+	CFinancialCalendar fc(_y, _d, e, strDayInfo);
+	if (!PARASETCTL->isExistFinancialCalendar(fc))
+		ShowWarnMessage(tr("modify"), tr("the time does not exist."), this);
+	else
+	{
+		if (PARASETCTL->setFinancialCalendar(fc))
+		{
+			ShowSuccessMessage(tr("modify"), tr("modify success."), this);
+			// 同步
+		}
+		else
+			ShowWarnMessage(tr("modify"), tr("modify fail."), this);
+	}
 }
 void ParaMgrHoliday::delHoliday()
 {
+	qint64 _d = ui.dateEdit->date().toJulianDay(); // 单位1为 一天
+	QString strDayType = ui.comboBox->currentText();
+	QString strDayInfo = ui.textEdit_def->toPlainText();
+	int _y = ui.dateEdit->date().year();
+	CFinancialCalendar::EHType e = CFinancialCalendar::eWorkDay;
+	if (tr("holiday") == strDayType) e = CFinancialCalendar::eHoliday;
+	CFinancialCalendar fc(_y, _d, e, strDayInfo);
+	if (PARASETCTL->isExistFinancialCalendar(fc))
+	{
+		if (!PARASETCTL->removeFinancialCalendar(_d))
+		{
+			ShowWarnMessage(tr("delete"), tr("delete fail."), this);
+			return;
+		}
+	}
+	ShowSuccessMessage(tr("delete"), tr("delete success."), this);
+	// 同步
 
 }

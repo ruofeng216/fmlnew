@@ -73,58 +73,113 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.ui" line="118"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="121"/>
         <source>年度</source>
         <translation>年度</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.ui" line="156"/>
-        <location filename="view/mainframe/paramgrholiday.ui" line="236"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="159"/>
         <source>TextLabel</source>
         <translation>日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.ui" line="273"/>
-        <location filename="view/mainframe/paramgrholiday.ui" line="285"/>
-        <location filename="view/mainframe/paramgrholiday.ui" line="297"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="244"/>
+        <source>日期说明</source>
+        <translation>假日说明</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.ui" line="281"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="293"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="305"/>
         <source>PushButton</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.cpp" line="11"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="13"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="81"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="86"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="90"/>
         <source>add</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.cpp" line="12"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="14"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="103"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="108"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="112"/>
         <source>modify</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.cpp" line="13"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="15"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="128"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="132"/>
         <source>delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.cpp" line="31"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="33"/>
         <source>hyear</source>
         <translation>年份</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.cpp" line="31"/>
-        <location filename="view/mainframe/paramgrholiday.cpp" line="62"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="33"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="63"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="78"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="100"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="122"/>
         <source>holiday</source>
         <translation>假日</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.cpp" line="31"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="33"/>
         <source>holidayinfo</source>
         <translation>假日说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.cpp" line="62"/>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="63"/>
         <source>workday</source>
         <translation type="unfinished">工作日</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="81"/>
+        <source>the time is existing.</source>
+        <translation>此日期已存在。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="86"/>
+        <source>add success.</source>
+        <translation>新增成功。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="90"/>
+        <source>add fail.</source>
+        <translation>新增失败。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="103"/>
+        <source>the time does not exist.</source>
+        <translation>此日期不存在。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="108"/>
+        <source>modify success.</source>
+        <translation>修改成功。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="112"/>
+        <source>modify fail.</source>
+        <translation>修改失败。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="128"/>
+        <source>delete fail.</source>
+        <translation>删除失败。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.cpp" line="132"/>
+        <source>delete success.</source>
+        <translation>删除成功。</translation>
     </message>
 </context>
 <context>

@@ -73,7 +73,7 @@ bool MetaDatabase::isExistFinancialCalendar(const CFinancialCalendar &val)
 	QStringList fieldList;
 	fieldList << "bwdate";
 	QList<QVariantList> results;
-	m_DbMgr->QueryFields(DB_SQL_SelectLoginUser, paramList, fieldList, results);
+	m_DbMgr->QueryFields(DB_SQL_SelectFinancialHolidayByDate, paramList, fieldList, results);
 	if (results.isEmpty()) return false;
 	return true;
 }
@@ -105,7 +105,7 @@ bool MetaDatabase::getFinancialCalendar(QMap<int, CFinancialCalendar> &val)
 	QStringList fieldList;
 	fieldList << "bwyear" << "bwdate" << "daytype" << "annotation";
 	QList<QVariantList> results;
-	m_DbMgr->QueryFields(DB_SQL_SelectLoginUser, paramList, fieldList, results);
+	m_DbMgr->QueryFields(DB_SQL_SelectFinancialHolidays, paramList, fieldList, results);
 	if (results.isEmpty()) return false;
 	for (int i = 0; i < results.size(); i++)
 	{

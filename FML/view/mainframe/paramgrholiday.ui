@@ -235,8 +235,13 @@
           <layout class="QVBoxLayout" name="verticalLayout">
            <item>
             <widget class="QLabel" name="label_def">
+             <property name="font">
+              <font>
+               <pointsize>12</pointsize>
+              </font>
+             </property>
              <property name="text">
-              <string>TextLabel</string>
+              <string>日期说明</string>
              </property>
             </widget>
            </item>
