@@ -75,7 +75,8 @@ DropUselessTable=false
 
 
 
-
+注：
+数据库必须是UTF-8语言
 
 
 
