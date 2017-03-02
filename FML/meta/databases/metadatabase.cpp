@@ -121,3 +121,64 @@ bool MetaDatabase::getFinancialCalendar(QMap<int, CFinancialCalendar> &val)
 	}
 	return true;
 }
+
+// 组合管理
+bool MetaDatabase::setPortfolio(const CPortfolio &val)
+{
+	FUNCLOG("MetaDatabase::setPortfolio(const CPortfolio &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	paramList << val.getPortcode() 
+		<< val.getPortname() 
+		<< val.getParentcode() 
+		<< val.getParentname()
+		<< val.getSdate()
+		<< val.getEdate()
+		<< val.getAnnotation();
+	if (m_DbMgr->ExecuteSQL(DB_SQL_ReplacePortfolio, paramList))
+		return true;
+	return false;
+}
+bool MetaDatabase::removePortfolio(const QStringList &val)
+{
+	FUNCLOG("MetaDatabase::removePortfolio(const QVector<CPortfolio> &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QList<QVariantList> lsts;
+	QVariantList paramList;
+	for (QStringList::const_iterator itor = val.begin();
+		itor != val.end(); itor++)
+	{
+		paramList << *itor;
+	}
+	lsts << paramList;
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeletePortfolio, lsts))
+		return true;
+	return false;
+}
+bool MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val)
+{
+	FUNCLOG("MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	QStringList fieldList;
+	fieldList << "portcode" << "portname" << "parentcode" << "parentname" << "sdate" << "edate" << "annotation";
+	QList<QVariantList> results;
+	m_DbMgr->QueryFields(DB_SQL_SelectPortfolios, paramList, fieldList, results);
+	if (results.isEmpty()) return false;
+	for (int i = 0; i < results.size(); i++)
+	{
+		if (results[i].size() == 7)
+		{
+			CPortfolio cp;
+			cp.setPortcode(results[i][0].toString());
+			cp.setPortname(results[i][1].toString());
+			cp.setParentcode(results[i][2].toString());
+			cp.setParentname(results[i][3].toString());
+			cp.setSdate(results[i][4].toInt());
+			cp.setEdate(results[i][5].toInt());
+			cp.setAnnotation(results[i][6].toString());
+			val[cp.getPortcode()] = cp;
+		}
+	}
+	return true;
+}

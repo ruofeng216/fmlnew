@@ -6,6 +6,7 @@
 #include <QJsonObject>
 #include <QJsonDocument>
 #include <QSettings>
+#include <QToolTip>
 
 namespace qutil
 {
@@ -319,6 +320,32 @@ namespace qutil
 		return doc;
 	}
 
+	QString splitTooltip(QString text, int lineWidth)
+	{
+		QFontMetrics fm(QToolTip::font());
+		QString result;
+
+		for (;;) {
+			int i = 0;
+			while (i < text.length()) {
+				if (fm.width(text.left(++i + 1)) > lineWidth) {
+					int j = text.lastIndexOf(' ', i);
+					if (j > 0) {
+						i = j;
+					}
+					result += text.left(i);
+					result += '\n';
+					text = text.mid(i);
+					break;
+				}
+			}
+			if (i >= text.length()) {
+				break;
+			}
+		}
+
+		return result + text;
+	}
 }
 
 namespace json

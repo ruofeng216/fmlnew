@@ -14,6 +14,7 @@
 #ifndef TB_NAME
 #define  DB_TBNAME_LOGIN "login"
 #define  DB_TBNAME_FINANCIALCALENDAR "financialholiday"
+#define  DB_TBNAME_PORTFOLIO "portfolio"
 
 #endif // !TB_NAME
 //////////////////////////////////////////////////////////
@@ -33,6 +34,18 @@ PRIMARY KEY(`user`) \
 constraint pk_finholiday PRIMARY KEY(`bwdate`) \
 ); ").arg(DB_TBNAME_FINANCIALCALENDAR)
 
+#define  DB_TBSQL_PORTFOLIO QString("CREATE TABLE IF NOT EXISTS `%1` (\
+`portcode` varchar(180), \
+`portname`  varchar(255), \
+`parentcode` varchar(255), \
+`parentname` varchar(255), \
+`sdate`  int, \
+`edate`  int, \
+`annotation` text, \
+constraint pk_portfolio PRIMARY KEY(`portcode`)\
+);").arg(DB_TBNAME_PORTFOLIO)
+
+
 #endif // !TB_CREATE
 /////////////////////////////////////////////////////////////
 ///////////////////operate sqls/////////////////////
@@ -47,6 +60,17 @@ constraint pk_finholiday PRIMARY KEY(`bwdate`) \
 #define DB_SQL_SelectFinancialHolidayByDate QString("SELECT bwdate from %1 where `bwdate`=?; ").arg(DB_TBNAME_FINANCIALCALENDAR)
 #define DB_SQL_ReplaceFinancialHoliday QString("replace into %1(bwyear,bwdate,daytype,annotation) values(?,?,?,?);").arg(DB_TBNAME_FINANCIALCALENDAR)
 #define DB_SQL_DeleteFinancialHoliday QString("delete from %1 where `bwdate`=?;").arg(DB_TBNAME_FINANCIALCALENDAR)
+
+// 组合管理
+#define DB_SQL_SelectPortfolios QString("SELECT * from %1; ").arg(DB_TBNAME_PORTFOLIO)
+#define DB_SQL_ReplacePortfolio QString("replace into %1(portcode,portname,parentcode,parentname,sdate,edate,annotation) values(?,?,?,?,?,?,?);").arg(DB_TBNAME_PORTFOLIO)
+#define DB_SQL_DeletePortfolio QString("delete from %1 where `portcode`=?;").arg(DB_TBNAME_PORTFOLIO)
+
+
+
+
+
+
 #endif // !TB_OPERATE
 
 

@@ -676,7 +676,7 @@ QComboBox QAbstractItemView
 /*------------QComboBox---end------------*/
 
 /*------------ParaMgrHoliday QTreeView---start------------*/
-ParaMgrHoliday QTreeView[objectName="treeView"]{
+QTreeView[objectName="treeView"]{
 	background:transparent;
 	background-color: #040c0a;
 	alternate-background-color: #121715;
@@ -685,7 +685,7 @@ ParaMgrHoliday QTreeView[objectName="treeView"]{
 	border:none;
 	font-size:12px;
 }
-ParaMgrHoliday QTreeView[objectName="treeView"] QHeaderView::section{
+QTreeView[objectName="treeView"] QHeaderView::section{
 	background:transparent;
 	background-color: #000000;
 	padding: 2px 25%;
@@ -695,17 +695,22 @@ ParaMgrHoliday QTreeView[objectName="treeView"] QHeaderView::section{
     border-bottom: none;
 	height: 16px;
 }
-ParaMgrHoliday QTreeView[objectName="treeView"]::item{
+QTreeView[objectName="treeView"]::item{
 	outline: none;
 	border: none;
 }
-ParaMgrHoliday QTreeView[objectName="treeView"]::item:hover {
+QTreeView[objectName="treeView"]::item:hover {
 	background：#1a4b64;
+	color:#fff;
 }
-ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected {
+QTreeView[objectName="treeView"]::item:selected,
+QTreeView[objectName="treeView"]::item:selected:active,
+QTreeView[objectName="treeView"]::item:selected:!active {
 	background：#1a4b64;
 	outline: none;
+	color:#fff;
 }
+
 /*
 ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:active{
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #232220, stop: 1 #ff900d);
@@ -718,16 +723,6 @@ ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:!active {
 /*------------ParaMgrHoliday QTreeView---end------------*/
 
 
-
-QSplitter::handle:horizontal {
-    width:1px;
-    background-color:#1b4d63;
-}
-
-QSplitter::handle:vertical {
-    height:1px;
-	background-color:#1b4d63;
-}
 
 
 

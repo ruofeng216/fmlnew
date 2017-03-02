@@ -4,6 +4,8 @@
 #include "ui_paramgrholiday.h"
 
 // ½ğÈÚÈÕÀú
+class QStandardItemModel;
+class QStandardItem;
 class ParaMgrHoliday : public QWidget
 {
 	Q_OBJECT
@@ -20,5 +22,8 @@ private slots:
 	void delHoliday();
 
 private:
+	void initDateView();
+private:
 	Ui::ParaMgrHoliday ui;
+	QStandardItemModel *m_pGoodsModel;
 };

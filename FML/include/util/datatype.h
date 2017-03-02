@@ -122,6 +122,42 @@ protected:
 	QString m_holidayinfo;
 };
 
+// 组合管理
+class CPortfolio
+{
+public:
+	CPortfolio(const QString& _portcode = QString(),
+		const QString& _portname = QString(),
+		const QString& _parentcode = QString(),
+		const QString& _parentname = QString(),
+		int _sdate = 0, 
+		int _edate = 0, 
+		const QString &_annotation = QString());
+	~CPortfolio();
+	void setPortcode(const QString &val);
+	const QString &getPortcode() const;
+	void setPortname(const QString &val);
+	const QString &getPortname() const;
+	void setParentcode(const QString &val);
+	const QString &getParentcode() const;
+	void setParentname(const QString &val);
+	const QString &getParentname() const;
+	void setSdate(const int &val);
+	const int &getSdate() const;
+	void setEdate(const int &val);
+	const int &getEdate() const;
+	void setAnnotation(const QString &val);
+	const QString &getAnnotation() const;
+
+protected:
+	QString m_portcode;
+	QString m_portname;
+	QString m_parentcode; 
+	QString m_parentname;
+	int m_sdate;
+	int m_edate;
+	QString m_annotation;
+};
 
 
 

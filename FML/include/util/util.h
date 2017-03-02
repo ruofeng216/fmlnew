@@ -60,7 +60,8 @@ namespace qutil
 
 	// 获取xml的Dom树
 	const QDomDocument GetXmlDom(const QString &path);
-
+	// tooltip换行
+	QString splitTooltip(QString text, int lineWidth);
 }
 
 

@@ -248,7 +248,82 @@ const QString &CFinancialCalendar::getHolidayinfo() const
 	return m_holidayinfo;
 }
 
-
+//////////////////////////////////////////////////////////////////
+CPortfolio::CPortfolio(const QString& _portcode,
+	const QString& _portname,
+	const QString& _parentcode,
+	const QString& _parentname,
+	int _sdate,
+	int _edate,
+	const QString &_annotation)
+{
+	m_portcode = _portcode;
+	m_portname = _portname;
+	m_parentcode = _parentcode;
+	m_parentname = _parentname;
+	m_sdate = _sdate;
+	m_edate = _edate;
+	m_annotation = _annotation;
+}
+CPortfolio::~CPortfolio()
+{
+}
+void CPortfolio::setPortcode(const QString &val)
+{
+	m_portcode = val;
+}
+const QString &CPortfolio::getPortcode() const
+{
+	return m_portcode;
+}
+void CPortfolio::setPortname(const QString &val)
+{
+	m_portname = val;
+}
+const QString &CPortfolio::getPortname() const
+{
+	return m_portname;
+}
+void CPortfolio::setParentcode(const QString &val)
+{
+	m_parentcode = val;
+}
+const QString &CPortfolio::getParentcode() const
+{
+	return m_parentcode;
+}
+void CPortfolio::setParentname(const QString &val)
+{
+	m_parentname = val;
+}
+const QString &CPortfolio::getParentname() const
+{
+	return m_parentname;
+}
+void CPortfolio::setSdate(const int &val)
+{
+	m_sdate = val;
+}
+const int &CPortfolio::getSdate() const
+{
+	return m_sdate;
+}
+void CPortfolio::setEdate(const int &val)
+{
+	m_edate = val;
+}
+const int &CPortfolio::getEdate() const
+{
+	return m_edate;
+}
+void CPortfolio::setAnnotation(const QString &val)
+{
+	m_annotation = val;
+}
+const QString &CPortfolio::getAnnotation() const
+{
+	return m_annotation;
+}
 
 
 

@@ -63,3 +63,4 @@ typedef enum e_ErrType
 // 窗口id
 const QString Main_HomePage = QString("Main_HomePage"); // home
 const QString ParaMgr_Holiday = QString("ParaMgr_Holiday"); // 金融日历
+const QString ParaMgr_Union = QString("ParaMgr_Union"); // 组合管理

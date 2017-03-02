@@ -21,6 +21,10 @@ public:
 	bool setFinancialCalendar(const CFinancialCalendar &val);
 	bool removeFinancialCalendar(int val);
 	bool getFinancialCalendar(QMap<int, CFinancialCalendar> &val);
+	// 组合管理
+	bool setPortfolio(const CPortfolio &val);
+	bool removePortfolio(const QStringList &val);
+	bool getPortfolio(QMap<QString, CPortfolio> &val);
 
 private:
 	MetaDatabase(QObject *parent = NULL);

@@ -339,6 +339,15 @@
     <ClCompile Include="controller\ParameterSetting.cpp">
       <Filter>controller</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_paramgrunion.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_paramgrunion.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\paramgrunion.cpp">
+      <Filter>view\mainframe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -497,6 +506,12 @@
     <CustomBuild Include="view\commonui\message_box_widget.ui">
       <Filter>view\commonui</Filter>
     </CustomBuild>
+    <CustomBuild Include="view\mainframe\paramgrunion.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\paramgrunion.h">
+      <Filter>view\mainframe</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FML.rc" />
@@ -510,6 +525,9 @@
     </ClInclude>
     <ClInclude Include="controller\ParameterSetting.h">
       <Filter>controller</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_paramgrunion.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

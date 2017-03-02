@@ -21,6 +21,7 @@
 #include "view/commonui/message_box_widget.h"
 #include "mainframe/paramgrholiday.h"
 #include "mainframe/mainhomepage.h"
+#include "mainframe/paramgrunion.h"
 
 ViewController::ViewController(QObject *parent)
 	: QObject(parent)
@@ -150,8 +151,8 @@ void ViewController::createChild(const QString &id, const QString &title, const 
 			pWidget = new QWidget;
 		else if (id == ParaMgr_Holiday)
 			pWidget = new ParaMgrHoliday;
-		else if (id == "ParaMgr_Union")
-			pWidget = new QWidget;
+		else if (id == ParaMgr_Union)
+			pWidget = new ParaMgrUnion;
 		else if (id == "ParaMgr_Products")
 			pWidget = new QWidget;
 		else if (id == "ParaMgr_Dict")
