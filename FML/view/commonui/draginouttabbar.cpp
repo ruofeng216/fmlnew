@@ -20,13 +20,14 @@ DragInOutTabBar::DragInOutTabBar(QWidget *parent)
 	setExpanding(true);
 
 	m_HaveDraged = false;
+	m_MoveIndex = -1;
+
 	m_MovingWidget = new QWidget;
+	m_MovingWidget->setObjectName("MovingWidget");
 	m_MovingPic = new QLabel(m_MovingWidget);
 	QGridLayout* layout = new QGridLayout;
 	layout->addWidget(m_MovingPic);
 	m_MovingWidget->setLayout(layout);
-	QString style = "QWidget{background-color:rgba(0,0,0,50%);background:transparent;};QLabel{background:transparent};";
-	m_MovingWidget->setStyleSheet(style);
 	m_MovingWidget->setWindowFlags(Qt::FramelessWindowHint);
 	m_MovingWidget->hide();
 }
@@ -39,7 +40,23 @@ DragInOutTabBar::~DragInOutTabBar()
 
 void DragInOutTabBar::mousePressEvent(QMouseEvent * event)
 {
-	bool bPressedTab = ((QTabWidget*)(this->parentWidget()))->currentWidget()->rect().contains(mapFromGlobal(event->pos())) &&
+	QList<QRect> lstRange;
+	for (int i = 0; i < count(); i++)
+		lstRange << tabRect(i);
+	auto isInRect = [this, event](const QList<QRect> &lst)->bool {
+		for (int n = 0; n < lst.size(); n++)
+		{
+			if (lst[n].contains(event->pos()))
+			{
+				m_MoveIndex = n;
+				return true;
+			}
+		}
+		return false;
+	};
+	bool btakeTab = isInRect(lstRange);
+	if (!btakeTab) m_MoveIndex = -1;
+	bool bPressedTab = btakeTab &&
 		((QTabWidget*)(this->parentWidget()))->currentWidget()->property("subwndid").toString() != Main_HomePage;
 	if (bPressedTab)
 		m_HaveDraged = true;
@@ -60,11 +77,14 @@ void DragInOutTabBar::mouseMoveEvent(QMouseEvent * event)
 }
 void DragInOutTabBar::mouseReleaseEvent(QMouseEvent * event)
 {
-	if (event->pos().y() > height() || event->pos().y() < 0)
+	if (m_HaveDraged && 
+		m_MoveIndex!=-1 && 
+		m_MoveIndex<count() &&
+		(event->pos().y() > height() || event->pos().y() < 0))
 	{
-		emit popSignalWnd(currentIndex());
+		emit popSignalWnd(m_MoveIndex);
 	}
-		
+	m_MoveIndex = -1;
 	m_HaveDraged = false;
 	unsetCursor();
 	m_MovingWidget->hide();

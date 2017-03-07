@@ -22,6 +22,7 @@ signals:
 
 private:
 	bool		m_HaveDraged;
+	int         m_MoveIndex;
 	QWidget*	m_MovingWidget;
 	QLabel*		m_MovingPic;
 };

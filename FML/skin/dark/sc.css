@@ -37,7 +37,7 @@ IDBImageButton,IDBImageButton::hover,IDBImageButton::pressed,IDBImageButton:disa
 }
 
 
-basicui,MainWidget,SubWidget {
+basicui,MainWidget,SubWidget{
 	background: #000000;
 }
 basicui QWidget[objectName="title"],
@@ -721,9 +721,14 @@ ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:!active {
 }*/
 
 /*------------ParaMgrHoliday QTreeView---end------------*/
-
-
-
+QWidget[objectName="MovingWidget"]
+{
+	background: black;
+	opacity: 50;
+}
+QWidget[objectName="MovingWidget"] > QLabel{
+	background: transparent;
+}
 
 
 

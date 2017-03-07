@@ -7,13 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>826</width>
-    <height>491</height>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>ParaMgrHoliday</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <property name="topMargin">
+    <number>10</number>
+   </property>
+   <property name="bottomMargin">
+    <number>30</number>
+   </property>
    <item row="0" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">

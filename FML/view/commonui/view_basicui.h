@@ -35,7 +35,6 @@ public:
 	void setTitleStyle(int titlestyle);					// 设置标题样式
 	void setCloseIsHide(bool isHide);					// 点击关闭按钮进行隐藏窗口
 	void setForbidMove(bool forbidMove);				// 禁止窗口移动
-	void setBackground(const QPixmap &bg);
 	QWidget *getContentWidget() const;
 
 	
@@ -75,7 +74,6 @@ protected:
 	bool m_closeIsHide;	//点击关闭按钮隐藏窗口
 	bool m_forbidMove;  //禁止窗口移动
 	QWidget *m_contentWidget; // 主窗口区域
-	QPixmap m_bgImage; //背景图片
 	QString m_title; //标题内容
 };
 

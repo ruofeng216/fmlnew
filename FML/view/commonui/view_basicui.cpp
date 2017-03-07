@@ -64,8 +64,6 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 	
 	m_blpressdown = false;
 	setTitleStyle(m_titlestyle);
-
-	m_bgImage.load(qutil::skin("bg_main"));
 }
 
 basicui::~basicui()
@@ -104,10 +102,6 @@ void basicui::setCloseIsHide(bool isHide)
 void basicui::setForbidMove(bool forbidMove)
 {
 	m_forbidMove = forbidMove;
-}
-void basicui::setBackground(const QPixmap &bg)
-{
-	m_bgImage = bg;
 }
 
 QWidget *basicui::getContentWidget() const
