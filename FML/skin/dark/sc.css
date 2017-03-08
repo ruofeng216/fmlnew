@@ -449,6 +449,9 @@ DragInOutTabBar:focus
 {
     border-bottom: 3px solid #ff900d;
 }
+DragInOutTabBar::close-button:!selected:!hover {
+    background-color: transparent;
+}
 
 /*
 DragInOutTabBar::tab{
@@ -464,8 +467,14 @@ DragInOutTabBar::tab:top {
     background-repeat:no-repeat;
     height: 28px;
     width: 132px;
+	/*margin-right: -10px;*/
 }
-
+/*DragInOutTabBar::tab:top:only-one {
+	margin-right: 0;
+}
+DragInOutTabBar::tab:top:selected  {
+	margin-right: -10px;
+}*/
 DragInOutTabBar::tab:top:!selected
 {
     color: #eff0f1;

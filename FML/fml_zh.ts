@@ -73,24 +73,28 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.ui" line="121"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="145"/>
         <source>年度</source>
         <translation>年度</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.ui" line="159"/>
-        <location filename="view/mainframe/paramgrholiday.ui" line="239"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="183"/>
         <source>TextLabel</source>
         <translation>日期</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/paramgrholiday.ui" line="263"/>
+        <source>假日说明</source>
+        <translation type="unfinished">假日说明</translation>
     </message>
     <message>
         <source>日期说明</source>
         <translation type="vanished">假日说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.ui" line="276"/>
-        <location filename="view/mainframe/paramgrholiday.ui" line="288"/>
         <location filename="view/mainframe/paramgrholiday.ui" line="300"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="312"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="324"/>
         <source>PushButton</source>
         <translation>增加</translation>
     </message>
@@ -176,7 +180,7 @@
     <message>
         <location filename="view/mainframe/paramgrholiday.cpp" line="110"/>
         <source>confirm to delete.</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">请确认是否删除？</translation>
     </message>
     <message>
         <location filename="view/mainframe/paramgrholiday.cpp" line="123"/>
@@ -202,163 +206,163 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="51"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="55"/>
         <source>组合代码</source>
         <translation>组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="76"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="80"/>
         <source>组合名称</source>
         <translation>组合名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="106"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="110"/>
         <source>开始日期</source>
         <translation>开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="129"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="133"/>
         <source>关闭日期</source>
         <translation>关闭日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="160"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="164"/>
         <source>上级组合代码</source>
         <translation>上级组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="179"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="183"/>
         <source>组合说明</source>
         <translation>组合说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="201"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="205"/>
         <source>增加</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="213"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="217"/>
         <source>修改</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="225"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="229"/>
         <source>删除</source>
         <translation>删除</translation>
     </message>
     <message>
         <location filename="view/mainframe/paramgrunion.cpp" line="13"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="68"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="73"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="78"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="67"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="72"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="77"/>
         <source>add</source>
         <translation>增加</translation>
     </message>
     <message>
         <location filename="view/mainframe/paramgrunion.cpp" line="15"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="87"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="97"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="102"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="107"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="86"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="96"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="101"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="106"/>
         <source>modify</source>
         <translation>修改</translation>
     </message>
     <message>
         <location filename="view/mainframe/paramgrunion.cpp" line="17"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="112"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="119"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="125"/>
-        <location filename="view/mainframe/paramgrunion.cpp" line="128"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="111"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="118"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="124"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="127"/>
         <source>delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="68"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="67"/>
         <source>the code is existing.</source>
         <translation>代码已存在。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="73"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="72"/>
         <source>add success.</source>
         <translation>新增成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="78"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="77"/>
         <source>add fail.</source>
         <translation>新增失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="87"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="86"/>
         <source>the code parent is invalid.do not choose its child or self.</source>
         <translation>代码的父级代码不合法。请不要设置为子代码或自己。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="97"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="96"/>
         <source>the code is not existing.</source>
         <translation>代码不存在。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="102"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="101"/>
         <source>modify success.</source>
         <translation>修改成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="107"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="106"/>
         <source>modify fail.</source>
         <translation>修改失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="112"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="111"/>
         <source>confirm to delete.</source>
         <translation>请确认是否删除？</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="119"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="118"/>
         <source>delete fail.</source>
         <translation>删除失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="125"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="124"/>
         <source>no code.</source>
         <translation>不存在此code。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="128"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="127"/>
         <source>delete success.</source>
         <translation>删除成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="138"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="137"/>
         <source>portcode</source>
         <translation>组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="138"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="137"/>
         <source>portname</source>
         <translation>组合名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="138"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="137"/>
         <source>parentcode</source>
         <translation>父组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="139"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="138"/>
         <source>parentname</source>
         <translation>父组合名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="139"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="138"/>
         <source>sdate</source>
         <translation>开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="139"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="138"/>
         <source>edate</source>
         <translation>关闭日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.cpp" line="139"/>
+        <location filename="view/mainframe/paramgrunion.cpp" line="138"/>
         <source>annotation</source>
         <translation>注释</translation>
     </message>
@@ -367,9 +371,9 @@
     <name>QDBMgr</name>
     <message>
         <location filename="meta/databases/qdbmgr.cpp" line="21"/>
-        <location filename="meta/databases/qdbmgr.cpp" line="55"/>
-        <location filename="meta/databases/qdbmgr.cpp" line="65"/>
-        <location filename="meta/databases/qdbmgr.cpp" line="85"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="56"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="66"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="86"/>
         <source>Database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -379,17 +383,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="meta/databases/qdbmgr.cpp" line="55"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="56"/>
         <source>Update DataBase Faile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="meta/databases/qdbmgr.cpp" line="65"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="66"/>
         <source>Create table Faile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="meta/databases/qdbmgr.cpp" line="85"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="86"/>
         <source>Get tables Faile.</source>
         <translation type="unfinished"></translation>
     </message>

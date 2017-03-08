@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>826</width>
+    <width>832</width>
     <height>520</height>
    </rect>
   </property>
@@ -25,6 +25,9 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::MinimumExpanding</enum>
+     </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>40</width>
@@ -38,6 +41,9 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::MinimumExpanding</enum>
+     </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>40</width>
@@ -50,6 +56,18 @@
     <layout class="QHBoxLayout" name="horizontalLayout_5">
      <item>
       <widget class="QTreeView" name="treeView">
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>600</width>
+         <height>16777215</height>
+        </size>
+       </property>
        <property name="palette">
         <palette>
          <active>
@@ -242,7 +260,7 @@
            <item>
             <widget class="QLabel" name="label_def">
              <property name="text">
-              <string>TextLabel</string>
+              <string>假日说明</string>
              </property>
             </widget>
            </item>
@@ -250,6 +268,9 @@
             <spacer name="verticalSpacer">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Expanding</enum>
              </property>
              <property name="sizeHint" stdset="0">
               <size>
@@ -262,7 +283,14 @@
           </layout>
          </item>
          <item>
-          <widget class="QTextEdit" name="textEdit_def"/>
+          <widget class="QTextEdit" name="textEdit_def">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>300</height>
+            </size>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -308,6 +336,19 @@
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </item>
