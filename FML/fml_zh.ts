@@ -92,9 +92,9 @@
         <translation type="vanished">假日说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrholiday.ui" line="300"/>
-        <location filename="view/mainframe/paramgrholiday.ui" line="312"/>
-        <location filename="view/mainframe/paramgrholiday.ui" line="324"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="310"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="322"/>
+        <location filename="view/mainframe/paramgrholiday.ui" line="334"/>
         <source>PushButton</source>
         <translation>增加</translation>
     </message>
@@ -206,47 +206,47 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="55"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="76"/>
         <source>组合代码</source>
         <translation>组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="80"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="101"/>
         <source>组合名称</source>
         <translation>组合名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="110"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="131"/>
         <source>开始日期</source>
         <translation>开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="133"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="154"/>
         <source>关闭日期</source>
         <translation>关闭日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="164"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="185"/>
         <source>上级组合代码</source>
         <translation>上级组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="183"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="204"/>
         <source>组合说明</source>
         <translation>组合说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="205"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="233"/>
         <source>增加</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="217"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="245"/>
         <source>修改</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/paramgrunion.ui" line="229"/>
+        <location filename="view/mainframe/paramgrunion.ui" line="257"/>
         <source>删除</source>
         <translation>删除</translation>
     </message>
@@ -371,9 +371,9 @@
     <name>QDBMgr</name>
     <message>
         <location filename="meta/databases/qdbmgr.cpp" line="21"/>
-        <location filename="meta/databases/qdbmgr.cpp" line="56"/>
-        <location filename="meta/databases/qdbmgr.cpp" line="66"/>
-        <location filename="meta/databases/qdbmgr.cpp" line="86"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="57"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="67"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="87"/>
         <source>Database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -383,17 +383,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="meta/databases/qdbmgr.cpp" line="56"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="57"/>
         <source>Update DataBase Faile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="meta/databases/qdbmgr.cpp" line="66"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="67"/>
         <source>Create table Faile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="meta/databases/qdbmgr.cpp" line="86"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="87"/>
         <source>Get tables Faile.</source>
         <translation type="unfinished"></translation>
     </message>

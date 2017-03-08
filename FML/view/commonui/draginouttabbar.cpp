@@ -60,6 +60,7 @@ void DragInOutTabBar::mousePressEvent(QMouseEvent * event)
 		((QTabWidget*)(this->parentWidget()))->currentWidget()->property("subwndid").toString() != Main_HomePage;
 	if (bPressedTab)
 		m_HaveDraged = true;
+	
 	QTabBar::mousePressEvent(event);
 }
 void DragInOutTabBar::mouseMoveEvent(QMouseEvent * event)
@@ -67,8 +68,12 @@ void DragInOutTabBar::mouseMoveEvent(QMouseEvent * event)
 	if (m_HaveDraged)
 	{
 		setCursor(Qt::SizeAllCursor);
-		QPixmap pixmap = QPixmap::grabWidget(((QTabWidget*)(this->parentWidget()))->currentWidget());
+		QTabWidget *tab = (QTabWidget*)this->parentWidget();
+		QRect tabRect = tab->rect();
+		tabRect.setTop(tab->tabBar()->rect().height());
+		QPixmap pixmap = QPixmap::grabWidget(tab, tabRect);
 		pixmap = pixmap.scaled(QSize(MOVING_PIXMAP_SIZE, MOVING_PIXMAP_SIZE));
+
 		m_MovingPic->setPixmap(pixmap);
 		m_MovingWidget->show();
 		m_MovingWidget->move(QCursor::pos());

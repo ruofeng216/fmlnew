@@ -20,6 +20,7 @@ QDBMgr::QDBMgr(QObject *parent)
 		qDebug() << "打开数据库失败!";
 		ShowErrorMessage(tr("Database"), tr("Open DataBase Faile."), NULL);
 		emit VIEWSIGNAL->sigExitProgramme();
+		return;
 	}
 	initTables();
 }

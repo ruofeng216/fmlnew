@@ -2,6 +2,7 @@
 #include "view/commonui/message_box_widget.h"
 #include "view/view_controller.h"
 #include "controller/qcontrollermanager.h"
+#include <QTimer>
 
 login::login(QWidget *parent)
 	: QWidget(parent)
@@ -13,6 +14,14 @@ login::login(QWidget *parent)
 	connect(ui.btn_login, SIGNAL(clicked()), this, SLOT(loginSys()));
 	connect(ui.btn_reg, SIGNAL(clicked()), this, SLOT(registerSys()));
 	ui.btn_login->setShortcut(QKeySequence::InsertParagraphSeparator);
+
+#if 0
+	ui.leUsername->setText("hello");
+	ui.lePassword->setText("hello");
+	QTimer::singleShot(1000, [this]() {
+		this->loginSys();
+	});
+#endif
 }
 
 login::~login()
