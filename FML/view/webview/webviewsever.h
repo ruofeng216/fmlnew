@@ -19,10 +19,9 @@ public:
 
 	static WebviewSever *instance();
 
-	const WebSocketClientWrapper *getWrapper() const;
+	WebSocketClientWrapper *getWrapper();
 
 private:
 	QWebSocketServer *m_socketSever;
-	WebSocketClientWrapper *m_wrapper;
 	static WebviewSever *m_pSever;
 };

@@ -232,7 +232,9 @@ void ViewController::popOutWndFromTab(const QString &id, QWidget *wnd, QPoint p)
 void ViewController::moveInWndToTab(const QString &id, QWidget *wnd)
 {
 	FML *mainWidget = (FML *)(((basicui*)getWidget(MAIN_WINDOW_ID))->getContentWidget());
-	if (mainWidget && getWidget(MAIN_WINDOW_ID)->isVisible() && !getWidget(MAIN_WINDOW_ID)->isMinimized() &&
+	if (mainWidget && 
+		getWidget(MAIN_WINDOW_ID)->isVisible() && 
+		!getWidget(MAIN_WINDOW_ID)->isMinimized() &&
 		m_widgets.contains(id) &&
 		CONTROLMGR->getGlobalSettingInst()->isExistFuncID(id))
 	{
