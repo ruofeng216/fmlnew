@@ -61,11 +61,11 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]
 	border-radius: none;
 	border-top-right-radius:5px;
 }
-basicui QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hove,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hover,
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pressed,
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hove,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hover,
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pressed,
-SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hove,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pressed
 {
 	background: #0a2d3c;
@@ -93,11 +93,11 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]
 	outline: none;
 	border-radius: none;
 }
-basicui QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hove,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hover,
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed,
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hove,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hover,
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed,
-SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hove,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed
 {
 	background: #0a2d3c;
@@ -124,11 +124,11 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]
 	outline: none;
 	border-radius: none;
 }
-basicui QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hove,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hover,
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed,
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hove,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hover,
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed,
-SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hove,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed
 {
 	background: #0a2d3c;
@@ -155,11 +155,11 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]
 	outline: none;
 	border-radius: none;
 }
-basicui QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hove,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hover,
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pressed,
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hove,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hover,
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pressed,
-SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hove,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pressed
 {
 	background: #0a2d3c;
