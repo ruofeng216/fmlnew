@@ -295,7 +295,6 @@ QMenu {
 	color:#e8e5d5;
     background-color:#1b4d63;
     text-align:center;
-    display:block;
     float:left;
 }
 QMenu::item {
