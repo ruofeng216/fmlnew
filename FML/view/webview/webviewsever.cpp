@@ -10,7 +10,6 @@ WebviewSever::WebviewSever(QObject *parent)
 		qFatal("Failed to open web socket server.");
 		return;
 	}
-	m_wrapper = new WebSocketClientWrapper(m_socketSever);
 }
 
 WebviewSever::~WebviewSever()
@@ -21,10 +20,6 @@ void WebviewSever::release()
 {
 	if (m_pSever)
 	{
-		if (m_wrapper)
-		{
-			m_wrapper->deleteLater();
-		}
 		m_socketSever->close();
 		if (m_socketSever)
 		{
@@ -43,7 +38,7 @@ WebviewSever *WebviewSever::instance()
 	return m_pSever;
 }
 
-const WebSocketClientWrapper *WebviewSever::getWrapper() const
+WebSocketClientWrapper *WebviewSever::getWrapper()
 {
-	return m_wrapper;
+	return new WebSocketClientWrapper(m_socketSever);
 }
