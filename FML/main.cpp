@@ -54,7 +54,9 @@ void customMessageHandler(QtMsgType type, const QMessageLogContext &context, con
 	if (outFile.open(QIODevice::WriteOnly | QIODevice::Append))
 	{
 		QTextStream ts(&outFile);
-		ts << _TIME_ << QString("[%1:%2:%3]").arg(context.file).arg(context.function).arg(context.line) << QString("[%1]").arg(logStr[_log]) << "[" << QThread::currentThreadId() << "]" << msg << endl;
+		QString text = _TIME_ + QString("[%1:%2:%3]").arg(context.file).arg(context.function).arg(context.line) + QString("[%1][%2]%3\n").arg(logStr[_log]).arg((qint64)QThread::currentThreadId()).arg(msg);
+		ts << text;
+		OutputDebugString(text.toStdWString().c_str());
 	}
 }
 

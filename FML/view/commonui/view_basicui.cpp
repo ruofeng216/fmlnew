@@ -245,28 +245,14 @@ bool basicui::nativeEvent(const QByteArray &eventType, void *message, long *resu
 			*result = HTCAPTION;
 			return true;
 		}
-		if(xPos > 0 && xPos < HIT_BORDER) {
-			*result = HTLEFT;
-			return true;
-		}
-		if(xPos > (this->width() - HIT_BORDER) && xPos < (this->width() - 0)) {
-			*result = HTRIGHT;
-			return true;
-		}
-		if(yPos > 0 && yPos < HIT_BORDER) {
-			*result = HTTOP;
-			return true;
-		}
-		if(yPos > (this->height() - HIT_BORDER) && yPos < (this->height() - 0)) {
-			*result = HTBOTTOM;
-			return true;
-		}
+
 		if(xPos > 0 && xPos < HIT_BORDER && yPos > 0 && yPos < HIT_BORDER) {
 			*result = HTTOPLEFT;
 			return true;
 		}
 		if(xPos > (this->width() - HIT_BORDER) && xPos < (this->width() - 0) && yPos > 0 && yPos < HIT_BORDER) {
 			*result = HTTOPRIGHT;
+			return true;
 		}
 		if(xPos > 0 && xPos < HIT_BORDER && yPos > (this->height() - HIT_BORDER) && yPos < (this->height() - 0)) {
 			*result = HTBOTTOMLEFT;
@@ -274,6 +260,22 @@ bool basicui::nativeEvent(const QByteArray &eventType, void *message, long *resu
 		}
 		if(xPos > (this->width() - HIT_BORDER) && xPos < (this->width() - 0) && yPos > (this->height() - HIT_BORDER) && yPos < (this->height() - 0)) {
 			*result = HTBOTTOMRIGHT;
+			return true;
+		}
+		if (xPos > 0 && xPos < HIT_BORDER) {
+			*result = HTLEFT;
+			return true;
+		}
+		if (xPos > (this->width() - HIT_BORDER) && xPos < (this->width() - 0)) {
+			*result = HTRIGHT;
+			return true;
+		}
+		if (yPos > 0 && yPos < HIT_BORDER) {
+			*result = HTTOP;
+			return true;
+		}
+		if (yPos > (this->height() - HIT_BORDER) && yPos < (this->height() - 0)) {
+			*result = HTBOTTOM;
 			return true;
 		}
 		return QWidget::nativeEvent(eventType, message, result);
