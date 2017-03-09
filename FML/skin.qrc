@@ -35,6 +35,9 @@
         <file alias="revise.png">skin/dark/revise.png</file>
         <file alias="reviseclickover.png">skin/dark/revise-click&amp;over.png</file>
         <file alias="revisedimmed.png">skin/dark/revise-dimmed.png</file>
+        <file alias="tabclosecllicked.png">skin/dark/tabclosecllicked.png</file>
+        <file alias="tabclosehover.png">skin/dark/tabclosehover.png</file>
+        <file alias="tabclosenormal.png">skin/dark/tabclosenormal.png</file>
     </qresource>
     <qresource prefix="/light">
         <file alias="active.png">skin/light/active.png</file>
