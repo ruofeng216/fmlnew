@@ -7,6 +7,7 @@
 #include <QJsonDocument>
 #include <QSettings>
 #include <QToolTip>
+#include "skin.h"
 
 namespace qutil
 {
@@ -19,27 +20,34 @@ namespace qutil
 		return QString::fromStdString(str);
 	}
 
+	void initSkin(const QString &skinName)
+	{
+		Skin::instance().setSkin(skinName);
+	}
+
 	// 获取皮肤
 	QString skin(const QString &name)
 	{
+		return Skin::instance().path(name);
 		// later get skin set, now default datas
-		QSettings configIniRead(qBaseConfigPath(), QSettings::IniFormat);
-		QString strskin = configIniRead.value("/skin/curskin").toString().toLower();
-		QString strtype = "dark";
-		if (strskin == "dark" ||
-			strskin == "light")
-			strtype = strskin;
-		return QString(":/%1/%2").arg(strtype).arg(name);
+		//QSettings configIniRead(qBaseConfigPath(), QSettings::IniFormat);
+		//QString strskin = configIniRead.value("/skin/curskin").toString().toLower();
+		//QString strtype = "dark";
+		//if (strskin == "dark" ||
+		//	strskin == "light")
+		//	strtype = strskin;
+		//return QString(":/%1/%2").arg(strtype).arg(name);
 	}
 	QString websrc(const QString &name)
 	{
-		QSettings configIniRead(qBaseConfigPath(), QSettings::IniFormat);
-		QString strskin = configIniRead.value("/skin/curskin").toString().toLower();
-		QString strtype = "dark";
-		if (strskin == "dark" ||
-			strskin == "light")
-			strtype = strskin;
-		return QString(":/%1/web/%2").arg(strtype).arg(name);
+		return Skin::instance().path("web/" + name);
+		//QSettings configIniRead(qBaseConfigPath(), QSettings::IniFormat);
+		//QString strskin = configIniRead.value("/skin/curskin").toString().toLower();
+		//QString strtype = "dark";
+		//if (strskin == "dark" ||
+		//	strskin == "light")
+		//	strtype = strskin;
+		//return QString(":/%1/web/%2").arg(strtype).arg(name);
 	}
 
 	// 内存整理

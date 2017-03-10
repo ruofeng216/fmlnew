@@ -448,20 +448,9 @@ DragInOutTabBar:focus
 {
     border-bottom: 3px solid #ff900d;
 }
-
-DragInOutTabBar::close-button:selected {
-    image: url(:/dark/tabclosenormal.png);
-}
-DragInOutTabBar::close-button:hover {
-    image: url(:/dark/tabclosehover.png);
-}
-DragInOutTabBar::close-button:pressed{
-    image: url(:/dark/tabclosecllicked.png);
-}
 DragInOutTabBar::close-button:!selected:!hover {
     background-color: transparent;
 }
-
 
 /*
 DragInOutTabBar::tab{

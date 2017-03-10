@@ -16,6 +16,7 @@ namespace qutil
 	QString toQString(const std::string &str);
 
 	// ªÒ»°∆§∑Ù
+	void initSkin(const QString &skinName);
 	QString skin(const QString &name);
 	QString websrc(const QString &name);
 

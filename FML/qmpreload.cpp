@@ -18,13 +18,15 @@ QmPreload::~QmPreload()
 
 bool QmPreload::init(int argc, char *argv[])
 {
+	qDebug() << "111111111111111";
+	qutil::initSkin("dark");
 	// 加载默认文字资源
 	static QTranslator trans;
 	bool isLoad = trans.load(QString(":/font/qt_zh_CN.qm"));
 	if (isLoad) {
 		qApp->installTranslator(&trans);
 	} else {
-		//LOG_ERROR << "load qt_zh_CN.qm failed";
+		qDebug() << "load qt_zh_CN.qm failed";
 	}
 
 	static QTranslator widgetsTrans;
@@ -32,7 +34,7 @@ bool QmPreload::init(int argc, char *argv[])
 	if (isLoad) {
 		qApp->installTranslator(&widgetsTrans);
 	} else {
-		//LOG_ERROR << "load widgets.qm failed";
+		qDebug() << "load widgets.qm failed";
 	}
 	
 	// 加载文字资源
@@ -41,7 +43,7 @@ bool QmPreload::init(int argc, char *argv[])
 	{
 		if (!qApp->installTranslator(&qtTranslator))
 		{
-			//LOG_ERROR << "install sc_zh.qm failed";
+			qDebug() << "install translator failed";
 			return false;
 		}
 	}
@@ -50,10 +52,6 @@ bool QmPreload::init(int argc, char *argv[])
 
 	// qcss 加载
 	QFile file(qutil::skin("sc.css"));
-	if (!file.exists())
-	{
-		//LOG_ERROR << "no skin file!!!";
-	}
 	if (file.open(QIODevice::ReadOnly | QIODevice::Text))
 	{
 		QString str = file.readAll();
@@ -62,8 +60,7 @@ bool QmPreload::init(int argc, char *argv[])
 	}
 	else
 	{
-		//LOG_ERROR << "skin load fail";
-		//ShowErrorMessage(tr("skin load fail"), tr("skin load fail"));
+		qDebug() << "open style file failed";
 		return false;
 	}
 
