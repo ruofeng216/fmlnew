@@ -1,37 +1,32 @@
 <RCC>
     <qresource prefix="/">
         <file>light/active.png</file>
-        <file>light/add-normal&amp;click.png</file>
-        <file>light/add-over&amp;dimmed.png</file>
+        <file>light/add.png</file>
+        <file>light/add-click-hover.png</file>
         <file>light/close.png</file>
-        <file>light/close-click&amp;over.png</file>
+        <file>light/close-click-hover.png</file>
         <file>light/date.png</file>
         <file>light/date-down.png</file>
-        <file>light/delete-normal&amp;click..png</file>
-        <file>light/delete-over&amp;dimmed.png</file>
+        <file>light/delete.png</file>
+        <file>light/delete-click-hover.png</file>
         <file>light/dropdown.png</file>
         <file>light/dropdown-down.png</file>
         <file>light/func.xml</file>
         <file>light/logo.png</file>
         <file>light/maximized.png</file>
-        <file>light/maximized-click&amp;over.png</file>
+        <file>light/maximized-click-hover.png</file>
         <file>light/minimize.png</file>
-        <file>light/minimize-click&amp;over.png</file>
+        <file>light/minimize-click-hover.png</file>
         <file>light/msgbox_caution.png</file>
         <file>light/msgbox_confirm.png</file>
         <file>light/msgbox_error.png</file>
         <file>light/msgbox_success.png</file>
         <file>light/normal.png</file>
         <file>light/pluralized.png</file>
-        <file>light/pluralized-click&amp;over.png</file>
-        <file>light/revisenormal&amp;click..png</file>
-        <file>light/revise-over&amp;dimmed.png</file>
+        <file>light/pluralized-click-hover.png</file>
+        <file>light/revise.png</file>
+        <file>light/revise-click-hover.png</file>
         <file>light/sc.css</file>
-        <file>light/web/fonts/glyphicons-halflings-regular.eot</file>
-        <file>light/web/fonts/glyphicons-halflings-regular.svg</file>
-        <file>light/web/fonts/glyphicons-halflings-regular.ttf</file>
-        <file>light/web/fonts/glyphicons-halflings-regular.woff</file>
-        <file>light/web/fonts/glyphicons-halflings-regular.woff2</file>
         <file>light/web/commoncss/bootstrap.min.css</file>
         <file>light/web/commoncss/bootstrap.min.css.map</file>
         <file>light/web/commoncss/bootstrap-theme.min.css</file>
@@ -47,5 +42,10 @@
         <file>light/web/commonjs/webgetway.js</file>
         <file>light/web/demo/1.html</file>
         <file>light/web/demo/2.html</file>
+        <file>light/web/fonts/glyphicons-halflings-regular.eot</file>
+        <file>light/web/fonts/glyphicons-halflings-regular.svg</file>
+        <file>light/web/fonts/glyphicons-halflings-regular.ttf</file>
+        <file>light/web/fonts/glyphicons-halflings-regular.woff</file>
+        <file>light/web/fonts/glyphicons-halflings-regular.woff2</file>
     </qresource>
 </RCC>

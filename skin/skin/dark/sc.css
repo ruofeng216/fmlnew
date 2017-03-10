@@ -69,7 +69,7 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hover
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pressed
 {
 	background: #0a2d3c;
-	background-image: url(:/dark/closeclickhover.png);
+	background-image: url(:/dark/close-click-hover.png);
     background-repeat:no-repeat;
 	width: 30px;
 	height: 20px;
@@ -101,7 +101,7 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed
 {
 	background: #0a2d3c;
-	background-image: url(:/dark/maximizedclickhover.png);
+	background-image: url(:/dark/maximized-click-hover.png);
     background-repeat:no-repeat;
 	width: 20px;
 	height: 20px;
@@ -132,7 +132,7 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed
 {
 	background: #0a2d3c;
-	background-image: url(:/dark/minimizeclickhover.png);
+	background-image: url(:/dark/minimize-click-hover.png);
     background-repeat:no-repeat;
 	width: 20px;
 	height: 20px;
@@ -163,7 +163,7 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hov
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pressed
 {
 	background: #0a2d3c;
-	background-image: url(:/dark/pluralizedclickhover.png);
+	background-image: url(:/dark/pluralized-click-hover.png);
     background-repeat:no-repeat;
 	width: 20px;
 	height: 20px;

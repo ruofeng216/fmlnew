@@ -18,7 +18,6 @@ QmPreload::~QmPreload()
 
 bool QmPreload::init(int argc, char *argv[])
 {
-	qDebug() << "111111111111111";
 	qutil::initSkin("dark");
 	// 加载默认文字资源
 	static QTranslator trans;
@@ -47,8 +46,6 @@ bool QmPreload::init(int argc, char *argv[])
 			return false;
 		}
 	}
-
-	//LOG_DEBUG << "qm load qss";
 
 	// qcss 加载
 	QFile file(qutil::skin("sc.css"));
