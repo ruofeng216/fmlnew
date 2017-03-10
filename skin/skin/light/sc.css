@@ -1,74 +1,199 @@
 *{
     font-size:12px;
     font-family:"Microsoft YaHei";
-    color:#000000;
+    color:#FFFFFF;
 }
 
 QPushButton,QToolButton{
-    background: #46464c;
-    border: none;
-    color:#FFFFFF;
-    font-size:12px;
-    height:30px;
-    border-radius: 3px;
+    background: #aec9ec;
+    outline: none;
+    color:#666666;
+    height:24px;
+    border-radius: 5px;
 }
 
 QPushButton::hover,QToolButton::hover{
-    background:#505057;
+    background:#18468a;
+	color:#ff900d;
+	outline: none;
 }
 QPushButton::pressed,QToolButton::pressed{
-    background:#026f6f;
+    background:#98b9e5;
+	color:#ff900d;
+	outline: none;
 }
 QPushButton::disabled,QToolButton::disabled{
-    background:#3b3b3e;
-    color:#5d5d67;
-}
-QPushButton::checked,QToolButton::checked{
-    background:#3E6A76;
-}
-
-QPushButton:default,QToolButton:default{
-    background: #0e9496;
-}
-QPushButton:default::hover,QToolButton:default::hover{
-    background: #11acae;
-}
-QPushButton:default::pressed,QToolButton:default::pressed{
-    background: #046e70;
-}
-QPushButton:default::disabled,QToolButton:default::disabled{
-    background: #005353;
-    color:#3f7676;
+    background:#dcdcdc;
+    color:#a6a6a6;
+	outline: none;
 }
 
 IDBImageButton,IDBImageButton::hover,IDBImageButton::pressed,IDBImageButton:disabled,IDBImageButton:hover,IDBImageButton:checked{
     background:transparent;
-    border:none;
+    outline: none;
     color: transparent;
     margin: 0;
     padding: 0;
 }
 
+
+basicui,MainWidget,SubWidget{
+	background: #ff900d;
+}
+basicui QWidget[objectName="title"],
+MainWidget QWidget[objectName="title"],
+SubWidget QWidget[objectName="title"] {
+	background: #0a2d3c;
+}
+
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_close"],
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"],
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]
+{
+	background: #0a2d3c;
+	background-image: url(:/light/close.png);
+    background-repeat:no-repeat;
+	width: 30px;
+	height: 20px;
+	max-height:20px;
+	max-width:30px;
+	outline: none;
+	border-radius: none;
+	border-top-right-radius:5px;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hover,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pressed,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hover,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pressed,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hover,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pressed
+{
+	background: #0a2d3c;
+	background-image: url(:/light/close-click-hover.png);
+    background-repeat:no-repeat;
+	width: 30px;
+	height: 20px;
+	max-height:20px;
+	max-width:30px;
+	outline: none;
+	border-radius: none;
+	border-top-right-radius:5px;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_max"],
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"],
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]
+{
+	background: #0a2d3c;
+	background-image: url(:/light/maximized.png);
+    background-repeat:no-repeat;
+	width: 20px;
+	height: 20px;
+	max-height:20px;
+	max-width:20px;
+	outline: none;
+	border-radius: none;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hover,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hover,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hover,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed
+{
+	background: #0a2d3c;
+	background-image: url(:/light/maximized-click-hover.png);
+    background-repeat:no-repeat;
+	width: 20px;
+	height: 20px;
+	max-height:20px;
+	max-width:20px;
+	outline: none;
+	border-radius: none;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_min"],
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"],
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]
+{
+	background: #0a2d3c;
+	background-image: url(:/light/minimize.png);
+    background-repeat:no-repeat;
+	width: 20px;
+	height: 20px;
+	max-height:20px;
+	max-width:20px;
+	outline: none;
+	border-radius: none;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hover,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hover,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hover,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed
+{
+	background: #0a2d3c;
+	background-image: url(:/light/minimize-click-hover.png);
+    background-repeat:no-repeat;
+	width: 20px;
+	height: 20px;
+	max-height:20px;
+	max-width:20px;
+	outline: none;
+	border-radius: none;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_restore"],
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"],
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]
+{
+	background: #0a2d3c;
+	background-image: url(:/light/pluralized.png);
+    background-repeat:no-repeat;
+	width: 20px;
+	height: 20px;
+	max-height:20px;
+	max-width:20px;
+	outline: none;
+	border-radius: none;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hover,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pressed,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hover,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pressed,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hover,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pressed
+{
+	background: #0a2d3c;
+	background-image: url(:/light/pluralized-click-hover.png);
+    background-repeat:no-repeat;
+	width: 20px;
+	height: 20px;
+	max-height:20px;
+	max-width:20px;
+	outline: none;
+	border-radius: none;
+}
+
+
 QScrollBar:vertical {
-    background:transparent;
+    background:#152731;
     width: 6px;
     min-width:6px;
     max-width:6px;
     margin: 0;
 }
 QScrollBar::handle:vertical {
-    background:#414147;
+    background:#aec9ec;
     min-height: 30px;
     margin: 0px 0px 0px 0px;
     border-radius: 2px;
     border: none;
 }
 QScrollBar::handle:vertical:hover {
-    background:#505056;
+    background:#277fad;
 }
 
 QScrollBar::handle:vertical:pressed {
-    background:#028789;
+    background:#98b9e5;
 }
 QScrollBar::handle:vertical:disabled {
     background:#28282c;
@@ -96,12 +221,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 }
 
 QScrollBar:horizontal {
-    background:transparent;
+    background:#152731;
     height: 6px;
     margin: 0;
 }
 QScrollBar::handle:horizontal {
-    background:#323237;
+    background:#aec9ec;
     min-width: 30px;
     margin: 0 2px 0 1px;
     border-radius: 3px;
@@ -109,11 +234,11 @@ QScrollBar::handle:horizontal {
 }
 
 QScrollBar::handle:horizontal:hover {
-    background:#505056;
+    background:#277fad;
 }
 
 QScrollBar::handle:horizontal:pressed {
-    background:#028789;
+    background:#98b9e5;
 }
 QScrollBar::handle:horizontal:disabled {
     background:#28282c;
@@ -140,18 +265,6 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
     background: none;
 }
 
-
-QSplitter::handle:horizontal {
-    width:1px;
-    background-color:#323438;
-}
-
-QSplitter::handle:vertical {
-    height:1px;
-	background-color:#323438;
-}
-
-
 QMenuBar {
     background: #0a2d3c;
     border:none;
@@ -171,15 +284,15 @@ QMenuBar::item:selected
 }
 QMenuBar::item:pressed
 {
-    background: #1b4b63;
+    background: #aec9ec;
 }
 QMenuBar::item:hover
 {
-    background: #206c93;
+    background: #98b9e5;
 }
 QMenu {
 	font-size:14px;
-	color:#e8e5d5;
+	color:#666666;
     background-color:#1b4d63;
     text-align:center;
     float:left;
@@ -206,66 +319,45 @@ QMenu::separator {
 }
 
 QLineEdit{
-    background:#36383d;
-    color:#ffffff;
+    background:#a6a6a6;
+    color:#666666;
     font-size:12px;
-    height:30px;
-    selection-background-color:#0e9496;
-    border-radius: 3px;
+    height:20px;
+    /*selection-background-color:#0e9496;*/
     border:1px;
+	border-color: #aec9ec;
 }
 
 QLineEdit::hover{
-    background:#505057;
+    background:#232220;
+	border-color: #6886b8;
 }
 QLineEdit::pressed{
-    background:#505057;
+    background:#232220;
+	border-color: #6886b8;
 }
-QLineEdit::disabled{
+/*QLineEdit::disabled{
     background:#36383d;
     color:#aaaaaa
+}*/
+QTextEdit {
+	background:#a6a6a6;
+    color:#666666;
+    font-size:12px;
+	border:1px;
+	border-color: #aec9ec;
 }
-
-
-
-
-
-
-
-QTreeWidget::focus{
-    border: 0px solid #099190;
-}
-
-/** �ָ��� **/
-IDBLine
-{
-    background:#3c3c41;
-    border-width: 1px;
-    border-top-style: solid;
-    border-right-style: none;
-    border-bottom-style: none;
-    border-left-style: none;
-}
-
-QCheckBox {
-    color:white
-}
-
-QProgressBar {
-    border: 0px solid grey;
-    border-radius: 0px;
-    text-align: center;
-    background-color:#28282c;
-}
-
-QProgressBar::chunk {
-    background-color:#017b7a;
+QTextEdit::hover,
+QTextEdit::pressed{
+    background:#232220;
+	border-color: #6886b8;
 }
 
 QScrollArea
 {
     background-color:transparent;
     border:0px;
+	outline: none;
 }
 
 QScrollArea > QWidget > QWidget
@@ -273,12 +365,6 @@ QScrollArea > QWidget > QWidget
     background: transparent;
     border: 0px solid black;
     margin: 0px 0px 0px 0px;
-}
-
-QComboBox QAbstractItemView {
-    selection-background-color: #0e9496;
-    border:none;
-    outline: none;
 }
 
 QWidget#MessageBoxWidget QPushButton#pbOk{
@@ -326,39 +412,6 @@ QWidget#ReloginMessageBoxWidget QPushButton{
 	font-weight:bold;
 }
 
-QListView {
-	background-color: transparent;
-	outline:0px;
-}
-QListView::item:hover {
-    background-color: #209a9b;
-	outline:0px;
-}
-
-QListView::item:selected {
-    background-color: #157b7c;
-    border: none;
-	outline:0px;
-}
-
-
-QListView#listFunc {
-	background-color:transparent;
-	border-right: 1px solid #3c3c41;
-	border-bottom: none;
-	border-left: none;
-	border-top: none;
-	
-}
-QListView#listFunc::item {
-	height: 40px;
-}
-
-QListView#listDetailFunc {
-	background-color:transparent;
-	border:none;
-}
-
 QToolTip {
     color: white;
     border: 1px solid #76797c;
@@ -373,45 +426,30 @@ DragInOutTabWidget{
 }
 
 DragInOutTabWidget::pane {
-    border-top: 2px solid #ff900d;
+    border-top: 3px solid #ff900d;
     border-radius: 1px;
     padding: 5px;
 }
 
 DragInOutTabWidget::tab-bar{
-    height: 25px;
-    left: 5px;
-
+    height: 28px;
+	
 }
 DragInOutTabBar
 {
     qproperty-drawBase: 0;
-    left: 5px; /* move to the right by 5px */
     border-radius: 1px;
     background: #0a2d3c;
-    height: 25px;
-    border-bottom: 2px solid #ff900d;
+    height: 28px;
+    border-bottom: 3px solid #ff900d;
 }
 
 DragInOutTabBar:focus
 {
-    border-bottom: 2px solid #ff900d;
+    border-bottom: 3px solid #ff900d;
 }
-
-DragInOutTabBar::close-button  {
-    image: url(:/skin/default/close);
-    background: transparent;
-}
-
-DragInOutTabBar::close-button:hover
-{
-    image: url(:/skin/default/close-hover);
-    background: transparent;
-}
-
-DragInOutTabBar::close-button:pressed {
-    image: url(:/skin/default/close-pressed);
-    background: transparent;
+DragInOutTabBar::close-button:!selected:!hover {
+    background-color: transparent;
 }
 
 /*
@@ -423,105 +461,280 @@ DragInOutTabBar::tab:first{
 }*/
 /* TOP TABS */
 DragInOutTabBar::tab:top {
-    color: #0b2c3d;
-    background-image: url(:/skin/default/tab);
+    color: #18468a;
+    background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    height: 25px;
+    height: 28px;
     width: 132px;
+	/*margin-right: -10px;*/
 }
-
+/*DragInOutTabBar::tab:top:only-one {
+	margin-right: 0;
+}
+DragInOutTabBar::tab:top:selected  {
+	margin-right: -10px;
+}*/
 DragInOutTabBar::tab:top:!selected
 {
     color: #eff0f1;
-    background-image: url(:/skin/default/tab);
+    background-image: url(:/light/normal.png);
     background-repeat:no-repeat;
 }
 
 DragInOutTabBar::tab:top:!selected:hover {
-    background-image: url(:/skin/default/tab);
+    background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    color: #0b2c3d;
+    color: #18468a;
 }
 
 /* BOTTOM TABS */
 DragInOutTabBar::tab:bottom {
-    color: #0b2c3d;
-    background-image: url(:/skin/default/tab);
+    color: #18468a;
+    background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    height: 25px;
+    height: 28px;
     width: 132px;
 }
 
 DragInOutTabBar::tab:bottom:!selected
 {
     color: #eff0f1;
-    background-image: url(:/skin/default/tab);
+    background-image: url(:/light/normal.png);
     background-repeat:no-repeat;
 }
 
 DragInOutTabBar::tab:bottom:!selected:hover {
-    background-image: url(:/skin/default/tab);
+    background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    color: #0b2c3d;
+    color: #18468a;
 }
 
 /* LEFT TABS */
 DragInOutTabBar::tab:left {
-    color: #0b2c3d;
-    background-image: url(:/skin/default/tab);
+    color: #18468a;
+    background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    height: 25px;
+    height: 28px;
     width: 132px;
 }
 
 DragInOutTabBar::tab:left:!selected
 {
     color: #eff0f1;
-    background-image: url(:/skin/default/tab);
+    background-image: url(:/light/active.png);
     background-repeat:no-repeat;
 }
 
 DragInOutTabBar::tab:left:!selected:hover {
-    background-image: url(:/skin/default/tab);
+    background-image: url(:/light/normal.png);
     background-repeat:no-repeat;
-    color: #0b2c3d;
+    color: #18468a;
 }
 
 
 /* RIGHT TABS */
 DragInOutTabBar::tab:right {
-    color: #0b2c3d;
-    background-image: url(:/skin/default/tab);
+    color: #18468a;
+    background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    height: 25px;
+    height: 28px;
     width: 132px;
 }
 
 DragInOutTabBar::tab:right:!selected
 {
     color: #eff0f1;
-    background-image: url(:/skin/default/tab);
+    background-image: url(:/light/normal.png);
     background-repeat:no-repeat;
 }
 
 DragInOutTabBar::tab:right:!selected:hover {
-    background-image: url(:/skin/default/tab);
+    background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    color: #0b2c3d;
+    color: #18468a;
 }
 
-DragInOutTabBar QToolButton::right-arrow:enabled {
-    image: url(:/skin/default/right_arrow);
+MessageBoxWidget {
+	background: transparent;
+	background-color: #0e2e37;
+	border-radius: 5px;
+	opacity: 0.75;
 }
 
-DragInOutTabBar QToolButton::left-arrow:enabled {
-    image: url(:/skin/default/left_arrow);
+QDateEdit {
+	background:#a6a6a6;
+    color:#666666;
+	height:20px;
+	width:130px;
+    font-size:12px;
+	border:1px;
+	border-color: #aec9ec;
+}
+QDateEdit::hover,
+QDateEdit::pressed,
+QDateEdit::on{
+    background:#232220;
+	border-color: #6886b8;
+}
+QDateEdit::drop-down {
+	margin: 3px 10px;
+	image: url(:/light/date.png);
+	outline: none;
+}
+QDateEdit::drop-down:pressed,
+QDateEdit::drop-down:hover,
+QDateEdit::drop-down:on {
+	image: url(:/light/datedown.png);
+	outline: none;
 }
 
-DragInOutTabBar QToolButton::right-arrow:disabled {
-    image: url(:/skin/default/right_arrow_disabled);
+/*----------日历控件------start-----------*/
+QPrevNextCalButton#qt_calendar_prevmonth,
+QPrevNextCalButton#qt_calendar_nextmonth,
+QToolButton#qt_calendar_monthbutton,
+QToolButton#qt_calendar_yearbutton{
+	background:transparent;
+	background-color: transparent;
+	border:none;
+	border-radius:5px;
+	margin:1px 3px;
+	padding:1px;
+	outline:none;
+}
+QToolButton#qt_calendar_monthbutton,
+QToolButton#qt_calendar_yearbutton
+{
+	width:60px;
+}
+QPrevNextCalButton#qt_calendar_prevmonth:pressed,
+QPrevNextCalButton#qt_calendar_nextmonth:pressed{
+	border:2px solid transparent;
+}
+QWidget#qt_calendar_navigationbar{
+	border:1px solid #575757;
+	border-width:1px 1px 0px 1px;
+	background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #4D4D4D,stop:1 #292929);
+}
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit{
+	background:#232220;
+	border-color: #6886b8;
+	selection-background-color: #ff900d;
+	selection-color: #ff900d;
+}
+/*
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button
+{
+	image:url(:/images/scroll_up.png);
+}
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::down-button{
+    image:url(:/images/scroll_down.png);
+}
+*/
+QToolButton#qt_calendar_monthbutton::menu-indicator{
+	subcontrol-origin: padding;
+	subcontrol-position: center right;
+}
+QCalendarView#qt_calendar_calendarview{
+	background:transparent;
+	background-color: #aec9ec;
+	alternate-background-color: #232220;
+	selection-background-color: #ff900d;
+	selection-color: #000;
+	border: none;
+	outline: none;
+}
+/*---------------日历控件------end------------------*/
+
+/*---------------QComboBox---start------------*/
+QComboBox {
+	background:#a6a6a6;
+    color:#666666;
+	height:20px;
+	width:130px;
+    font-size:12px;
+	border:1px;
+	border-color: #aec9ec;
+}
+QComboBox::hover,
+QComboBox::pressed,
+QComboBox::on{
+    background:#232220;
+	border-color: #6886b8;
+}
+QComboBox::drop-down {
+	image: url(:/light/dropdown.png) ;
+	outline: none;
+	margin: 6px 4px;
+}
+QComboBox::drop-down:pressed,
+QComboBox::drop-down:hover,
+QComboBox::drop-down:on {
+	image: url(:/light/dropdowndown.png);
+	outline: none;
+}
+QComboBox QAbstractItemView
+{
+	alternate-background-color: #a6a6a6;
+	selection-background-color: #ff900d;
+	selection-color: #ff900d;
+	border: none;
+	background: #232220;
+	outline: none;
+}
+/*------------QComboBox---end------------*/
+
+/*------------ParaMgrHoliday QTreeView---start------------*/
+QTreeView[objectName="treeView"]{
+	background:transparent;
+	background-color: #040c0a;
+	alternate-background-color: #121715;
+	outline: none;
+    color:#a0ad67;
+	border:none;
+	font-size:12px;
+}
+QTreeView[objectName="treeView"] QHeaderView::section{
+	background:transparent;
+	background-color: #ff900d;
+	padding: 2px 25%;
+	border-top: none;
+    border-left:none;
+    border-right:1px solid #1b4d63;
+    border-bottom: none;
+	height: 16px;
+}
+QTreeView[objectName="treeView"]::item{
+	outline: none;
+	border: none;
+}
+QTreeView[objectName="treeView"]::item:hover {
+	background：#1a4b64;
+	color:#fff;
+}
+QTreeView[objectName="treeView"]::item:selected,
+QTreeView[objectName="treeView"]::item:selected:active,
+QTreeView[objectName="treeView"]::item:selected:!active {
+	background：#1a4b64;
+	outline: none;
+	color:#fff;
 }
 
-DragInOutTabBar QToolButton::left-arrow:disabled {
-    image: url(:/skin/default/left_arrow_disabled);
+/*
+ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:active{
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #232220, stop: 1 #ff900d);
 }
+
+ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:!active {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);
+}*/
+
+/*------------ParaMgrHoliday QTreeView---end------------*/
+QWidget[objectName="MovingWidget"]
+{
+	background: black;
+	opacity: 50;
+}
+QWidget[objectName="MovingWidget"] > QLabel{
+	background: transparent;
+}
+
