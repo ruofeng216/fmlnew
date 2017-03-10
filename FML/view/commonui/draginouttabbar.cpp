@@ -71,9 +71,7 @@ void DragInOutTabBar::mouseMoveEvent(QMouseEvent * event)
 		QTabWidget *tab = (QTabWidget*)this->parentWidget();
 		QRect tabRect = tab->rect();
 		tabRect.setTop(tab->tabBar()->rect().height());
-		QPixmap pixmap = QPixmap::grabWidget(tab, tabRect);
-		pixmap = pixmap.scaled(QSize(MOVING_PIXMAP_SIZE, MOVING_PIXMAP_SIZE));
-
+		QPixmap pixmap = tab->grab(tabRect).scaled(QSize(MOVING_PIXMAP_SIZE, MOVING_PIXMAP_SIZE));
 		m_MovingPic->setPixmap(pixmap);
 		m_MovingWidget->show();
 		m_MovingWidget->move(QCursor::pos());
