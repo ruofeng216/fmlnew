@@ -8,7 +8,8 @@ class SKIN_EXPORT Skin
 public:
 	static Skin& instance();
 
-	void setSkin(const QString &skinName);
+	void setSkinName(const QString &skinName);
+	const QString& skinName() const;
 	QString path(const QString &fileName);
 
 private:

@@ -28,6 +28,9 @@
   <property name="windowTitle">
    <string/>
   </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
@@ -85,7 +88,7 @@
           <verstretch>0</verstretch>
          </sizepolicy>
         </property>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <layout class="QHBoxLayout" name="titleLeftLayout">
          <property name="spacing">
           <number>0</number>
          </property>
@@ -105,7 +108,7 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
+       <layout class="QHBoxLayout" name="titleBtns">
         <property name="spacing">
          <number>0</number>
         </property>

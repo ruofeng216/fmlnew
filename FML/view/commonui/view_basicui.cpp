@@ -30,7 +30,7 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 		bool isLogoVisible = (m_titlestyle & TS_LOGO);
 		bool isCenter = (m_titlestyle & TS_CENTER);
 		ptitle->init(isLogoVisible ? QPixmap(qutil::skin("logo.png")).scaled(20, 20) : QPixmap(), m_title, isCenter);
-		m_ui->horizontalLayout_2->addWidget(ptitle);
+		m_ui->titleLeftLayout->addWidget(ptitle);
 	}
 	
 	setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint | Qt::Window);
@@ -47,12 +47,6 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 	m_ui->gl_body->addWidget(m_contentWidget);
 	m_contentWidget->setMouseTracking(true);
 	setWindowTitle(m_title);
-	
-	/*m_ui->btn_min->init(IDBResourceNS::BASICUI_TITLE_MIN);
-	m_ui->btn_max->init(IDBResourceNS::BASICUI_TITLE_MAX);
-	m_ui->btn_close->init(IDBResourceNS::BASICUI_TITLE_CLOSE);
-	m_ui->btn_restore->init(IDBResourceNS::BASICUI_TITLE_RESTORE);
-	m_ui->btn_func->init(IDBResourceNS::SINGLESESSION_MENU);*/
 
 	// 最小化信号槽
 	connect(m_ui->btn_min, SIGNAL(clicked()), this, SLOT(min()));
@@ -114,16 +108,20 @@ void basicui::paintEvent(QPaintEvent *event)
 	QPainter painter(this);
 	// 窗口top圆角处理
 	int radius = 5;
-	QSize maskSize(this->size().width(), this->size().height() + radius);
+	QSize maskSize(this->width(), this->height() + radius);
 	QBitmap mask(maskSize);
 	QPainter maskPainter(&mask);
 	maskPainter.setRenderHint(QPainter::Antialiasing);
 	maskPainter.setRenderHint(QPainter::SmoothPixmapTransform);
-	QColor color=QColor("#FFFFFF");
+	QColor color = QColor("#FFFFFF");
 	maskPainter.fillRect(this->rect(), color);
 	maskPainter.setBrush(QColor("#000000"));
 	maskPainter.drawRoundedRect(QRect(QPoint(0, 0), maskSize), radius, radius);
 	this->setMask(mask);
+	
+	static QColor borderColor = m_ui->title->palette().color(QPalette::Background);
+	painter.setPen(borderColor);
+	painter.drawRect(0, 0, this->width() - 1, this->height() - 1);
 	QWidget::paintEvent(event);
 }
 
@@ -365,11 +363,12 @@ MainWidget::MainWidget(QWidget *parent, QWidget *contentWidget, const QString &w
 	const QString &title, int titlestyle)
 	: basicui(parent, contentWidget, wndid, title, titlestyle|TS_NONE)
 {
+	this->setObjectName("MainWidget");
 	m_titlestyle = titlestyle;
 	MainTitle *ptitle = new MainTitle(this);
 	bool isLogoVisible = (m_titlestyle & TS_LOGO);
 	ptitle->init(isLogoVisible ? QPixmap(qutil::skin("logo.png")).scaled(20, 20) : QPixmap(), m_title);
-	m_ui->horizontalLayout_2->addWidget(ptitle);
+	m_ui->titleLeftLayout->addWidget(ptitle);
 }
 MainWidget::~MainWidget()
 {

@@ -22,7 +22,12 @@ namespace qutil
 
 	void initSkin(const QString &skinName)
 	{
-		Skin::instance().setSkin(skinName);
+		Skin::instance().setSkinName(skinName);
+	}
+
+	QString currentSkin()
+	{
+		return Skin::instance().skinName();
 	}
 
 	// ªÒ»°∆§∑Ù

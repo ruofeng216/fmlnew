@@ -36,6 +36,9 @@ IDBImageButton,IDBImageButton::hover,IDBImageButton::pressed,IDBImageButton:disa
     padding: 0;
 }
 
+MainTitle QLabel, TitleWidget QLabel {
+    color: #e8e5d5;
+}
 
 basicui,MainWidget,SubWidget{
 	background: #000000;
@@ -304,12 +307,12 @@ QMenu::item {
 QMenu::item:hover {
     background: #fe900d;
 	margin: 0px;
-	color: #000;
+	color: #0b2c3d;
 }
 QMenu::item:selected {
     background:#fe900d;
 	margin: 0px;
-	color: #000;
+	color: #0b2c3d;
 }
 QMenu::item:!enabled {
     color:#75777e;
@@ -407,12 +410,11 @@ DragInOutTabWidget::pane {
     padding: 5px;
 }
 
-DragInOutTabWidget::tab-bar{
+DragInOutTabWidget::tab-bar {
     height: 28px;
-	
 }
-DragInOutTabBar
-{
+
+DragInOutTabBar {
     qproperty-drawBase: 0;
     border-radius: 1px;
     background: #0a2d3c;
@@ -420,10 +422,10 @@ DragInOutTabBar
     border-bottom: 3px solid #ff900d;
 }
 
-DragInOutTabBar:focus
-{
+DragInOutTabBar:focus {
     border-bottom: 3px solid #ff900d;
 }
+
 DragInOutTabBar::close-button:!selected:!hover {
     background-color: transparent;
 }

@@ -223,7 +223,7 @@ void CFinancialCalendar::setHolidayType(const int &val)
 {
 	m_holidayType = EHType(val);
 }
-const int &CFinancialCalendar::CFinancialCalendar::getHolidayType() const
+int CFinancialCalendar::getHolidayType() const
 {
 	return m_holidayType;
 }

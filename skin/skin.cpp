@@ -14,9 +14,14 @@ Skin& Skin::instance()
 	return s_inst;
 }
 
-void Skin::setSkin(const QString &skinName)
+void Skin::setSkinName(const QString &skinName)
 {
 	m_skinName = skinName;
+}
+
+const QString& Skin::skinName() const
+{
+	return m_skinName;
 }
 
 QString Skin::path(const QString &fileName)

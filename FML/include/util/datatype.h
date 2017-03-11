@@ -111,7 +111,7 @@ public:
 	void setDate(const int &val);
 	const int &getDate() const;
 	void setHolidayType(const int &val);
-	const int &getHolidayType() const;
+	int getHolidayType() const;
 	const QString getHolidayTypeStr() const;
 	void setHolidayinfo(const QString &val);
 	const QString &getHolidayinfo() const;

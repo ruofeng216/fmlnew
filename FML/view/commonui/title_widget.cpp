@@ -31,7 +31,7 @@ TitleWidget::~TitleWidget()
 void TitleWidget::init(const QPixmap &logoPixmap, const QString &title, bool isCenter)
 {
 	QHBoxLayout *mainlayout = new QHBoxLayout;
-	mainlayout->setContentsMargins(0, 0, 0, 0);
+	mainlayout->setContentsMargins(10, 0, 0, 0);
 
 	if (!logoPixmap.isNull())
 	{
@@ -70,7 +70,7 @@ MainTitle::~MainTitle()
 void MainTitle::init(const QPixmap &logoPixmap, const QString &title)
 {
 	QHBoxLayout *mainlayout = new QHBoxLayout;
-	mainlayout->setContentsMargins(0, 0, 0, 0);
+	mainlayout->setContentsMargins(10, 0, 0, 0);
 
 	if (!logoPixmap.isNull())
 	{

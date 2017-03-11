@@ -1,7 +1,7 @@
 *{
     font-size:12px;
     font-family:"Microsoft YaHei";
-    color:#ff900d;
+    color:#ffffff;
 }
 
 QPushButton,QToolButton{
@@ -36,21 +36,25 @@ IDBImageButton,IDBImageButton::hover,IDBImageButton::pressed,IDBImageButton:disa
     padding: 0;
 }
 
+MainTitle QLabel, TitleWidget QLabel {
+    color: #666666;
+}
 
 basicui,MainWidget,SubWidget{
-	background: #ff900d;
+	background: #ffffff;
 }
+
 basicui QWidget[objectName="title"],
 MainWidget QWidget[objectName="title"],
 SubWidget QWidget[objectName="title"] {
-	background: #0a2d3c;
+	background: #dddddd;
 }
 
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_close"],
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"],
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]
 {
-	background: #0a2d3c;
+	background: #18468a;
 	background-image: url(:/light/close.png);
     background-repeat:no-repeat;
 	width: 30px;
@@ -68,7 +72,7 @@ MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pres
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pressed
 {
-	background: #0a2d3c;
+	background: #18468a;
 	background-image: url(:/light/close-click-hover.png);
     background-repeat:no-repeat;
 	width: 30px;
@@ -83,7 +87,7 @@ basicui QWidget[objectName="title"] QPushButton[objectName="btn_max"],
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"],
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]
 {
-	background: #0a2d3c;
+	background: #18468a;
 	background-image: url(:/light/maximized.png);
     background-repeat:no-repeat;
 	width: 20px;
@@ -100,7 +104,7 @@ MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::presse
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed
 {
-	background: #0a2d3c;
+	background: #18468a;
 	background-image: url(:/light/maximized-click-hover.png);
     background-repeat:no-repeat;
 	width: 20px;
@@ -114,7 +118,7 @@ basicui QWidget[objectName="title"] QPushButton[objectName="btn_min"],
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"],
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]
 {
-	background: #0a2d3c;
+	background: #18468a;
 	background-image: url(:/light/minimize.png);
     background-repeat:no-repeat;
 	width: 20px;
@@ -131,7 +135,7 @@ MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::presse
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed
 {
-	background: #0a2d3c;
+	background: #18468a;
 	background-image: url(:/light/minimize-click-hover.png);
     background-repeat:no-repeat;
 	width: 20px;
@@ -145,7 +149,7 @@ basicui QWidget[objectName="title"] QPushButton[objectName="btn_restore"],
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"],
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]
 {
-	background: #0a2d3c;
+	background: #18468a;
 	background-image: url(:/light/pluralized.png);
     background-repeat:no-repeat;
 	width: 20px;
@@ -162,7 +166,7 @@ MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pr
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pressed
 {
-	background: #0a2d3c;
+	background: #18468a;
 	background-image: url(:/light/pluralized-click-hover.png);
     background-repeat:no-repeat;
 	width: 20px;
@@ -267,7 +271,8 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
 
 QMenuBar {
 	color: #666666;
-    background: #0a2d3c;
+    /*background: #18468a;*/
+    background: #dddddd;
     border:none;
 	text-align: center;
 	font-size: 14px;
@@ -281,20 +286,20 @@ QMenuBar::item {
 }
 QMenuBar::item:selected
 {
-    background: #aec9ec;
+    background: #a6a6a6;
 }
 QMenuBar::item:pressed
 {
-    background: #aec9ec;
+    background: #a6a6a6;
 }
 QMenuBar::item:hover
 {
-    background: #98b9e5;
+    background: #a6a6a6;
 }
 QMenu {
 	font-size:14px;
-	color:#666666;
-    background-color:#aec9ec;
+	color:#333;
+    background-color:#dddddd;
     text-align:center;
     float:left;
 }
@@ -302,14 +307,14 @@ QMenu::item {
     padding: 3px 25px 5px 20px;
 }
 QMenu::item:hover {
-    background: #fe900d;
+    background: #a6a6a6;
 	margin: 0px;
-	color: #000;
+	color: #fff;
 }
 QMenu::item:selected {
-    background:#fe900d;
+    background:#a6a6a6;
 	margin: 0px;
-	color: #000;
+	color: #fff;
 }
 QMenu::item:!enabled {
     color:#75777e;
@@ -377,14 +382,13 @@ QWidget#ReloginMessageBoxWidget QPushButton{
 }
 
 MessageBoxWidget {
-	background-color: #0e2e37;
+	background-color: #000000;
 	border-radius: 5px;
-	border: 1px solid #98b9e5;
 	opacity: 0.75;
 }
 
 MessageBoxWidget QLabel[objectName="labelContent"] {
-	color:#666666;
+	color:#ffffff;
 	font:16px;
 }
 
@@ -407,23 +411,22 @@ DragInOutTabWidget::pane {
     padding: 5px;
 }
 
-DragInOutTabWidget::tab-bar{
+DragInOutTabWidget::tab-bar {
     height: 28px;
-	
 }
-DragInOutTabBar
-{
+
+DragInOutTabBar {
     qproperty-drawBase: 0;
     border-radius: 1px;
-    background: #0a2d3c;
+    background: #dddddd;
     height: 28px;
+    border-bottom: 3px solid #6886B8;
+}
+
+DragInOutTabBar:focus {
     border-bottom: 3px solid #f5fafe;
 }
 
-DragInOutTabBar:focus
-{
-    border-bottom: 3px solid #f5fafe;
-}
 DragInOutTabBar::close-button:!selected:!hover {
     background-color: transparent;
 }
@@ -437,7 +440,7 @@ DragInOutTabBar::tab:first{
 }*/
 /* TOP TABS */
 DragInOutTabBar::tab:top {
-    color: #0a2d3c;
+    color: #18468a;
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -460,12 +463,12 @@ DragInOutTabBar::tab:top:!selected
 DragInOutTabBar::tab:top:!selected:hover {
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    color: #0a2d3c;
+    color: #18468a;
 }
 
 /* BOTTOM TABS */
 DragInOutTabBar::tab:bottom {
-    color: #0a2d3c;
+    color: #18468a;
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -482,12 +485,12 @@ DragInOutTabBar::tab:bottom:!selected
 DragInOutTabBar::tab:bottom:!selected:hover {
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    color: #0a2d3c;
+    color: #18468a;
 }
 
 /* LEFT TABS */
 DragInOutTabBar::tab:left {
-    color: #0a2d3c;
+    color: #18468a;
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -504,13 +507,13 @@ DragInOutTabBar::tab:left:!selected
 DragInOutTabBar::tab:left:!selected:hover {
     background-image: url(:/light/normal.png);
     background-repeat:no-repeat;
-    color: #0a2d3c;
+    color: #18468a;
 }
 
 
 /* RIGHT TABS */
 DragInOutTabBar::tab:right {
-    color: #0a2d3c;
+    color: #18468a;
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -527,7 +530,7 @@ DragInOutTabBar::tab:right:!selected
 DragInOutTabBar::tab:right:!selected:hover {
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    color: #0a2d3c;
+    color: #18468a;
 }
 
 QDateEdit {
@@ -557,7 +560,7 @@ QDateEdit::drop-down:on {
 	outline: none;
 }
 
-/*----------日历控件------start-----------*/
+/*----------鏃ュ巻鎺т欢------start-----------*/
 QPrevNextCalButton#qt_calendar_prevmonth,
 QPrevNextCalButton#qt_calendar_nextmonth,
 QToolButton#qt_calendar_monthbutton,
@@ -612,7 +615,7 @@ QCalendarView#qt_calendar_calendarview{
 	border: none;
 	outline: none;
 }
-/*---------------日历控件------end------------------*/
+/*---------------鏃ュ巻鎺т欢------end------------------*/
 
 /*---------------QComboBox---start------------*/
 QComboBox {

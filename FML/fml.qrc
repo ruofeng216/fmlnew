@@ -3,38 +3,7 @@
         <file>fml_zh.qm</file>
         <file>qt_zh_CN.qm</file>
     </qresource>
-    <qresource prefix="/skin">
-        <file alias="default/20x20">skin/default/20x20.png</file>
-        <file alias="default/bg_main">skin/default/bg_main.png</file>
-        <file alias="default/hot">skin/default/hot.png</file>
-        <file alias="default/loading">skin/default/loading.gif</file>
-        <file alias="default/msgbox_caution">skin/default/msgbox_caution.png</file>
-        <file alias="default/msgbox_confirm">skin/default/msgbox_confirm.png</file>
-        <file alias="default/msgbox_error">skin/default/msgbox_error.png</file>
-        <file alias="default/msgbox_success">skin/default/msgbox_success.png</file>
-        <file alias="default/sc">skin/default/sc.css</file>
-        <file alias="default/logo">skin/default/logo.png</file>
-        <file alias="default/tab">skin/default/tab-1.png</file>
-        <file alias="default/close">skin/default/close.png</file>
-        <file alias="default/close-hover">skin/default/close-hover.png</file>
-        <file alias="default/close-pressed">skin/default/close-pressed.png</file>
-        <file alias="default/left_arrow">skin/default/left_arrow.png</file>
-        <file alias="default/left_arrow_disabled">skin/default/left_arrow_disabled.png</file>
-        <file alias="default/right_arrow">skin/default/right_arrow.png</file>
-        <file alias="default/right_arrow_disabled">skin/default/right_arrow_disabled.png</file>
-    </qresource>
     <qresource prefix="/syswnd">
         <file>widgets.qm</file>
-    </qresource>
-    <qresource prefix="/web">
-        <file alias="default/web/demo/1.html">skin/default/web/demo/1.html</file>
-        <file alias="default/web/commonjs/qwebchannel.js">skin/default/web/commonjs/qwebchannel.js</file>
-        <file alias="default/web/commonjs/webgetway.js">skin/default/web/commonjs/webgetway.js</file>
-        <file alias="default/web/commoncss/webkit.css">skin/default/web/commoncss/webkit.css</file>
-        <file alias="default/web/commonjs/jquery.js">skin/default/web/commonjs/jquery.js</file>
-        <file alias="default/web/demo/2.html">skin/default/web/demo/2.html</file>
-    </qresource>
-    <qresource prefix="/set">
-        <file alias="default/func.xml">skin/default/func.xml</file>
     </qresource>
 </RCC>

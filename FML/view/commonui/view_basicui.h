@@ -85,8 +85,6 @@ public:
 	MainWidget(QWidget *parent, QWidget *contentWidget, const QString &wndid,
 		const QString &title, int titlestyle = TS_LOGO | TS_MAX | TS_CLOSE | TS_MIN | TS_LEFT);
 	~MainWidget();
-
-
 };
 
 class SubWidget : public basicui
