@@ -1,7 +1,7 @@
 *{
     font-size:12px;
     font-family:"Microsoft YaHei";
-    color:#FFFFFF;
+    color:#ff900d;
 }
 
 QPushButton,QToolButton{
@@ -13,13 +13,13 @@ QPushButton,QToolButton{
 }
 
 QPushButton::hover,QToolButton::hover{
-    background:#18468a;
-	color:#ff900d;
+    background:#0a2d3c;
+	color:#f5fafe;
 	outline: none;
 }
 QPushButton::pressed,QToolButton::pressed{
     background:#98b9e5;
-	color:#ff900d;
+	color:#f5fafe;
 	outline: none;
 }
 QPushButton::disabled,QToolButton::disabled{
@@ -280,7 +280,7 @@ QMenuBar::item {
 }
 QMenuBar::item:selected
 {
-    background: #1b4d63;
+    background: #aec9ec;
 }
 QMenuBar::item:pressed
 {
@@ -293,7 +293,7 @@ QMenuBar::item:hover
 QMenu {
 	font-size:14px;
 	color:#666666;
-    background-color:#1b4d63;
+    background-color:#aec9ec;
     text-align:center;
     float:left;
 }
@@ -426,7 +426,7 @@ DragInOutTabWidget{
 }
 
 DragInOutTabWidget::pane {
-    border-top: 3px solid #ff900d;
+    border-top: 3px solid #f5fafe;
     border-radius: 1px;
     padding: 5px;
 }
@@ -441,12 +441,12 @@ DragInOutTabBar
     border-radius: 1px;
     background: #0a2d3c;
     height: 28px;
-    border-bottom: 3px solid #ff900d;
+    border-bottom: 3px solid #f5fafe;
 }
 
 DragInOutTabBar:focus
 {
-    border-bottom: 3px solid #ff900d;
+    border-bottom: 3px solid #f5fafe;
 }
 DragInOutTabBar::close-button:!selected:!hover {
     background-color: transparent;
@@ -461,7 +461,7 @@ DragInOutTabBar::tab:first{
 }*/
 /* TOP TABS */
 DragInOutTabBar::tab:top {
-    color: #18468a;
+    color: #0a2d3c;
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -484,12 +484,12 @@ DragInOutTabBar::tab:top:!selected
 DragInOutTabBar::tab:top:!selected:hover {
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    color: #18468a;
+    color: #0a2d3c;
 }
 
 /* BOTTOM TABS */
 DragInOutTabBar::tab:bottom {
-    color: #18468a;
+    color: #0a2d3c;
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -506,12 +506,12 @@ DragInOutTabBar::tab:bottom:!selected
 DragInOutTabBar::tab:bottom:!selected:hover {
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    color: #18468a;
+    color: #0a2d3c;
 }
 
 /* LEFT TABS */
 DragInOutTabBar::tab:left {
-    color: #18468a;
+    color: #0a2d3c;
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -528,13 +528,13 @@ DragInOutTabBar::tab:left:!selected
 DragInOutTabBar::tab:left:!selected:hover {
     background-image: url(:/light/normal.png);
     background-repeat:no-repeat;
-    color: #18468a;
+    color: #0a2d3c;
 }
 
 
 /* RIGHT TABS */
 DragInOutTabBar::tab:right {
-    color: #18468a;
+    color: #0a2d3c;
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -551,7 +551,7 @@ DragInOutTabBar::tab:right:!selected
 DragInOutTabBar::tab:right:!selected:hover {
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
-    color: #18468a;
+    color: #0a2d3c;
 }
 
 MessageBoxWidget {
@@ -588,7 +588,7 @@ QDateEdit::drop-down:on {
 	outline: none;
 }
 
-/*----------æ—¥å†æ§ä»¶------start-----------*/
+/*----------ÈÕÀú¿Ø¼ş------start-----------*/
 QPrevNextCalButton#qt_calendar_prevmonth,
 QPrevNextCalButton#qt_calendar_nextmonth,
 QToolButton#qt_calendar_monthbutton,
@@ -618,7 +618,7 @@ QWidget#qt_calendar_navigationbar{
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit{
 	background:#232220;
 	border-color: #6886b8;
-	selection-background-color: #ff900d;
+	selection-background-color: #f5fafe;
 	selection-color: #ff900d;
 }
 /*
@@ -638,12 +638,12 @@ QCalendarView#qt_calendar_calendarview{
 	background:transparent;
 	background-color: #aec9ec;
 	alternate-background-color: #232220;
-	selection-background-color: #ff900d;
+	selection-background-color: #f5fafe;
 	selection-color: #000;
 	border: none;
 	outline: none;
 }
-/*---------------æ—¥å†æ§ä»¶------end------------------*/
+/*---------------ÈÕÀú¿Ø¼ş------end------------------*/
 
 /*---------------QComboBox---start------------*/
 QComboBox {
@@ -675,7 +675,7 @@ QComboBox::drop-down:on {
 QComboBox QAbstractItemView
 {
 	alternate-background-color: #a6a6a6;
-	selection-background-color: #ff900d;
+	selection-background-color: #f5fafe;
 	selection-color: #ff900d;
 	border: none;
 	background: #232220;
@@ -699,7 +699,7 @@ QTreeView[objectName="treeView"] QHeaderView::section{
 	padding: 2px 25%;
 	border-top: none;
     border-left:none;
-    border-right:1px solid #1b4d63;
+    border-right:1px solid #aec9ec;
     border-bottom: none;
 	height: 16px;
 }
@@ -708,20 +708,20 @@ QTreeView[objectName="treeView"]::item{
 	border: none;
 }
 QTreeView[objectName="treeView"]::item:hover {
-	backgroundï¼š#1a4b64;
+	background:#1a4b64;
 	color:#fff;
 }
 QTreeView[objectName="treeView"]::item:selected,
 QTreeView[objectName="treeView"]::item:selected:active,
 QTreeView[objectName="treeView"]::item:selected:!active {
-	backgroundï¼š#1a4b64;
+	background:#1a4b64;
 	outline: none;
 	color:#fff;
 }
 
 /*
 ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:active{
-    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #232220, stop: 1 #ff900d);
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #232220, stop: 1 #f5fafe);
 }
 
 ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:!active {
@@ -737,4 +737,16 @@ QWidget[objectName="MovingWidget"]
 QWidget[objectName="MovingWidget"] > QLabel{
 	background: transparent;
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

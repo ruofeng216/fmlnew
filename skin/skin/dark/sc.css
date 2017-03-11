@@ -1,7 +1,7 @@
 *{
     font-size:12px;
     font-family:"Microsoft YaHei";
-    color:#FFFFFF;
+    color:#000000;
 }
 
 QPushButton,QToolButton{
@@ -13,7 +13,7 @@ QPushButton,QToolButton{
 }
 
 QPushButton::hover,QToolButton::hover{
-    background:#0b2c3d;
+    background:#0a2d3c;
 	color:#ff900d;
 	outline: none;
 }
@@ -280,7 +280,7 @@ QMenuBar::item {
 }
 QMenuBar::item:selected
 {
-    background: #1b4d63;
+    background: #1b4b63;
 }
 QMenuBar::item:pressed
 {
@@ -293,7 +293,7 @@ QMenuBar::item:hover
 QMenu {
 	font-size:14px;
 	color:#e8e5d5;
-    background-color:#1b4d63;
+    background-color:#1b4b63;
     text-align:center;
     float:left;
 }
@@ -461,7 +461,7 @@ DragInOutTabBar::tab:first{
 }*/
 /* TOP TABS */
 DragInOutTabBar::tab:top {
-    color: #0b2c3d;
+    color: #0a2d3c;
     background-image: url(:/dark/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -484,12 +484,12 @@ DragInOutTabBar::tab:top:!selected
 DragInOutTabBar::tab:top:!selected:hover {
     background-image: url(:/dark/active.png);
     background-repeat:no-repeat;
-    color: #0b2c3d;
+    color: #0a2d3c;
 }
 
 /* BOTTOM TABS */
 DragInOutTabBar::tab:bottom {
-    color: #0b2c3d;
+    color: #0a2d3c;
     background-image: url(:/dark/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -506,12 +506,12 @@ DragInOutTabBar::tab:bottom:!selected
 DragInOutTabBar::tab:bottom:!selected:hover {
     background-image: url(:/dark/active.png);
     background-repeat:no-repeat;
-    color: #0b2c3d;
+    color: #0a2d3c;
 }
 
 /* LEFT TABS */
 DragInOutTabBar::tab:left {
-    color: #0b2c3d;
+    color: #0a2d3c;
     background-image: url(:/dark/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -528,13 +528,13 @@ DragInOutTabBar::tab:left:!selected
 DragInOutTabBar::tab:left:!selected:hover {
     background-image: url(:/dark/normal.png);
     background-repeat:no-repeat;
-    color: #0b2c3d;
+    color: #0a2d3c;
 }
 
 
 /* RIGHT TABS */
 DragInOutTabBar::tab:right {
-    color: #0b2c3d;
+    color: #0a2d3c;
     background-image: url(:/dark/active.png);
     background-repeat:no-repeat;
     height: 28px;
@@ -551,7 +551,7 @@ DragInOutTabBar::tab:right:!selected
 DragInOutTabBar::tab:right:!selected:hover {
     background-image: url(:/dark/active.png);
     background-repeat:no-repeat;
-    color: #0b2c3d;
+    color: #0a2d3c;
 }
 
 MessageBoxWidget {
@@ -699,7 +699,7 @@ QTreeView[objectName="treeView"] QHeaderView::section{
 	padding: 2px 25%;
 	border-top: none;
     border-left:none;
-    border-right:1px solid #1b4d63;
+    border-right:1px solid #1b4b63;
     border-bottom: none;
 	height: 16px;
 }
@@ -708,13 +708,13 @@ QTreeView[objectName="treeView"]::item{
 	border: none;
 }
 QTreeView[objectName="treeView"]::item:hover {
-	background：#1a4b64;
+	background:#1a4b64;
 	color:#fff;
 }
 QTreeView[objectName="treeView"]::item:selected,
 QTreeView[objectName="treeView"]::item:selected:active,
 QTreeView[objectName="treeView"]::item:selected:!active {
-	background：#1a4b64;
+	background:#1a4b64;
 	outline: none;
 	color:#fff;
 }
