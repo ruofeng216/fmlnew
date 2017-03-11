@@ -5,6 +5,8 @@
 #include "view/view_controller.h"
 #include <QPointer>
 
+// Í¼±ê´óÐ¡
+const QSize s_iconSize(98, 98);
 MessageBoxWidget::MessageBoxWidget(QWidget *parent)
 	: DropWidget(parent), ui(new Ui::MessageBoxWidget)
 	, m_iconType(Warning)
@@ -45,9 +47,9 @@ void MessageBoxWidget::setIconType(IconType type)
 	{
 		pixmap.load(qutil::skin("msgbox_error.png"));
 	}
-	pixmap=pixmap.scaled(QSize(24,24),Qt::KeepAspectRatio);
+	pixmap=pixmap.scaled(s_iconSize,Qt::KeepAspectRatio);
 	ui->labelIcon->setPixmap(pixmap);
-	ui->labelIcon->setFixedSize(QSize(24,24));
+	ui->labelIcon->setFixedSize(s_iconSize);
 }
 
 MessageBoxWidget::IconType MessageBoxWidget::getIconType() const
@@ -114,7 +116,7 @@ static MessageBoxWidget::Result ShowMessage(const QString &title, const QString 
 	msgBox->setButtonType(buttonType);
 	msgBox->setWindowTitle(title);
 	msgBox->setContent(content);
-	msgBox->resize(240, 140);
+	msgBox->resize(290, 270);
 	
 	QEventLoop eventLoop;
 	QObject::connect(msgBox, SIGNAL(sigOk()), &eventLoop, SLOT(quit()), Qt::DirectConnection);
@@ -158,7 +160,7 @@ static MessageBoxWidget::Result ShowMessage(const QString &title, const QString 
 
 void ShowWarnMessage(const QString &title, const QString &content, QWidget *parent)
 {
-	ShowMessage(title, content, MessageBoxWidget::Warning, MessageBoxWidget::Ok, parent);
+	ShowMessage(title, content, MessageBoxWidget::Critical, MessageBoxWidget::Ok, parent);
 }
 
 void ShowErrorMessage(const QString &title, const QString &content, QWidget *parent)

@@ -13,12 +13,12 @@ QPushButton,QToolButton{
 }
 
 QPushButton::hover,QToolButton::hover{
-    background:#0a2d3c;
+    background:#98b9e5;
 	color:#f5fafe;
 	outline: none;
 }
 QPushButton::pressed,QToolButton::pressed{
-    background:#98b9e5;
+    background:#18468a;
 	color:#f5fafe;
 	outline: none;
 }
@@ -266,6 +266,7 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
 }
 
 QMenuBar {
+	color: #666666;
     background: #0a2d3c;
     border:none;
 	text-align: center;
@@ -367,49 +368,24 @@ QScrollArea > QWidget > QWidget
     margin: 0px 0px 0px 0px;
 }
 
-QWidget#MessageBoxWidget QPushButton#pbOk{
-    color:#ffffff;
-	font:12px;
-	background:#0e9496;
-}
-QWidget#MessageBoxWidget QPushButton#pbOk::hover{
-    background:#11acae;
-}
-QWidget#MessageBoxWidget QPushButton#pbOk::pressed{
-    background:#046e70;
-}
-QWidget#MessageBoxWidget QPushButton#pbOk::disabled{
-    background:#005353;
-	color:#3f7676;
-}
-
-QWidget#MessageBoxWidget QPushButton#pbCancel{
-    color:#ffffff;
-	font:12px;
-	background:#46464c;
-}
-QWidget#MessageBoxWidget QPushButton#pbCancel::hover{
-    background:#505057;
-}
-QWidget#MessageBoxWidget QPushButton#pbCancel::pressed{
-    background:#026f6f;
-}
-QWidget#MessageBoxWidget QPushButton#pbCancel::disabled{
-    background:#3b3b3e;
-	color:#5d5d67;
-}
-
-QWidget#MessageBoxWidget QLabel#labelContent{
-    color:#fffcf6;
-	font:14px;
-}
-
 QWidget#ReloginMessageBoxWidget QLabel{
     font-size:13px;
 }
 QWidget#ReloginMessageBoxWidget QPushButton{
     font-size:15px; 
 	font-weight:bold;
+}
+
+MessageBoxWidget {
+	background-color: #0e2e37;
+	border-radius: 5px;
+	border: 1px solid #98b9e5;
+	opacity: 0.75;
+}
+
+MessageBoxWidget QLabel[objectName="labelContent"] {
+	color:#666666;
+	font:16px;
 }
 
 QToolTip {
@@ -552,13 +528,6 @@ DragInOutTabBar::tab:right:!selected:hover {
     background-image: url(:/light/active.png);
     background-repeat:no-repeat;
     color: #0a2d3c;
-}
-
-MessageBoxWidget {
-	background: transparent;
-	background-color: #0e2e37;
-	border-radius: 5px;
-	opacity: 0.75;
 }
 
 QDateEdit {
