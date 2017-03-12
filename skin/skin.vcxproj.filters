@@ -36,13 +36,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="skin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="skin_global.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\skin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="header\skin_global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

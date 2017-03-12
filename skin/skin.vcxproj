@@ -118,9 +118,7 @@
       <AdditionalDependencies>qtmaind.lib;Qt5Cored.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy $(ProjectDir)skin.h $(ProjectDir)header /r /y
-xcopy $(ProjectDir)skin_global.h $(ProjectDir)header /r /y
-xcopy $(TargetDir)skin.lib $(ProjectDir)lib /r /y</Command>
+      <Command>xcopy $(TargetDir)skin.lib $(ProjectDir)lib /r /y</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -179,9 +177,9 @@ xcopy $(TargetDir)skin.lib $(ProjectDir)lib /r /y</Command>
     <ClCompile Include="skin.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="header\skin.h" />
+    <ClInclude Include="header\skin_global.h" />
     <ClInclude Include="resource.h" />
-    <ClInclude Include="skin.h" />
-    <ClInclude Include="skin_global.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="skin\dark.qrc">
