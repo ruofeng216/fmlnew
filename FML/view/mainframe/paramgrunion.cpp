@@ -149,9 +149,10 @@ void ParaMgrUnion::initDateView()
 	{
 		QList<QStandardItem *> items;
 		packItem(items, PARASETCTL->getPortfolio()[*itorRoot]);
-		m_pGoodsModel->appendRow(items);
-		
-		packChild(items.front(), *itorRoot);
+		if (items.size() > 0) {
+			m_pGoodsModel->appendRow(items);
+			packChild(items.front(), *itorRoot);
+		}
 	}
 	ui.treeView->expandAll();
 
@@ -171,6 +172,9 @@ void ParaMgrUnion::initDateView()
 
 void ParaMgrUnion::packItem(QList<QStandardItem *> &childItems, const CPortfolio &val)
 {
+	if (val.getPortcode().isEmpty() || val.getPortname().isEmpty()) {
+		return;
+	}
 	QStandardItem *iportcode = new QStandardItem(val.getPortcode());
 	QStandardItem *iportname = new QStandardItem(val.getPortname());
 	QStandardItem *iparentcode = new QStandardItem(val.getParentcode());
