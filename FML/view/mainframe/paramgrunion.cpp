@@ -11,11 +11,11 @@ ParaMgrUnion::ParaMgrUnion(QWidget *parent)
 {
 	ui.setupUi(this);
 	ui.pushButton_add->setText(tr("add"));
-	ui.pushButton_add->setIcon(QIcon(qutil::skin("addclickover.png")));
+	ui.pushButton_add->setIcon(QIcon(qutil::skin("add-click-hover.png")));
 	ui.pushButton_modify->setText(tr("modify"));
-	ui.pushButton_modify->setIcon(QIcon(qutil::skin("reviseclickover.png")));
+	ui.pushButton_modify->setIcon(QIcon(qutil::skin("revise-click-hover.png")));
 	ui.pushButton_delete->setText(tr("delete"));
-	ui.pushButton_delete->setIcon(QIcon(qutil::skin("deleteclickover.png")));
+	ui.pushButton_delete->setIcon(QIcon(qutil::skin("delete-click-hover.png")));
 	connect(ui.pushButton_add, &QPushButton::clicked, this, &ParaMgrUnion::addPortfolio);
 	connect(ui.pushButton_modify, &QPushButton::clicked, this, &ParaMgrUnion::modifyPortfolio);
 	connect(ui.pushButton_delete, &QPushButton::clicked, this, &ParaMgrUnion::delPortfolio);
@@ -155,6 +155,10 @@ void ParaMgrUnion::initDateView()
 	}
 	ui.treeView->expandAll();
 
+	{
+		ui.dateEdit_datebegin->setDate(QDate::currentDate());
+		ui.dateEdit_dateend->setDate(QDate::currentDate());
+	}
 	{
 		QString last = ui.comboBox_parentcode->currentText();
 		QStringList s;
