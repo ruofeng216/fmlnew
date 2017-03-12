@@ -428,9 +428,6 @@
     <CustomBuild Include="view\mainframe\fml.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="include\util\log.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="resource.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
@@ -522,6 +519,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_paramgrunion.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\util\log.h">
+      <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
