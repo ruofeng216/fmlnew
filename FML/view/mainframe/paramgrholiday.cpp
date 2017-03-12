@@ -12,11 +12,11 @@ ParaMgrHoliday::ParaMgrHoliday(QWidget *parent)
 {
 	ui.setupUi(this);
 	ui.pushButton_add->setText(tr("add"));
-	ui.pushButton_add->setIcon(QIcon(qutil::skin("addclickover.png")));
+	ui.pushButton_add->setIcon(QIcon(qutil::skin("add-click-hover.png")));
 	ui.pushButton_modify->setText(tr("modify"));
-	ui.pushButton_modify->setIcon(QIcon(qutil::skin("reviseclickover.png")));
+	ui.pushButton_modify->setIcon(QIcon(qutil::skin("revise-click-hover.png")));
 	ui.pushButton_delete->setText(tr("delete"));
-	ui.pushButton_delete->setIcon(QIcon(qutil::skin("deleteclickover.png")));
+	ui.pushButton_delete->setIcon(QIcon(qutil::skin("delete-click-hover.png")));
 	connect(ui.pushButton_add, &QPushButton::clicked, this, &ParaMgrHoliday::addHoliday);
 	connect(ui.pushButton_modify, &QPushButton::clicked, this, &ParaMgrHoliday::modifyHoliday);
 	connect(ui.pushButton_delete, &QPushButton::clicked, this, &ParaMgrHoliday::delHoliday);
@@ -49,7 +49,9 @@ void ParaMgrHoliday::init()
 			}
 		});
 	}
-
+	{
+		ui.dateEdit->setDate(QDate::currentDate());
+	}
 	{
 		ui.comboBox->addItems(QStringList() << tr("holiday") << tr("workday"));
 		ui.comboBox->view()->setAlternatingRowColors(true);

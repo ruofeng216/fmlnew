@@ -15,8 +15,6 @@ login::login(QWidget *parent)
 	connect(ui.btn_reg, SIGNAL(clicked()), this, SLOT(registerSys()));
 	ui.btn_login->setShortcut(QKeySequence::InsertParagraphSeparator);
 
-	ui.leUsername->setText("hello");
-	ui.lePassword->setText("hello");
 #if 0
 	QTimer::singleShot(1000, [this]() {
 		this->loginSys();

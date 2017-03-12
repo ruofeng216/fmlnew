@@ -7,7 +7,7 @@
 #include <QPushButton>
 #include <QDebug>
 #include "util/pro.h"
-#define MOVING_PIXMAP_SIZE 300
+#define MOVING_PIXMAP_PERSENT 0.5
 
 DragInOutTabBar::DragInOutTabBar(QWidget *parent)
 	: QTabBar(parent)
@@ -71,7 +71,7 @@ void DragInOutTabBar::mouseMoveEvent(QMouseEvent * event)
 		QTabWidget *tab = (QTabWidget*)this->parentWidget();
 		QRect tabRect = tab->rect();
 		tabRect.setTop(tab->tabBar()->rect().height());
-		QPixmap pixmap = tab->grab(tabRect).scaled(QSize(MOVING_PIXMAP_SIZE, MOVING_PIXMAP_SIZE));
+		QPixmap pixmap = tab->grab(tabRect).scaled(QSize(tabRect.width()*MOVING_PIXMAP_PERSENT, tabRect.height()*MOVING_PIXMAP_PERSENT));
 		m_MovingPic->setPixmap(pixmap);
 		m_MovingWidget->show();
 		m_MovingWidget->move(QCursor::pos());
