@@ -322,39 +322,44 @@ QMenu::separator {
     background:#1D99A9;
 }
 
-QLineEdit{
+QLineEdit {
     background:#121716;
     color:#e8e5d5;
     font-size:12px;
     height:20px;
     /*selection-background-color:#0e9496;*/
-    border:1px;
-	border-color: #1b4b63;
+    border:1px solid #1b4b63;
 }
 
-QLineEdit::hover{
+QLineEdit::hover, 
+QLineEdit::pressed {
+    background:#232220;
+	border: 1px solid #a67439;
+    color: #e8e5d5;
+}
+/*QLineEdit::pressed{
     background:#232220;
 	border-color: #a67439;
-}
-QLineEdit::pressed{
-    background:#232220;
-	border-color: #a67439;
-}
+}*/
 /*QLineEdit::disabled{
     background:#36383d;
     color:#aaaaaa
 }*/
+
 QTextEdit {
-	background:#121716;
+    background:#121716;
     color:#e8e5d5;
     font-size:12px;
-	border:1px;
-	border-color: #1b4b63;
+    height:20px;
+    /*selection-background-color:#0e9496;*/
+    border:1px solid #1b4b63;
 }
+
 QTextEdit::hover,
-QTextEdit::pressed{
+QTextEdit::pressed {
     background:#232220;
-	border-color: #a67439;
+	border: 1px solid #a67439;
+    color: #e8e5d5;
 }
 
 QScrollArea
@@ -623,17 +628,18 @@ QComboBox {
 	height:20px;
 	width:130px;
     font-size:12px;
-	border:1px;
-	border-color: #1b4b63;
+	border:1px solid #1b4b63;
 }
-QComboBox::hover,
-QComboBox::pressed,
-QComboBox::on{
-    background:#232220;
-	border-color: #a67439;
+
+QComboBox::hover {
+    background: #232220;
 }
+/*QComboBox::on {
+    background: #ff0000;
+}*/
+
 QComboBox::drop-down {
-	image: url(:/dark/dropdown.png) ;
+	image: url(:/dark/dropdown.png);
 	outline: none;
 	margin: 6px 4px;
 }
@@ -643,13 +649,13 @@ QComboBox::drop-down:on {
 	image: url(:/dark/dropdowndown.png);
 	outline: none;
 }
-QComboBox QAbstractItemView
-{
-	alternate-background-color: #121716;
+QComboBox QAbstractItemView {
+    alternate-background-color: #232220;
 	selection-background-color: #ff900d;
-	selection-color: #000000;
+	selection-color: #232220;
+    background: #121716;
+    color: #e8e5d5;
 	border: none;
-	background: #232220;
 	outline: none;
 }
 /*------------QComboBox---end------------*/

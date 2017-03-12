@@ -324,39 +324,44 @@ QMenu::separator {
     background:#1D99A9;
 }
 
-QLineEdit{
-    background:#a6a6a6;
-    color:#666666;
+QLineEdit {
+    background:#ffffff;
     font-size:12px;
     height:20px;
     /*selection-background-color:#0e9496;*/
-    border:1px;
-	border-color: #aec9ec;
+    border: 1px solid #dcdcdc;
+    color:#dcdcdc;
 }
 
-QLineEdit::hover{
+QLineEdit::hover, 
+QLineEdit::pressed {
+    background:#ffffff;
+	border: 1px solid #f9c59a;
+    color: #666666;
+}
+/*QLineEdit::pressed{
     background:#232220;
 	border-color: #6886b8;
-}
-QLineEdit::pressed{
-    background:#232220;
-	border-color: #6886b8;
-}
+}*/
 /*QLineEdit::disabled{
     background:#36383d;
     color:#aaaaaa
 }*/
+
 QTextEdit {
-	background:#a6a6a6;
-    color:#666666;
+    background:#ffffff;
     font-size:12px;
-	border:1px;
-	border-color: #aec9ec;
+    height:20px;
+    /*selection-background-color:#0e9496;*/
+    border: 1px solid #dcdcdc;
+    color:#dcdcdc;
 }
+
 QTextEdit::hover,
-QTextEdit::pressed{
-    background:#232220;
-	border-color: #6886b8;
+QTextEdit::pressed {
+    background:#ffffff;
+	border: 1px solid #f9c59a;
+    color: #666666;
 }
 
 QScrollArea
@@ -619,20 +624,18 @@ QCalendarView#qt_calendar_calendarview{
 
 /*---------------QComboBox---start------------*/
 QComboBox {
-	background:#a6a6a6;
+	background:#ffffff;
     color:#666666;
 	height:20px;
 	width:130px;
     font-size:12px;
-	border:1px;
-	border-color: #aec9ec;
+	border: 1px solid #dcdcdc;
 }
-QComboBox::hover,
-QComboBox::pressed,
-QComboBox::on{
-    background:#232220;
-	border-color: #6886b8;
+
+QComboBox::hover {
+    background: #ffffff;
 }
+
 QComboBox::drop-down {
 	image: url(:/light/dropdown.png) ;
 	outline: none;
@@ -646,11 +649,12 @@ QComboBox::drop-down:on {
 }
 QComboBox QAbstractItemView
 {
-	alternate-background-color: #a6a6a6;
-	selection-background-color: #f5fafe;
-	selection-color: #ff900d;
+	alternate-background-color: #ffffff;
+	selection-background-color: #ff900d;
+	selection-color: #666666;
 	border: none;
-	background: #232220;
+	background: #f4fafe;
+    color: #666666;
 	outline: none;
 }
 /*------------QComboBox---end------------*/
