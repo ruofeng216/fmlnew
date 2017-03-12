@@ -1,7 +1,7 @@
 *{
     font-size:12px;
     font-family:"Microsoft YaHei";
-    color:#000000;
+    color:#e8e5d5;
 }
 
 QPushButton,QToolButton{
@@ -679,6 +679,7 @@ QTreeView[objectName="treeView"] QHeaderView::section{
     border-right:1px solid #1b4b63;
     border-bottom: none;
 	height: 16px;
+    color: #e8e5d5;
 }
 QTreeView[objectName="treeView"]::item{
 	outline: none;
