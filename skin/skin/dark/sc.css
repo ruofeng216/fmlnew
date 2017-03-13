@@ -699,6 +699,26 @@ QTreeView[objectName="treeView"]::item:selected:!active {
     color: #e0ad67;
 }
 
+QTreeView[objectName="treeView"]::branch:has-children:!has-siblings:closed,
+QTreeView[objectName="treeView"]::branch:closed:has-children:has-siblings {
+    image: url(:/dark/dropright.png);
+	outline: none;
+}
+QTreeView[objectName="treeView"]::branch:has-children:!has-siblings:closed:hover,
+QTreeView[objectName="treeView"]::branch:closed:has-children:has-siblings:hover {
+    image: url(:/dark/dropright-hover.png);
+	outline: none;
+}
+QTreeView[objectName="treeView"]::branch:open:has-children:!has-siblings,
+QTreeView[objectName="treeView"]::branch:open:has-children:has-siblings  {
+    image: url(:/dark/dropdown.png);
+	outline: none;
+}
+QTreeView[objectName="treeView"]::branch:open:has-children:!has-siblings:hover,
+QTreeView[objectName="treeView"]::branch:open:has-children:has-siblings:hover  {
+    image: url(:/dark/dropdown-down.png);
+	outline: none;
+}
 /*
 ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:active{
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #232220, stop: 1 #ff900d);

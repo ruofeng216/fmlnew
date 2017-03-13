@@ -50,5 +50,13 @@
         <file>dark/web/fonts/glyphicons-halflings-regular.ttf</file>
         <file>dark/web/fonts/glyphicons-halflings-regular.woff</file>
         <file>dark/web/fonts/glyphicons-halflings-regular.woff2</file>
+        <file>dark/downsolid.png</file>
+        <file>dark/downsolid-hover.png</file>
+        <file>dark/dropleft.png</file>
+        <file>dark/dropleft-hover.png</file>
+        <file>dark/dropright.png</file>
+        <file>dark/dropright-hover.png</file>
+        <file>dark/upsolid.png</file>
+        <file>dark/upsolid-hover.png</file>
     </qresource>
 </RCC>
