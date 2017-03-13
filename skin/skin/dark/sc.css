@@ -663,10 +663,10 @@ QComboBox QAbstractItemView {
 /*------------ParaMgrHoliday QTreeView---start------------*/
 QTreeView[objectName="treeView"]{
 	background:transparent;
-	background-color: #040c0a;
-	alternate-background-color: #121715;
+    background-color: #121715;
+	alternate-background-color: #040c0a;
 	outline: none;
-    color:#a0ad67;
+    color:#e0ad67;
 	border:none;
 	font-size:12px;
 }
@@ -687,14 +687,13 @@ QTreeView[objectName="treeView"]::item{
 }
 QTreeView[objectName="treeView"]::item:hover {
 	background:#1a4b64;
-	color:#fff;
 }
 QTreeView[objectName="treeView"]::item:selected,
 QTreeView[objectName="treeView"]::item:selected:active,
 QTreeView[objectName="treeView"]::item:selected:!active {
 	background:#1a4b64;
 	outline: none;
-	color:#fff;
+    color: #e0ad67;
 }
 
 /*

@@ -179,25 +179,25 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pre
 
 
 QScrollBar:vertical {
-    background:#152731;
+    background:#d9e8fc;
     width: 6px;
     min-width:6px;
     max-width:6px;
     margin: 0;
 }
 QScrollBar::handle:vertical {
-    background:#aec9ec;
+    background:#98b9e5;
     min-height: 30px;
     margin: 0px 0px 0px 0px;
     border-radius: 2px;
     border: none;
 }
 QScrollBar::handle:vertical:hover {
-    background:#277fad;
+    background:#a5c4ed;
 }
 
 QScrollBar::handle:vertical:pressed {
-    background:#98b9e5;
+    background:#7aa4dd;
 }
 QScrollBar::handle:vertical:disabled {
     background:#28282c;
@@ -225,12 +225,12 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
 }
 
 QScrollBar:horizontal {
-    background:#152731;
+    background:#d9e8fc;
     height: 6px;
     margin: 0;
 }
 QScrollBar::handle:horizontal {
-    background:#aec9ec;
+    background:#98b9e5;
     min-width: 30px;
     margin: 0 2px 0 1px;
     border-radius: 3px;
@@ -238,11 +238,11 @@ QScrollBar::handle:horizontal {
 }
 
 QScrollBar::handle:horizontal:hover {
-    background:#277fad;
+    background:#a5c4ed;
 }
 
 QScrollBar::handle:horizontal:pressed {
-    background:#98b9e5;
+    background:#7aa4dd;
 }
 QScrollBar::handle:horizontal:disabled {
     background:#28282c;
@@ -662,37 +662,37 @@ QComboBox QAbstractItemView
 /*------------ParaMgrHoliday QTreeView---start------------*/
 QTreeView[objectName="treeView"]{
 	background:transparent;
-	background-color: #040c0a;
-	alternate-background-color: #121715;
+	background-color: #f4fbfe;
+	alternate-background-color: #fefefe;
 	outline: none;
-    color:#a0ad67;
+    color:#333333;
 	border:none;
 	font-size:12px;
 }
 QTreeView[objectName="treeView"] QHeaderView::section{
 	background:transparent;
-	background-color: #ff900d;
+	background-color: #ffffff;
 	padding: 2px 25%;
 	border-top: none;
     border-left:none;
-    border-right:1px solid #aec9ec;
+    border-right:1px solid #bfd0f5;
     border-bottom: none;
 	height: 16px;
+    color: #333333;
 }
 QTreeView[objectName="treeView"]::item{
 	outline: none;
 	border: none;
 }
 QTreeView[objectName="treeView"]::item:hover {
-	background:#1a4b64;
-	color:#fff;
+	background:#e7e7e7;
 }
 QTreeView[objectName="treeView"]::item:selected,
 QTreeView[objectName="treeView"]::item:selected:active,
 QTreeView[objectName="treeView"]::item:selected:!active {
-	background:#1a4b64;
+	background:#e7e7e7;
 	outline: none;
-	color:#fff;
+    color: #333;
 }
 
 /*
