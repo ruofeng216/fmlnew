@@ -568,8 +568,8 @@ QDateEdit::drop-down:on {
 }
 
 /*----------日历控件------start-----------*/
-QPrevNextCalButton#qt_calendar_prevmonth,
-QPrevNextCalButton#qt_calendar_nextmonth,
+QToolButton#qt_calendar_prevmonth,
+QToolButton#qt_calendar_nextmonth,
 QToolButton#qt_calendar_monthbutton,
 QToolButton#qt_calendar_yearbutton{
 	background:transparent;
@@ -585,8 +585,26 @@ QToolButton#qt_calendar_yearbutton
 {
 	width:60px;
 }
-QPrevNextCalButton#qt_calendar_prevmonth:pressed,
-QPrevNextCalButton#qt_calendar_nextmonth:pressed{
+QToolButton#qt_calendar_prevmonth
+{
+	qproperty-icon:url(:/dark/dropleft.png);
+}
+QToolButton#qt_calendar_nextmonth
+{
+	qproperty-icon:url(:/dark/dropright.png);
+}
+QToolButton#qt_calendar_prevmonth:hover,
+QToolButton#qt_calendar_prevmonth:pressed
+{
+	qproperty-icon:url(:/dark/dropleft-hover.png);
+}
+QToolButton#qt_calendar_nextmonth:hover,
+QToolButton#qt_calendar_nextmonth:pressed
+{
+	qproperty-icon:url(:/dark/dropright-hover.png);
+}
+QToolButton#qt_calendar_prevmonth:pressed,
+QToolButton#qt_calendar_nextmonth:pressed{
 	border:2px solid transparent;
 }
 QWidget#qt_calendar_navigationbar{
@@ -600,15 +618,30 @@ QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit{
 	selection-background-color: #ff900d;
 	selection-color: #000000;
 }
-/*
+
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button
 {
-	image:url(:/images/scroll_up.png);
+	image:url(:/dark/upsolid.png);
+	outline: none;
+	margin-left: 5px;
+}
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button:hover,
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button:pressed
+{
+	image:url(:/dark/upsolid-hover.png);
+	outline: none;
 }
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::down-button{
-    image:url(:/images/scroll_down.png);
+    image:url(:/dark/downsolid.png);
+	outline: none;
+	margin-left: 5px;
 }
-*/
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::down-button:hover,
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::down-button:pressed{
+    image:url(:/dark/downsolid-hover.png);
+	outline: none;
+}
+
 QToolButton#qt_calendar_monthbutton::menu-indicator{
 	subcontrol-origin: padding;
 	subcontrol-position: center right;
