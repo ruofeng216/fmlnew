@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FML", "FML\FML.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C61B5870-C25F-45DB-81E3-2844FEA23896} = {C61B5870-C25F-45DB-81E3-2844FEA23896}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "skin", "skin\skin.vcxproj", "{C61B5870-C25F-45DB-81E3-2844FEA23896}"
 EndProject

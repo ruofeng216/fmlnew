@@ -560,7 +560,7 @@ QDateEdit::drop-down {
 QDateEdit::drop-down:pressed,
 QDateEdit::drop-down:hover,
 QDateEdit::drop-down:on {
-	image: url(:/dark/datedown.png);
+	image: url(:/dark/date-down.png);
 	outline: none;
 }
 
@@ -646,7 +646,7 @@ QComboBox::drop-down {
 QComboBox::drop-down:pressed,
 QComboBox::drop-down:hover,
 QComboBox::drop-down:on {
-	image: url(:/dark/dropdowndown.png);
+	image: url(:/dark/dropdown-down.png);
 	outline: none;
 }
 QComboBox QAbstractItemView {
