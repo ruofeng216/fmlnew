@@ -38,6 +38,7 @@ IDBImageButton,IDBImageButton::hover,IDBImageButton::pressed,IDBImageButton:disa
 
 MainTitle QLabel, TitleWidget QLabel {
     color: #e8e5d5;
+    font-size: 14px;
 }
 
 basicui,MainWidget,SubWidget{
@@ -702,7 +703,6 @@ QComboBox QAbstractItemView {
 
 /*------------ParaMgrHoliday QTreeView---start------------*/
 QTreeView[objectName="treeView"]{
-	background:transparent;
     background-color: #121715;
 	alternate-background-color: #040c0a;
 	outline: none;
@@ -711,19 +711,26 @@ QTreeView[objectName="treeView"]{
 	font-size:12px;
 }
 QTreeView[objectName="treeView"] QHeaderView::section{
-	background:transparent;
 	background-color: #000000;
-	padding: 2px 25%;
+	/*padding: 2px 25%;*/
 	border-top: none;
     border-left:none;
     border-right:1px solid #1b4b63;
     border-bottom: none;
+    padding-left: 10px;
 	height: 16px;
     color: #e8e5d5;
+}
+QTreeView[objectName="treeView"] QHeaderView::section:first {
+    padding-left: 30px;
+}
+QTreeView[objectName="treeView"] QHeaderView::section:last {
+    border-right: none;
 }
 QTreeView[objectName="treeView"]::item{
 	outline: none;
 	border: none;
+    height: 26px;
 }
 QTreeView[objectName="treeView"]::item:hover {
 	background:#1a4b64;

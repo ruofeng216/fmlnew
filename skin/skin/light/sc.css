@@ -38,6 +38,7 @@ IDBImageButton,IDBImageButton::hover,IDBImageButton::pressed,IDBImageButton:disa
 
 MainTitle QLabel, TitleWidget QLabel {
     color: #666666;
+    font-size: 14px;
 }
 
 basicui,MainWidget,SubWidget{
