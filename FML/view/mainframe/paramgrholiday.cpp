@@ -136,6 +136,7 @@ void ParaMgrHoliday::delHoliday()
 		ShowSuccessMessage(tr("delete"), tr("delete success."), this);
 		// Í¬²½
 		initDateView();
+		expand(_y);
 	}
 }
 
@@ -173,11 +174,19 @@ void ParaMgrHoliday::initDateView()
 		itemHolidayinfo->setToolTip(qutil::splitTooltip(itor->getHolidayinfo(),200));
 		items.back()->appendRow(childItems);
 	}
+	expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
 }
 
 void ParaMgrHoliday::expand(int y)
 {
 	QList<QStandardItem*> lst = m_pGoodsModel->findItems(QString::number(y));
+	if (lst.isEmpty())
+	{
+		QMap<int, CFinancialCalendar> val;
+		PARASETCTL->getFinancialCalendar(val);
+		expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
+		return;
+	}
 	for each (QStandardItem* var in lst)
 	{
 		ui.treeView->expand(var->index());
