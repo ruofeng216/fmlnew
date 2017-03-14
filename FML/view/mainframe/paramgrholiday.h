@@ -23,6 +23,7 @@ private slots:
 
 private:
 	void initDateView();
+	void expand(int y);
 private:
 	Ui::ParaMgrHoliday ui;
 	QStandardItemModel *m_pGoodsModel;

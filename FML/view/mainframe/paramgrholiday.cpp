@@ -79,6 +79,7 @@ void ParaMgrHoliday::addHoliday()
 			ShowSuccessMessage(tr("add"), tr("add success."), this);
 			// 同步
 			initDateView();
+			expand(_y);
 		}
 		else
 			ShowWarnMessage(tr("add"), tr("add fail."), this);
@@ -102,6 +103,7 @@ void ParaMgrHoliday::modifyHoliday()
 			ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 			// 同步
 			initDateView();
+			expand(_y);
 		}
 		else
 			ShowWarnMessage(tr("modify"), tr("modify fail."), this);
@@ -170,5 +172,14 @@ void ParaMgrHoliday::initDateView()
 		itemDate->setToolTip(QDate::fromJulianDay(itor->getDate()).toString("yyyy-MM-dd"));
 		itemHolidayinfo->setToolTip(qutil::splitTooltip(itor->getHolidayinfo(),200));
 		items.back()->appendRow(childItems);
+	}
+}
+
+void ParaMgrHoliday::expand(int y)
+{
+	QList<QStandardItem*> lst = m_pGoodsModel->findItems(QString::number(y));
+	for each (QStandardItem* var in lst)
+	{
+		ui.treeView->expand(var->index());
 	}
 }
