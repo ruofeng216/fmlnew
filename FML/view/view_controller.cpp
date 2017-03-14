@@ -225,6 +225,7 @@ void ViewController::popOutWndFromTab(const QString &id, QWidget *wnd, QPoint p)
 		connect(pwnd, &SubWidget::sigWndMove, this, &ViewController::moveInWndToTab, Qt::QueuedConnection);
 		connect(pwnd, &SubWidget::sigClose, this, &ViewController::closewnd);
 		pwnd->move(p);
+		pwnd->resize(1000, 610);
 		pwnd->show();
 		m_widgets[id] = pwnd;
 	}
