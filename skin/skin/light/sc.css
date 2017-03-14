@@ -432,6 +432,10 @@ DragInOutTabBar:focus {
     border-bottom: 3px solid #f5fafe;
 }
 
+DragInOutTabBar > QToolButton {
+	border-radius: 0px;
+}
+
 DragInOutTabBar::close-button:selected:!hover,
 DragInOutTabBar::close-button:selected:hover,
 DragInOutTabBar::close-button:!selected:hover,
