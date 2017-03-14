@@ -73,7 +73,7 @@
       <OutputFile>$(OutDir)\$(ProjectName).exe</OutputFile>
       <AdditionalLibraryDirectories>$(QTDIR)\lib;$(MYSQL)\lib\opt;$(SolutionDir)build\skin\$(Platform)\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
-      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Sql.lib;Qt5Network.lib;Qt5Widgets.lib;Qt5WebChannel.lib;Qt5WebSockets.lib;Qt5WebEngineWidgets.lib;Qt5WebEngineCore.lib;Qt5Xml.lib;Qt5XmlPatterns.lib;libmysql.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>qtmain.lib;Qt5Core.lib;Qt5Gui.lib;Qt5Sql.lib;Qt5Network.lib;Qt5Widgets.lib;Qt5WebChannel.lib;Qt5WebSockets.lib;Qt5WebEngineWidgets.lib;Qt5WebEngineCore.lib;Qt5Xml.lib;Qt5XmlPatterns.lib;libmysql.lib;skin.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(OutDir)$(ProjectName).exe" "$(SolutionDir)bin\$(Platform)\$(Configuration)"  /Y /R</Command>
