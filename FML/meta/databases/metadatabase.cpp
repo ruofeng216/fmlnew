@@ -171,6 +171,9 @@ bool MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val)
 		{
 			CPortfolio cp;
 			cp.setPortcode(results[i][0].toString());
+			if (cp.getPortcode().isEmpty()) {
+				continue;
+			}
 			cp.setPortname(results[i][1].toString());
 			cp.setParentcode(results[i][2].toString());
 			cp.setParentname(results[i][3].toString());

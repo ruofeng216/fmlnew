@@ -56,6 +56,7 @@ void ParaMgrHoliday::init()
 		ui.comboBox->addItems(QStringList() << tr("holiday") << tr("workday"));
 		ui.comboBox->view()->setAlternatingRowColors(true);
 	}
+
 	connect(ui.dateEdit, &QDateTimeEdit::dateChanged, [this](const QDate &date) {
 		ui.lineEdit_year->setText(QString::number(date.year()));
 	});

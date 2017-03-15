@@ -163,7 +163,7 @@ void ParaMgrUnion::initDateView()
 	{
 		QString last = ui.comboBox_parentcode->currentText();
 		QStringList s;
-		s << "" << PARASETCTL->getPortfolio().keys();
+		s << PARASETCTL->getPortfolio().keys();
 		ui.comboBox_parentcode->clear();
 		ui.comboBox_parentcode->addItems(s);
 		if (s.contains(last)) ui.comboBox_parentcode->setCurrentText(last);

@@ -675,9 +675,6 @@ QComboBox {
 QComboBox::hover {
     background: #232220;
 }
-/*QComboBox::on {
-    background: #ff0000;
-}*/
 
 QComboBox::drop-down {
 	image: url(:/dark/dropdown.png);
@@ -699,6 +696,7 @@ QComboBox QAbstractItemView {
 	border: none;
 	outline: none;
 }
+
 /*------------QComboBox---end------------*/
 
 /*------------ParaMgrHoliday QTreeView---start------------*/

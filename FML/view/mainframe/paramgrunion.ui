@@ -49,9 +49,18 @@
        <height>16777215</height>
       </size>
      </property>
+     <property name="sizeAdjustPolicy">
+      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+     </property>
      <property name="editTriggers">
       <set>QAbstractItemView::NoEditTriggers</set>
      </property>
+     <attribute name="headerCascadingSectionResizes">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="headerDefaultSectionSize">
+      <number>110</number>
+     </attribute>
     </widget>
    </item>
    <item>
@@ -310,7 +319,22 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="comboBox_parentcode"/>
+         <widget class="QComboBox" name="comboBox_parentcode">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="frame">
+           <bool>false</bool>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>
