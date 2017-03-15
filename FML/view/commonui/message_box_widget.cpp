@@ -6,7 +6,7 @@
 #include <QPointer>
 
 // Í¼±ê´óÐ¡
-const QSize s_iconSize(98, 98);
+
 MessageBoxWidget::MessageBoxWidget(QWidget *parent)
 	: DropWidget(parent), ui(new Ui::MessageBoxWidget)
 	, m_iconType(Warning)
@@ -47,9 +47,9 @@ void MessageBoxWidget::setIconType(IconType type)
 	{
 		pixmap.load(qutil::skin("msgbox_error.png"));
 	}
-	pixmap=pixmap.scaled(s_iconSize,Qt::KeepAspectRatio);
+	//pixmap=pixmap.scaled(s_iconSize,Qt::KeepAspectRatio);
 	ui->labelIcon->setPixmap(pixmap);
-	ui->labelIcon->setFixedSize(s_iconSize);
+	ui->labelIcon->setFixedSize(pixmap.size());
 }
 
 MessageBoxWidget::IconType MessageBoxWidget::getIconType() const

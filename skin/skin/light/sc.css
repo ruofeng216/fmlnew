@@ -547,19 +547,19 @@ DragInOutTabBar::tab:right:!selected:hover {
 }
 
 QDateEdit {
-	background:#a6a6a6;
-    color:#666666;
+	background:#ffffff;
+    color:#dcdcdc;
 	height:20px;
 	width:130px;
     font-size:12px;
-	border:1px;
-	border-color: #aec9ec;
+    border: 1px solid #dcdcdc;
 }
 QDateEdit::hover,
 QDateEdit::pressed,
 QDateEdit::on{
-    background:#232220;
-	border-color: #6886b8;
+    background:#ffffff;
+    color: #666666;
+    border: 1px solid #f9c59a;
 }
 QDateEdit::drop-down {
 	margin: 3px 10px;
