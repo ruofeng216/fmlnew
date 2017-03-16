@@ -660,6 +660,7 @@ QCalendarView#qt_calendar_calendarview{
     width: 240px;
     height: 240px;
 	outline: none;
+    color: #ffffff;
 }
 /*---------------日历控件------end------------------*/
 
