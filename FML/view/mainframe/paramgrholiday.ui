@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>910</width>
+    <width>1030</width>
     <height>520</height>
    </rect>
   </property>
@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="1,0">
+    <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="3,2">
      <property name="spacing">
       <number>0</number>
      </property>
@@ -50,7 +50,7 @@
       <widget class="QTreeView" name="treeView">
        <property name="minimumSize">
         <size>
-         <width>0</width>
+         <width>300</width>
          <height>0</height>
         </size>
        </property>
@@ -123,13 +123,13 @@
       <widget class="QWidget" name="rightWidget" native="true">
        <property name="minimumSize">
         <size>
-         <width>400</width>
+         <width>0</width>
          <height>0</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>400</width>
+         <width>16777215</width>
          <height>16777215</height>
         </size>
        </property>
@@ -234,7 +234,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>120</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>
@@ -258,7 +258,7 @@
             </property>
             <property name="minimumSize">
              <size>
-              <width>100</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>

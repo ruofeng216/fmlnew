@@ -551,8 +551,7 @@ QDateEdit {
 	height:20px;
 	width:130px;
     font-size:12px;
-	border:1px;
-	border-color: #1b4b63;
+    border: 1px solid #1b4b63;
 }
 QDateEdit::hover,
 QDateEdit::pressed,
@@ -613,9 +612,9 @@ QToolButton#qt_calendar_nextmonth:pressed{
 	border:2px solid transparent;
 }
 QWidget#qt_calendar_navigationbar{
-	border:1px solid #575757;
-	border-width:1px 1px 0px 1px;
-	background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #4D4D4D,stop:1 #292929);
+	/*background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #4D4D4D,stop:1 #292929);*/
+    background: #1a4a64;
+    color: #ff900d;
 }
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit{
 	background:#232220;
@@ -652,12 +651,14 @@ QToolButton#qt_calendar_monthbutton::menu-indicator{
 	subcontrol-position: center right;
 }
 QCalendarView#qt_calendar_calendarview{
-	background:transparent;
-	background-color: #1b4b63;
-	alternate-background-color: #232220;
+	/*background-color: #1b4b63;*/
+    background: #121616;
+	alternate-background-color: #040A0A;
 	selection-background-color: #ff900d;
-	selection-color: #000;
-	border: none;
+	selection-color: #1b4b63;
+	border: 1px solid #1b4b63;
+    width: 240px;
+    height: 240px;
 	outline: none;
 }
 /*---------------日历控件------end------------------*/

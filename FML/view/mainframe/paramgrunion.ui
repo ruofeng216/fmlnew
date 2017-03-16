@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1059</width>
-    <height>514</height>
+    <width>958</width>
+    <height>462</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>ParaMgrUnion</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="1,0">
+  <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="3,2">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -37,9 +37,15 @@
    </property>
    <item>
     <widget class="QTreeView" name="treeView">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="minimumSize">
       <size>
-       <width>0</width>
+       <width>300</width>
        <height>0</height>
       </size>
      </property>
@@ -65,15 +71,21 @@
    </item>
    <item>
     <widget class="QWidget" name="rightWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="minimumSize">
       <size>
-       <width>400</width>
+       <width>0</width>
        <height>0</height>
       </size>
      </property>
      <property name="maximumSize">
       <size>
-       <width>400</width>
+       <width>16777215</width>
        <height>16777215</height>
       </size>
      </property>
@@ -218,15 +230,21 @@
           </item>
           <item>
            <widget class="QDateEdit" name="dateEdit_datebegin">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>130</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>130</width>
+              <width>16777215</width>
               <height>16777215</height>
              </size>
             </property>
@@ -238,12 +256,18 @@
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
+         <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,0">
           <property name="spacing">
            <number>6</number>
           </property>
           <item>
            <widget class="QLabel" name="label_dateend">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <pointsize>12</pointsize>
@@ -253,21 +277,27 @@
              <string>至</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             <set>Qt::AlignCenter</set>
             </property>
            </widget>
           </item>
           <item>
            <widget class="QDateEdit" name="dateEdit_dateend">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="minimumSize">
              <size>
-              <width>130</width>
+              <width>0</width>
               <height>0</height>
              </size>
             </property>
             <property name="maximumSize">
              <size>
-              <width>130</width>
+              <width>16777215</width>
               <height>16777215</height>
              </size>
             </property>
@@ -416,7 +446,7 @@
          <widget class="QPushButton" name="pushButton_add">
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>0</width>
             <height>24</height>
            </size>
           </property>
@@ -440,7 +470,7 @@
          <widget class="QPushButton" name="pushButton_modify">
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>0</width>
             <height>24</height>
            </size>
           </property>
@@ -464,7 +494,7 @@
          <widget class="QPushButton" name="pushButton_delete">
           <property name="minimumSize">
            <size>
-            <width>100</width>
+            <width>0</width>
             <height>24</height>
            </size>
           </property>

@@ -2,6 +2,7 @@
 #include "util/datatype.h"
 #include "controller/qcontrollermanager.h"
 #include <QStandardItemModel>
+#include <QCalendarWidget>
 #include "util/util.h"
 #include "view/commonui/message_box_widget.h"
 
@@ -30,6 +31,7 @@ ParaMgrHoliday::~ParaMgrHoliday()
 void ParaMgrHoliday::init()
 {
 	{
+		ui.dateEdit->calendarWidget()->setFirstDayOfWeek(Qt::DayOfWeek(7));
 		ui.treeView->setAlternatingRowColors(true);
 		initDateView();
 		connect(ui.treeView, &QTreeView::clicked, [this](const QModelIndex &index) {
