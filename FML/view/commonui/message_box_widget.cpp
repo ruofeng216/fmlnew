@@ -160,7 +160,7 @@ static MessageBoxWidget::Result ShowMessage(const QString &title, const QString 
 
 void ShowWarnMessage(const QString &title, const QString &content, QWidget *parent)
 {
-	ShowMessage(title, content, MessageBoxWidget::Critical, MessageBoxWidget::Ok, parent);
+	ShowMessage(title, content, MessageBoxWidget::Warning, MessageBoxWidget::Ok, parent);
 }
 
 void ShowErrorMessage(const QString &title, const QString &content, QWidget *parent)
