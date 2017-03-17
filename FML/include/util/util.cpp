@@ -7,7 +7,10 @@
 #include <QJsonDocument>
 #include <QSettings>
 #include <QToolTip>
+#include <QCalendarWidget>
+#include <QTextCharFormat>
 #include "skin.h"
+#include "FmlStyle.h"
 
 namespace qutil
 {
@@ -34,25 +37,21 @@ namespace qutil
 	QString skin(const QString &name)
 	{
 		return Skin::instance().path(name);
-		// later get skin set, now default datas
-		//QSettings configIniRead(qBaseConfigPath(), QSettings::IniFormat);
-		//QString strskin = configIniRead.value("/skin/curskin").toString().toLower();
-		//QString strtype = "dark";
-		//if (strskin == "dark" ||
-		//	strskin == "light")
-		//	strtype = strskin;
-		//return QString(":/%1/%2").arg(strtype).arg(name);
 	}
+
 	QString websrc(const QString &name)
 	{
 		return Skin::instance().path("web/" + name);
-		//QSettings configIniRead(qBaseConfigPath(), QSettings::IniFormat);
-		//QString strskin = configIniRead.value("/skin/curskin").toString().toLower();
-		//QString strtype = "dark";
-		//if (strskin == "dark" ||
-		//	strskin == "light")
-		//	strtype = strskin;
-		//return QString(":/%1/web/%2").arg(strtype).arg(name);
+	}
+
+	const QString& fmlStyle(const QString &fmlName)
+	{
+		return FmlStyle::instance()->style(fmlName);
+	}
+
+	QString fmlAttr(const QString &fmlName, const QString &attrName)
+	{
+		return FmlStyle::instance()->attr(fmlName, attrName);
 	}
 
 	// ÄÚ´æÕûÀí
@@ -358,6 +357,17 @@ namespace qutil
 		}
 
 		return result + text;
+	}
+
+	void setWeekendStyle(QDateEdit *widget)
+	{
+		widget->calendarWidget()->setFixedSize(230, 210);
+		widget->calendarWidget()->setFirstDayOfWeek(Qt::DayOfWeek(7));
+		widget->calendarWidget()->setFirstDayOfWeek(Qt::DayOfWeek(7));
+		QTextCharFormat format;
+		format.setForeground(QColor(qutil::fmlAttr("WeekendCalendar", "color")));
+		widget->calendarWidget()->setWeekdayTextFormat(Qt::Saturday, format);
+		widget->calendarWidget()->setWeekdayTextFormat(Qt::Sunday, format);
 	}
 }
 

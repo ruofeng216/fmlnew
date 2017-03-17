@@ -251,6 +251,7 @@
     <ClCompile Include="include\inc\controller_interface.cpp" />
     <ClCompile Include="include\util\crash_hook.cpp" />
     <ClCompile Include="include\util\datatype.cpp" />
+    <ClCompile Include="include\util\FmlStyle.cpp" />
     <ClCompile Include="include\util\util.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="meta\databases\metadatabase.cpp" />
@@ -920,6 +921,7 @@
     <ClInclude Include="GeneratedFiles\ui_mainhomepage.h" />
     <ClInclude Include="GeneratedFiles\ui_paramgrholiday.h" />
     <ClInclude Include="GeneratedFiles\ui_paramgrunion.h" />
+    <ClInclude Include="include\util\FmlStyle.h" />
     <ClInclude Include="include\util\log.h" />
     <CustomBuild Include="view\mainframe\paramgrunion.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

@@ -31,7 +31,6 @@ ParaMgrHoliday::~ParaMgrHoliday()
 void ParaMgrHoliday::init()
 {
 	{
-		ui.dateEdit->calendarWidget()->setFirstDayOfWeek(Qt::DayOfWeek(7));
 		ui.treeView->setAlternatingRowColors(true);
 		initDateView();
 		connect(ui.treeView, &QTreeView::clicked, [this](const QModelIndex &index) {
@@ -52,6 +51,7 @@ void ParaMgrHoliday::init()
 		});
 	}
 	{
+		qutil::setWeekendStyle(ui.dateEdit);
 		ui.dateEdit->setDate(QDate::currentDate());
 	}
 	{

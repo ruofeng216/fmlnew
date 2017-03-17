@@ -446,7 +446,7 @@
          <widget class="QPushButton" name="pushButton_add">
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>100</width>
             <height>24</height>
            </size>
           </property>
@@ -470,7 +470,7 @@
          <widget class="QPushButton" name="pushButton_modify">
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>100</width>
             <height>24</height>
            </size>
           </property>
@@ -494,7 +494,7 @@
          <widget class="QPushButton" name="pushButton_delete">
           <property name="minimumSize">
            <size>
-            <width>0</width>
+            <width>100</width>
             <height>24</height>
            </size>
           </property>

@@ -9,6 +9,7 @@
 #include <QFile>
 #include <QDir>
 #include <QTextStream>
+#include <QDateEdit>
 
 namespace qutil
 {
@@ -20,6 +21,9 @@ namespace qutil
 	QString currentSkin();
 	QString skin(const QString &name);
 	QString websrc(const QString &name);
+	// 获取FmlStyle
+	const QString& fmlStyle(const QString &fmlName);
+	QString fmlAttr(const QString &fmlName, const QString &attrName);
 
 	// 内存整理
 	void cacheclean();
@@ -64,6 +68,9 @@ namespace qutil
 	const QDomDocument GetXmlDom(const QString &path);
 	// tooltip换行
 	QString splitTooltip(QString text, int lineWidth);
+
+	// 设置日期周末颜色
+	void setWeekendStyle(QDateEdit *widget);
 }
 
 

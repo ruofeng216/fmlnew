@@ -4,6 +4,12 @@
     color:#e8e5d5;
 }
 
+/*-------------------FmlStyle----------------*/
+QWidget[fmlName="WeekendCalendar"] {
+    color: #dfae64;
+}
+/*-------------------------------------------*/
+
 QPushButton,QToolButton{
     background: #1b4b63;
     outline: none;
@@ -549,7 +555,6 @@ QDateEdit {
 	background:#121716;
     color:#e8e5d5;
 	height:20px;
-	width:130px;
     font-size:12px;
     border: 1px solid #1b4b63;
 }
@@ -657,8 +662,6 @@ QCalendarView#qt_calendar_calendarview{
 	selection-background-color: #ff900d;
 	selection-color: #1b4b63;
 	border: 1px solid #1b4b63;
-    width: 240px;
-    height: 240px;
 	outline: none;
     color: #ffffff;
 }
@@ -669,7 +672,6 @@ QComboBox {
 	background:#121716;
     color:#e8e5d5;
 	height:20px;
-	width:130px;
     font-size:12px;
 	border:1px solid #1b4b63;
 }

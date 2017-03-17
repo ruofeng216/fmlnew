@@ -4,6 +4,12 @@
     color:#333333;
 }
 
+/*-------------------FmlStyle----------------*/
+QWidget[fmlName="WeekendCalendar"] {
+    color: #dfae64;
+}
+/*-------------------------------------------*/
+
 QPushButton,QToolButton{
     background: #aec9ec;
     outline: none;

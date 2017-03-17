@@ -158,8 +158,8 @@ void ParaMgrUnion::initDateView()
 	ui.treeView->expandAll();
 
 	{
-		ui.dateEdit_datebegin->calendarWidget()->setFirstDayOfWeek(Qt::DayOfWeek(7));
-		ui.dateEdit_dateend->calendarWidget()->setFirstDayOfWeek(Qt::DayOfWeek(7));
+		qutil::setWeekendStyle(ui.dateEdit_datebegin);
+		qutil::setWeekendStyle(ui.dateEdit_dateend);
 		ui.dateEdit_datebegin->setDate(QDate::currentDate());
 		ui.dateEdit_dateend->setDate(QDate::currentDate());
 	}

@@ -357,6 +357,9 @@
     <ClCompile Include="view\mainframe\mainhomepage.cpp">
       <Filter>view\function\主页</Filter>
     </ClCompile>
+    <ClCompile Include="include\util\FmlStyle.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -533,6 +536,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\util\log.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\util\FmlStyle.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>

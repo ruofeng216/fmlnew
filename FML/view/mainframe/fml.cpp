@@ -21,6 +21,7 @@ FML::FML(QWidget *parent)
 		emit ViewController::instance()->sigGotoFunc(Main_HomePage);
 	});
 }
+
 FML::~FML()
 {
 	saveWidget();

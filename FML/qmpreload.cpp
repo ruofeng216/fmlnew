@@ -4,6 +4,7 @@
 #include <QTranslator>
 #include <QFile>
 #include <QIcon>
+#include "util/FmlStyle.h"
 
 QmPreload::QmPreload(QObject *parent)
 	: QObject(parent)
@@ -53,6 +54,7 @@ bool QmPreload::init(int argc, char *argv[])
 	{
 		QString str = file.readAll();
 		qApp->setStyleSheet(str);
+		FmlStyle::instance()->init(str);
 		file.close();
 	}
 	else
