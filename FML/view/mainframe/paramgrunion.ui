@@ -192,42 +192,51 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_6">
+       <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="0,1">
         <property name="spacing">
          <number>0</number>
         </property>
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <property name="spacing">
+         <widget class="QLabel" name="label_datebegin">
+          <property name="minimumSize">
+           <size>
+            <width>95</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>95</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>12</pointsize>
+           </font>
+          </property>
+          <property name="text">
+           <string>起止日期</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="1,0,1">
+          <property name="leftMargin">
            <number>20</number>
           </property>
-          <item>
-           <widget class="QLabel" name="label_datebegin">
-            <property name="minimumSize">
-             <size>
-              <width>95</width>
-              <height>0</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>95</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="font">
-             <font>
-              <pointsize>12</pointsize>
-             </font>
-            </property>
-            <property name="text">
-             <string>起止日期</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
           <item>
            <widget class="QDateEdit" name="dateEdit_datebegin">
             <property name="sizePolicy">
@@ -253,13 +262,6 @@
             </property>
            </widget>
           </item>
-         </layout>
-        </item>
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0,0">
-          <property name="spacing">
-           <number>6</number>
-          </property>
           <item>
            <widget class="QLabel" name="label_dateend">
             <property name="sizePolicy">
