@@ -81,3 +81,9 @@ namespace json
 	QVariantMap toMap(const QByteArray &val);
 	QString toString(const QVariantMap &val);
 }
+
+namespace config
+{
+	QVariant value(const QString &section, const QString &key);
+	void setValue(const QString &section, const QString &key, const QString &value);
+}

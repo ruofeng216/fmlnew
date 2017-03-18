@@ -61,7 +61,7 @@ basicui QWidget[objectName="title"] QPushButton[objectName="btn_close"],
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"],
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]
 {
-	background: #18468a;
+	background: #dddddd;
 	background-image: url(:/light/close.png);
     background-repeat:no-repeat;
 	outline: none;
@@ -75,7 +75,6 @@ MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pres
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::pressed
 {
-	background: #18468a;
 	background-image: url(:/light/close-click-hover.png);
     background-repeat:no-repeat;
 	outline: none;
@@ -86,7 +85,6 @@ basicui QWidget[objectName="title"] QPushButton[objectName="btn_max"],
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"],
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]
 {
-	background: #18468a;
 	background-image: url(:/light/maximized.png);
     background-repeat:no-repeat;
 	outline: none;
@@ -99,7 +97,6 @@ MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::presse
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed
 {
-	background: #18468a;
 	background-image: url(:/light/maximized-click-hover.png);
     background-repeat:no-repeat;
 	outline: none;
@@ -109,7 +106,6 @@ basicui QWidget[objectName="title"] QPushButton[objectName="btn_min"],
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"],
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]
 {
-	background: #18468a;
 	background-image: url(:/light/minimize.png);
     background-repeat:no-repeat;
 	outline: none;
@@ -122,7 +118,6 @@ MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::presse
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed
 {
-	background: #18468a;
 	background-image: url(:/light/minimize-click-hover.png);
     background-repeat:no-repeat;
 	outline: none;

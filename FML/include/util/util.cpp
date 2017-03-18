@@ -10,7 +10,7 @@
 #include <QCalendarWidget>
 #include <QTextCharFormat>
 #include "skin.h"
-#include "FmlStyle.h"
+#include "fml_style.h"
 
 namespace qutil
 {
@@ -395,5 +395,20 @@ namespace json
 		QJsonObject jobj = QJsonObject::fromVariantMap(val);
 		QJsonDocument jdoc(jobj);
 		return QString(jdoc.toJson(QJsonDocument::Compact));
+	}
+}
+
+namespace config
+{
+	QVariant value(const QString &section, const QString &key)
+	{
+		QSettings configIniRead(qutil::qBaseConfigPath(), QSettings::IniFormat);
+		return configIniRead.value("/" + section + "/" + key).toString();
+	}
+
+	void setValue(const QString &section, const QString &key, const QString &value)
+	{
+		QSettings configIniWrite(qutil::qBaseConfigPath(), QSettings::IniFormat);
+		configIniWrite.setValue("/" + section + "/" + key, value);
 	}
 }

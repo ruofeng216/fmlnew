@@ -357,7 +357,7 @@
     <ClCompile Include="view\mainframe\mainhomepage.cpp">
       <Filter>view\function\主页</Filter>
     </ClCompile>
-    <ClCompile Include="include\util\FmlStyle.cpp">
+    <ClCompile Include="include\util\fml_style.cpp">
       <Filter>common</Filter>
     </ClCompile>
   </ItemGroup>
@@ -538,7 +538,7 @@
     <ClInclude Include="include\util\log.h">
       <Filter>common</Filter>
     </ClInclude>
-    <ClInclude Include="include\util\FmlStyle.h">
+    <ClInclude Include="include\util\fml_style.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>

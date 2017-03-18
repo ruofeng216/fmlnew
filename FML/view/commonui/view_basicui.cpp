@@ -9,6 +9,7 @@
 #include "title_widget.h"
 #include "idbresource.h"
 #include "../view_controller.h"
+#include "message_box_widget.h"
 
 basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, const QString &title, int titlestyle)
 	: QWidget(parent)
@@ -330,7 +331,11 @@ void basicui::max()
 
 void basicui::skin()
 {
-
+	QString newSkinName = qutil::currentSkin() == "dark" ? "light" : "dark";
+	QString newSkinTip = qutil::currentSkin() == "dark" ? tr("light") : tr("dark");
+	if (MessageBoxWidget::Yes == ShowQuestionMessage(DefaultTitle, QString(tr("skin change to %1,need restart app")).arg(newSkinTip), this)) {
+		config::setValue("skin", "curskin", newSkinName);
+	}
 }
 
 void basicui::pushpin()
