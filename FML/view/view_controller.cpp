@@ -103,7 +103,7 @@ QWidget* ViewController::create(const QString &id, const QString &title, const Q
 		pwnd = new basicui(NULL, new login(), id, title, basicui::TS_CLOSE|basicui::TS_MIN|basicui::TS_LEFT|basicui::TS_LOGO);
 		pwnd->resize(LOGIN_INIT_WIDTH, LOGIN_INIT_HEIGHT);
 	} else if (MAIN_WINDOW_ID == id) { // 主窗口
-		pwnd = new MainWidget(NULL, new FML(), id, title, basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_MIN | basicui::TS_LEFT | basicui::TS_LOGO);
+		pwnd = new MainWidget(NULL, new FML(), id, title, basicui::TS_SKIN | basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_MIN | basicui::TS_LEFT | basicui::TS_LOGO);
 		//获取可用桌面大小
 		QRect deskRect = QApplication::desktop()->availableGeometry();
 		pwnd->resize(deskRect.width()*0.8>MAIN_INIT_WIDTH ? deskRect.width()*0.8 : MAIN_INIT_WIDTH,
@@ -221,7 +221,7 @@ void ViewController::popOutWndFromTab(const QString &id, QWidget *wnd, QPoint p)
 	{
 		CFuncInfo finfo;
 		CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
-		SubWidget *pwnd = new SubWidget(NULL, wnd, id, finfo.getFuncName().getVal().toString(), basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_MIN | basicui::TS_LEFT | basicui::TS_LOGO);
+		SubWidget *pwnd = new SubWidget(NULL, wnd, id, finfo.getFuncName().getVal().toString(), basicui::TS_PUSHPIN | basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_MIN | basicui::TS_LEFT | basicui::TS_LOGO);
 		connect(pwnd, &SubWidget::sigWndMove, this, &ViewController::moveInWndToTab, Qt::QueuedConnection);
 		connect(pwnd, &SubWidget::sigClose, this, &ViewController::closewnd);
 		pwnd->move(p);

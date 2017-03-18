@@ -47,5 +47,9 @@
         <file>light/web/fonts/glyphicons-halflings-regular.ttf</file>
         <file>light/web/fonts/glyphicons-halflings-regular.woff</file>
         <file>light/web/fonts/glyphicons-halflings-regular.woff2</file>
+        <file>light/pushpin.png</file>
+        <file>light/pushpin-click-hover.png</file>
+        <file>light/skin.png</file>
+        <file>light/skin-click-hover.png</file>
     </qresource>
 </RCC>

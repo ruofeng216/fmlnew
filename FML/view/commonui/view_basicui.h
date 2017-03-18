@@ -24,6 +24,8 @@ public:
 		TS_LEFT =1<<5,		// 标题在左边
 		TS_CENTER= 1<<6,	// 标题居中
 		TS_LOGO =1<<7,		// LOGO
+		TS_SKIN = 1<<8,		// 换肤
+		TS_PUSHPIN = 1<<9,	// 图钉
 	};
 
 	explicit basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
@@ -56,6 +58,8 @@ public Q_SLOTS:
 	bool close();
 	void min();
 	virtual void max();
+	void skin();
+	void pushpin();
 
 protected:
 	// 鼠标所在窗口区域：上，下，左，右，左上，左下，右下，右上，中间

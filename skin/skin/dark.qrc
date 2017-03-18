@@ -58,5 +58,9 @@
         <file>dark/dropright-hover.png</file>
         <file>dark/upsolid.png</file>
         <file>dark/upsolid-hover.png</file>
+        <file>dark/pushpin.png</file>
+        <file>dark/pushpin-click-hover.png</file>
+        <file>dark/skin.png</file>
+        <file>dark/skin-click-hover.png</file>
     </qresource>
 </RCC>

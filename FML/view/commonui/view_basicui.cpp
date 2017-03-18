@@ -8,6 +8,7 @@
 #include <qt_windows.h>
 #include "title_widget.h"
 #include "idbresource.h"
+#include "../view_controller.h"
 
 basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, const QString &title, int titlestyle)
 	: QWidget(parent)
@@ -55,6 +56,8 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 	connect(m_ui->btn_restore, SIGNAL(clicked()), this, SLOT(max()));
 	// 关闭信号槽
 	connect(m_ui->btn_close, SIGNAL(clicked()), this, SLOT(close()));
+	connect(m_ui->btn_skin, SIGNAL(clicked()), this, SLOT(skin()));
+	connect(m_ui->btn_pushpin, SIGNAL(clicked()), this, SLOT(pushpin()));
 	
 	m_blpressdown = false;
 	setTitleStyle(m_titlestyle);
@@ -77,8 +80,11 @@ QString basicui::id() const
 void basicui::setTitleStyle(int titlestyle)
 {
 	m_titlestyle = titlestyle;
+	m_ui->btns->setContentsMargins(0, 0, 0, 20);
 	m_ui->btn_func->setVisible(m_titlestyle & TS_FUNC);
 	m_ui->btn_min->setVisible(m_titlestyle & TS_MIN);
+	m_ui->btn_skin->setVisible(m_titlestyle & TS_SKIN);
+	m_ui->btn_pushpin->setVisible(m_titlestyle & TS_PUSHPIN);
 	setMaxRestoreVisible();
 	m_ui->btn_close->setVisible(m_titlestyle & TS_CLOSE);
 	bool isLogoVisible = (m_titlestyle & TS_LOGO);
@@ -322,6 +328,26 @@ void basicui::max()
 	setMaxRestoreVisible();
 }
 
+void basicui::skin()
+{
+
+}
+
+void basicui::pushpin()
+{
+	QWidget *widget = ViewController::instance()->getWidget(m_wndid);
+	if (!widget) {
+		return;
+	}
+
+	if (qutil::isWndTopMost((HWND)widget->winId())) {
+		ViewController::instance()->cancelShowTopMost(m_wndid);
+	} else {
+		ViewController::instance()->showTopMost(m_wndid);
+	}
+	
+}
+
 // 鼠标目前的位置转换对应窗口所在区域
 void basicui::transRegion(const QPoint &cursorGlobalPoint)
 {
@@ -382,6 +408,7 @@ SubWidget::SubWidget(QWidget *parent, QWidget *contentWidget, const QString &wnd
 	m_contentWidget->show();
 	m_move = startTimer(500);
 	m_pos = QPoint(-9999, -9999);
+	m_ui->btns->setContentsMargins(0, 6, 0, 6);
 }
 SubWidget::~SubWidget()
 {

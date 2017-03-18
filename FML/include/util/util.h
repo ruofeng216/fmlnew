@@ -32,6 +32,7 @@ namespace qutil
 	QPoint GracePoint(const QPoint &point, const QSize &size);
 
 	void showWnd(HWND hwnd);
+	bool isWndTopMost(HWND hwnd);
 	void showWndTop(HWND hwnd);
 	void showWndTopMost(HWND hwnd);
 	void cancelTopMost(HWND hwnd);

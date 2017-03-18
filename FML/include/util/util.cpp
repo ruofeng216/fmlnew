@@ -101,6 +101,9 @@ namespace qutil
 	void showWnd(HWND hwnd){
 		ShowWindow(hwnd, SW_RESTORE);
 	}
+	bool isWndTopMost(HWND hwnd) {
+		return GetWindowLong(hwnd, GWL_EXSTYLE) & WS_EX_TOPMOST;
+	}
 	void showWndTop(HWND hWnd){
 		if (!::IsWindow(hWnd))
 			return;

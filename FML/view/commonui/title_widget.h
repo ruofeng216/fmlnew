@@ -4,7 +4,6 @@
 #include <QPixmap>
 
 class QPushButton;
-class QLineEdit;
 class QLabel;
 class QMenu;
 class TitleWidget : public QWidget
@@ -32,5 +31,4 @@ public:
 private:
 	QLabel *m_logo;
 	QLabel *m_title;
-	QLineEdit *m_Search;
 };

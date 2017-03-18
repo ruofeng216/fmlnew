@@ -31,7 +31,7 @@ TitleWidget::~TitleWidget()
 void TitleWidget::init(const QPixmap &logoPixmap, const QString &title, bool isCenter)
 {
 	QHBoxLayout *mainlayout = new QHBoxLayout;
-	mainlayout->setContentsMargins(10, 0, 0, 0);
+	mainlayout->setContentsMargins(20, 0, 0, 0);
 
 	if (!logoPixmap.isNull())
 	{
@@ -59,7 +59,6 @@ MainTitle::MainTitle(QWidget *parent)
 	: QWidget(parent)
 	, m_logo(NULL)
 	, m_title(NULL)
-	, m_Search(NULL)
 {
 	this->setObjectName("MainTitle");
 }
@@ -70,7 +69,7 @@ MainTitle::~MainTitle()
 void MainTitle::init(const QPixmap &logoPixmap, const QString &title)
 {
 	QHBoxLayout *mainlayout = new QHBoxLayout;
-	mainlayout->setContentsMargins(10, 0, 0, 0);
+	mainlayout->setContentsMargins(20, 0, 0, 0);
 
 	if (!logoPixmap.isNull())
 	{
@@ -85,12 +84,5 @@ void MainTitle::init(const QPixmap &logoPixmap, const QString &title)
 		m_title->setText(title);
 		mainlayout->addWidget(m_title);
 	}
-	QSpacerItem *horizontalSpacer = new QSpacerItem(5, 5, QSizePolicy::Expanding, QSizePolicy::Maximum);
-	mainlayout->addItem(horizontalSpacer);
-	m_Search = new QLineEdit(this);
-	mainlayout->addWidget(m_Search);
-	m_Search->setPlaceholderText(tr("Navigation function"));
-	m_Search->setAlignment(Qt::AlignHCenter);
-
 	this->setLayout(mainlayout);
 }

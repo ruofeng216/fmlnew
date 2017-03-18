@@ -64,10 +64,6 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]
 	background: #18468a;
 	background-image: url(:/light/close.png);
     background-repeat:no-repeat;
-	width: 30px;
-	height: 20px;
-	max-height:20px;
-	max-width:30px;
 	outline: none;
 	border-radius: none;
 	border-top-right-radius:5px;
@@ -82,10 +78,6 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_close"]::press
 	background: #18468a;
 	background-image: url(:/light/close-click-hover.png);
     background-repeat:no-repeat;
-	width: 30px;
-	height: 20px;
-	max-height:20px;
-	max-width:30px;
 	outline: none;
 	border-radius: none;
 	border-top-right-radius:5px;
@@ -97,10 +89,6 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]
 	background: #18468a;
 	background-image: url(:/light/maximized.png);
     background-repeat:no-repeat;
-	width: 20px;
-	height: 20px;
-	max-height:20px;
-	max-width:20px;
 	outline: none;
 	border-radius: none;
 }
@@ -114,10 +102,6 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_max"]::pressed
 	background: #18468a;
 	background-image: url(:/light/maximized-click-hover.png);
     background-repeat:no-repeat;
-	width: 20px;
-	height: 20px;
-	max-height:20px;
-	max-width:20px;
 	outline: none;
 	border-radius: none;
 }
@@ -128,10 +112,6 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]
 	background: #18468a;
 	background-image: url(:/light/minimize.png);
     background-repeat:no-repeat;
-	width: 20px;
-	height: 20px;
-	max-height:20px;
-	max-width:20px;
 	outline: none;
 	border-radius: none;
 }
@@ -145,10 +125,6 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_min"]::pressed
 	background: #18468a;
 	background-image: url(:/light/minimize-click-hover.png);
     background-repeat:no-repeat;
-	width: 20px;
-	height: 20px;
-	max-height:20px;
-	max-width:20px;
 	outline: none;
 	border-radius: none;
 }
@@ -159,10 +135,6 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]
 	background: #18468a;
 	background-image: url(:/light/pluralized.png);
     background-repeat:no-repeat;
-	width: 20px;
-	height: 20px;
-	max-height:20px;
-	max-width:20px;
 	outline: none;
 	border-radius: none;
 }
@@ -176,14 +148,51 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pre
 	background: #18468a;
 	background-image: url(:/light/pluralized-click-hover.png);
     background-repeat:no-repeat;
-	width: 20px;
-	height: 20px;
-	max-height:20px;
-	max-width:20px;
 	outline: none;
 	border-radius: none;
 }
-
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_skin"],
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"],
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]
+{
+	background-image: url(:/light/skin.png);
+    background-repeat:no-repeat;
+	outline: none;
+	border-radius: none;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::hover,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::pressed,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::hover,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::pressed,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::hover,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::pressed
+{
+	background-image: url(:/light/skin-click-hover.png);
+    background-repeat:no-repeat;
+	outline: none;
+	border-radius: none;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"],
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"],
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]
+{
+	background-image: url(:/light/pushpin.png);
+    background-repeat:no-repeat;
+	outline: none;
+	border-radius: none;
+}
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::hover,
+basicui QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::pressed,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::hover,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::pressed,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::hover,
+SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::pressed
+{
+	background-image: url(:/light/pushpin-click-hover.png);
+    background-repeat:no-repeat;
+	outline: none;
+	border-radius: none;
+}
 
 QScrollBar:vertical {
     background:#d9e8fc;
