@@ -25,7 +25,7 @@ namespace qutil
 
 	void initSkin(const QString &skinName)
 	{
-		Skin::instance().setSkinName(skinName.isEmpty() ? "dark" : skinName);
+		Skin::instance().setSkinName(skinName);
 	}
 
 	QString currentSkin()
