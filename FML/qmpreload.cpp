@@ -6,6 +6,7 @@
 #include <QIcon>
 #include "util/fml_style.h"
 #include "util/util.h"
+#include "util/skin_config.h"
 
 QmPreload::QmPreload(QObject *parent)
 	: QObject(parent)
@@ -20,8 +21,7 @@ QmPreload::~QmPreload()
 
 bool QmPreload::init(int argc, char *argv[])
 {
-	QString curskin = config::value("skin", "curskin").toString();
-	qutil::initSkin(curskin.isEmpty() ? "dark" : curskin);
+	qutil::initSkin(SkinConfig::current());
 	// 加载默认文字资源
 	static QTranslator trans;
 	bool isLoad = trans.load(QString(":/font/qt_zh_CN.qm"));

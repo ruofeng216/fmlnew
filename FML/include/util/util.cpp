@@ -25,7 +25,7 @@ namespace qutil
 
 	void initSkin(const QString &skinName)
 	{
-		Skin::instance().setSkinName(skinName);
+		Skin::instance().setSkinName(skinName.isEmpty() ? "dark" : skinName);
 	}
 
 	QString currentSkin()
@@ -211,6 +211,11 @@ namespace qutil
 	const QString qBaseSettingPath()
 	{
 		return QCoreApplication::applicationDirPath() + "/config/settings.xml";
+	}
+
+	QString getSkinConfigPath()
+	{
+		return QCoreApplication::applicationDirPath() + "/config/skin.xml";
 	}
 
 	// ±àÂë×ª»»
@@ -412,3 +417,4 @@ namespace config
 		configIniWrite.setValue("/" + section + "/" + key, value);
 	}
 }
+

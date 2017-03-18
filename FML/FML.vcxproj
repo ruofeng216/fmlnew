@@ -252,6 +252,7 @@
     <ClCompile Include="include\util\crash_hook.cpp" />
     <ClCompile Include="include\util\datatype.cpp" />
     <ClCompile Include="include\util\fml_style.cpp" />
+    <ClCompile Include="include\util\skin_config.cpp" />
     <ClCompile Include="include\util\util.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="meta\databases\metadatabase.cpp" />
@@ -923,6 +924,7 @@
     <ClInclude Include="GeneratedFiles\ui_paramgrunion.h" />
     <ClInclude Include="include\util\fml_style.h" />
     <ClInclude Include="include\util\log.h" />
+    <ClInclude Include="include\util\skin_config.h" />
     <CustomBuild Include="view\mainframe\paramgrunion.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing paramgrunion.h...</Message>

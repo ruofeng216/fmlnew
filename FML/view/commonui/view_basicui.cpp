@@ -3,9 +3,11 @@
 #include "ui_basic.h"
 #include <QDebug>
 #include <QPainter>
-#include "util/util.h"
 #include <QBitmap>
+#include <QMenu>
 #include <qt_windows.h>
+#include "util/util.h"
+#include "util/skin_config.h"
 #include "title_widget.h"
 #include "idbresource.h"
 #include "../view_controller.h"
@@ -331,11 +333,32 @@ void basicui::max()
 
 void basicui::skin()
 {
-	QString newSkinName = qutil::currentSkin() == "dark" ? "light" : "dark";
-	QString newSkinTip = qutil::currentSkin() == "dark" ? tr("light") : tr("dark");
-	if (MessageBoxWidget::Yes == ShowQuestionMessage(DefaultTitle, QString(tr("skin change to %1,need restart app")).arg(newSkinTip), this)) {
-		config::setValue("skin", "curskin", newSkinName);
+	QList<QPair<QString, QString>> skinList = SkinConfig::list();
+	if (skinList.isEmpty()) {
+		return;
 	}
+
+	QString curSkin = SkinConfig::current();
+	QMenu skinMenu;
+	skinMenu.setObjectName("SkinMenu");
+	for (int i = 0; i < skinList.size(); i++) {
+		QString skinName = skinList[i].first;
+		QString skinDesc = skinList[i].second;
+		QAction *action = new QAction(QIcon(skinName == curSkin ? qutil::skin("dropdown.png") : ""), skinDesc);
+		connect(action, &QAction::triggered, [=]() {
+			if (skinName != curSkin && MessageBoxWidget::Yes == ShowQuestionMessage(
+				DefaultTitle, QString(tr("skin change to %1,need restart app")).arg(skinDesc), this)) {
+				SkinConfig::setCurrent(skinName);
+				close();
+			}
+		});
+		skinMenu.addAction(action);
+	}
+
+	QPoint pos = m_ui->btn_skin->pos();
+	pos = m_ui->btn_skin->mapToGlobal(pos);
+	pos.setY(pos.y() + m_ui->btn_skin->height() + 3);
+	skinMenu.exec(pos);
 }
 
 void basicui::pushpin()

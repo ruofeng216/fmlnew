@@ -135,8 +135,7 @@ void ParaMgrUnion::initDateView()
 {
 	if (m_pGoodsModel) m_pGoodsModel->clear();
 	QStringList treeHeader;
-	treeHeader << tr("portcode") << tr("portname") << tr("parentcode")
-		<< tr("parentname") << tr("sdate") << tr("edate") << tr("annotation");
+	treeHeader << tr("portcode") << tr("portname") << tr("sdate") << tr("edate") << tr("annotation");
 	if (!m_pGoodsModel) m_pGoodsModel = new QStandardItemModel(0, treeHeader.size(), this);
 	m_pGoodsModel->setColumnCount(treeHeader.size());
 	for (int i = 0; i < treeHeader.size(); i++)

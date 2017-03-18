@@ -51,6 +51,8 @@ namespace qutil
 	QString logDir();
 	// 获取存储配置信息
 	const QString qBaseSettingPath();
+	// 获取皮肤配置路径
+	QString getSkinConfigPath();
 
 	// 编码转换
 	std::wstring ansi2unicode(const STRINGANSI& ansi);

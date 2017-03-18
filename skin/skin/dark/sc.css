@@ -146,8 +146,7 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pre
 	border-radius: none;
 }
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_skin"],
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"],
-SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]
 {
 	background-image: url(:/dark/skin.png);
     background-repeat:no-repeat;
@@ -323,6 +322,10 @@ QMenu::item:!enabled {
 QMenu::separator {
     height:1px;
     background:#1D99A9;
+}
+QMenu::item[objectName="SkinMenu"] {
+    padding: 3px 15px 3px 20px;
+    margin-left: 3px;
 }
 
 QLineEdit {

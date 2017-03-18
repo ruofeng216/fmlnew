@@ -147,8 +147,7 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_restore"]::pre
 	border-radius: none;
 }
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_skin"],
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"],
-SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]
 {
 	background-image: url(:/light/skin.png);
     background-repeat:no-repeat;
@@ -158,7 +157,7 @@ SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::hover,
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::pressed,
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::hover,
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::pressed,
+MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::pressed
 {
 	background-image: url(:/light/skin-click-hover.png);
     background-repeat:no-repeat;
@@ -325,6 +324,10 @@ QMenu::item:!enabled {
 QMenu::separator {
     height:1px;
     background:#1D99A9;
+}
+QMenu::item[objectName="SkinMenu"] {
+    padding: 3px 15px 3px 20px;
+    margin-left: 3px;
 }
 
 QLineEdit {
@@ -576,8 +579,8 @@ QDateEdit::drop-down:on {
 }
 
 /*----------日历控件------start-----------*/
-QPrevNextCalButton#qt_calendar_prevmonth,
-QPrevNextCalButton#qt_calendar_nextmonth,
+QToolButton#qt_calendar_prevmonth,
+QToolButton#qt_calendar_nextmonth,
 QToolButton#qt_calendar_monthbutton,
 QToolButton#qt_calendar_yearbutton{
 	background:transparent;
@@ -593,42 +596,76 @@ QToolButton#qt_calendar_yearbutton
 {
 	width:60px;
 }
-QPrevNextCalButton#qt_calendar_prevmonth:pressed,
-QPrevNextCalButton#qt_calendar_nextmonth:pressed{
+QToolButton#qt_calendar_prevmonth
+{
+	qproperty-icon:url(:/light/dropleft.png);
+}
+QToolButton#qt_calendar_nextmonth
+{
+	qproperty-icon:url(:/light/dropright.png);
+}
+QToolButton#qt_calendar_prevmonth:hover,
+QToolButton#qt_calendar_prevmonth:pressed
+{
+	qproperty-icon:url(:/light/dropleft-hover.png);
+}
+QToolButton#qt_calendar_nextmonth:hover,
+QToolButton#qt_calendar_nextmonth:pressed
+{
+	qproperty-icon:url(:/light/dropright-hover.png);
+}
+QToolButton#qt_calendar_prevmonth:pressed,
+QToolButton#qt_calendar_nextmonth:pressed{
 	border:2px solid transparent;
 }
 QWidget#qt_calendar_navigationbar{
-	border:1px solid #575757;
-	border-width:1px 1px 0px 1px;
-	background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #4D4D4D,stop:1 #292929);
+	/*background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #4D4D4D,stop:1 #292929);*/
+    background: #aec9ec;
+    color: #f5fafe;
 }
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit{
 	background:#232220;
-	border-color: #6886b8;
-	selection-background-color: #f5fafe;
-	selection-color: #ff900d;
+	border-color: #a67439;
+	selection-background-color: #ff900d;
+	selection-color: #000000;
 }
-/*
+
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button
 {
-	image:url(:/images/scroll_up.png);
+	image:url(:/light/upsolid.png);
+	outline: none;
+	margin-left: 5px;
+}
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button:hover,
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button:pressed
+{
+	image:url(:/light/upsolid-hover.png);
+	outline: none;
 }
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::down-button{
-    image:url(:/images/scroll_down.png);
+    image:url(:/light/downsolid.png);
+	outline: none;
+	margin-left: 5px;
 }
-*/
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::down-button:hover,
+QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::down-button:pressed{
+    image:url(:/light/downsolid-hover.png);
+	outline: none;
+}
+
 QToolButton#qt_calendar_monthbutton::menu-indicator{
 	subcontrol-origin: padding;
 	subcontrol-position: center right;
 }
 QCalendarView#qt_calendar_calendarview{
-	background:transparent;
-	background-color: #aec9ec;
-	alternate-background-color: #232220;
-	selection-background-color: #f5fafe;
-	selection-color: #000;
-	border: none;
+	/*background-color: #1b4b63;*/
+    background: #121616;
+	alternate-background-color: #040A0A;
+	selection-background-color: #ff900d;
+	selection-color: #1b4b63;
+	border: 1px solid #1b4b63;
 	outline: none;
+    color: #ffffff;
 }
 /*---------------日历控件------end------------------*/
 

@@ -360,6 +360,9 @@
     <ClCompile Include="include\util\fml_style.cpp">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="include\util\skin_config.cpp">
+      <Filter>common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -539,6 +542,9 @@
       <Filter>common</Filter>
     </ClInclude>
     <ClInclude Include="include\util\fml_style.h">
+      <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="include\util\skin_config.h">
       <Filter>common</Filter>
     </ClInclude>
   </ItemGroup>
