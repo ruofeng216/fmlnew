@@ -159,31 +159,23 @@ basicui QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::hover,
 basicui QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::pressed,
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::hover,
 MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::pressed,
-SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::hover,
-SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_skin"]::pressed
 {
 	background-image: url(:/light/skin-click-hover.png);
     background-repeat:no-repeat;
 	outline: none;
 	border-radius: none;
 }
-basicui QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"],
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"],
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]
 {
-	background-image: url(:/light/pushpin.png);
+	background-image: url(:/light/sub-pushpin.png);
     background-repeat:no-repeat;
 	outline: none;
 	border-radius: none;
 }
-basicui QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::hover,
-basicui QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::pressed,
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::hover,
-MainWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::pressed,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::hover,
 SubWidget QWidget[objectName="title"] QPushButton[objectName="btn_pushpin"]::pressed
 {
-	background-image: url(:/light/pushpin-click-hover.png);
+	background-image: url(:/light/sub-pushpin-click-hover.png);
     background-repeat:no-repeat;
 	outline: none;
 	border-radius: none;

@@ -58,9 +58,15 @@
         <file>dark/dropright-hover.png</file>
         <file>dark/upsolid.png</file>
         <file>dark/upsolid-hover.png</file>
-        <file>dark/pushpin.png</file>
-        <file>dark/pushpin-click-hover.png</file>
         <file>dark/skin.png</file>
         <file>dark/skin-click-hover.png</file>
+        <file>dark/sub-close.png</file>
+        <file>dark/sub-close-click-hover.png</file>
+        <file>dark/sub-maximized.png</file>
+        <file>dark/sub-maximized-click-hover.png</file>
+        <file>dark/sub-pluralized.png</file>
+        <file>dark/sub-pluralized-click-hover.png</file>
+        <file>dark/sub-pushpin.png</file>
+        <file>dark/sub-pushpin-click-hover.png</file>
     </qresource>
 </RCC>
