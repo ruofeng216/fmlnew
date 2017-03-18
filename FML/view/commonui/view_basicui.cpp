@@ -243,7 +243,7 @@ bool basicui::nativeEvent(const QByteArray &eventType, void *message, long *resu
 
 	const int HIT_BORDER = 6;
 	const MSG *msg=static_cast<MSG*>(message);
-	if(msg->message == WM_NCHITTEST) {
+	if(msg->message == WM_NCHITTEST && (m_titlestyle & TS_MAX)) {
 		int xPos = ((int)(short)LOWORD(msg->lParam)) - this->frameGeometry().x();
 		int yPos = ((int)(short)HIWORD(msg->lParam)) - this->frameGeometry().y();
 		if(this->childAt(xPos,yPos) == 0) {
