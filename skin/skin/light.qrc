@@ -57,5 +57,9 @@
         <file>light/sub-pluralized-click-hover.png</file>
         <file>light/sub-pushpin.png</file>
         <file>light/sub-pushpin-click-hover.png</file>
+        <file>light/dropleft.png</file>
+        <file>light/dropleft-hover.png</file>
+        <file>light/dropright.png</file>
+        <file>light/dropright-hover.png</file>
     </qresource>
 </RCC>
