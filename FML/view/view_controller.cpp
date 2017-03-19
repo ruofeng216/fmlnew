@@ -221,7 +221,7 @@ void ViewController::popOutWndFromTab(const QString &id, QWidget *wnd, QPoint p)
 	{
 		CFuncInfo finfo;
 		CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
-		SubWidget *pwnd = new SubWidget(NULL, wnd, id, finfo.getFuncName().getVal().toString(), basicui::TS_PUSHPIN | basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_MIN | basicui::TS_LEFT | basicui::TS_LOGO);
+		SubWidget *pwnd = new SubWidget(NULL, wnd, id, finfo.getFuncName().getVal().toString(), basicui::TS_PUSHPIN | basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_LEFT | basicui::TS_LOGO);
 		connect(pwnd, &SubWidget::sigWndMove, this, &ViewController::moveInWndToTab, Qt::QueuedConnection);
 		connect(pwnd, &SubWidget::sigClose, this, &ViewController::closewnd);
 		pwnd->move(p);
