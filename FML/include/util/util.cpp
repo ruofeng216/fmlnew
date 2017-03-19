@@ -44,7 +44,7 @@ namespace qutil
 		return Skin::instance().path("web/" + name);
 	}
 
-	const QString& fmlStyle(const QString &fmlName)
+	QString fmlStyle(const QString &fmlName)
 	{
 		return FmlStyle::instance()->style(fmlName);
 	}
@@ -52,6 +52,12 @@ namespace qutil
 	QString fmlAttr(const QString &fmlName, const QString &attrName)
 	{
 		return FmlStyle::instance()->attr(fmlName, attrName);
+	}
+
+	void setFmlStyle(QWidget *widget, const QString &fmlName)
+	{
+		widget->setProperty("fmlName", fmlName);
+		widget->setStyleSheet(fmlStyle(fmlName));
 	}
 
 	// ÄÚ´æÕûÀí
@@ -373,7 +379,8 @@ namespace qutil
 		widget->calendarWidget()->setFirstDayOfWeek(Qt::DayOfWeek(7));
 		widget->calendarWidget()->setFirstDayOfWeek(Qt::DayOfWeek(7));
 		QTextCharFormat format;
-		format.setForeground(QColor(qutil::fmlAttr("WeekendCalendar", "color")));
+		QColor color = QColor(qutil::fmlAttr("WeekendCalendar", "color"));
+		format.setForeground(QBrush(color));
 		widget->calendarWidget()->setWeekdayTextFormat(Qt::Saturday, format);
 		widget->calendarWidget()->setWeekdayTextFormat(Qt::Sunday, format);
 	}

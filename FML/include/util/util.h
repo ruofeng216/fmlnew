@@ -22,8 +22,9 @@ namespace qutil
 	QString skin(const QString &name);
 	QString websrc(const QString &name);
 	// 获取FmlStyle
-	const QString& fmlStyle(const QString &fmlName);
+	QString fmlStyle(const QString &fmlName);
 	QString fmlAttr(const QString &fmlName, const QString &attrName);
+	void setFmlStyle(QWidget *widget, const QString &fmlName);
 
 	// 内存整理
 	void cacheclean();

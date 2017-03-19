@@ -38,7 +38,7 @@ public:
 	void setCloseIsHide(bool isHide);					// 点击关闭按钮进行隐藏窗口
 	void setForbidMove(bool forbidMove);				// 禁止窗口移动
 	QWidget *getContentWidget() const;
-
+	void initBtns();
 	
 signals:
 	void sigClose(const QString &id="", bool isExit=true);
@@ -98,6 +98,8 @@ public:
 	SubWidget(QWidget *parent, QWidget *contentWidget, const QString &wndid,
 		const QString &title, int titlestyle = TS_LOGO | TS_MAX | TS_CLOSE | TS_MIN | TS_LEFT);
 	~SubWidget();
+	void initBtns();
+
 protected:
 	void moveEvent(QMoveEvent *event);
 	void timerEvent(QTimerEvent *event);

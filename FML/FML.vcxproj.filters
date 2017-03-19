@@ -363,6 +363,15 @@
     <ClCompile Include="include\util\skin_config.cpp">
       <Filter>common</Filter>
     </ClCompile>
+    <ClCompile Include="view\commonui\pic_button.cpp">
+      <Filter>view\commonui</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_pic_button.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_pic_button.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -520,6 +529,9 @@
     </CustomBuild>
     <CustomBuild Include="view\mainframe\mainhomepage.h">
       <Filter>view\function\主页</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\commonui\pic_button.h">
+      <Filter>view\commonui</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

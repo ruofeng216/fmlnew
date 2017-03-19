@@ -1,18 +1,20 @@
 #pragma once
 
 #include <QString>
-#include <QMap>
+#include <QPair>
+#include <QList>
 
 class FmlStyle {
 public:
 	static FmlStyle* instance();
 	void init(const QString &styleFileContent);
-	const QString& style(const QString &fmlName);
+	QString style(const QString &fmlName);
 	QString attr(const QString &fmlName, const QString &attrName);
 
 private:
 	FmlStyle();
+	QString head(const QString &fmlName);
 
 private:
-	QMap<QString, QString> m_fmlStyles;
+	QList<QPair<QString, QString>> m_fmlStyles;
 };

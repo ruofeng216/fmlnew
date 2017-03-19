@@ -64,6 +64,7 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 	
 	m_blpressdown = false;
 	setTitleStyle(m_titlestyle);
+	initBtns();
 }
 
 basicui::~basicui()
@@ -95,6 +96,7 @@ void basicui::setTitleStyle(int titlestyle)
 	if (TS_NONE == titlestyle) {
 		m_ui->title->hide();
 	}
+
 }
 
 void basicui::setCloseIsHide(bool isHide)
@@ -110,6 +112,16 @@ void basicui::setForbidMove(bool forbidMove)
 QWidget *basicui::getContentWidget() const
 {
 	return m_contentWidget;
+}
+
+void basicui::initBtns()
+{
+	m_ui->btn_close->setPicName(qutil::skin("close.png"), qutil::skin("close-click-hover.png"), qutil::skin("close-click-hover.png"));
+	m_ui->btn_max->setPicName(qutil::skin("maximized.png"), qutil::skin("maximized-click-hover.png"), qutil::skin("maximized-click-hover.png"));
+	m_ui->btn_min->setPicName(qutil::skin("minimize.png"), qutil::skin("minimize-click-hover.png"), qutil::skin("minimize-click-hover.png"));
+	m_ui->btn_pushpin->setPicName(qutil::skin("sub-pushpin.png"), qutil::skin("sub-pushpin-click-hover.png"), qutil::skin("sub-pushpin-click-hover.png"));
+	m_ui->btn_restore->setPicName(qutil::skin("pluralized.png"), qutil::skin("pluralized-click-hover.png"), qutil::skin("pluralized-click-hover.png"));
+	m_ui->btn_skin->setPicName(qutil::skin("skin.png"), qutil::skin("skin-click-hover.png"), qutil::skin("skin-click-hover.png"));
 }
 
 void basicui::paintEvent(QPaintEvent *event)
@@ -356,7 +368,7 @@ void basicui::skin()
 	}
 
 	QPoint pos = m_ui->btn_skin->pos();
-	pos = m_ui->btn_skin->mapToGlobal(pos);
+	pos = this->mapToGlobal(pos);
 	pos.setY(pos.y() + m_ui->btn_skin->height() + 3);
 	skinMenu.exec(pos);
 }
@@ -436,11 +448,23 @@ SubWidget::SubWidget(QWidget *parent, QWidget *contentWidget, const QString &wnd
 	m_contentWidget->show();
 	m_move = startTimer(500);
 	m_pos = QPoint(-9999, -9999);
-	m_ui->btns->setContentsMargins(0, 6, 0, 6);
+	initBtns();
 }
 SubWidget::~SubWidget()
 {
 }
+
+void SubWidget::initBtns()
+{
+	m_ui->btn_close->setPicName(qutil::skin("sub-close.png"), qutil::skin("sub-close-click-hover.png"), qutil::skin("sub-close-click-hover.png"));
+	m_ui->btn_max->setPicName(qutil::skin("sub-maximized.png"), qutil::skin("sub-maximized-click-hover.png"), qutil::skin("sub-maximized-click-hover.png"));
+	m_ui->btn_min->setPicName(qutil::skin("sub-pushpin.png"), qutil::skin("sub-pushpin-click-hover.png"), qutil::skin("sub-pushpin-click-hover.png"));
+	m_ui->btn_pushpin->setPicName(qutil::skin("sub-pushpin.png"), qutil::skin("sub-pushpin-click-hover.png"), qutil::skin("sub-pushpin-click-hover.png"));
+	m_ui->btn_restore->setPicName(qutil::skin("sub-pluralized.png"), qutil::skin("sub-pluralized-click-hover.png"), qutil::skin("sub-pluralized-click-hover.png"));
+	m_ui->btns->setContentsMargins(10, 6, 10, 9);
+	m_ui->btns->setSpacing(8);
+}
+
 void SubWidget::moveEvent(QMoveEvent *event)
 {
 	m_pos = pos();
