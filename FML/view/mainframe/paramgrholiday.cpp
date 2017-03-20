@@ -12,16 +12,11 @@ ParaMgrHoliday::ParaMgrHoliday(QWidget *parent)
 	, m_pGoodsModel(NULL)
 {
 	ui.setupUi(this);
-	ui.pushButton_add->setText(tr("add"));
-	ui.pushButton_add->setIcon(QIcon(qutil::skin("add-click-hover.png")));
-	ui.pushButton_modify->setText(tr("modify"));
-	ui.pushButton_modify->setIcon(QIcon(qutil::skin("revise-click-hover.png")));
-	ui.pushButton_delete->setText(tr("delete"));
-	ui.pushButton_delete->setIcon(QIcon(qutil::skin("delete-click-hover.png")));
 	connect(ui.pushButton_add, &QPushButton::clicked, this, &ParaMgrHoliday::addHoliday);
 	connect(ui.pushButton_modify, &QPushButton::clicked, this, &ParaMgrHoliday::modifyHoliday);
 	connect(ui.pushButton_delete, &QPushButton::clicked, this, &ParaMgrHoliday::delHoliday);
 	init();
+	slotSkinChange();
 }
 
 ParaMgrHoliday::~ParaMgrHoliday()
@@ -66,7 +61,12 @@ void ParaMgrHoliday::init()
 
 void ParaMgrHoliday::slotSkinChange()
 {
-
+	ui.pushButton_add->setText(tr("add"));
+	ui.pushButton_add->setIcon(QIcon(qutil::skin("add-click-hover.png")));
+	ui.pushButton_modify->setText(tr("modify"));
+	ui.pushButton_modify->setIcon(QIcon(qutil::skin("revise-click-hover.png")));
+	ui.pushButton_delete->setText(tr("delete"));
+	ui.pushButton_delete->setIcon(QIcon(qutil::skin("delete-click-hover.png")));
 }
 
 void ParaMgrHoliday::addHoliday()

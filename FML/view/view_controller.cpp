@@ -142,67 +142,67 @@ void ViewController::createChild(const QString &id, const QString &title, const 
 	if (CONTROLMGR->getGlobalSettingInst()->isExistFuncID(id) ||
 		id == Main_HomePage)
 	{
-		QWidget* pWidget = NULL;
+		BodyWidget* pWidget = NULL;
 		if (id == Main_HomePage)
 			pWidget = new MainHomePage;
 		else if (id == "SysMgr_User")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "SysMgr_WorkDay")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == ParaMgr_Holiday)
 			pWidget = new ParaMgrHoliday;
 		else if (id == ParaMgr_Union)
 			pWidget = new ParaMgrUnion;
 		else if (id == "ParaMgr_Products")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "ParaMgr_Dict")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveSet_Market")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveSet_Point")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveSet_YieldCurve")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveSet_TimeCurve")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveMgr_TimeCurve")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveMgr_YieldCurve")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveMgr_YieldCurveAna")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "DataImport_BondInfo")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "DataImport_HisYieldCurve")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "TradingParameter_BondDeal")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "TradingParameter_BondSearch")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "TradingParameter_IRS")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "TradingParameter_IRSSearch")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "TradingParameter_TBF")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "TradingParameter_TBFSearch")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "PortfolioMgr_UnionSearch")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "PortfolioMgr_ScenarioAnalysis")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "PortfolioMgr_CD")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "PortfolioMgr_DISCD")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "Monitor_All")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "Monitor_WarnSet")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "Monitor_TradingStrategies")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		else if (id == "Monitor_MFAM")
-			pWidget = new QWidget;
+			pWidget = new EmptyWidget;
 		if (pWidget)
 		{
 			pWidget->setProperty("subwndid", id);
@@ -210,6 +210,7 @@ void ViewController::createChild(const QString &id, const QString &title, const 
 			CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
 			int nIndex = mainWidget->getMainTab()->addTab(pWidget, finfo.getFuncName().getVal().toString());
 			mainWidget->getMainTab()->setCurrentIndex(nIndex);
+			connect(ViewController::instance(), SIGNAL(sigSkinChange()), pWidget, SLOT(slotSkinChange()));
 		}
 	}
 }
