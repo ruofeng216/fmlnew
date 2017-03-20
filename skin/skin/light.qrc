@@ -61,5 +61,9 @@
         <file>light/dropleft-hover.png</file>
         <file>light/dropright.png</file>
         <file>light/dropright-hover.png</file>
+        <file>light/downsolid.png</file>
+        <file>light/downsolid-hover.png</file>
+        <file>light/upsolid.png</file>
+        <file>light/upsolid-hover.png</file>
     </qresource>
 </RCC>

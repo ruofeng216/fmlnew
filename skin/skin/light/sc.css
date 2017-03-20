@@ -47,10 +47,9 @@ MainTitle QLabel, TitleWidget QLabel {
     font-size: 14px;
 }
 
-basicui,MainWidget,SubWidget{
+basicui{
 	background: #ffffff;
 }
-
 basicui QWidget[objectName="title"]{
 	background: #dddddd;
 }
@@ -148,7 +147,6 @@ QScrollBar::add-page:horizontal, QScrollBar::sub-page:horizontal {
 
 QMenuBar {
 	color: #666666;
-    /*background: #18468a;*/
     background: #dddddd;
     border:none;
 	text-align: center;
@@ -207,11 +205,11 @@ QMenu::item[objectName="SkinMenu"] {
 
 QLineEdit {
     background:#ffffff;
+	color:#dcdcdc;
     font-size:12px;
     height:20px;
     /*selection-background-color:#0e9496;*/
     border: 1px solid #dcdcdc;
-    color:#dcdcdc;
 }
 
 QLineEdit::hover, 
@@ -231,11 +229,11 @@ QLineEdit::pressed {
 
 QTextEdit {
     background:#ffffff;
+	color:#dcdcdc;
     font-size:12px;
     height:20px;
     /*selection-background-color:#0e9496;*/
     border: 1px solid #dcdcdc;
-    color:#dcdcdc;
 }
 
 QTextEdit::hover,
@@ -270,6 +268,7 @@ QWidget#ReloginMessageBoxWidget QPushButton{
 MessageBoxWidget {
 	background-color: #000000;
 	border-radius: 5px;
+	border: 1px solid #206c93;
 	opacity: 0.75;
 }
 
@@ -430,7 +429,6 @@ QDateEdit {
 	background:#ffffff;
     color:#dcdcdc;
 	height:20px;
-	width:130px;
     font-size:12px;
     border: 1px solid #dcdcdc;
 }
@@ -439,7 +437,6 @@ QDateEdit::pressed,
 QDateEdit::on{
     background:#ffffff;
     color: #666666;
-    border: 1px solid #f9c59a;
 }
 QDateEdit::drop-down {
 	margin: 3px 10px;
@@ -499,10 +496,10 @@ QWidget#qt_calendar_navigationbar{
     color: #f5fafe;
 }
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit{
-	background:#232220;
-	border-color: #a67439;
-	selection-background-color: #ff900d;
-	selection-color: #000000;
+	background:#ffffff;
+	border-color: #dcdcdc;
+	selection-background-color: #dcdcdc;
+	selection-color: #666666;
 }
 
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button
@@ -534,13 +531,13 @@ QToolButton#qt_calendar_monthbutton::menu-indicator{
 }
 QCalendarView#qt_calendar_calendarview{
 	/*background-color: #1b4b63;*/
-    background: #121616;
-	alternate-background-color: #040A0A;
+    background: #f4fbfe;
+	alternate-background-color: #fefefe;
 	selection-background-color: #ff900d;
 	selection-color: #1b4b63;
 	border: 1px solid #1b4b63;
 	outline: none;
-    color: #ffffff;
+    color: #000;
 }
 /*---------------日历控件------end------------------*/
 
@@ -549,7 +546,6 @@ QComboBox {
 	background:#ffffff;
     color:#666666;
 	height:20px;
-	width:130px;
     font-size:12px;
 	border: 1px solid #dcdcdc;
 }
@@ -583,7 +579,6 @@ QComboBox QAbstractItemView
 
 /*------------ParaMgrHoliday QTreeView---start------------*/
 QTreeView[objectName="treeView"]{
-	background:transparent;
 	background-color: #f4fbfe;
 	alternate-background-color: #fefefe;
 	outline: none;
@@ -592,24 +587,21 @@ QTreeView[objectName="treeView"]{
 	font-size:12px;
 }
 QTreeView[objectName="treeView"] QHeaderView::section{
-	background:transparent;
 	background-color: #ffffff;
-	padding: 2px 25%;
 	border-top: none;
     border-left:none;
     border-right:1px solid #bfd0f5;
     border-bottom: none;
+	padding-left: 10px;
 	height: 16px;
     color: #333333;
 }
-
 QTreeView[objectName="treeView"] QHeaderView::section:first {
     padding-left: 30px;
 }
 QTreeView[objectName="treeView"] QHeaderView::section:last {
     border-right: none;
 }
-
 QTreeView[objectName="treeView"]::item{
 	outline: none;
 	border: none;
@@ -626,6 +618,26 @@ QTreeView[objectName="treeView"]::item:selected:!active {
     color: #333;
 }
 
+QTreeView[objectName="treeView"]::branch:has-children:!has-siblings:closed,
+QTreeView[objectName="treeView"]::branch:closed:has-children:has-siblings {
+    image: url(:/light/dropright.png);
+	outline: none;
+}
+QTreeView[objectName="treeView"]::branch:has-children:!has-siblings:closed:hover,
+QTreeView[objectName="treeView"]::branch:closed:has-children:has-siblings:hover {
+    image: url(:/light/dropright-hover.png);
+	outline: none;
+}
+QTreeView[objectName="treeView"]::branch:open:has-children:!has-siblings,
+QTreeView[objectName="treeView"]::branch:open:has-children:has-siblings  {
+    image: url(:/light/dropdown.png);
+	outline: none;
+}
+QTreeView[objectName="treeView"]::branch:open:has-children:!has-siblings:hover,
+QTreeView[objectName="treeView"]::branch:open:has-children:has-siblings:hover  {
+    image: url(:/light/dropdown-down.png);
+	outline: none;
+}
 /*
 ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:active{
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #232220, stop: 1 #f5fafe);
@@ -638,7 +650,7 @@ ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:!active {
 /*------------ParaMgrHoliday QTreeView---end------------*/
 QWidget[objectName="MovingWidget"]
 {
-	background: black;
+	background: #ffffff;
 	opacity: 50;
 	border: 1px solid #dddddd;
 	border-radius: 5px;

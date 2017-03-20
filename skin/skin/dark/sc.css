@@ -209,7 +209,7 @@ QLineEdit {
     font-size:12px;
     height:20px;
     /*selection-background-color:#0e9496;*/
-    border:1px solid #1b4b63;
+    border: 1px solid #1b4b63;
 }
 
 QLineEdit::hover, 
@@ -233,7 +233,7 @@ QTextEdit {
     font-size:12px;
     height:20px;
     /*selection-background-color:#0e9496;*/
-    border:1px solid #1b4b63;
+    border: 1px solid #1b4b63;
 }
 
 QTextEdit::hover,
@@ -547,7 +547,7 @@ QComboBox {
     color:#e8e5d5;
 	height:20px;
     font-size:12px;
-	border:1px solid #1b4b63;
+	border: 1px solid #1b4b63;
 }
 
 QComboBox::hover {
@@ -565,7 +565,8 @@ QComboBox::drop-down:on {
 	image: url(:/dark/dropdown-down.png);
 	outline: none;
 }
-QComboBox QAbstractItemView {
+QComboBox QAbstractItemView 
+{
     alternate-background-color: #232220;
 	selection-background-color: #ff900d;
 	selection-color: #232220;
@@ -574,7 +575,6 @@ QComboBox QAbstractItemView {
 	border: none;
 	outline: none;
 }
-
 /*------------QComboBox---end------------*/
 
 /*------------ParaMgrHoliday QTreeView---start------------*/
@@ -588,7 +588,6 @@ QTreeView[objectName="treeView"]{
 }
 QTreeView[objectName="treeView"] QHeaderView::section{
 	background-color: #000000;
-	/*padding: 2px 25%;*/
 	border-top: none;
     border-left:none;
     border-right:1px solid #1b4b63;
