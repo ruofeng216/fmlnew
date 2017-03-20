@@ -12,6 +12,7 @@
 #include "idbresource.h"
 #include "../view_controller.h"
 #include "message_box_widget.h"
+#include "util/fml_style.h"
 
 basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, const QString &title, int titlestyle)
 	: QWidget(parent)
@@ -61,6 +62,7 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 	connect(m_ui->btn_close, SIGNAL(clicked()), this, SLOT(close()));
 	connect(m_ui->btn_skin, SIGNAL(clicked()), this, SLOT(skin()));
 	connect(m_ui->btn_pushpin, SIGNAL(clicked()), this, SLOT(pushpin()));
+	connect(this, SIGNAL(sigSkinChange()), this, SLOT(skinchange()));
 	
 	m_blpressdown = false;
 	setTitleStyle(m_titlestyle);
@@ -343,6 +345,10 @@ void basicui::max()
 	setMaxRestoreVisible();
 }
 
+void basicui::skinchange()
+{
+	initBtns();
+}
 void basicui::skin()
 {
 	QList<QPair<QString, QString>> skinList = SkinConfig::list();
@@ -361,7 +367,22 @@ void basicui::skin()
 			if (skinName != curSkin && MessageBoxWidget::Yes == ShowQuestionMessage(
 				DefaultTitle, QString(tr("skin change to %1,need restart app")).arg(skinDesc), this)) {
 				SkinConfig::setCurrent(skinName);
-				close();
+				qutil::initSkin(SkinConfig::current());
+				// qcss 加载
+				QFile file(qutil::skin("sc.css"));
+				if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+				{
+					QString str = file.readAll();
+					qApp->setStyleSheet(str);
+					FmlStyle::instance()->init(str);
+					file.close();
+				}
+				else
+				{
+					qDebug() << "open style file failed";
+				}
+				//close();
+				emit sigSkinChange();
 			}
 		});
 		skinMenu.addAction(action);

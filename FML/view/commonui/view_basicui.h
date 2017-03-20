@@ -38,10 +38,11 @@ public:
 	void setCloseIsHide(bool isHide);					// 点击关闭按钮进行隐藏窗口
 	void setForbidMove(bool forbidMove);				// 禁止窗口移动
 	QWidget *getContentWidget() const;
-	void initBtns();
+	virtual void initBtns();
 	
 signals:
 	void sigClose(const QString &id="", bool isExit=true);
+	void sigSkinChange();
 
 protected:
 	void paintEvent(QPaintEvent *event);
@@ -60,6 +61,7 @@ public Q_SLOTS:
 	virtual void max();
 	void skin();
 	void pushpin();
+	void skinchange();
 
 protected:
 	// 鼠标所在窗口区域：上，下，左，右，左上，左下，右下，右上，中间
