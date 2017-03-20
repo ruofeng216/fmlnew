@@ -75,6 +75,8 @@ signals:
 	void sigGotoFunc(const QString &funcid);
 	// 合并窗口
 	void sigMoveInWndToTab(const QString &id, QWidget *wnd);
+	// 换肤
+	void sigSkinChange();
 
 public slots:
 	void closewnd(const QString &id /* 窗口ID */, bool bdestory = true);

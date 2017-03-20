@@ -62,7 +62,7 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 	connect(m_ui->btn_close, SIGNAL(clicked()), this, SLOT(close()));
 	connect(m_ui->btn_skin, SIGNAL(clicked()), this, SLOT(skin()));
 	connect(m_ui->btn_pushpin, SIGNAL(clicked()), this, SLOT(pushpin()));
-	connect(this, SIGNAL(sigSkinChange()), this, SLOT(skinchange()));
+	connect(ViewController::instance(), SIGNAL(sigSkinChange()), this, SLOT(skinchange()));
 	
 	m_blpressdown = false;
 	setTitleStyle(m_titlestyle);
@@ -367,7 +367,7 @@ void basicui::skin()
 			if (skinName != curSkin && MessageBoxWidget::Yes == ShowQuestionMessage(
 				DefaultTitle, QString(tr("skin changed to %1")).arg(skinDesc), this)) {
 				qutil::initSkin(skinName);
-				emit sigSkinChange();
+				emit ViewController::instance()->sigSkinChange();
 			}
 		});
 		skinMenu.addAction(action);

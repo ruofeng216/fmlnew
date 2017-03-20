@@ -42,7 +42,6 @@ public:
 	
 signals:
 	void sigClose(const QString &id="", bool isExit=true);
-	void sigSkinChange();
 
 protected:
 	void paintEvent(QPaintEvent *event);
