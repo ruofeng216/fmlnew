@@ -142,7 +142,7 @@ void basicui::paintEvent(QPaintEvent *event)
 	maskPainter.drawRoundedRect(QRect(QPoint(0, 0), maskSize), radius, radius);
 	this->setMask(mask);
 	
-	static QColor borderColor = m_ui->title->palette().color(QPalette::Background);
+	QColor borderColor = m_ui->title->palette().color(QPalette::Background);
 	painter.setPen(borderColor);
 	painter.drawRect(0, 0, this->width() - 1, this->height() - 1);
 	QWidget::paintEvent(event);
@@ -365,23 +365,8 @@ void basicui::skin()
 		QAction *action = new QAction(QIcon(skinName == curSkin ? qutil::skin("dropdown.png") : ""), skinDesc);
 		connect(action, &QAction::triggered, [=]() {
 			if (skinName != curSkin && MessageBoxWidget::Yes == ShowQuestionMessage(
-				DefaultTitle, QString(tr("skin change to %1,need restart app")).arg(skinDesc), this)) {
-				SkinConfig::setCurrent(skinName);
-				qutil::initSkin(SkinConfig::current());
-				// qcss 加载
-				QFile file(qutil::skin("sc.css"));
-				if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-				{
-					QString str = file.readAll();
-					qApp->setStyleSheet(str);
-					FmlStyle::instance()->init(str);
-					file.close();
-				}
-				else
-				{
-					qDebug() << "open style file failed";
-				}
-				//close();
+				DefaultTitle, QString(tr("skin changed to %1")).arg(skinDesc), this)) {
+				qutil::initSkin(skinName);
 				emit sigSkinChange();
 			}
 		});

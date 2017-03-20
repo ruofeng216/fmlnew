@@ -2,7 +2,7 @@
 #include "util/pro.h"
 
 MainHomePage::MainHomePage(QWidget *parent)
-	: QWidget(parent)
+	: BodyWidget(parent)
 {
 	ui.setupUi(this);
 	setProperty("subwndid", Main_HomePage);
@@ -10,4 +10,9 @@ MainHomePage::MainHomePage(QWidget *parent)
 
 MainHomePage::~MainHomePage()
 {
+}
+
+void MainHomePage::slotSkinChange()
+{
+
 }

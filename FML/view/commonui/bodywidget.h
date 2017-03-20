@@ -1,14 +1,15 @@
 #pragma once
 
-#include <QObject>
+#include <QWidget>
 
-class BodyWidget : public QObject
+class BodyWidget : public QWidget
 {
 	Q_OBJECT
 
 public:
-	BodyWidget(QObject *parent);
-	~BodyWidget();
+	BodyWidget(QWidget *parent);
+	virtual ~BodyWidget();
+
 public slots:
 	virtual void slotSkinChange() = 0;
 };

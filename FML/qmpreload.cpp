@@ -4,7 +4,6 @@
 #include <QTranslator>
 #include <QFile>
 #include <QIcon>
-#include "util/fml_style.h"
 #include "util/util.h"
 #include "util/skin_config.h"
 
@@ -48,21 +47,6 @@ bool QmPreload::init(int argc, char *argv[])
 			qDebug() << "install translator failed";
 			return false;
 		}
-	}
-
-	// qcss ╪сть
-	QFile file(qutil::skin("sc.css"));
-	if (file.open(QIODevice::ReadOnly | QIODevice::Text))
-	{
-		QString str = file.readAll();
-		qApp->setStyleSheet(str);
-		FmlStyle::instance()->init(str);
-		file.close();
-	}
-	else
-	{
-		qDebug() << "open style file failed";
-		return false;
 	}
 
 	qApp->setWindowIcon(QIcon(qutil::skin("logo")));

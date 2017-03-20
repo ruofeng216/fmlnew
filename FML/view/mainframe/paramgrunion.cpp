@@ -5,9 +5,8 @@
 #include "util/util.h"
 #include "view/commonui/message_box_widget.h"
 
-
 ParaMgrUnion::ParaMgrUnion(QWidget *parent)
-	: QWidget(parent)
+	: BodyWidget(parent)
 	, m_pGoodsModel(NULL)
 {
 	ui.setupUi(this);
@@ -52,6 +51,11 @@ void ParaMgrUnion::init()
 	{
 		ui.comboBox_parentcode->view()->setAlternatingRowColors(true);
 	}
+}
+
+void ParaMgrUnion::slotSkinChange()
+{
+
 }
 
 void ParaMgrUnion::addPortfolio()

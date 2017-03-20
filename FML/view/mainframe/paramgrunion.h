@@ -1,13 +1,13 @@
 #pragma once
 
-#include <QWidget>
 #include "ui_paramgrunion.h"
 #include "util/datatype.h"
+#include "bodywidget.h"
 
 class QStandardItemModel;
 class QStandardItem;
 // 组合管理
-class ParaMgrUnion : public QWidget
+class ParaMgrUnion : public BodyWidget
 {
 	Q_OBJECT
 
@@ -16,6 +16,9 @@ public:
 	~ParaMgrUnion();
 	
 	void init();
+
+public slots:
+	virtual void slotSkinChange();
 
 private slots:
 	void addPortfolio();

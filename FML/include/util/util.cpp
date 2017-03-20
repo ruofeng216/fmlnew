@@ -11,6 +11,7 @@
 #include <QTextCharFormat>
 #include "skin.h"
 #include "fml_style.h"
+#include "skin_config.h"
 
 namespace qutil
 {
@@ -26,6 +27,13 @@ namespace qutil
 	void initSkin(const QString &skinName)
 	{
 		Skin::instance().setSkinName(skinName);
+		SkinConfig::setCurrent(skinName);
+		QFile file(qutil::skin("sc.css"));
+		if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+			QString str = file.readAll();
+			qApp->setStyleSheet(str);
+			FmlStyle::instance()->init(str);
+		}
 	}
 
 	QString currentSkin()

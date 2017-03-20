@@ -1,12 +1,12 @@
 #pragma once
 
-#include <QWidget>
 #include "ui_paramgrholiday.h"
+#include "bodywidget.h"
 
 // ½ğÈÚÈÕÀú
 class QStandardItemModel;
 class QStandardItem;
-class ParaMgrHoliday : public QWidget
+class ParaMgrHoliday : public BodyWidget
 {
 	Q_OBJECT
 
@@ -15,6 +15,9 @@ public:
 	~ParaMgrHoliday();
 
 	void init();
+
+public slots:
+	virtual void slotSkinChange();
 
 private slots:
 	void addHoliday();

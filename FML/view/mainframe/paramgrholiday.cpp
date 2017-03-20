@@ -8,7 +8,7 @@
 
 
 ParaMgrHoliday::ParaMgrHoliday(QWidget *parent)
-	: QWidget(parent)
+	: BodyWidget(parent)
 	, m_pGoodsModel(NULL)
 {
 	ui.setupUi(this);
@@ -62,6 +62,11 @@ void ParaMgrHoliday::init()
 	connect(ui.dateEdit, &QDateTimeEdit::dateChanged, [this](const QDate &date) {
 		ui.lineEdit_year->setText(QString::number(date.year()));
 	});
+}
+
+void ParaMgrHoliday::slotSkinChange()
+{
+
 }
 
 void ParaMgrHoliday::addHoliday()
