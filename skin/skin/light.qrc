@@ -65,5 +65,7 @@
         <file>light/downsolid-hover.png</file>
         <file>light/upsolid.png</file>
         <file>light/upsolid-hover.png</file>
+        <file>light/sub-minimize.png</file>
+        <file>light/sub-minimize-click-hover.png</file>
     </qresource>
 </RCC>

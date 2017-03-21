@@ -19,9 +19,10 @@
 #include "mainframe/fml.h"
 #include "webview/webviewsever.h"
 #include "view/commonui/message_box_widget.h"
-#include "mainframe/paramgrholiday.h"
-#include "mainframe/mainhomepage.h"
-#include "mainframe/paramgrunion.h"
+#include "mainframe/financial_calendar.h"
+#include "mainframe/main_home_page.h"
+#include "mainframe/portfolio_manage.h"
+#include "mainframe/product_manage.h"
 
 ViewController::ViewController(QObject *parent)
 	: QObject(parent)
@@ -150,11 +151,11 @@ void ViewController::createChild(const QString &id, const QString &title, const 
 		else if (id == "SysMgr_WorkDay")
 			pWidget = new EmptyWidget;
 		else if (id == ParaMgr_Holiday)
-			pWidget = new ParaMgrHoliday;
+			pWidget = new FinancialCalendar;
 		else if (id == ParaMgr_Union)
-			pWidget = new ParaMgrUnion;
+			pWidget = new PortfolioManage;
 		else if (id == "ParaMgr_Products")
-			pWidget = new EmptyWidget;
+			pWidget = new ProductManage();
 		else if (id == "ParaMgr_Dict")
 			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveSet_Market")
@@ -222,7 +223,7 @@ void ViewController::popOutWndFromTab(const QString &id, QWidget *wnd, QPoint p)
 	{
 		CFuncInfo finfo;
 		CONTROLMGR->getGlobalSettingInst()->getFuncInfo(id, finfo);
-		SubWidget *pwnd = new SubWidget(NULL, wnd, id, finfo.getFuncName().getVal().toString(), basicui::TS_PUSHPIN | basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_LEFT | basicui::TS_LOGO);
+		SubWidget *pwnd = new SubWidget(NULL, wnd, id, finfo.getFuncName().getVal().toString(), basicui::TS_MIN | basicui::TS_PUSHPIN | basicui::TS_CLOSE | basicui::TS_MAX | basicui::TS_LEFT | basicui::TS_LOGO);
 		connect(pwnd, &SubWidget::sigWndMove, this, &ViewController::moveInWndToTab, Qt::QueuedConnection);
 		connect(pwnd, &SubWidget::sigClose, this, &ViewController::closewnd);
 		pwnd->move(p);

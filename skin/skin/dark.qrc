@@ -68,5 +68,7 @@
         <file>dark/sub-pluralized-click-hover.png</file>
         <file>dark/sub-pushpin.png</file>
         <file>dark/sub-pushpin-click-hover.png</file>
+        <file>dark/sub-minimize.png</file>
+        <file>dark/sub-minimize-click-hover.png</file>
     </qresource>
 </RCC>

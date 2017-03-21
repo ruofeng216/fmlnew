@@ -76,14 +76,32 @@
     <Filter Include="view\function">
       <UniqueIdentifier>{716df706-ae29-4c9c-8fa5-b895d1c93e74}</UniqueIdentifier>
     </Filter>
-    <Filter Include="view\function\主页">
+    <Filter Include="view\function\system_manage">
+      <UniqueIdentifier>{cd66ed9d-fd31-45c3-82af-6dc39e1a9de0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\param_manage">
+      <UniqueIdentifier>{e53dac1a-4b1b-48d7-96fc-92ae69038672}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\yield_curve_definition">
+      <UniqueIdentifier>{0f0c44a9-7c80-40af-b996-74dc10f05046}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\yield_curve_manage">
+      <UniqueIdentifier>{b0f73e3e-9739-45da-bfb3-d8475626678d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\data_batch_import">
+      <UniqueIdentifier>{b2e6f43a-1689-40f5-995a-02fb6cc4eaee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\trading_account">
+      <UniqueIdentifier>{bc941cbd-80e2-45a1-9e9a-fc87e2dcdc18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\portfolio_manage">
+      <UniqueIdentifier>{c9609104-1d0c-4116-b1ee-51e94ca33fc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\quotes_monitor">
+      <UniqueIdentifier>{bc6b9a07-f5af-4f17-b312-9f5f91001a9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\main_page">
       <UniqueIdentifier>{ecc4ca9d-e100-40d1-86fa-bfd6019f72c0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\function\金融日历">
-      <UniqueIdentifier>{6b84b7e9-4df6-4617-8bfa-f5b9dbb2eb8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="view\function\组合管理">
-      <UniqueIdentifier>{51222004-b159-4ca7-a50f-86766758adc6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -327,35 +345,8 @@
     <ClCompile Include="view\commonui\draginouttabwidget.cpp">
       <Filter>view\commonui</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_mainhomepage.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_mainhomepage.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_paramgrholiday.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_paramgrholiday.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
     <ClCompile Include="controller\ParameterSetting.cpp">
       <Filter>controller</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_paramgrunion.cpp">
-      <Filter>Generated Files\Debug</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_paramgrunion.cpp">
-      <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="view\mainframe\paramgrholiday.cpp">
-      <Filter>view\function\金融日历</Filter>
-    </ClCompile>
-    <ClCompile Include="view\mainframe\paramgrunion.cpp">
-      <Filter>view\function\组合管理</Filter>
-    </ClCompile>
-    <ClCompile Include="view\mainframe\mainhomepage.cpp">
-      <Filter>view\function\主页</Filter>
     </ClCompile>
     <ClCompile Include="include\util\fml_style.cpp">
       <Filter>common</Filter>
@@ -380,6 +371,42 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_bodywidget.cpp">
       <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_product_manage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_product_manage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\product_manage.cpp">
+      <Filter>view\function\param_manage</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_portfolio_manage.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_portfolio_manage.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\portfolio_manage.cpp">
+      <Filter>view\function\param_manage</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_financial_calendar.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_financial_calendar.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\financial_calendar.cpp">
+      <Filter>view\function\param_manage</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_main_home_page.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_main_home_page.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\main_home_page.cpp">
+      <Filter>view\function\main_page</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -518,26 +545,8 @@
     <CustomBuild Include="view\commonui\draginouttabwidget.h">
       <Filter>view\commonui</Filter>
     </CustomBuild>
-    <CustomBuild Include="view\mainframe\mainhomepage.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="view\mainframe\paramgrholiday.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="view\mainframe\paramgrunion.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="view\commonui\message_box_widget.ui">
       <Filter>Form Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="view\mainframe\paramgrholiday.h">
-      <Filter>view\function\金融日历</Filter>
-    </CustomBuild>
-    <CustomBuild Include="view\mainframe\paramgrunion.h">
-      <Filter>view\function\组合管理</Filter>
-    </CustomBuild>
-    <CustomBuild Include="view\mainframe\mainhomepage.h">
-      <Filter>view\function\主页</Filter>
     </CustomBuild>
     <CustomBuild Include="view\commonui\pic_button.h">
       <Filter>view\commonui</Filter>
@@ -545,22 +554,37 @@
     <CustomBuild Include="view\commonui\bodywidget.h">
       <Filter>view\commonui</Filter>
     </CustomBuild>
+    <CustomBuild Include="view\mainframe\product_manage.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\product_manage.h">
+      <Filter>view\function\param_manage</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\portfolio_manage.h">
+      <Filter>view\function\param_manage</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\portfolio_manage.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\financial_calendar.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\financial_calendar.h">
+      <Filter>view\function\param_manage</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\main_home_page.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\main_home_page.h">
+      <Filter>view\function\main_page</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FML.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="GeneratedFiles\ui_mainhomepage.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_paramgrholiday.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
     <ClInclude Include="controller\ParameterSetting.h">
       <Filter>controller</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_paramgrunion.h">
-      <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="include\util\log.h">
       <Filter>common</Filter>
@@ -570,6 +594,18 @@
     </ClInclude>
     <ClInclude Include="include\util\skin_config.h">
       <Filter>common</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_product_manage.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_portfolio_manage.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_financial_calendar.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_main_home_page.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

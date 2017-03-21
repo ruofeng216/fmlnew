@@ -1,4 +1,4 @@
-#include "paramgrholiday.h"
+#include "financial_calendar.h"
 #include "util/datatype.h"
 #include "controller/qcontrollermanager.h"
 #include <QStandardItemModel>
@@ -7,23 +7,23 @@
 #include "view/commonui/message_box_widget.h"
 
 
-ParaMgrHoliday::ParaMgrHoliday(QWidget *parent)
+FinancialCalendar::FinancialCalendar(QWidget *parent)
 	: BodyWidget(parent)
 	, m_pGoodsModel(NULL)
 {
 	ui.setupUi(this);
-	connect(ui.pushButton_add, &QPushButton::clicked, this, &ParaMgrHoliday::addHoliday);
-	connect(ui.pushButton_modify, &QPushButton::clicked, this, &ParaMgrHoliday::modifyHoliday);
-	connect(ui.pushButton_delete, &QPushButton::clicked, this, &ParaMgrHoliday::delHoliday);
+	connect(ui.pushButton_add, &QPushButton::clicked, this, &FinancialCalendar::addHoliday);
+	connect(ui.pushButton_modify, &QPushButton::clicked, this, &FinancialCalendar::modifyHoliday);
+	connect(ui.pushButton_delete, &QPushButton::clicked, this, &FinancialCalendar::delHoliday);
 	init();
 	slotSkinChange();
 }
 
-ParaMgrHoliday::~ParaMgrHoliday()
+FinancialCalendar::~FinancialCalendar()
 {
 }
 
-void ParaMgrHoliday::init()
+void FinancialCalendar::init()
 {
 	{
 		ui.treeView->setAlternatingRowColors(true);
@@ -59,7 +59,7 @@ void ParaMgrHoliday::init()
 	});
 }
 
-void ParaMgrHoliday::slotSkinChange()
+void FinancialCalendar::slotSkinChange()
 {
 	ui.pushButton_add->setText(tr("add"));
 	ui.pushButton_add->setIcon(QIcon(qutil::skin("add-click-hover.png")));
@@ -69,7 +69,7 @@ void ParaMgrHoliday::slotSkinChange()
 	ui.pushButton_delete->setIcon(QIcon(qutil::skin("delete-click-hover.png")));
 }
 
-void ParaMgrHoliday::addHoliday()
+void FinancialCalendar::addHoliday()
 {
 	qint64 _d = ui.dateEdit->date().toJulianDay(); // 单位1为 一天
 	QString strDayType = ui.comboBox->currentText();
@@ -93,7 +93,7 @@ void ParaMgrHoliday::addHoliday()
 			ShowWarnMessage(tr("add"), tr("add fail."), this);
 	}
 }
-void ParaMgrHoliday::modifyHoliday()
+void FinancialCalendar::modifyHoliday()
 {
 	qint64 _d = ui.dateEdit->date().toJulianDay(); // 单位1为 一天
 	QString strDayType = ui.comboBox->currentText();
@@ -117,7 +117,7 @@ void ParaMgrHoliday::modifyHoliday()
 			ShowWarnMessage(tr("modify"), tr("modify fail."), this);
 	}
 }
-void ParaMgrHoliday::delHoliday()
+void FinancialCalendar::delHoliday()
 {
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this))
 	{
@@ -148,7 +148,7 @@ void ParaMgrHoliday::delHoliday()
 	}
 }
 
-void ParaMgrHoliday::initDateView()
+void FinancialCalendar::initDateView()
 {
 	if (m_pGoodsModel) m_pGoodsModel->clear();
 	QStringList treeHeader;
@@ -185,7 +185,7 @@ void ParaMgrHoliday::initDateView()
 	expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
 }
 
-void ParaMgrHoliday::expand(int y)
+void FinancialCalendar::expand(int y)
 {
 	QList<QStandardItem*> lst = m_pGoodsModel->findItems(QString::number(y));
 	if (lst.isEmpty())

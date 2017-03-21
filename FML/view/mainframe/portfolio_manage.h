@@ -1,19 +1,19 @@
 #pragma once
 
-#include "ui_paramgrunion.h"
+#include "ui_portfolio_manage.h"
 #include "util/datatype.h"
 #include "bodywidget.h"
 
 class QStandardItemModel;
 class QStandardItem;
 // 组合管理
-class ParaMgrUnion : public BodyWidget
+class PortfolioManage : public BodyWidget
 {
 	Q_OBJECT
 
 public:
-	ParaMgrUnion(QWidget *parent = Q_NULLPTR);
-	~ParaMgrUnion();
+	PortfolioManage(QWidget *parent = Q_NULLPTR);
+	~PortfolioManage();
 	
 	void init();
 
@@ -30,6 +30,6 @@ private:
 	void packItem(QList<QStandardItem *> &childItems, const CPortfolio &val);
 	void packChild(QStandardItem *parent, const QString &curID);
 private:
-	Ui::ParaMgrUnion ui;
+	Ui::PortfolioManage ui;
 	QStandardItemModel *m_pGoodsModel;
 };

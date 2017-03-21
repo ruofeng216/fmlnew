@@ -1,12 +1,14 @@
 <?xml version='1.0' encoding='utf-8'?>
 <configuration>
     <openwidgets>
-        <widget current="0" index="0" wname="Main_HomePage"/>
-        <widget current="0" index="1" wname="YieldCurveSet_Market"/>
-        <widget current="0" index="2" wname="YieldCurveSet_Point"/>
-        <widget current="0" index="3" wname="YieldCurveSet_YieldCurve"/>
-        <widget current="0" index="4" wname="YieldCurveMgr_YieldCurve"/>
-        <widget current="0" index="5" wname="YieldCurveMgr_YieldCurveAna"/>
-        <widget current="1" index="6" wname="ParaMgr_Holiday"/>
+        <widget wname="Main_HomePage" index="0" current="0"/>
+        <widget wname="YieldCurveSet_Market" index="1" current="0"/>
+        <widget wname="YieldCurveSet_Point" index="2" current="0"/>
+        <widget wname="YieldCurveSet_YieldCurve" index="3" current="0"/>
+        <widget wname="YieldCurveMgr_YieldCurve" index="4" current="0"/>
+        <widget wname="YieldCurveMgr_YieldCurveAna" index="5" current="0"/>
+        <widget wname="ParaMgr_Holiday" index="6" current="0"/>
+        <widget wname="ParaMgr_Union" index="7" current="1"/>
+        <widget wname="ParaMgr_Products" index="8" current="0"/>
     </openwidgets>
 </configuration>

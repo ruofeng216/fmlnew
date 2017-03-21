@@ -1,4 +1,4 @@
-#include "mainhomepage.h"
+#include "main_home_page.h"
 #include "util/pro.h"
 
 MainHomePage::MainHomePage(QWidget *parent)

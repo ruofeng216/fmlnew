@@ -466,6 +466,7 @@ void SubWidget::initBtns()
 	m_ui->btn_max->setPicName(qutil::skin("sub-maximized.png"), qutil::skin("sub-maximized-click-hover.png"), qutil::skin("sub-maximized-click-hover.png"));
 	m_ui->btn_pushpin->setPicName(qutil::skin("sub-pushpin.png"), qutil::skin("sub-pushpin-click-hover.png"), qutil::skin("sub-pushpin-click-hover.png"));
 	m_ui->btn_restore->setPicName(qutil::skin("sub-pluralized.png"), qutil::skin("sub-pluralized-click-hover.png"), qutil::skin("sub-pluralized-click-hover.png"));
+	m_ui->btn_min->setPicName(qutil::skin("sub-minimize.png"), qutil::skin("sub-minimize-click-hover.png"), qutil::skin("sub-minimize-click-hover.png"));
 	m_ui->btns->setContentsMargins(10, 8, 10, 8);
 	m_ui->btns->setSpacing(8);
 }

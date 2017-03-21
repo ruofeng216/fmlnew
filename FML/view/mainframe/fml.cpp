@@ -2,7 +2,7 @@
 #include "util/util.h"
 #include "controller/qcontrollermanager.h"
 #include "view/view_controller.h"
-#include "mainhomepage.h"
+#include "main_home_page.h"
 #include <QPushButton>
 #include <QShortcut>
 

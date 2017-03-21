@@ -1,18 +1,18 @@
 #pragma once
 
-#include "ui_paramgrholiday.h"
+#include "ui_financial_calendar.h"
 #include "bodywidget.h"
 
 // ½ğÈÚÈÕÀú
 class QStandardItemModel;
 class QStandardItem;
-class ParaMgrHoliday : public BodyWidget
+class FinancialCalendar : public BodyWidget
 {
 	Q_OBJECT
 
 public:
-	ParaMgrHoliday(QWidget *parent = Q_NULLPTR);
-	~ParaMgrHoliday();
+	FinancialCalendar(QWidget *parent = Q_NULLPTR);
+	~FinancialCalendar();
 
 	void init();
 
@@ -28,6 +28,6 @@ private:
 	void initDateView();
 	void expand(int y);
 private:
-	Ui::ParaMgrHoliday ui;
+	Ui::FinancialCalendar ui;
 	QStandardItemModel *m_pGoodsModel;
 };

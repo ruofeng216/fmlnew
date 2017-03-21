@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ui_mainhomepage.h"
+#include "ui_main_home_page.h"
 #include "bodywidget.h"
 
 class MainHomePage : public BodyWidget

@@ -577,7 +577,7 @@ QComboBox QAbstractItemView
 }
 /*------------QComboBox---end------------*/
 
-/*------------ParaMgrHoliday QTreeView---start------------*/
+/*------------FinancialCalendar QTreeView---start------------*/
 QTreeView[objectName="treeView"]{
 	background-color: #f4fbfe;
 	alternate-background-color: #fefefe;
@@ -639,15 +639,15 @@ QTreeView[objectName="treeView"]::branch:open:has-children:has-siblings:hover  {
 	outline: none;
 }
 /*
-ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:active{
+FinancialCalendar QTreeView[objectName="treeView"]::item:selected:active{
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #232220, stop: 1 #f5fafe);
 }
 
-ParaMgrHoliday QTreeView[objectName="treeView"]::item:selected:!active {
+FinancialCalendar QTreeView[objectName="treeView"]::item:selected:!active {
     background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 #6b9be8, stop: 1 #577fbf);
 }*/
 
-/*------------ParaMgrHoliday QTreeView---end------------*/
+/*------------FinancialCalendar QTreeView---end------------*/
 QWidget[objectName="MovingWidget"]
 {
 	background: #ffffff;

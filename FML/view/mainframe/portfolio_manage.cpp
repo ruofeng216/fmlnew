@@ -1,28 +1,28 @@
-#include "paramgrunion.h"
+#include "portfolio_manage.h"
 #include "controller/qcontrollermanager.h"
 #include <QStandardItemModel>
 #include <QCalendarWidget>
 #include "util/util.h"
 #include "view/commonui/message_box_widget.h"
 
-ParaMgrUnion::ParaMgrUnion(QWidget *parent)
+PortfolioManage::PortfolioManage(QWidget *parent)
 	: BodyWidget(parent)
 	, m_pGoodsModel(NULL)
 {
 	ui.setupUi(this);
 
-	connect(ui.pushButton_add, &QPushButton::clicked, this, &ParaMgrUnion::addPortfolio);
-	connect(ui.pushButton_modify, &QPushButton::clicked, this, &ParaMgrUnion::modifyPortfolio);
-	connect(ui.pushButton_delete, &QPushButton::clicked, this, &ParaMgrUnion::delPortfolio);
+	connect(ui.pushButton_add, &QPushButton::clicked, this, &PortfolioManage::addPortfolio);
+	connect(ui.pushButton_modify, &QPushButton::clicked, this, &PortfolioManage::modifyPortfolio);
+	connect(ui.pushButton_delete, &QPushButton::clicked, this, &PortfolioManage::delPortfolio);
 	init();
 	slotSkinChange();
 }
 
-ParaMgrUnion::~ParaMgrUnion()
+PortfolioManage::~PortfolioManage()
 {
 }
 
-void ParaMgrUnion::init()
+void PortfolioManage::init()
 {
 	{
 		ui.treeView->setAlternatingRowColors(true);
@@ -49,7 +49,7 @@ void ParaMgrUnion::init()
 	}
 }
 
-void ParaMgrUnion::slotSkinChange()
+void PortfolioManage::slotSkinChange()
 {
 	ui.pushButton_add->setText(tr("add"));
 	ui.pushButton_add->setIcon(QIcon(qutil::skin("add-click-hover.png")));
@@ -59,7 +59,7 @@ void ParaMgrUnion::slotSkinChange()
 	ui.pushButton_delete->setIcon(QIcon(qutil::skin("delete-click-hover.png")));
 }
 
-void ParaMgrUnion::addPortfolio()
+void PortfolioManage::addPortfolio()
 {
 	QString _portcode = ui.lineEdit_portcode->text();
 	QString _parentcode = ui.comboBox_parentcode->currentText();
@@ -83,7 +83,7 @@ void ParaMgrUnion::addPortfolio()
 			ShowWarnMessage(tr("add"), tr("add fail."), this);
 	}
 }
-void ParaMgrUnion::modifyPortfolio()
+void PortfolioManage::modifyPortfolio()
 {
 	QString _portcode = ui.lineEdit_portcode->text();
 	QString _parentcode = ui.comboBox_parentcode->currentText();
@@ -112,7 +112,7 @@ void ParaMgrUnion::modifyPortfolio()
 			ShowWarnMessage(tr("modify"), tr("modify fail."), this);
 	}
 }
-void ParaMgrUnion::delPortfolio()
+void PortfolioManage::delPortfolio()
 {
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this))
 	{
@@ -136,7 +136,7 @@ void ParaMgrUnion::delPortfolio()
 	}
 }
 
-void ParaMgrUnion::initDateView()
+void PortfolioManage::initDateView()
 {
 	if (m_pGoodsModel) m_pGoodsModel->clear();
 	QStringList treeHeader;
@@ -180,7 +180,7 @@ void ParaMgrUnion::initDateView()
 	}
 }
 
-void ParaMgrUnion::packItem(QList<QStandardItem *> &childItems, const CPortfolio &val)
+void PortfolioManage::packItem(QList<QStandardItem *> &childItems, const CPortfolio &val)
 {
 	if (val.getPortcode().isEmpty() || val.getPortname().isEmpty()) {
 		return;
@@ -208,7 +208,7 @@ void ParaMgrUnion::packItem(QList<QStandardItem *> &childItems, const CPortfolio
 	iannotation->setToolTip(qutil::splitTooltip(val.getAnnotation(), 200));
 }
 
-void ParaMgrUnion::packChild(QStandardItem *parent, const QString &curID)
+void PortfolioManage::packChild(QStandardItem *parent, const QString &curID)
 {
 	QStringList children;
 	PARASETCTL->getChildren(curID, children);

@@ -3,11 +3,11 @@
 <skin>
     <!--当前选择的皮肤-->
     <current decs="当前皮肤">
-        <skin id="light"/>
+        <skin id="dark"/>
     </current>
     <!--所有皮肤列表-->
     <list des="皮肤列表">
-        <skin desc="深色版" id="dark"/>
-        <skin desc="浅色版" id="light"/>
+        <skin id="dark" desc="深色版"/>
+        <skin id="light" desc="浅色版"/>
     </list>
 </skin>
