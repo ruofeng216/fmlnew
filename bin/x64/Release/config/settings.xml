@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<configuration>
+    <openwidgets>
+        <widget wname="Main_HomePage" current="0" index="0"/>
+        <widget wname="YieldCurveSet_Market" current="0" index="1"/>
+        <widget wname="YieldCurveSet_Point" current="0" index="2"/>
+        <widget wname="YieldCurveSet_YieldCurve" current="0" index="3"/>
+        <widget wname="ParaMgr_Union" current="1" index="4"/>
+        <widget wname="YieldCurveSet_TimeCurve" current="0" index="5"/>
+        <widget wname="ParaMgr_Holiday" current="0" index="6"/>
+        <widget wname="YieldCurveMgr_TimeCurve" current="0" index="7"/>
+        <widget wname="YieldCurveMgr_YieldCurve" current="0" index="8"/>
+        <widget wname="YieldCurveMgr_YieldCurveAna" current="0" index="9"/>
+    </openwidgets>
+</configuration>
