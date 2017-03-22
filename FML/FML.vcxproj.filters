@@ -103,6 +103,15 @@
     <Filter Include="view\function\main_page">
       <UniqueIdentifier>{ecc4ca9d-e100-40d1-86fa-bfd6019f72c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="view\function\param_manage\financial_calendar">
+      <UniqueIdentifier>{60a62300-b72a-484e-a62d-a62e5401bf50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\param_manage\portfolio_manage">
+      <UniqueIdentifier>{4c4b8d35-2f6f-4624-acb5-9d75330693ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="view\function\param_manage\product_manage">
+      <UniqueIdentifier>{c5148f47-78c5-4450-9230-5b9147231f71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -378,26 +387,17 @@
     <ClCompile Include="GeneratedFiles\Release\moc_product_manage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="view\mainframe\product_manage.cpp">
-      <Filter>view\function\param_manage</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_portfolio_manage.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_portfolio_manage.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="view\mainframe\portfolio_manage.cpp">
-      <Filter>view\function\param_manage</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_financial_calendar.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_financial_calendar.cpp">
       <Filter>Generated Files\Release</Filter>
-    </ClCompile>
-    <ClCompile Include="view\mainframe\financial_calendar.cpp">
-      <Filter>view\function\param_manage</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_main_home_page.cpp">
       <Filter>Generated Files\Debug</Filter>
@@ -407,6 +407,15 @@
     </ClCompile>
     <ClCompile Include="view\mainframe\main_home_page.cpp">
       <Filter>view\function\main_page</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\financial_calendar.cpp">
+      <Filter>view\function\param_manage\financial_calendar</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\portfolio_manage.cpp">
+      <Filter>view\function\param_manage\portfolio_manage</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\product_manage.cpp">
+      <Filter>view\function\param_manage\product_manage</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -557,26 +566,26 @@
     <CustomBuild Include="view\mainframe\product_manage.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="view\mainframe\product_manage.h">
-      <Filter>view\function\param_manage</Filter>
-    </CustomBuild>
-    <CustomBuild Include="view\mainframe\portfolio_manage.h">
-      <Filter>view\function\param_manage</Filter>
-    </CustomBuild>
     <CustomBuild Include="view\mainframe\portfolio_manage.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="view\mainframe\financial_calendar.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="view\mainframe\financial_calendar.h">
-      <Filter>view\function\param_manage</Filter>
-    </CustomBuild>
     <CustomBuild Include="view\mainframe\main_home_page.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="view\mainframe\main_home_page.h">
       <Filter>view\function\main_page</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\financial_calendar.h">
+      <Filter>view\function\param_manage\financial_calendar</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\portfolio_manage.h">
+      <Filter>view\function\param_manage\portfolio_manage</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\product_manage.h">
+      <Filter>view\function\param_manage\product_manage</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
