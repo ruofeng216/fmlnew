@@ -65,6 +65,7 @@ basicui::basicui(QWidget *parent, QWidget *contentWidget, const QString &wndid, 
 	connect(ViewController::instance(), SIGNAL(sigSkinChange()), this, SLOT(skinchange()));
 	
 	m_blpressdown = false;
+	m_bPin = false;
 	setTitleStyle(m_titlestyle);
 	initBtns();
 }
@@ -388,10 +389,13 @@ void basicui::pushpin()
 
 	if (qutil::isWndTopMost((HWND)widget->winId())) {
 		ViewController::instance()->cancelShowTopMost(m_wndid);
+		m_bPin = false;
+		m_ui->btn_pushpin->setPicName(qutil::skin("sub-pushpin.png"), qutil::skin("sub-pushpin-click-hover.png"), qutil::skin("sub-pushpin-click-hover.png"));
 	} else {
 		ViewController::instance()->showTopMost(m_wndid);
+		m_bPin = true;
+		m_ui->btn_pushpin->setPicName(qutil::skin("sub-pin.png"), qutil::skin("sub-pin-click-hover.png"), qutil::skin("sub-pin-click-hover.png"));
 	}
-	
 }
 
 // 鼠标目前的位置转换对应窗口所在区域
@@ -464,7 +468,10 @@ void SubWidget::initBtns()
 {
 	m_ui->btn_close->setPicName(qutil::skin("sub-close.png"), qutil::skin("sub-close-click-hover.png"), qutil::skin("sub-close-click-hover.png"));
 	m_ui->btn_max->setPicName(qutil::skin("sub-maximized.png"), qutil::skin("sub-maximized-click-hover.png"), qutil::skin("sub-maximized-click-hover.png"));
-	m_ui->btn_pushpin->setPicName(qutil::skin("sub-pushpin.png"), qutil::skin("sub-pushpin-click-hover.png"), qutil::skin("sub-pushpin-click-hover.png"));
+	if (m_bPin)
+		m_ui->btn_pushpin->setPicName(qutil::skin("sub-pin.png"), qutil::skin("sub-pin-click-hover.png"), qutil::skin("sub-pin-click-hover.png"));
+	else
+		m_ui->btn_pushpin->setPicName(qutil::skin("sub-pushpin.png"), qutil::skin("sub-pushpin-click-hover.png"), qutil::skin("sub-pushpin-click-hover.png"));
 	m_ui->btn_restore->setPicName(qutil::skin("sub-pluralized.png"), qutil::skin("sub-pluralized-click-hover.png"), qutil::skin("sub-pluralized-click-hover.png"));
 	m_ui->btn_min->setPicName(qutil::skin("sub-minimize.png"), qutil::skin("sub-minimize-click-hover.png"), qutil::skin("sub-minimize-click-hover.png"));
 	m_ui->btns->setContentsMargins(10, 8, 10, 8);

@@ -80,6 +80,8 @@ protected:
 	bool m_forbidMove;  //禁止窗口移动
 	QWidget *m_contentWidget; // 主窗口区域
 	QString m_title; //标题内容
+
+	bool m_bPin; // 窗口置顶
 };
 
 
