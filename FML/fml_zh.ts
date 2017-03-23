@@ -4,9 +4,9 @@
 <context>
     <name>FML</name>
     <message>
-        <location filename="view/mainframe/fml.cpp" line="151"/>
+        <location filename="view/mainframe/fml.cpp" line="150"/>
         <source>homepage</source>
-        <translation type="unfinished">主页</translation>
+        <translation>主页</translation>
     </message>
 </context>
 <context>
@@ -703,7 +703,7 @@
         <translation type="vanished">深色皮肤</translation>
     </message>
     <message>
-        <location filename="view/commonui/view_basicui.cpp" line="368"/>
+        <location filename="view/commonui/view_basicui.cpp" line="369"/>
         <source>skin changed to %1</source>
         <oldsource>skin change to %1,need restart app</oldsource>
         <translation>确定将皮肤更改为%1</translation>

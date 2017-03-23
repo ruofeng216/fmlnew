@@ -58,6 +58,10 @@
     <PostBuildEvent>
       <Command>xcopy "$(OutDir)$(ProjectName).exe" "$(SolutionDir)bin\$(Platform)\$(Configuration)"  /Y /R</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>"$(QTDIR)\bin\lrelease.exe" "$(ProjectDir)fml_zh.ts"
+"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "$(ProjectDir)fml.qrc" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
