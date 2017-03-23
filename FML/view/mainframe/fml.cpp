@@ -66,8 +66,6 @@ void FML::slotOpenSpeedSearch()
 {
 	m_speedSearch->move(this->width() - m_speedSearch->width() - 20, 
 		this->height() - m_speedSearch->height() - 20);
-	m_speedSearch->getCombox()->view()->move(this->width() - m_speedSearch->width() - 20,
-		this->height() - m_speedSearch->height() - 20 - m_speedSearch->getCombox()->view()->height());
 	m_speedSearch->show();
 }
 
