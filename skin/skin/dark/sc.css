@@ -500,6 +500,7 @@ QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit{
 	border-color: #a67439;
 	selection-background-color: #ff900d;
 	selection-color: #000000;
+	height: 20px;
 }
 
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button
@@ -535,7 +536,6 @@ QCalendarView#qt_calendar_calendarview{
 	alternate-background-color: #040A0A;
 	selection-background-color: #ff900d;
 	selection-color: #1b4b63;
-	border: 1px solid #1b4b63;
 	outline: none;
     color: #ffffff;
 }
