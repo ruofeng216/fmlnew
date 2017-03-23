@@ -1,14 +1,15 @@
 <?xml version='1.0' encoding='utf-8'?>
 <configuration>
     <openwidgets>
-        <widget wname="Main_HomePage" index="0" current="0"/>
-        <widget wname="YieldCurveSet_Market" index="1" current="0"/>
-        <widget wname="YieldCurveSet_Point" index="2" current="0"/>
-        <widget wname="YieldCurveSet_YieldCurve" index="3" current="0"/>
-        <widget wname="YieldCurveMgr_YieldCurve" index="4" current="0"/>
-        <widget wname="YieldCurveMgr_YieldCurveAna" index="5" current="0"/>
-        <widget wname="ParaMgr_Holiday" index="6" current="0"/>
-        <widget wname="ParaMgr_Union" index="7" current="1"/>
-        <widget wname="ParaMgr_Products" index="8" current="0"/>
+        <widget current="0" index="0" wname="Main_HomePage"/>
+        <widget current="0" index="1" wname="YieldCurveSet_Market"/>
+        <widget current="0" index="2" wname="YieldCurveSet_Point"/>
+        <widget current="0" index="3" wname="YieldCurveSet_YieldCurve"/>
+        <widget current="0" index="4" wname="YieldCurveMgr_YieldCurve"/>
+        <widget current="0" index="5" wname="ParaMgr_Holiday"/>
+        <widget current="1" index="6" wname="ParaMgr_Union"/>
+        <widget current="0" index="7" wname="ParaMgr_Products"/>
+        <widget current="0" index="8" wname="ParaMgr_Dict"/>
+        <widget current="0" index="9" wname="SysMgr_User"/>
     </openwidgets>
 </configuration>
