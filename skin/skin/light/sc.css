@@ -6,7 +6,7 @@
 
 /*-------------------FmlStyle----------------*/
 QWidget[fmlName="WeekendCalendar"] {
-    color: #dfae64;
+    color: #86A9DB;
 }
 /*-------------------------------------------*/
 
@@ -492,14 +492,15 @@ QToolButton#qt_calendar_nextmonth:pressed{
 }
 QWidget#qt_calendar_navigationbar{
 	/*background:qlineargradient(spread:pad,x1:0,y1:0,x2:0,y2:1,stop:0 #4D4D4D,stop:1 #292929);*/
-    background: #aec9ec;
-    color: #f5fafe;
+    background: #98B9E5;
+    color: #E8EFF9;
 }
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit{
-	background:#ffffff;
-	border-color: #dcdcdc;
+	background:#98B9E5;
+	border-color: #ffffff;
 	selection-background-color: #dcdcdc;
 	selection-color: #666666;
+	height: 20px;
 }
 
 QWidget#qt_calendar_navigationbar QSpinBox#qt_calendar_yearedit::up-button
@@ -531,11 +532,10 @@ QToolButton#qt_calendar_monthbutton::menu-indicator{
 }
 QCalendarView#qt_calendar_calendarview{
 	/*background-color: #1b4b63;*/
-    background: #f4fbfe;
-	alternate-background-color: #fefefe;
-	selection-background-color: #ff900d;
-	selection-color: #1b4b63;
-	border: 1px solid #1b4b63;
+	alternate-background-color: #F5FAFE;
+    selection-background-color: #6192D2;
+    selection-color: #DFE6F4;
+    background: #fff;
 	outline: none;
     color: #000;
 }
