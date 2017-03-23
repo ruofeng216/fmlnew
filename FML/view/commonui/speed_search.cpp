@@ -8,15 +8,14 @@ SpeedSearch::SpeedSearch(QWidget *parent)
 	m_comboBox = new QComboBox(this);
 	m_comboBox->setEditable(true);
 	m_comboBox->lineEdit()->setPlaceholderText(tr("speed search"));
+	m_comboBox->view()->setAlternatingRowColors(true);
 	connect(m_comboBox, SIGNAL(activated(QString)), this, SLOT(slotActivated(QString)));
-
 	QVBoxLayout *vLayout = new QVBoxLayout(this);
 	vLayout->setContentsMargins(0, 0, 0, 0);
 	vLayout->setSpacing(0);
 	vLayout->addWidget(m_comboBox);
 
 	this->setFixedSize(150, 24);
-	m_comboBox->installEventFilter(this);
 }
 
 void SpeedSearch::initData(const QStringList &strList)
@@ -32,6 +31,11 @@ void SpeedSearch::initData(const QStringList &strList)
 	m_comboBox->addItems(strList);
 }
 
+const QComboBox *SpeedSearch::getCombox() const
+{
+	return m_comboBox;
+}
+
 void SpeedSearch::slotActivated(const QString &str)
 {
 	qDebug() << str;
@@ -43,12 +47,4 @@ void SpeedSearch::showEvent(QShowEvent *event)
 	QWidget::showEvent(event);
 	m_comboBox->setCurrentText("");
 	m_comboBox->setFocus();
-}
-
-bool SpeedSearch::eventFilter(QObject *watched, QEvent *event)
-{
-	if (watched == m_comboBox && event->type() == QEvent::FocusOut) {
-		
-	}
-	return false;
 }

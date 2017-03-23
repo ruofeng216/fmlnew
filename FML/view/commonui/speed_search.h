@@ -1,8 +1,8 @@
 #pragma once
 
 #include <QWidget>
+#include <QComboBox>
 
-class QComboBox;
 class QCompleter;
 class SpeedSearch : public QWidget
 {
@@ -10,6 +10,7 @@ class SpeedSearch : public QWidget
 public:
 	explicit SpeedSearch(QWidget *parent = 0);
 	void initData(const QStringList &strList);
+	const QComboBox *getCombox() const;
 
 signals:
 	void sigItemSelected(const QString &name);
@@ -19,7 +20,6 @@ public slots:
 
 protected:
 	void showEvent(QShowEvent *event);
-	bool eventFilter(QObject *watched, QEvent *event);
 
 private:
 	QComboBox *m_comboBox;

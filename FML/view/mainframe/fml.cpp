@@ -26,11 +26,12 @@ FML::FML(QWidget *parent)
 	connect(shortcut, SIGNAL(activated()), this, SLOT(slotOpenSpeedSearch()));
 
 	m_speedSearch = new SpeedSearch(this);
-	connect(m_speedSearch, &SpeedSearch::sigItemSelected, [](const QString& name) {
+	connect(m_speedSearch, &SpeedSearch::sigItemSelected, [this](const QString& name) {
 		CFuncInfo info;
 		if (GLBSETCTL->getFuncInfoFromName(name, info)) {
 			emit ViewController::instance()->sigGotoFunc(info.getFuncID().getVal().toString());
 		}
+		this->m_speedSearch->hide();
 	});
 	m_speedSearch->hide();
 }
@@ -63,7 +64,10 @@ void FML::slotPopSignalWndDBClk(int nIndex)
 
 void FML::slotOpenSpeedSearch()
 {
-	m_speedSearch->move(this->width() - m_speedSearch->width() - 80, 0);
+	m_speedSearch->move(this->width() - m_speedSearch->width() - 20, 
+		this->height() - m_speedSearch->height() - 20);
+	m_speedSearch->getCombox()->view()->move(this->width() - m_speedSearch->width() - 20,
+		this->height() - m_speedSearch->height() - 20 - m_speedSearch->getCombox()->view()->height());
 	m_speedSearch->show();
 }
 
