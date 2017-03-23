@@ -72,6 +72,7 @@
     <OutDir>$(SolutionDir)build\$(ProjectName)\$(Platform)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
     <PostBuildEventUseInBuild>true</PostBuildEventUseInBuild>
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
@@ -122,6 +123,10 @@
     <PostBuildEvent>
       <Command>xcopy "$(OutDir)$(ProjectName).dll" "$(SolutionDir)bin\$(Platform)\$(Configuration)"  /Y /R</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "$(ProjectDir)skin\dark.qrc" -o .\GeneratedFiles\qrc_%(Filename).cpp
+"$(QTDIR)\bin\rcc.exe" -name "%(Filename)" -no-compress "$(ProjectDir)skin\light.qrc" -o .\GeneratedFiles\qrc_%(Filename).cpp</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
