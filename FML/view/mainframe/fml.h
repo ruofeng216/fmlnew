@@ -9,6 +9,7 @@
 #include <QTimer>
 #include "view/webview/basewebengineview.h"
 
+class SpeedSearch;
 class FML : public QMainWindow
 {
     Q_OBJECT
@@ -22,14 +23,16 @@ public:
 private slots:
 	void slotPopSignalWnd(int nIndex);
 	void slotPopSignalWndDBClk(int nIndex);
+	void slotOpenSpeedSearch();
+
 private:
 	void initMenuFunc();
 	void initWidget();
-	void setMenu(QMenu *menu, const QString funcid);
+	QStringList setMenu(QMenu *menu, const QString funcid);
 
 	void saveWidget();
 
 private:
     Ui::FMLClass ui;
-	
+	SpeedSearch *m_speedSearch;
 };
