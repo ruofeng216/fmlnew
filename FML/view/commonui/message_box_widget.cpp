@@ -17,7 +17,7 @@ MessageBoxWidget::MessageBoxWidget(QWidget *parent)
 	setAttribute(Qt::WA_DeleteOnClose);
 	ui->pbOk->setDefault(true);
 	ui->pbCancel->setDefault(false);
-
+	setWindowFlags(Qt::WindowStaysOnTopHint);
 	connect(ui->pbOk, &QPushButton::clicked, this, &MessageBoxWidget::onOk);
 	connect(ui->pbCancel, &QPushButton::clicked, this, &MessageBoxWidget::onCancel);
 }
