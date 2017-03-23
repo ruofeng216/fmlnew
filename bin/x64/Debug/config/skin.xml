@@ -3,7 +3,7 @@
 <skin>
     <!--当前选择的皮肤-->
     <current decs="当前皮肤">
-        <skin id="dark"/>
+        <skin id="light"/>
     </current>
     <!--所有皮肤列表-->
     <list des="皮肤列表">

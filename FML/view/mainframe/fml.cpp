@@ -5,6 +5,7 @@
 #include "main_home_page.h"
 #include <QPushButton>
 #include <QShortcut>
+#include "speed_search.h"
 
 FML::FML(QWidget *parent)
 	: QMainWindow(parent)
@@ -20,6 +21,18 @@ FML::FML(QWidget *parent)
 	connect(pHome, &QShortcut::activated, [this] {
 		emit ViewController::instance()->sigGotoFunc(Main_HomePage);
 	});
+
+	QShortcut *shortcut = new QShortcut(QKeySequence(Qt::CTRL + Qt::Key_F), this);
+	connect(shortcut, SIGNAL(activated()), this, SLOT(slotOpenSpeedSearch()));
+
+	m_speedSearch = new SpeedSearch(this);
+	connect(m_speedSearch, &SpeedSearch::sigItemSelected, [](const QString& name) {
+		CFuncInfo info;
+		if (GLBSETCTL->getFuncInfoFromName(name, info)) {
+			emit ViewController::instance()->sigGotoFunc(info.getFuncID().getVal().toString());
+		}
+	});
+	m_speedSearch->hide();
 }
 
 FML::~FML()
@@ -48,6 +61,12 @@ void FML::slotPopSignalWndDBClk(int nIndex)
 	ui.tabWidget->setCurrentIndex(qMax(0, qMin(nIndex - 1, ui.tabWidget->count() - 1)));
 }
 
+void FML::slotOpenSpeedSearch()
+{
+	m_speedSearch->move(this->width() - m_speedSearch->width() - 80, 0);
+	m_speedSearch->show();
+}
+
 void FML::init()
 {
 	initMenuFunc();
@@ -56,6 +75,7 @@ void FML::init()
 void FML::initMenuFunc()
 {
 	// 获取所有功能的根节点
+	QStringList speedSearchList;
 	QStringList rootlst;
 	GLBSETCTL->getRootFunc(rootlst);
 	if (!rootlst.isEmpty())
@@ -81,16 +101,18 @@ void FML::initMenuFunc()
 			{
 				QMenu *childmenu = new QMenu(this);
 				ui.menuBar->addMenu(childmenu)->setText(cf.getFuncName().getVal().toString());
-				setMenu(childmenu, curfunid);
+				QStringList childList = setMenu(childmenu, curfunid);
+				speedSearchList.append(childList);
 			}
 		}
 	}
-
+	m_speedSearch->initData(speedSearchList);
 }
 
-void FML::setMenu(QMenu *menu, const QString funcid)
+QStringList FML::setMenu(QMenu *menu, const QString funcid)
 {
 	// 获取子节点
+	QStringList resultList;
 	QStringList childlst;
 	GLBSETCTL->getChildrenFunc(funcid, childlst);
 	for (int j = 0; j < childlst.size(); j++)
@@ -109,6 +131,7 @@ void FML::setMenu(QMenu *menu, const QString funcid)
 				emit ViewController::instance()->sigGotoFunc(curfunid);
 			});
 			menu->addAction(action);
+			resultList.push_back(action->text());
 		}
 		else
 		{
@@ -117,6 +140,7 @@ void FML::setMenu(QMenu *menu, const QString funcid)
 			setMenu(childmenu, curfunid);
 		}
 	}
+	return resultList;
 }
 
 void FML::initWidget()

@@ -45,6 +45,20 @@ void GlobalSetController::getFuncInfo(const QString &funcid, CFuncInfo &funcinfo
 		funcinfo = m_AllFunc[funcid];
 }
 
+bool GlobalSetController::getFuncInfoFromName(const QString &name, CFuncInfo &info)
+{
+	auto itor = m_AllFunc.constBegin();
+	while (itor != m_AllFunc.constEnd()) {
+		const CFuncInfo &curInfo = itor.value();
+		if (name == curInfo.getFuncName().getVal().toString()) {
+			info = curInfo;
+			return true;
+		}
+		++itor;
+	}
+	return false;
+}
+
 // 是否存在功能
 bool GlobalSetController::isExistFuncID(const QString &funcid)
 {

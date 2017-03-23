@@ -565,7 +565,7 @@ QComboBox::drop-down:on {
 	image: url(:/light/dropdown-down.png);
 	outline: none;
 }
-QComboBox QAbstractItemView
+QComboBox, QAbstractItemView
 {
 	alternate-background-color: #ffffff;
 	selection-background-color: #ff900d;

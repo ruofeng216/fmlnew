@@ -4,7 +4,7 @@
 <context>
     <name>FML</name>
     <message>
-        <location filename="view/mainframe/fml.cpp" line="126"/>
+        <location filename="view/mainframe/fml.cpp" line="151"/>
         <source>homepage</source>
         <translation type="unfinished">主页</translation>
     </message>
@@ -685,6 +685,14 @@
     </message>
 </context>
 <context>
+    <name>SpeedSearch</name>
+    <message>
+        <location filename="view/commonui/speed_search.cpp" line="10"/>
+        <source>speed search</source>
+        <translation>快速导航</translation>
+    </message>
+</context>
+<context>
     <name>basicui</name>
     <message>
         <source>light</source>
@@ -805,17 +813,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="330"/>
+        <location filename="view/mainframe/product_manage.ui" line="346"/>
         <source>增加</source>
         <translation type="unfinished">增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="349"/>
+        <location filename="view/mainframe/product_manage.ui" line="365"/>
         <source>修改</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="368"/>
+        <location filename="view/mainframe/product_manage.ui" line="384"/>
         <source>删除</source>
         <translation type="unfinished">删除</translation>
     </message>

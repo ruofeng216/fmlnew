@@ -17,6 +17,7 @@ public:
 	void getParentFunc(const QString &funcid, QString &parval);
 	// 获取功能info菜单
 	void getFuncInfo(const QString &funcid, CFuncInfo &funcinfo);
+	bool getFuncInfoFromName(const QString &name, CFuncInfo &info);
 
 	// 是否存在功能
 	bool isExistFuncID(const QString &funcid);

@@ -26,6 +26,7 @@ public:
 	virtual void getParentFunc(const QString &funcid, QString &parval) = 0;
 	// 获取功能info
 	virtual void getFuncInfo(const QString &funcid, CFuncInfo &funcinfo) = 0;
+	virtual bool getFuncInfoFromName(const QString &name, CFuncInfo &info) = 0;
 	// 是否存在功能
 	virtual bool isExistFuncID(const QString &funcid) = 0;
 };
