@@ -229,7 +229,7 @@ QLineEdit::pressed {
 
 QTextEdit {
     background:#ffffff;
-	color:#dcdcdc;
+	color:#666666;
     font-size:12px;
     height:20px;
     /*selection-background-color:#0e9496;*/
