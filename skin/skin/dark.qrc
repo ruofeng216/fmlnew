@@ -69,5 +69,7 @@
         <file>dark/sub-minimize-click-hover.png</file>
         <file>dark/sub-pin.png</file>
         <file>dark/sub-pin-click-hover.png</file>
+        <file>dark/treetable-retract.png</file>
+        <file>dark/treetable-spread.png</file>
     </qresource>
 </RCC>

@@ -620,22 +620,22 @@ QTreeView[objectName="treeView"]::item:selected:!active {
 
 QTreeView[objectName="treeView"]::branch:has-children:!has-siblings:closed,
 QTreeView[objectName="treeView"]::branch:closed:has-children:has-siblings {
-    image: url(:/light/dropright.png);
+    image: url(:/light/treetable-retract.png);
 	outline: none;
 }
 QTreeView[objectName="treeView"]::branch:has-children:!has-siblings:closed:hover,
 QTreeView[objectName="treeView"]::branch:closed:has-children:has-siblings:hover {
-    image: url(:/light/dropright-hover.png);
+    image: url(:/light/treetable-retract.png);
 	outline: none;
 }
 QTreeView[objectName="treeView"]::branch:open:has-children:!has-siblings,
 QTreeView[objectName="treeView"]::branch:open:has-children:has-siblings  {
-    image: url(:/light/dropdown.png);
+    image: url(:/light/treetable-spread.png);
 	outline: none;
 }
 QTreeView[objectName="treeView"]::branch:open:has-children:!has-siblings:hover,
 QTreeView[objectName="treeView"]::branch:open:has-children:has-siblings:hover  {
-    image: url(:/light/dropdown-down.png);
+    image: url(:/light/treetable-spread.png);
 	outline: none;
 }
 /*
