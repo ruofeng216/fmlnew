@@ -3,14 +3,12 @@
         <file>dark/active.png</file>
         <file>dark/add.png</file>
         <file>dark/add-click-hover.png</file>
-        <file>dark/add-dimmed.png</file>
         <file>dark/close.png</file>
         <file>dark/close-click-hover.png</file>
         <file>dark/date.png</file>
         <file>dark/date-down.png</file>
         <file>dark/delete.png</file>
         <file>dark/delete-click-hover.png</file>
-        <file>dark/delete-dimmed.png</file>
         <file>dark/dropdown.png</file>
         <file>dark/dropdown-down.png</file>
         <file>dark/func.xml</file>
@@ -28,7 +26,6 @@
         <file>dark/pluralized-click-hover.png</file>
         <file>dark/revise.png</file>
         <file>dark/revise-click-hover.png</file>
-        <file>dark/revise-dimmed.png</file>
         <file>dark/sc.css</file>
         <file>dark/web/commoncss/bootstrap.min.css</file>
         <file>dark/web/commoncss/bootstrap.min.css.map</file>
