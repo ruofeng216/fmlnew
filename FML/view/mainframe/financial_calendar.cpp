@@ -158,6 +158,7 @@ void FinancialCalendar::initDateView()
 	for (int i = 0; i < treeHeader.size(); i++)
 		m_pGoodsModel->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
 	ui.treeView->setModel(m_pGoodsModel);
+	ui.treeView->header()->setDefaultSectionSize(130);
 	QMap<int, CFinancialCalendar> val;
 	PARASETCTL->getFinancialCalendar(val);
 	QList<QStandardItem *> items;

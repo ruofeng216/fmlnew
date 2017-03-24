@@ -325,14 +325,89 @@ const QString &CPortfolio::getAnnotation() const
 	return m_annotation;
 }
 
+///////////////////////////////////////////////////////////////
+CProduct::CProduct()
+	: m_sdate(0), m_edate(0)
+{
+}
 
+CProduct::CProduct(const QString &code
+	, const QString &name
+	, const QString &parentCode
+	, const QString &parentName
+	, int sdate, int edate
+	, const QString &annotation) 
+	: m_code(code)
+	, m_name(name)
+	, m_parentCode(parentCode)
+	, m_parentName(parentName)
+	, m_sdate(sdate)
+	, m_edate(edate)
+	, m_annotation(annotation)
+{
+}
 
+CProduct::~CProduct()
+{
 
+}
 
-
-
-
-
+void CProduct::setCode(const QString &code)
+{
+	m_code = code;
+}
+const QString& CProduct::getCode() const
+{
+	return m_code;
+}
+void CProduct::setName(const QString &name)
+{
+	m_name = name;
+}
+const QString& CProduct::getName() const
+{
+	return m_name;
+}
+void CProduct::setParentCode(const QString &parentCode)
+{
+	m_parentCode = parentCode;
+}
+const QString& CProduct::getParentCode() const
+{
+	return m_parentCode;
+}
+void CProduct::setParentName(const QString &parentName)
+{
+	m_parentName = parentName;
+}
+const QString& CProduct::getParentName() const
+{
+	return m_parentName;
+}
+void CProduct::setSdate(int sdate)
+{
+	m_sdate = sdate;
+}
+int CProduct::getSdate() const
+{
+	return m_sdate;
+}
+void CProduct::setEdate(int edate)
+{
+	m_edate = edate;
+}
+int CProduct::getEdate() const
+{
+	return m_edate;
+}
+void CProduct::setAnnotation(const QString &annotation)
+{
+	m_annotation = annotation;
+}
+const QString& CProduct::getAnnotation() const
+{
+	return m_annotation;
+}
 
 
 ////////////////////////////////////////////////////////////////

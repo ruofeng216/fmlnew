@@ -158,16 +158,43 @@ protected:
 	int m_edate;
 	QString m_annotation;
 };
+// 产品信息
+class CProduct
+{
+public:
+	CProduct();
+	CProduct(const QString &code,
+		const QString &name = QString(),
+		const QString &parentCode = QString(),
+		const QString &parentName = QString(),
+		int sdate = 0,
+		int edate = 0,
+		const QString &annotation = QString());
+	~CProduct();
+	void setCode(const QString &code);
+	const QString& getCode() const;
+	void setName(const QString &name);
+	const QString& getName() const;
+	void setParentCode(const QString &parentCode);
+	const QString& getParentCode() const;
+	void setParentName(const QString &parentName);
+	const QString& getParentName() const;
+	void setSdate(int sdate);
+	int getSdate() const;
+	void setEdate(int edate);
+	int getEdate() const;
+	void setAnnotation(const QString &annotation);
+	const QString& getAnnotation() const;
 
-
-
-
-
-
-
-
-
-
+private:
+	QString m_code;
+	QString m_name;
+	QString m_parentCode;
+	QString m_parentName;
+	int m_sdate;
+	int m_edate;
+	QString m_annotation;
+};
 
 
 ///////////////////////////////////////////////////////////

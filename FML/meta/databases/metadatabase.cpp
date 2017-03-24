@@ -185,3 +185,68 @@ bool MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val)
 	}
 	return true;
 }
+
+bool MetaDatabase::getProduct(QMap<QString, CProduct> &val)
+{
+	FUNCLOG("MetaDatabase::getProduct(QMap<QString, CProduct> &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	QStringList fieldList;
+	fieldList << "productcode" << "productname" << "parentcode" << "parentname" << "sdate" << "edate" << "annotation";
+	QList<QVariantList> results;
+	m_DbMgr->QueryFields(DB_SQL_SelectProduct, paramList, fieldList, results);
+	if (results.isEmpty()) {
+		return false;
+	}
+	for (int i = 0; i < results.size(); i++) {
+		const QVariantList &valList = results[i];
+		if (valList.size() != 7) {
+			continue;
+		}
+		CProduct product;
+		product.setCode(valList.at(0).toString());
+		if (product.getCode().isEmpty()) {
+			continue;
+		}
+		product.setName(valList.at(1).toString());
+		product.setParentCode(valList.at(2).toString());
+		product.setParentName(valList.at(3).toString());
+		product.setSdate(valList.at(4).toInt());
+		product.setEdate(valList.at(5).toInt());
+		product.setAnnotation(valList.at(6).toString());
+		val[product.getCode()] = product;
+	}
+	return true;
+}
+bool MetaDatabase::setProduct(const CProduct &val)
+{
+	FUNCLOG("MetaDatabase::setProduct(const CProduct &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	paramList << val.getCode()
+		<< val.getName()
+		<< val.getParentCode()
+		<< val.getParentName()
+		<< val.getSdate()
+		<< val.getEdate()
+		<< val.getAnnotation();
+	if (m_DbMgr->ExecuteSQL(DB_SQL_ReplaceProduct, paramList)) {
+		return true;
+	}
+	return false;
+}
+bool MetaDatabase::removeProduct(const QStringList &codeList)
+{
+	FUNCLOG("MetaDatabase::removeProduct(const QStringList &codeList)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QList<QVariantList> allParamList;
+	QVariantList paramList;
+	foreach(const QString &code, codeList) {
+		paramList << code;
+	}
+	allParamList << paramList;
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteProduct, allParamList)) {
+		return true;
+	}
+	return false;
+}

@@ -15,6 +15,7 @@
 #define  DB_TBNAME_LOGIN "login"
 #define  DB_TBNAME_FINANCIALCALENDAR "financialholiday"
 #define  DB_TBNAME_PORTFOLIO "portfolio"
+#define  DB_TBNAME_PRODUCT "product"
 
 #endif // !TB_NAME
 //////////////////////////////////////////////////////////
@@ -45,6 +46,16 @@ constraint pk_finholiday PRIMARY KEY(`bwdate`) \
 constraint pk_portfolio PRIMARY KEY(`portcode`)\
 );").arg(DB_TBNAME_PORTFOLIO)
 
+#define  DB_TBSQL_PRODUCT QString("CREATE TABLE IF NOT EXISTS `%1` (\
+`productcode` varchar(180), \
+`productname`  varchar(255), \
+`parentcode` varchar(255), \
+`parentname` varchar(255), \
+`sdate`  int, \
+`edate`  int, \
+`annotation` text, \
+constraint pk_product PRIMARY KEY(`productcode`)\
+);").arg(DB_TBNAME_PRODUCT)
 
 #endif // !TB_CREATE
 /////////////////////////////////////////////////////////////
@@ -66,9 +77,10 @@ constraint pk_portfolio PRIMARY KEY(`portcode`)\
 #define DB_SQL_ReplacePortfolio QString("replace into %1(portcode,portname,parentcode,parentname,sdate,edate,annotation) values(?,?,?,?,?,?,?);").arg(DB_TBNAME_PORTFOLIO)
 #define DB_SQL_DeletePortfolio QString("delete from %1 where `portcode`=?;").arg(DB_TBNAME_PORTFOLIO)
 
-
-
-
+// 产品管理
+#define DB_SQL_SelectProduct QString("SELECT * from %1; ").arg(DB_TBNAME_PRODUCT)
+#define DB_SQL_ReplaceProduct QString("replace info %1(productcode,productname,parentcode,parentname,sdate,edate,annotation) value(?,?,?,?,?,?,?);").arg(DB_TBNAME_PRODUCT)
+#define DB_SQL_DeleteProduct QString("delete from %1 where `productcode`=?;").arg(DB_TBNAME_PRODUCT)
 
 
 #endif // !TB_OPERATE

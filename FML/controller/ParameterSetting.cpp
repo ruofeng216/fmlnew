@@ -105,3 +105,40 @@ void CParameterSetting::getChildren(const QString &key, QStringList &val)
 		}
 	}
 }
+
+const QMap<QString, CProduct>& CParameterSetting::getProduct()
+{
+	if (m_product.isEmpty()) {
+		METADATABASE->getProduct(m_product);
+	}
+	return m_product;
+}
+bool CParameterSetting::setProduct(const CProduct &val)
+{
+	if (METADATABASE->setProduct(val)) {
+		m_product[val.getCode()] = val;
+		return true;
+	}
+	return false;
+}
+bool CParameterSetting::removeProduct(const QString &code)
+{
+	if (!m_product.contains(code)) {
+		return false;
+	}
+	if (METADATABASE->removeProduct(QStringList() << code)) {
+		m_product.remove(code);
+	}
+	return false;
+}
+
+QList<CProduct> CParameterSetting::getRootProduct() const
+{
+	QList<CProduct> result;
+	return result;
+}
+QList<CProduct> CParameterSetting::getChildrenProduct(const QString &parentCode)
+{
+	QList<CProduct> result;
+	return result;
+}

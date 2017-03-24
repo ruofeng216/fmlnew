@@ -4,7 +4,8 @@
 #include "util/util.h"
 #include "view/view_controller.h"
 #include <QPointer>
-
+#include <QPainter>
+#include <QBitmap>
 // 图标大小
 
 MessageBoxWidget::MessageBoxWidget(QWidget *parent)
@@ -17,7 +18,7 @@ MessageBoxWidget::MessageBoxWidget(QWidget *parent)
 	setAttribute(Qt::WA_DeleteOnClose);
 	ui->pbOk->setDefault(true);
 	ui->pbCancel->setDefault(false);
-	setWindowFlags(Qt::WindowStaysOnTopHint);
+	//setWindowFlags(Qt::WindowStaysOnTopHint); // 会使透明度无效
 	connect(ui->pbOk, &QPushButton::clicked, this, &MessageBoxWidget::onOk);
 	connect(ui->pbCancel, &QPushButton::clicked, this, &MessageBoxWidget::onCancel);
 }
@@ -99,6 +100,24 @@ void MessageBoxWidget::keyPressEvent(QKeyEvent *event)
 		onCancel();
 	}
 	DropWidget::keyPressEvent(event);
+}
+
+void MessageBoxWidget::paintEvent(QPaintEvent * event)
+{
+	// 浅色皮肤border radius在样式表中不生效
+	QPainter painter(this);
+	int radius = 5;
+	QSize maskSize(this->size().width(), this->size().height());
+	QBitmap mask(maskSize);
+	QPainter maskPainter(&mask);
+	maskPainter.setRenderHint(QPainter::Antialiasing);
+	maskPainter.setRenderHint(QPainter::SmoothPixmapTransform);
+	QColor color = QColor("#FFFFFF");
+	maskPainter.fillRect(this->rect(), color);
+	maskPainter.setBrush(QColor("#000000"));
+	maskPainter.drawRoundedRect(QRect(QPoint(0, 0), maskSize), radius, radius);
+	this->setMask(mask);
+	QWidget::paintEvent(event);
 }
 
 MessageBoxWidget::Result MessageBoxWidget::getResult() const

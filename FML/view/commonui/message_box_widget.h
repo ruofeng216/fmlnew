@@ -57,6 +57,7 @@ private slots:
 
 protected:
 	void keyPressEvent(QKeyEvent *event);
+	void paintEvent(QPaintEvent * event);
 
 private:
 	Ui::MessageBoxWidget *ui;

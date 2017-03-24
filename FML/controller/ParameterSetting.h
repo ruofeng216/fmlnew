@@ -22,8 +22,15 @@ public:
 	void getAllRootCodes(QStringList &val);
 	void getChildren(const QString &key, QStringList &val);
 
+	///////产品管理///////////
+	const QMap<QString, CProduct>& getProduct();
+	bool setProduct(const CProduct &val);
+	bool removeProduct(const QString &code);
+	QList<CProduct> getRootProduct() const;
+	QList<CProduct> getChildrenProduct(const QString &parentCode);
 
 private:
 	QMap<QString, CPortfolio> m_portfolio;
+	QMap<QString, CProduct> m_product;
 };
 

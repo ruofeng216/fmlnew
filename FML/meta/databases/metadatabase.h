@@ -25,6 +25,10 @@ public:
 	bool setPortfolio(const CPortfolio &val);
 	bool removePortfolio(const QStringList &val);
 	bool getPortfolio(QMap<QString, CPortfolio> &val);
+	// 产品管理
+	bool getProduct(QMap<QString, CProduct> &val);
+	bool setProduct(const CProduct &val);
+	bool removeProduct(const QStringList &codeList);
 
 private:
 	MetaDatabase(QObject *parent = NULL);
