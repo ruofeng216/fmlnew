@@ -229,7 +229,7 @@ void ProductManage::appendChildrenProduct(QStandardItem *item, const QString &pa
 		}
 		item->appendRow(childItems);
 		appendChildrenProduct(childItems.front(), child.getCode());
-	}
+	} 
 }
 
 CProduct ProductManage::getViewProduct()

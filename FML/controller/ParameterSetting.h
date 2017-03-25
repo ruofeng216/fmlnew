@@ -30,7 +30,10 @@ public:
 	bool setProduct(const CProduct &val);
 	bool removeProduct(const QString &code);
 	QList<CProduct> getRootProduct();
+	// 获取直系子节点
 	QList<CProduct> getChildrenProduct(const QString &parentCode);
+	// 获取所有子节点
+	void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results);
 
 private:
 	QMap<QString, CPortfolio> m_portfolio;

@@ -124,6 +124,24 @@ const QMap<QString, CProduct>& CParameterSetting::getProduct()
 {
 	if (m_product.isEmpty()) {
 		METADATABASE->getProduct(m_product);
+
+#if 0
+		// 删除脏数据，有些产品有parentCode，但其实parentCode对应的产品不存在
+		QStringList deleteList;
+		for (auto iter = m_product.begin(); iter != m_product.end(); ) {
+			const QString &parentCode = iter.value().getParentCode();
+			if (!parentCode.isEmpty() && !m_product.contains(parentCode)) {
+				qDebug() << "parent code is not existing, invalid product:" << iter.key();
+				deleteList << iter.key();
+				iter = m_product.erase(iter);
+			} else {
+				++iter;
+			}
+		}
+		foreach(const QString &code, deleteList) {
+			this->removeProduct(code);
+		}
+#endif
 	}
 	return m_product;
 }
@@ -151,7 +169,8 @@ bool CParameterSetting::removeProduct(const QString &code)
 	if (!m_product.contains(code)) {
 		return false;
 	}
-	QList<CProduct> children = getChildrenProduct(code);
+	QList<CProduct> children;
+	getAllChildrenProduct(code, children);
 	QStringList deleteList;
 	deleteList << code;
 	foreach(const CProduct &child, children) {
@@ -189,4 +208,15 @@ QList<CProduct> CParameterSetting::getChildrenProduct(const QString &parentCode)
 		}
 	}
 	return result;
+}
+
+void CParameterSetting::getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results)
+{
+	QList<CProduct> result = this->getChildrenProduct(parentCode);
+	if (!result.isEmpty()) {
+		results.append(result);
+		foreach(const CProduct &product, result) {
+			getAllChildrenProduct(product.getCode(), results);
+		}
+	}
 }

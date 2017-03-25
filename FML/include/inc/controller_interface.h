@@ -57,6 +57,7 @@ public:
 	virtual bool removeProduct(const QString &code) = 0;
 	virtual QList<CProduct> getRootProduct() = 0;
 	virtual QList<CProduct> getChildrenProduct(const QString &parentCode) = 0;
+	virtual void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results) = 0;
 };
 
 
