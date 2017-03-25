@@ -426,6 +426,15 @@
     <ClCompile Include="view\commonui\speed_search.cpp">
       <Filter>view\commonui</Filter>
     </ClCompile>
+    <ClCompile Include="view\mainframe\key_point_definition.cpp">
+      <Filter>view\function\yield_curve_definition</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_key_point_definition.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_key_point_definition.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -599,6 +608,12 @@
     <CustomBuild Include="view\commonui\speed_search.h">
       <Filter>view\commonui</Filter>
     </CustomBuild>
+    <CustomBuild Include="view\mainframe\key_point_definition.h">
+      <Filter>view\function\yield_curve_definition</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\key_point_definition.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FML.rc" />
@@ -626,6 +641,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_main_home_page.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_key_point_definition.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>

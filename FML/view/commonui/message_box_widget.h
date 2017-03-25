@@ -44,12 +44,6 @@ public:
 
 	void setContent(const QString &content);
 	QString getContent() const;
-
-	Result getResult() const;
-
-signals:
-	void sigOk();
-	void sigCancel();
 	
 private slots:
 	void onOk();
@@ -66,7 +60,6 @@ private:
 	ButtonType m_buttonType;
 	QString m_title;
 	QString m_content;
-	Result m_result;
 };
 
 const QString DefaultTitle(QStringLiteral("ÌבÊ¾"));

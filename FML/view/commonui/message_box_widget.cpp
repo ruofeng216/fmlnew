@@ -12,13 +12,10 @@ MessageBoxWidget::MessageBoxWidget(QWidget *parent)
 	: DropWidget(parent), ui(new Ui::MessageBoxWidget)
 	, m_iconType(Warning)
 	, m_buttonType(Ok)
-	, m_result(Yes)
 {
 	ui->setupUi(this);
-	setAttribute(Qt::WA_DeleteOnClose);
 	ui->pbOk->setDefault(true);
 	ui->pbCancel->setDefault(false);
-	//setWindowFlags(Qt::WindowStaysOnTopHint); // 会使透明度无效
 	connect(ui->pbOk, &QPushButton::clicked, this, &MessageBoxWidget::onOk);
 	connect(ui->pbCancel, &QPushButton::clicked, this, &MessageBoxWidget::onCancel);
 }
@@ -84,14 +81,12 @@ QString MessageBoxWidget::getContent() const
 
 void MessageBoxWidget::onOk()
 {
-	m_result = Yes;
-	emit sigOk();
+	done(Yes);
 }
 
 void MessageBoxWidget::onCancel()
 {
-	m_result = No;
-	emit sigCancel();
+	done(No);
 }
 
 void MessageBoxWidget::keyPressEvent(QKeyEvent *event)
@@ -120,28 +115,16 @@ void MessageBoxWidget::paintEvent(QPaintEvent * event)
 	QWidget::paintEvent(event);
 }
 
-MessageBoxWidget::Result MessageBoxWidget::getResult() const
-{
-	return m_result;
-}
-
 static MessageBoxWidget::Result ShowMessage(const QString &title, const QString &content,
 	MessageBoxWidget::IconType iconType, MessageBoxWidget::ButtonType buttonType, QWidget *parent = NULL)
 {
-	MessageBoxWidget *msgBox = new MessageBoxWidget(parent);
-	QPointer<MessageBoxWidget> pMsgBox(msgBox); 
-	msgBox->setAttribute(Qt::WA_ShowModal, true);
-	msgBox->setIconType(iconType);
-	msgBox->setButtonType(buttonType);
-	msgBox->setWindowTitle(title);
-	msgBox->setContent(content);
-	msgBox->resize(290, 270);
-	
-	QEventLoop eventLoop;
-	QObject::connect(msgBox, SIGNAL(sigOk()), &eventLoop, SLOT(quit()), Qt::DirectConnection);
-	QObject::connect(msgBox, SIGNAL(sigCancel()), &eventLoop, SLOT(quit()), Qt::DirectConnection);
-
-	msgBox->show();
+	MessageBoxWidget msgBox(parent);
+	msgBox.setAttribute(Qt::WA_ShowModal, true);
+	msgBox.setIconType(iconType);
+	msgBox.setButtonType(buttonType);
+	msgBox.setWindowTitle(title);
+	msgBox.setContent(content);
+	msgBox.resize(290, 270);
 
 	QPoint centerPos;
 	QRect rect = ViewController::instance()->wndGlobalRect(MAIN_WINDOW_ID);
@@ -159,22 +142,16 @@ static MessageBoxWidget::Result ShowMessage(const QString &title, const QString 
 		} else {
 			parentGlobalPos = parent->pos();
 		}
-		centerPos.setX(parentGlobalPos.x() + parent->width() / 2 - msgBox->width() / 2);
-		centerPos.setY(parentGlobalPos.y() + parent->height() / 2 - msgBox->height() / 2);
-		msgBox->move(centerPos);
+		centerPos.setX(parentGlobalPos.x() + parent->width() / 2 - msgBox.width() / 2);
+		centerPos.setY(parentGlobalPos.y() + parent->height() / 2 - msgBox.height() / 2);
+		msgBox.move(centerPos);
 	} else if (!centerPos.isNull()) {
-		centerPos.setX(centerPos.x() - msgBox->width() / 2);
-		centerPos.setY(centerPos.y() - msgBox->height() / 2);
-		msgBox->move(centerPos);
+		centerPos.setX(centerPos.x() - msgBox.width() / 2);
+		centerPos.setY(centerPos.y() - msgBox.height() / 2);
+		msgBox.move(centerPos);
 	}
-	eventLoop.exec();
-	MessageBoxWidget::Result result = MessageBoxWidget::No;
-	if (!pMsgBox.isNull())
-	{
-		result = msgBox->getResult();
-		msgBox->close();
-	}
-	return result;
+	int result = msgBox.exec();
+	return (MessageBoxWidget::Result)result;
 }
 
 void ShowWarnMessage(const QString &title, const QString &content, QWidget *parent)

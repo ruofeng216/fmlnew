@@ -23,6 +23,7 @@
 #include "mainframe/main_home_page.h"
 #include "mainframe/portfolio_manage.h"
 #include "mainframe/product_manage.h"
+#include "mainframe/key_point_definition.h"
 
 ViewController::ViewController(QObject *parent)
 	: QObject(parent)
@@ -161,7 +162,7 @@ void ViewController::createChild(const QString &id, const QString &title, const 
 		else if (id == "YieldCurveSet_Market")
 			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveSet_Point")
-			pWidget = new EmptyWidget;
+			pWidget = new KeyPointDefinition();
 		else if (id == "YieldCurveSet_YieldCurve")
 			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveSet_TimeCurve")
