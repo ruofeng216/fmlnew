@@ -52,6 +52,7 @@ public:
 	virtual bool getPortfolio(const QString &key, CPortfolio &val) = 0;
 	///////产品管理///////////
 	virtual const QMap<QString, CProduct>& getProduct() = 0;
+	virtual bool getProduct(const QString &code, CProduct &val) = 0;
 	virtual bool setProduct(const CProduct &val) = 0;
 	virtual bool removeProduct(const QString &code) = 0;
 	virtual QList<CProduct> getRootProduct() = 0;

@@ -13,9 +13,14 @@ ProductManage::ProductManage(QWidget *parent)
 	connect(ui.pbAdd, SIGNAL(clicked()), this, SLOT(slotAdd()));
 	connect(ui.pbModify, SIGNAL(clicked()), this, SLOT(slotModify()));
 	connect(ui.pbDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
+	connect(ui.treeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotTreeDoubleClicked(QModelIndex)));
+	connect(ui.cbParentCode, SIGNAL(currentIndexChanged(int)), this, SLOT(slotParentCodeChanged(int)));
+	connect(ui.cbParentName, SIGNAL(currentIndexChanged(int)), this, SLOT(slotParentNameChanged(int)));
 
 	slotSkinChange();
 	init();
+	ui.deStart->setDate(QDate::currentDate());
+	ui.deEnd->setDate(QDate::currentDate());
 }
 
 ProductManage::~ProductManage()
@@ -24,52 +29,56 @@ ProductManage::~ProductManage()
 
 void ProductManage::init()
 {
-	QStringList treeHeader;
-	treeHeader << tr("productcode") << tr("productname") << tr("parentcode")
-		<< tr("parentname") << tr("sdate") << tr("edate") << tr("annotation");
+	{
+		// 初始化treeView
+		QStringList treeHeader;
+		treeHeader << tr("productcode") << tr("productname") << tr("parentcode")
+			<< tr("parentname") << tr("sdate") << tr("edate") << tr("annotation");
 
-	if (m_model) {
-		m_model->clear();
-	} else {
-		m_model = new QStandardItemModel(0, treeHeader.size(), this);
-	}
-	m_model->setColumnCount(treeHeader.size());
-	for (int i = 0; i < treeHeader.size(); i++) {
-		m_model->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
-	}
-
-	QList<CProduct> roots = PARASETCTL->getRootProduct();
-	foreach(const CProduct &root, roots) {
-		QList<QStandardItem *> items = createRowItems(root);
-		if (items.isEmpty()) {
-			continue;
+		if (m_model) {
+			m_model->clear();
+		} else {
+			m_model = new QStandardItemModel(0, treeHeader.size(), this);
 		}
-		m_model->appendRow(items);
-		appendChildrenProduct(items.front(), root.getCode());
-	}
-	
-	ui.treeView->setModel(m_model);
-	ui.treeView->setColumnWidth(0, 160);
-	ui.treeView->expandAll();
-	ui.deStart->setDate(QDate::currentDate());
-	ui.deEnd->setDate(QDate::currentDate());
 
-	connect(ui.treeView, &QTreeView::doubleClicked, [this](const QModelIndex &index) {
-		QVariant s = index.sibling(index.row(), 0).data();
-		if (s.isValid()) ui.leCode->setText(s.toString());
-		s = index.sibling(index.row(), 1).data();
-		if (s.isValid()) ui.leName->setText(s.toString());
-		s = index.sibling(index.row(), 2).data();
-		if (s.isValid()) ui.leParentCode->setText(s.toString());
-		s = index.sibling(index.row(), 3).data();
-		if (s.isValid()) ui.leParentName->setText(s.toString());
-		s = index.sibling(index.row(), 4).data();
-		if (s.isValid()) ui.deStart->setDate(QDate::fromString(s.toString(), "yyyy-MM-dd"));
-		s = index.sibling(index.row(), 5).data();
-		if (s.isValid()) ui.deEnd->setDate(QDate::fromString(s.toString(), "yyyy-MM-dd"));
-		s = index.sibling(index.row(), 6).data();
-		if (s.isValid()) ui.pteAnnotation->setPlainText(s.toString());
-	});
+		m_model->setColumnCount(treeHeader.size());
+		for (int i = 0; i < treeHeader.size(); i++) {
+			m_model->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
+		}
+		QList<CProduct> roots = PARASETCTL->getRootProduct();
+		foreach(const CProduct &root, roots) {
+			QList<QStandardItem *> items = createRowItems(root);
+			if (items.isEmpty()) {
+				continue;
+			}
+			m_model->appendRow(items);
+			appendChildrenProduct(items.front(), root.getCode());
+		}
+		
+		ui.treeView->setModel(m_model);
+		ui.treeView->setColumnWidth(0, 160);
+		ui.treeView->expandAll();
+	}
+
+	{
+		// 初始化上级产品
+		QString oldCode = ui.cbParentCode->currentText();
+		QString oldName = ui.cbParentName->currentText();
+		ui.cbParentCode->clear();
+		ui.cbParentName->clear();
+		QStringList parentCodeList, parentNameList;
+		parentCodeList << "";
+		parentNameList << "";
+		const QMap<QString, CProduct>& allProduct = PARASETCTL->getProduct();
+		for (auto iter = allProduct.constBegin(); iter != allProduct.constEnd(); ++iter) {
+			parentCodeList.push_back(iter.value().getCode());
+			parentNameList.push_back(iter.value().getName());
+		}
+		ui.cbParentCode->addItems(parentCodeList);
+		ui.cbParentName->addItems(parentNameList);
+		ui.cbParentCode->setCurrentText(oldCode);
+		ui.cbParentName->setCurrentText(oldName);
+	}
 }
 
 void ProductManage::slotSkinChange()
@@ -88,19 +97,29 @@ void ProductManage::slotAdd()
 {
 	QString code = ui.leCode->text();
 	QString name = ui.leName->text();
-	QString parentCode = ui.leParentCode->text();
-	QString parentName = ui.leParentName->text();
+	QString parentCode = ui.cbParentCode->currentText();
+	QString parentName = ui.cbParentName->currentText();
 	int sdate = ui.deStart->date().toJulianDay();
 	int edate = ui.deEnd->date().toJulianDay();
 	QString annotation = ui.pteAnnotation->toPlainText();
+
 	if (code.isEmpty() || name.isEmpty()) {
 		ShowWarnMessage(tr("add"), tr("code or name is empty"), this);
 		return;
 	}
 
+	CProduct oldVal;
+	if (PARASETCTL->getProduct(code, oldVal)) {
+		ShowWarnMessage(tr("add"), tr("The product already exists"), this);
+		return;
+	}
+
 	CProduct product(code, name, parentCode, parentName, sdate, edate, annotation);
 	if (PARASETCTL->setProduct(product)) {
-		qDebug() << "add product success";
+		ShowSuccessMessage(tr("add"), tr("add success."), this);
+		init();
+	} else {
+		ShowWarnMessage(tr("add"), tr("add fail."), this);
 	}
 }
 
@@ -112,6 +131,38 @@ void ProductManage::slotModify()
 void ProductManage::slotDelete()
 {
 
+}
+
+void ProductManage::slotTreeDoubleClicked(const QModelIndex &index)
+{
+	QVariant code = index.sibling(index.row(), 0).data();
+	QVariant name = index.sibling(index.row(), 1).data();
+	QVariant parentCode = index.sibling(index.row(), 2).data();
+	QVariant parentName = index.sibling(index.row(), 3).data();
+	QVariant sdate = index.sibling(index.row(), 4).data();
+	QVariant edate = index.sibling(index.row(), 5).data();
+	QVariant annotation = index.sibling(index.row(), 6).data();
+	ui.leCode->setText(code.toString());
+	ui.leName->setText(name.toString());
+	ui.cbParentCode->setCurrentText(parentCode.toString());
+	ui.cbParentName->setCurrentText(parentName.toString());
+	ui.deStart->setDate(QDate::fromString(sdate.toString(), "yyyy-MM-dd"));
+	ui.deEnd->setDate(QDate::fromString(edate.toString(), "yyyy-MM-dd"));
+	ui.pteAnnotation->setPlainText(annotation.toString());
+}
+
+void ProductManage::slotParentCodeChanged(int index)
+{
+	if (ui.cbParentName->currentIndex() != index) {
+		ui.cbParentName->setCurrentIndex(index);
+	}
+}
+
+void ProductManage::slotParentNameChanged(int index)
+{
+	if (ui.cbParentCode->currentIndex() != index) {
+		ui.cbParentCode->setCurrentIndex(index);
+	}
 }
 
 QList<QStandardItem*> ProductManage::createRowItems(const CProduct &val)
@@ -143,6 +194,7 @@ QList<QStandardItem*> ProductManage::createRowItems(const CProduct &val)
 	items.push_back(annotation);
 	return items;
 }
+
 void ProductManage::appendChildrenProduct(QStandardItem *item, const QString &parentCode)
 {
 	if (!item || parentCode.isEmpty()) {

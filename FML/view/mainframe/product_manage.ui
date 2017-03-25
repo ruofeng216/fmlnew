@@ -136,7 +136,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="leParentCode"/>
+        <widget class="QComboBox" name="cbParentCode"/>
        </item>
       </layout>
      </item>
@@ -168,7 +168,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="leParentName"/>
+        <widget class="QComboBox" name="cbParentName"/>
        </item>
       </layout>
      </item>

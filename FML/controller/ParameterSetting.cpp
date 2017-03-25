@@ -135,6 +135,17 @@ bool CParameterSetting::setProduct(const CProduct &val)
 	}
 	return false;
 }
+
+bool CParameterSetting::getProduct(const QString &code, CProduct &val)
+{
+	const QMap<QString, CProduct> &data = this->getProduct();
+	if (data.contains(code)) {
+		val = data[code];
+		return true;
+	}
+	return false;
+}
+
 bool CParameterSetting::removeProduct(const QString &code)
 {
 	if (!m_product.contains(code)) {

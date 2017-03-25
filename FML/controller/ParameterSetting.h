@@ -26,6 +26,7 @@ public:
 
 	///////产品管理///////////
 	const QMap<QString, CProduct>& getProduct();
+	bool getProduct(const QString &code, CProduct &val);
 	bool setProduct(const CProduct &val);
 	bool removeProduct(const QString &code);
 	QList<CProduct> getRootProduct();

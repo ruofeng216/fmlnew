@@ -20,9 +20,14 @@ public slots:
 	void slotAdd();
 	void slotModify();
 	void slotDelete();
+	void slotTreeDoubleClicked(const QModelIndex &index);
+	void slotParentCodeChanged(int index);
+	void slotParentNameChanged(int index);
 
 private:
+	// 创建每行的items
 	QList<QStandardItem*> createRowItems(const CProduct &val);
+	// 递归插入所有孩子节点
 	void appendChildrenProduct(QStandardItem *item, const QString &parentCode);
 
 private:

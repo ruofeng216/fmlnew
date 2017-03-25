@@ -611,19 +611,78 @@
 <context>
     <name>ProductManage</name>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="17"/>
+        <location filename="view/mainframe/product_manage.cpp" line="35"/>
+        <source>productcode</source>
+        <translation>产品代码</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="35"/>
+        <source>productname</source>
+        <translation>产品名称</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="35"/>
+        <source>parentcode</source>
+        <translation>上级产品代码</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <source>parentname</source>
+        <translation>上级产品名称</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <source>sdate</source>
+        <translation>开始日期</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <source>edate</source>
+        <translation>结束日期</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <source>annotation</source>
+        <translation>说明</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="86"/>
+        <location filename="view/mainframe/product_manage.cpp" line="107"/>
+        <location filename="view/mainframe/product_manage.cpp" line="113"/>
+        <location filename="view/mainframe/product_manage.cpp" line="119"/>
+        <location filename="view/mainframe/product_manage.cpp" line="122"/>
         <source>add</source>
-        <translation type="unfinished">增加</translation>
+        <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="19"/>
+        <location filename="view/mainframe/product_manage.cpp" line="88"/>
         <source>modify</source>
-        <translation type="unfinished">修改</translation>
+        <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="21"/>
+        <location filename="view/mainframe/product_manage.cpp" line="90"/>
         <source>delete</source>
-        <translation type="unfinished">删除</translation>
+        <translation>删除</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="107"/>
+        <source>code or name is empty</source>
+        <translation>产品代码或者产品名称不能为空！</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="113"/>
+        <source>The product already exists</source>
+        <translation>此产品已经存在！</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="119"/>
+        <source>add success.</source>
+        <translation>新增成功。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="122"/>
+        <source>add fail.</source>
+        <translation>新增失败。</translation>
     </message>
 </context>
 <context>
@@ -790,52 +849,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="63"/>
+        <location filename="view/mainframe/product_manage.ui" line="67"/>
         <source>产品代码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="95"/>
+        <location filename="view/mainframe/product_manage.ui" line="99"/>
         <source>产品名称</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="127"/>
+        <location filename="view/mainframe/product_manage.ui" line="131"/>
         <source>上级产品代码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="159"/>
+        <location filename="view/mainframe/product_manage.ui" line="163"/>
         <source>上级产品名称</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="196"/>
+        <location filename="view/mainframe/product_manage.ui" line="200"/>
         <source>开始日期</source>
         <translation type="unfinished">开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="235"/>
+        <location filename="view/mainframe/product_manage.ui" line="239"/>
         <source>结束日期</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="276"/>
+        <location filename="view/mainframe/product_manage.ui" line="280"/>
         <source>说明</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="346"/>
+        <location filename="view/mainframe/product_manage.ui" line="350"/>
         <source>增加</source>
         <translation type="unfinished">增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="365"/>
+        <location filename="view/mainframe/product_manage.ui" line="369"/>
         <source>修改</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="384"/>
+        <location filename="view/mainframe/product_manage.ui" line="388"/>
         <source>删除</source>
         <translation type="unfinished">删除</translation>
     </message>
