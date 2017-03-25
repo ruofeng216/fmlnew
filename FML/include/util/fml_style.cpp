@@ -13,6 +13,7 @@ FmlStyle* FmlStyle::instance()
 
 void FmlStyle::init(const QString &styleFileContent)
 {
+	m_fmlStyles.clear();
 	int pos = 0;
 	QRegExp rx("QWidget\\[fmlName=\"\\w+\"\\]"); // ∆•≈‰key£¨»Á£∫QWidget[fmlName="calendar"]
 	while ((pos = rx.indexIn(styleFileContent, pos)) != -1) {

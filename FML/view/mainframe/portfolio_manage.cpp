@@ -57,6 +57,8 @@ void PortfolioManage::slotSkinChange()
 	ui.pushButton_modify->setIcon(QIcon(qutil::skin("revise-click-hover.png")));
 	ui.pushButton_delete->setText(tr("delete"));
 	ui.pushButton_delete->setIcon(QIcon(qutil::skin("delete-click-hover.png")));
+	qutil::setWeekendStyle(ui.dateEdit_datebegin);
+	qutil::setWeekendStyle(ui.dateEdit_dateend);
 }
 
 void PortfolioManage::addPortfolio()
@@ -171,8 +173,6 @@ void PortfolioManage::initDateView()
 	ui.treeView->expandAll();
 
 	{
-		qutil::setWeekendStyle(ui.dateEdit_datebegin);
-		qutil::setWeekendStyle(ui.dateEdit_dateend);
 		ui.dateEdit_datebegin->setDate(QDate::currentDate());
 		ui.dateEdit_dateend->setDate(QDate::currentDate());
 	}

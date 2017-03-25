@@ -46,7 +46,6 @@ void FinancialCalendar::init()
 		});
 	}
 	{
-		qutil::setWeekendStyle(ui.dateEdit);
 		ui.dateEdit->setDate(QDate::currentDate());
 	}
 	{
@@ -67,6 +66,7 @@ void FinancialCalendar::slotSkinChange()
 	ui.pushButton_modify->setIcon(QIcon(qutil::skin("revise-click-hover.png")));
 	ui.pushButton_delete->setText(tr("delete"));
 	ui.pushButton_delete->setIcon(QIcon(qutil::skin("delete-click-hover.png")));
+	qutil::setWeekendStyle(ui.dateEdit);
 }
 
 void FinancialCalendar::addHoliday()
