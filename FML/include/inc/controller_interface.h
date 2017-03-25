@@ -50,6 +50,12 @@ public:
 	virtual void getAllRootCodes(QStringList &val) = 0;
 	virtual void getChildren(const QString &key, QStringList &val) = 0;
 	virtual bool getPortfolio(const QString &key, CPortfolio &val) = 0;
+	///////产品管理///////////
+	virtual const QMap<QString, CProduct>& getProduct() = 0;
+	virtual bool setProduct(const CProduct &val) = 0;
+	virtual bool removeProduct(const QString &code) = 0;
+	virtual QList<CProduct> getRootProduct() = 0;
+	virtual QList<CProduct> getChildrenProduct(const QString &parentCode) = 0;
 };
 
 

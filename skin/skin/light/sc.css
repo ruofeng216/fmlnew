@@ -227,7 +227,7 @@ QLineEdit::pressed {
     color:#aaaaaa
 }*/
 
-QTextEdit {
+QTextEdit, QPlainTextEdit {
     background:#ffffff;
 	color:#666666;
     font-size:12px;
@@ -237,7 +237,9 @@ QTextEdit {
 }
 
 QTextEdit::hover,
-QTextEdit::pressed {
+QTextEdit::pressed,
+QPlainTextEdit::hover,
+QPlainTextEdit::pressed {
     background:#ffffff;
 	border: 1px solid #f9c59a;
     color: #666666;

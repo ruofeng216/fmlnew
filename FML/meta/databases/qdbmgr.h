@@ -33,6 +33,9 @@ public:
 	// 删除表
 	void DropTable(const QString &table);
 
+	// 错误信息
+	QString lastError();
+
 protected:
 	// 打开数据库
 	bool openDB();

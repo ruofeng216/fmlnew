@@ -146,13 +146,27 @@ bool CParameterSetting::removeProduct(const QString &code)
 	return false;
 }
 
-QList<CProduct> CParameterSetting::getRootProduct() const
+QList<CProduct> CParameterSetting::getRootProduct()
 {
 	QList<CProduct> result;
+	const QMap<QString, CProduct>& data = this->getProduct();
+	for (auto iter = data.constBegin(); iter != data.constEnd(); ++iter) {
+		const CProduct &val = iter.value();
+		if (val.getParentCode().isEmpty()) {
+			result.push_back(val);
+		}
+	}
 	return result;
 }
 QList<CProduct> CParameterSetting::getChildrenProduct(const QString &parentCode)
 {
 	QList<CProduct> result;
+	const QMap<QString, CProduct>& data = this->getProduct();
+	for (auto iter = data.constBegin(); iter != data.constEnd(); ++iter) {
+		const CProduct &val = iter.value();
+		if (val.getParentCode() == parentCode) {
+			result.push_back(val);
+		}
+	}
 	return result;
 }

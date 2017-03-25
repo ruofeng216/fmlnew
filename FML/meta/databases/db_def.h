@@ -79,7 +79,7 @@ constraint pk_product PRIMARY KEY(`productcode`)\
 
 // 产品管理
 #define DB_SQL_SelectProduct QString("SELECT * from %1; ").arg(DB_TBNAME_PRODUCT)
-#define DB_SQL_ReplaceProduct QString("replace info %1(productcode,productname,parentcode,parentname,sdate,edate,annotation) value(?,?,?,?,?,?,?);").arg(DB_TBNAME_PRODUCT)
+#define DB_SQL_ReplaceProduct QString("replace into %1(productcode,productname,parentcode,parentname,sdate,edate,annotation) values(?,?,?,?,?,?,?);").arg(DB_TBNAME_PRODUCT)
 #define DB_SQL_DeleteProduct QString("delete from %1 where `productcode`=?;").arg(DB_TBNAME_PRODUCT)
 
 

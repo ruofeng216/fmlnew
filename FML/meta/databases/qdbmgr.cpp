@@ -448,3 +448,11 @@ void QDBMgr::DropTable(const QString &table)
 		qDebug() << QString("DB Error: sql:") << sql;
 	}
 }
+
+QString QDBMgr::lastError()
+{
+	if (m_sqlQuery) {
+		return m_sqlQuery->lastError().text();
+	}
+	return "sql query not init";
+}

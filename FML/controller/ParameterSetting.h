@@ -28,7 +28,7 @@ public:
 	const QMap<QString, CProduct>& getProduct();
 	bool setProduct(const CProduct &val);
 	bool removeProduct(const QString &code);
-	QList<CProduct> getRootProduct() const;
+	QList<CProduct> getRootProduct();
 	QList<CProduct> getChildrenProduct(const QString &parentCode);
 
 private:
