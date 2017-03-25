@@ -369,6 +369,17 @@ CProduct::~CProduct()
 
 }
 
+bool CProduct::operator==(const CProduct &val)
+{
+	return m_code == val.getCode() &&
+		m_name == val.getName() &&
+		m_parentCode == val.getParentCode() &&
+		m_parentName == val.getParentName() &&
+		m_sdate == val.getSdate() &&
+		m_edate == val.getEdate() &&
+		m_annotation == val.getAnnotation();
+}
+
 void CProduct::setCode(const QString &code)
 {
 	m_code = code;

@@ -29,6 +29,7 @@ ProductManage::~ProductManage()
 
 void ProductManage::init()
 {
+	CProduct oldVal = getViewProduct();
 	{
 		// 初始化treeView
 		QStringList treeHeader;
@@ -62,8 +63,6 @@ void ProductManage::init()
 
 	{
 		// 初始化上级产品
-		QString oldCode = ui.cbParentCode->currentText();
-		QString oldName = ui.cbParentName->currentText();
 		ui.cbParentCode->clear();
 		ui.cbParentName->clear();
 		QStringList parentCodeList, parentNameList;
@@ -76,9 +75,8 @@ void ProductManage::init()
 		}
 		ui.cbParentCode->addItems(parentCodeList);
 		ui.cbParentName->addItems(parentNameList);
-		ui.cbParentCode->setCurrentText(oldCode);
-		ui.cbParentName->setCurrentText(oldName);
 	}
+	setViewProduct(oldVal);
 }
 
 void ProductManage::slotSkinChange()
@@ -95,60 +93,82 @@ void ProductManage::slotSkinChange()
 
 void ProductManage::slotAdd()
 {
-	QString code = ui.leCode->text();
-	QString name = ui.leName->text();
-	QString parentCode = ui.cbParentCode->currentText();
-	QString parentName = ui.cbParentName->currentText();
-	int sdate = ui.deStart->date().toJulianDay();
-	int edate = ui.deEnd->date().toJulianDay();
-	QString annotation = ui.pteAnnotation->toPlainText();
-
-	if (code.isEmpty() || name.isEmpty()) {
+	CProduct val = getViewProduct();
+	if (val.getCode().isEmpty() || val.getName().isEmpty()) {
 		ShowWarnMessage(tr("add"), tr("code or name is empty"), this);
 		return;
 	}
 
 	CProduct oldVal;
-	if (PARASETCTL->getProduct(code, oldVal)) {
+	if (PARASETCTL->getProduct(val.getCode(), oldVal)) {
 		ShowWarnMessage(tr("add"), tr("The product already exists"), this);
 		return;
 	}
 
-	CProduct product(code, name, parentCode, parentName, sdate, edate, annotation);
-	if (PARASETCTL->setProduct(product)) {
+	if (PARASETCTL->setProduct(val)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
 		init();
 	} else {
-		ShowWarnMessage(tr("add"), tr("add fail."), this);
+		ShowErrorMessage(tr("add"), tr("add fail."), this);
 	}
 }
 
 void ProductManage::slotModify()
 {
+	CProduct val = getViewProduct();
+	if (val.getCode().isEmpty() || val.getName().isEmpty()) {
+		ShowWarnMessage(tr("modify"), tr("code or name is empty"), this);
+		return;
+	}
 
+	CProduct oldVal;
+	if (!PARASETCTL->getProduct(val.getCode(), oldVal)) {
+		ShowWarnMessage(tr("modify"), tr("The product is not existing!"), this);
+		return;
+	}
+
+	if (oldVal == val) {
+		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
+		return;
+	}
+
+	if (PARASETCTL->setProduct(val)) {
+		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
+		init();
+	} else {
+		ShowErrorMessage(tr("modify"), tr("modify fail."), this);
+	}
 }
 
 void ProductManage::slotDelete()
 {
-
+	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this)) {
+		CProduct val = getViewProduct();
+		CProduct oldVal;
+		if (!PARASETCTL->getProduct(val.getCode(), oldVal)) {
+			ShowWarnMessage(tr("delete"), tr("The product is not existing!"), this);
+			return;
+		}
+		if (PARASETCTL->removeProduct(val.getCode())) {
+			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
+			init();
+		} else {
+			ShowErrorMessage(tr("delete"), tr("delete fail."), this);
+		}
+	}
 }
 
 void ProductManage::slotTreeDoubleClicked(const QModelIndex &index)
 {
-	QVariant code = index.sibling(index.row(), 0).data();
-	QVariant name = index.sibling(index.row(), 1).data();
-	QVariant parentCode = index.sibling(index.row(), 2).data();
-	QVariant parentName = index.sibling(index.row(), 3).data();
-	QVariant sdate = index.sibling(index.row(), 4).data();
-	QVariant edate = index.sibling(index.row(), 5).data();
-	QVariant annotation = index.sibling(index.row(), 6).data();
-	ui.leCode->setText(code.toString());
-	ui.leName->setText(name.toString());
-	ui.cbParentCode->setCurrentText(parentCode.toString());
-	ui.cbParentName->setCurrentText(parentName.toString());
-	ui.deStart->setDate(QDate::fromString(sdate.toString(), "yyyy-MM-dd"));
-	ui.deEnd->setDate(QDate::fromString(edate.toString(), "yyyy-MM-dd"));
-	ui.pteAnnotation->setPlainText(annotation.toString());
+	QString code = index.sibling(index.row(), 0).data().toString();
+	QString name = index.sibling(index.row(), 1).data().toString();
+	QString parentCode = index.sibling(index.row(), 2).data().toString();
+	QString parentName = index.sibling(index.row(), 3).data().toString();
+	int sdate = index.sibling(index.row(), 4).data().toInt();
+	int edate = index.sibling(index.row(), 5).data().toInt();
+	QString annotation = index.sibling(index.row(), 6).data().toString();
+	CProduct val(code, name, parentCode, parentName, sdate, edate, annotation);
+	setViewProduct(val);
 }
 
 void ProductManage::slotParentCodeChanged(int index)
@@ -210,4 +230,27 @@ void ProductManage::appendChildrenProduct(QStandardItem *item, const QString &pa
 		item->appendRow(childItems);
 		appendChildrenProduct(childItems.front(), child.getCode());
 	}
+}
+
+CProduct ProductManage::getViewProduct()
+{
+	QString code = ui.leCode->text().trimmed();
+	QString name = ui.leName->text().trimmed();
+	QString parentCode = ui.cbParentCode->currentText().trimmed();
+	QString parentName = ui.cbParentName->currentText().trimmed();
+	int sdate = ui.deStart->date().toJulianDay();
+	int edate = ui.deEnd->date().toJulianDay();
+	QString annotation = ui.pteAnnotation->toPlainText().trimmed();
+	return CProduct(code, name, parentCode, parentName, sdate, edate, annotation);
+}
+
+void ProductManage::setViewProduct(const CProduct &val)
+{
+	ui.leCode->setText(val.getCode());
+	ui.leName->setText(val.getName());
+	ui.cbParentCode->setCurrentText(val.getParentCode());
+	ui.cbParentName->setCurrentText(val.getParentName());
+	ui.deStart->setDate(QDate::fromString(QString::number(val.getSdate()), "yyyy-MM-dd"));
+	ui.deEnd->setDate(QDate::fromString(QString::number(val.getEdate()), "yyyy-MM-dd"));
+	ui.pteAnnotation->setPlainText(val.getAnnotation());
 }

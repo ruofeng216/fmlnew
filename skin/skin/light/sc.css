@@ -279,9 +279,9 @@ MessageBoxWidget QLabel[objectName="labelContent"] {
 }
 
 QToolTip {
-    color: white;
+    color: black;
     border: 1px solid #76797c;
-    background-color: #1e1e1e;
+    background-color: #a6a6a6;
     font-size: 12px;
     padding: 2px;
     opacity: 200;

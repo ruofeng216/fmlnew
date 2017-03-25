@@ -151,8 +151,17 @@ bool CParameterSetting::removeProduct(const QString &code)
 	if (!m_product.contains(code)) {
 		return false;
 	}
-	if (METADATABASE->removeProduct(QStringList() << code)) {
-		m_product.remove(code);
+	QList<CProduct> children = getChildrenProduct(code);
+	QStringList deleteList;
+	deleteList << code;
+	foreach(const CProduct &child, children) {
+		deleteList << child.getCode();
+	}
+	if (METADATABASE->removeProduct(deleteList)) {
+		foreach(const QString &deleteCode, deleteList) {
+			m_product.remove(deleteCode);
+		}
+		return true;
 	}
 	return false;
 }

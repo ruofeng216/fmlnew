@@ -173,6 +173,7 @@ public:
 		int edate = 0,
 		const QString &annotation = QString());
 	~CProduct();
+	bool operator==(const CProduct &val);
 	void setCode(const QString &code);
 	const QString& getCode() const;
 	void setName(const QString &name);

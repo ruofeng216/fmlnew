@@ -611,78 +611,124 @@
 <context>
     <name>ProductManage</name>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="35"/>
+        <location filename="view/mainframe/product_manage.cpp" line="36"/>
         <source>productcode</source>
         <translation>产品代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="35"/>
+        <location filename="view/mainframe/product_manage.cpp" line="36"/>
         <source>productname</source>
         <translation>产品名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="35"/>
+        <location filename="view/mainframe/product_manage.cpp" line="36"/>
         <source>parentcode</source>
         <translation>上级产品代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <location filename="view/mainframe/product_manage.cpp" line="37"/>
         <source>parentname</source>
         <translation>上级产品名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <location filename="view/mainframe/product_manage.cpp" line="37"/>
         <source>sdate</source>
         <translation>开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <location filename="view/mainframe/product_manage.cpp" line="37"/>
         <source>edate</source>
         <translation>结束日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <location filename="view/mainframe/product_manage.cpp" line="37"/>
         <source>annotation</source>
         <translation>说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="86"/>
-        <location filename="view/mainframe/product_manage.cpp" line="107"/>
-        <location filename="view/mainframe/product_manage.cpp" line="113"/>
-        <location filename="view/mainframe/product_manage.cpp" line="119"/>
-        <location filename="view/mainframe/product_manage.cpp" line="122"/>
+        <location filename="view/mainframe/product_manage.cpp" line="84"/>
+        <location filename="view/mainframe/product_manage.cpp" line="98"/>
+        <location filename="view/mainframe/product_manage.cpp" line="104"/>
+        <location filename="view/mainframe/product_manage.cpp" line="109"/>
+        <location filename="view/mainframe/product_manage.cpp" line="112"/>
         <source>add</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="88"/>
+        <location filename="view/mainframe/product_manage.cpp" line="86"/>
+        <location filename="view/mainframe/product_manage.cpp" line="120"/>
+        <location filename="view/mainframe/product_manage.cpp" line="126"/>
+        <location filename="view/mainframe/product_manage.cpp" line="131"/>
+        <location filename="view/mainframe/product_manage.cpp" line="136"/>
+        <location filename="view/mainframe/product_manage.cpp" line="139"/>
         <source>modify</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="90"/>
+        <location filename="view/mainframe/product_manage.cpp" line="88"/>
+        <location filename="view/mainframe/product_manage.cpp" line="145"/>
+        <location filename="view/mainframe/product_manage.cpp" line="149"/>
+        <location filename="view/mainframe/product_manage.cpp" line="153"/>
+        <location filename="view/mainframe/product_manage.cpp" line="156"/>
         <source>delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="107"/>
+        <location filename="view/mainframe/product_manage.cpp" line="98"/>
+        <location filename="view/mainframe/product_manage.cpp" line="120"/>
         <source>code or name is empty</source>
         <translation>产品代码或者产品名称不能为空！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="113"/>
+        <location filename="view/mainframe/product_manage.cpp" line="104"/>
         <source>The product already exists</source>
         <translation>此产品已经存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="119"/>
+        <location filename="view/mainframe/product_manage.cpp" line="109"/>
         <source>add success.</source>
         <translation>新增成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="122"/>
+        <location filename="view/mainframe/product_manage.cpp" line="112"/>
         <source>add fail.</source>
         <translation>新增失败。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="126"/>
+        <location filename="view/mainframe/product_manage.cpp" line="149"/>
+        <source>The product is not existing!</source>
+        <translation>此产品不存在！</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="131"/>
+        <source>Records do not change, do not need to modify!</source>
+        <translation>记录没有发生变化，不需要修改!</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="136"/>
+        <source>modify success.</source>
+        <translation>修改成功。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="139"/>
+        <source>modify fail.</source>
+        <translation>修改失败。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="145"/>
+        <source>confirm to delete.</source>
+        <translation>请确认是否删除？</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="153"/>
+        <source>delete success.</source>
+        <translation>删除成功。</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="156"/>
+        <source>delete fail.</source>
+        <translation>删除失败。</translation>
     </message>
 </context>
 <context>
