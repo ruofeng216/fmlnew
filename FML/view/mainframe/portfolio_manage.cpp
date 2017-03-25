@@ -102,6 +102,12 @@ void PortfolioManage::modifyPortfolio()
 		ShowWarnMessage(tr("modify"), tr("the code is not existing."), this);
 	else
 	{
+		CPortfolio oldVal;
+		if (PARASETCTL->getPortfolio(_portcode, oldVal) && oldVal == cp) {
+			ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
+			return;
+		}
+
 		if (PARASETCTL->setPortfolio(cp))
 		{
 			ShowSuccessMessage(tr("modify"), tr("modify success."), this);

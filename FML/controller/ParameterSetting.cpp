@@ -31,6 +31,11 @@ bool CParameterSetting::getFinancialCalendar(QMap<int, CFinancialCalendar> &val)
 	return METADATABASE->getFinancialCalendar(val);
 }
 
+bool CParameterSetting::getFinancialCalendar(int bwdate, CFinancialCalendar &val)
+{
+	return METADATABASE->getFinancialCalendar(bwdate, val);
+}
+
 ///////组合管理///////////
 bool CParameterSetting::setPortfolio(const CPortfolio &val)
 {
@@ -104,6 +109,15 @@ void CParameterSetting::getChildren(const QString &key, QStringList &val)
 				val << it.key();
 		}
 	}
+}
+
+bool CParameterSetting::getPortfolio(const QString &key, CPortfolio &val)
+{
+	if (m_portfolio.contains(key)) {
+		val = m_portfolio[key];
+		return true;
+	}
+	return false;
 }
 
 const QMap<QString, CProduct>& CParameterSetting::getProduct()

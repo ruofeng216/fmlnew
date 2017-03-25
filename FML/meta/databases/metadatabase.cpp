@@ -66,16 +66,8 @@ bool MetaDatabase::updateLoginInfo(const CLogin &uinfo)
 // 金融日历
 bool MetaDatabase::isExistFinancialCalendar(const CFinancialCalendar &val)
 {
-	FUNCLOG("MetaDatabase::isExistFinancialCalendar(const CFinancialCalendar &val)");
-	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
-	QVariantList paramList;
-	paramList << val.getDate();
-	QStringList fieldList;
-	fieldList << "bwdate";
-	QList<QVariantList> results;
-	m_DbMgr->QueryFields(DB_SQL_SelectFinancialHolidayByDate, paramList, fieldList, results);
-	if (results.isEmpty()) return false;
-	return true;
+	CFinancialCalendar result;
+	return getFinancialCalendar(val.getDate(), result);
 }
 bool MetaDatabase::setFinancialCalendar(const CFinancialCalendar &val)
 {
@@ -120,6 +112,30 @@ bool MetaDatabase::getFinancialCalendar(QMap<int, CFinancialCalendar> &val)
 		}
 	}
 	return true;
+}
+
+bool MetaDatabase::getFinancialCalendar(int bwdate, CFinancialCalendar &val)
+{
+	FUNCLOG("MetaDatabase::getFinancialCalendar(int bwdate, CFinancialCalendar &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	paramList << bwdate;
+	QStringList fieldList;
+	fieldList << "bwyear" << "bwdate" << "daytype" << "annotation";
+	QList<QVariantList> results;
+	m_DbMgr->QueryFields(DB_SQL_SelectFinancialHolidayByDate, paramList, fieldList, results);
+	if (results.isEmpty()) {
+		return false;
+	}
+	const QVariantList &result = results[0];
+	if (result.size() == 4) {
+		val.setYear(result[0].toInt());
+		val.setDate(result[1].toInt());
+		val.setHolidayType(result[2].toInt());
+		val.setHolidayinfo(result[3].toString());
+		return true;
+	}
+	return false;
 }
 
 // 组合管理

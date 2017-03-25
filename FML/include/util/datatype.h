@@ -106,6 +106,7 @@ public:
 	enum EHType { eHoliday=0, eWorkDay };
 	CFinancialCalendar(int _y = 0, int _d = 0, EHType e = eHoliday, const QString &val = QString());
 	~CFinancialCalendar();
+	bool operator==(const CFinancialCalendar &val) const;
 	void setYear(const int &val);
 	const int &getYear() const;
 	void setDate(const int &val);
@@ -134,6 +135,7 @@ public:
 		int _edate = 0, 
 		const QString &_annotation = QString());
 	~CPortfolio();
+	bool operator==(const CPortfolio &val) const;
 	void setPortcode(const QString &val);
 	const QString &getPortcode() const;
 	void setPortname(const QString &val);

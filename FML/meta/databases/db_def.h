@@ -68,7 +68,7 @@ constraint pk_product PRIMARY KEY(`productcode`)\
 
 // ½ðÈÚÈÕÀú
 #define DB_SQL_SelectFinancialHolidays QString("SELECT * from %1; ").arg(DB_TBNAME_FINANCIALCALENDAR)
-#define DB_SQL_SelectFinancialHolidayByDate QString("SELECT bwdate from %1 where `bwdate`=?; ").arg(DB_TBNAME_FINANCIALCALENDAR)
+#define DB_SQL_SelectFinancialHolidayByDate QString("SELECT * from %1 where `bwdate`=?; ").arg(DB_TBNAME_FINANCIALCALENDAR)
 #define DB_SQL_ReplaceFinancialHoliday QString("replace into %1(bwyear,bwdate,daytype,annotation) values(?,?,?,?);").arg(DB_TBNAME_FINANCIALCALENDAR)
 #define DB_SQL_DeleteFinancialHoliday QString("delete from %1 where `bwdate`=?;").arg(DB_TBNAME_FINANCIALCALENDAR)
 

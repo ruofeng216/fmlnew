@@ -203,6 +203,13 @@ CFinancialCalendar::CFinancialCalendar(int _y, int _d, EHType e, const QString &
 CFinancialCalendar::~CFinancialCalendar()
 {
 }
+bool CFinancialCalendar::operator==(const CFinancialCalendar &val) const
+{
+	return m_year == val.getYear() &&
+		m_date == val.getDate() &&
+		m_holidayinfo == val.getHolidayinfo() &&
+		m_holidayType == val.getHolidayType();
+}
 void CFinancialCalendar::setYear(const int &val)
 {
 	m_year = val;
@@ -267,6 +274,16 @@ CPortfolio::CPortfolio(const QString& _portcode,
 }
 CPortfolio::~CPortfolio()
 {
+}
+bool CPortfolio::operator==(const CPortfolio &val) const
+{
+	return m_portcode == val.getPortcode() &&
+		m_portname == val.getPortname() &&
+		m_parentcode == val.getParentcode() &&
+		m_parentname == val.getParentname() &&
+		m_sdate == val.getSdate() &&
+		m_edate == val.getEdate() &&
+		m_annotation == val.getAnnotation();
 }
 void CPortfolio::setPortcode(const QString &val)
 {

@@ -102,19 +102,26 @@ void FinancialCalendar::modifyHoliday()
 	CFinancialCalendar::EHType e = CFinancialCalendar::eWorkDay;
 	if (tr("holiday") == strDayType) e = CFinancialCalendar::eHoliday;
 	CFinancialCalendar fc(_y, _d, e, strDayInfo);
-	if (!PARASETCTL->isExistFinancialCalendar(fc))
+
+	CFinancialCalendar oldVal;
+	if (!PARASETCTL->getFinancialCalendar(fc.getDate(), oldVal)) {
 		ShowWarnMessage(tr("modify"), tr("the time does not exist."), this);
-	else
+		return;
+	}
+
+	if (oldVal == fc) {
+		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
+		return;
+	}
+
+	if (PARASETCTL->setFinancialCalendar(fc))
 	{
-		if (PARASETCTL->setFinancialCalendar(fc))
-		{
-			ShowSuccessMessage(tr("modify"), tr("modify success."), this);
-			// 同步
-			initDateView();
-			expand(_y);
-		}
-		else
-			ShowWarnMessage(tr("modify"), tr("modify fail."), this);
+		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
+		// 同步
+		initDateView();
+		expand(_y);
+	} else {
+		ShowWarnMessage(tr("modify"), tr("modify fail."), this);
 	}
 }
 void FinancialCalendar::delHoliday()

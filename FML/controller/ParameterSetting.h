@@ -12,6 +12,7 @@ public:
 	bool setFinancialCalendar(const CFinancialCalendar &val);
 	bool removeFinancialCalendar(int val);
 	bool getFinancialCalendar(QMap<int, CFinancialCalendar> &val);
+	bool getFinancialCalendar(int bwdate, CFinancialCalendar &val);
 
 	///////组合管理///////////
 	bool setPortfolio(const CPortfolio &val);
@@ -21,6 +22,7 @@ public:
 	bool isExistCode(const QString &val);
 	void getAllRootCodes(QStringList &val);
 	void getChildren(const QString &key, QStringList &val);
+	bool getPortfolio(const QString &key, CPortfolio &val);
 
 	///////产品管理///////////
 	const QMap<QString, CProduct>& getProduct();
