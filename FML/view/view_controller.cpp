@@ -24,6 +24,7 @@
 #include "mainframe/portfolio_manage.h"
 #include "mainframe/product_manage.h"
 #include "mainframe/key_point_definition.h"
+#include "mainframe/parameter_dictionary.h"
 
 ViewController::ViewController(QObject *parent)
 	: QObject(parent)
@@ -158,7 +159,7 @@ void ViewController::createChild(const QString &id, const QString &title, const 
 		else if (id == "ParaMgr_Products")
 			pWidget = new ProductManage();
 		else if (id == "ParaMgr_Dict")
-			pWidget = new EmptyWidget;
+			pWidget = new ParameterDictionary;
 		else if (id == "YieldCurveSet_Market")
 			pWidget = new EmptyWidget;
 		else if (id == "YieldCurveSet_Point")

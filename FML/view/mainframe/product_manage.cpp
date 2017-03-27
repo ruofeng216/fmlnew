@@ -17,8 +17,8 @@ ProductManage::ProductManage(QWidget *parent)
 	connect(ui.cbParentCode, SIGNAL(currentIndexChanged(int)), this, SLOT(slotParentCodeChanged(int)));
 	connect(ui.cbParentName, SIGNAL(currentIndexChanged(int)), this, SLOT(slotParentNameChanged(int)));
 
-	slotSkinChange();
 	init();
+	slotSkinChange();
 	ui.deStart->setDate(QDate::currentDate());
 	ui.deEnd->setDate(QDate::currentDate());
 }

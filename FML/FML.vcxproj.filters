@@ -112,6 +112,9 @@
     <Filter Include="view\function\param_manage\product_manage">
       <UniqueIdentifier>{c5148f47-78c5-4450-9230-5b9147231f71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="view\function\param_manage\parameter_dictionary">
+      <UniqueIdentifier>{4c9d11d5-fbfb-4f29-b04a-9d4f6d03d1b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -435,6 +438,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_key_point_definition.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_parameter_dictionary.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_parameter_dictionary.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\mainframe\parameter_dictionary.cpp">
+      <Filter>view\function\param_manage\parameter_dictionary</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -614,6 +626,12 @@
     <CustomBuild Include="view\mainframe\key_point_definition.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="view\mainframe\parameter_dictionary.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\mainframe\parameter_dictionary.h">
+      <Filter>view\function\param_manage\parameter_dictionary</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FML.rc" />
@@ -644,6 +662,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_key_point_definition.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_parameter_dictionary.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
