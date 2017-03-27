@@ -30,6 +30,8 @@ public:
 	bool getProduct(QMap<QString, CProduct> &val);
 	bool setProduct(const CProduct &val);
 	bool removeProduct(const QStringList &codeList);
+	// ²ÎÊý×Öµä
+	bool getParadict(QMap<QString, CParaDict> &val);
 
 private:
 	MetaDatabase(QObject *parent = NULL);

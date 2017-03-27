@@ -12,10 +12,11 @@
 #endif // !DB_OPERATER
 /////////////////////table name///////////////////////////
 #ifndef TB_NAME
-#define  DB_TBNAME_LOGIN "login"
-#define  DB_TBNAME_FINANCIALCALENDAR "financialholiday"
-#define  DB_TBNAME_PORTFOLIO "portfolio"
-#define  DB_TBNAME_PRODUCT "product"
+#define  DB_TBNAME_LOGIN "login"						// 登录
+#define  DB_TBNAME_FINANCIALCALENDAR "financialholiday" // 金融日历
+#define  DB_TBNAME_PORTFOLIO "portfolio"				// 组合管理
+#define  DB_TBNAME_PRODUCT "product"					// 产品管理
+#define  DB_TBNAME_PARADICT "paradict"					// 参数字典
 
 #endif // !TB_NAME
 //////////////////////////////////////////////////////////
@@ -48,7 +49,7 @@ constraint pk_portfolio PRIMARY KEY(`portcode`)\
 
 #define  DB_TBSQL_PRODUCT QString("CREATE TABLE IF NOT EXISTS `%1` (\
 `productcode` varchar(180), \
-`productname`  varchar(255), \
+`productname` varchar(255), \
 `parentcode` varchar(255), \
 `parentname` varchar(255), \
 `sdate`  int, \
@@ -56,6 +57,15 @@ constraint pk_portfolio PRIMARY KEY(`portcode`)\
 `annotation` text, \
 constraint pk_product PRIMARY KEY(`productcode`)\
 );").arg(DB_TBNAME_PRODUCT)
+
+#define  DB_TBSQL_PARADICT QString("CREATE TABLE IF NOT EXISTS `%1` (\
+`typecode` varchar(180), \
+`typename` varchar(255), \
+`paracode` varchar(180), \
+`paraname` varchar(255), \
+`paraexplain` text, \
+constraint pk_paradict PRIMARY KEY(`paracode`)\
+);").arg(DB_TBNAME_PARADICT)
 
 #endif // !TB_CREATE
 /////////////////////////////////////////////////////////////
@@ -78,10 +88,14 @@ constraint pk_product PRIMARY KEY(`productcode`)\
 #define DB_SQL_DeletePortfolio QString("delete from %1 where `portcode`=?;").arg(DB_TBNAME_PORTFOLIO)
 
 // 产品管理
-#define DB_SQL_SelectProduct QString("SELECT * from %1; ").arg(DB_TBNAME_PRODUCT)
+#define DB_SQL_SelectProduct QString("SELECT * from %1;").arg(DB_TBNAME_PRODUCT)
 #define DB_SQL_ReplaceProduct QString("replace into %1(productcode,productname,parentcode,parentname,sdate,edate,annotation) values(?,?,?,?,?,?,?);").arg(DB_TBNAME_PRODUCT)
 #define DB_SQL_DeleteProduct QString("delete from %1 where `productcode`=?;").arg(DB_TBNAME_PRODUCT)
 
+// 参数字典
+#define DB_SQL_SelectParadict QString("SELECT * from %1;").arg(DB_TBNAME_PARADICT)
+#define DB_SQL_ReplaceParadict QString("replace info %1(typecode,typename,paracode,paraname,paraexplain) values(?,?,?,?,?);").arg(DB_TBNAME_PARADICT)
+#define DB_SQL_DeleteParadict QString("delete from %1 where `paracode`=?;").arg(DB_TBNAME_PARADICT)
 
 #endif // !TB_OPERATE
 

@@ -266,3 +266,34 @@ bool MetaDatabase::removeProduct(const QStringList &codeList)
 	}
 	return false;
 }
+
+bool MetaDatabase::getParadict(QMap<QString, CParaDict> &val)
+{
+	FUNCLOG("MetaDatabase::getParadict(QMap<QString, CParaDict> &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	QStringList fieldList;
+	fieldList << "typecode" << "typename" << "paracode" << "paraname" << "paraexplain";
+	QList<QVariantList> results;
+	m_DbMgr->QueryFields(DB_SQL_SelectParadict, paramList, fieldList, results);
+	if (results.isEmpty()) {
+		return false;
+	}
+	for (int i = 0; i < results.size(); i++) {
+		const QVariantList &valList = results[i];
+		if (valList.size() != 5) {
+			continue;
+		}
+		CParaDict paraDict;
+		paraDict.setTypeCode(valList.at(0).toString());
+		paraDict.setTypeName(valList.at(1).toString());
+		paraDict.setParaCode(valList.at(2).toString());
+		paraDict.setParaName(valList.at(3).toString());
+		paraDict.setParaExplain(valList.at(4).toString());
+		if (paraDict.getTypeCode().isEmpty() || paraDict.getParaCode().isEmpty()) {
+			continue;
+		}
+		val[paraDict.getParaCode()] = paraDict;
+	}
+	return true;
+}

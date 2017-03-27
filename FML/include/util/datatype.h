@@ -198,7 +198,35 @@ private:
 	int m_edate;
 	QString m_annotation;
 };
+// ²ÎÊý×Öµä
+class CParaDict {
+public:
+	CParaDict();
+	CParaDict(const QString &typeCode,
+		const QString &typeName = QString(),
+		const QString &paraCode = QString(),
+		const QString &paraName = QString(),
+		const QString &paraExplain = QString());
+	~CParaDict();
+	bool operator==(const CParaDict &val);
+	void setTypeCode(const QString &typeCode);
+	const QString& getTypeCode() const;
+	void setTypeName(const QString &typeName);
+	const QString& getTypeName() const;
+	void setParaCode(const QString &paraCode);
+	const QString& getParaCode() const;
+	void setParaName(const QString &paraName);
+	const QString& getParaName() const;
+	void setParaExplain(const QString &paraExplain);
+	const QString& getParaExplain() const;
 
+private:
+	QString m_typeCode;
+	QString m_typeName;
+	QString m_paraCode;
+	QString m_paraName;
+	QString m_paraExplain;
+};
 
 ///////////////////////////////////////////////////////////
 // demo

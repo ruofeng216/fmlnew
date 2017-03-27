@@ -120,6 +120,7 @@ bool CParameterSetting::getPortfolio(const QString &key, CPortfolio &val)
 	return false;
 }
 
+///////产品管理///////////
 const QMap<QString, CProduct>& CParameterSetting::getProduct()
 {
 	if (m_product.isEmpty()) {
@@ -219,4 +220,10 @@ void CParameterSetting::getAllChildrenProduct(const QString &parentCode, QList<C
 			getAllChildrenProduct(product.getCode(), results);
 		}
 	}
+}
+
+///////参数字典///////////
+const QMap<QString, CParaDict>& CParameterSetting::getParadict()
+{
+	return m_paradict;
 }

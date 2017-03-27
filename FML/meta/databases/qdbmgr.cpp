@@ -46,6 +46,7 @@ void QDBMgr::initTables()
 	m_tables[DB_TBNAME_FINANCIALCALENDAR] = DB_TBSQL_FINANCIALCALENDAR;
 	m_tables[DB_TBNAME_PORTFOLIO] = DB_TBSQL_PORTFOLIO;
 	m_tables[DB_TBNAME_PRODUCT] = DB_TBSQL_PRODUCT;
+	m_tables[DB_TBNAME_PARADICT] = DB_TBSQL_PARADICT;
 
 	for (QMap<QString, QString>::const_iterator itor = m_tables.begin();
 		itor != m_tables.end(); itor++)

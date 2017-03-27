@@ -35,8 +35,12 @@ public:
 	// 获取所有子节点
 	void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results);
 
+	///////参数字典///////////
+	const QMap<QString, CParaDict>& getParadict();
+
 private:
 	QMap<QString, CPortfolio> m_portfolio;
 	QMap<QString, CProduct> m_product;
+	QMap<QString, CParaDict> m_paradict;
 };
 

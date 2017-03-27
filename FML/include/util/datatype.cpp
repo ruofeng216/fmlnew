@@ -437,7 +437,77 @@ const QString& CProduct::getAnnotation() const
 	return m_annotation;
 }
 
+////////////////////////////////////////////////////////////////
+CParaDict::CParaDict()
+{
+}
 
+CParaDict::CParaDict(const QString &typeCode,
+	const QString &typeName,
+	const QString &paraCode,
+	const QString &paraName,
+	const QString &paraExplain)
+	: m_typeCode(typeCode)
+	, m_typeName(typeName)
+	, m_paraCode(paraCode)
+	, m_paraName(paraName)
+	, m_paraExplain(paraExplain)
+
+{
+}
+
+CParaDict::~CParaDict()
+{
+}
+
+bool CParaDict::operator==(const CParaDict &val)
+{
+	return m_typeCode == val.getTypeCode() && 
+		m_typeName == val.getTypeName() &&
+		m_paraCode == val.getParaCode() && 
+		m_paraName == val.getParaName() &&
+		m_paraExplain == val.getParaExplain();
+}
+void CParaDict::setTypeCode(const QString &typeCode)
+{
+	m_typeCode = typeCode;
+}
+const QString& CParaDict::getTypeCode() const
+{
+	return m_typeCode;
+}
+void CParaDict::setTypeName(const QString &typeName)
+{
+	m_typeName = typeName;
+}
+const QString& CParaDict::getTypeName() const
+{
+	return m_typeName;
+}
+void CParaDict::setParaCode(const QString &paraCode)
+{
+	m_paraCode = paraCode;
+}
+const QString& CParaDict::getParaCode() const
+{
+	return m_paraCode;
+}
+void CParaDict::setParaName(const QString &paraName)
+{
+	m_paraName = paraName;
+}
+const QString& CParaDict::getParaName() const
+{
+	return m_paraName;
+}
+void CParaDict::setParaExplain(const QString &paraExplain)
+{
+	m_paraExplain = paraExplain;
+}
+const QString& CParaDict::getParaExplain() const
+{
+	return m_paraExplain;
+}
 ////////////////////////////////////////////////////////////////
 
 demoStruct::demoStruct(const QVariant &val)
