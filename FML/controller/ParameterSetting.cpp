@@ -223,7 +223,53 @@ void CParameterSetting::getAllChildrenProduct(const QString &parentCode, QList<C
 }
 
 ///////²ÎÊý×Öµä///////////
-const QMap<QString, CParaDict>& CParameterSetting::getParadict()
+const QList<CParaDict>& CParameterSetting::getParadict()
 {
+	if (m_paradict.isEmpty()) {
+		METADATABASE->getParadict(m_paradict);
+#if 1 // µ÷ÊÔ
+		if (m_paradict.isEmpty()) {
+			CParaDict val1("CouponFrequency", "32141");
+			CParaDict val11("CouponFrequency", "435435", "quarterly", "54656");
+			CParaDict val12("CouponFrequency", "5465", "yearly", "34634");
+			CParaDict val13("CouponFrequency", "67457", "monthly", "345435");
+			CParaDict val14("CouponFrequency", "34543", "halfyear", "345346");
+			CParaDict val2("Calendar", "5467364");
+			CParaDict val21("Calendar", "456346", "CFETS", "3456346");
+			CParaDict val22("Calendar", "333", "SHSE", "546546");
+			if (!setParadict(val1)) {
+				
+			}
+			setParadict(val11);
+			setParadict(val12);
+			setParadict(val13);
+			setParadict(val14);
+			setParadict(val2);
+			setParadict(val21);
+			setParadict(val22);
+		}
+#endif
+	}
 	return m_paradict;
+}
+
+bool CParameterSetting::getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val)
+{
+	const QList<CParaDict> &items = this->getParadict();
+	foreach(const CParaDict &item, items) {
+		if (item.getTypeCode() == typeCode && item.getParaCode() == paraCode) {
+			val = item;
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CParameterSetting::setParadict(const CParaDict &val)
+{
+	if (METADATABASE->setParadict(val)) {
+		m_paradict.push_back(val);
+		return true;
+	}
+	return false;
 }

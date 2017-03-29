@@ -58,6 +58,10 @@ public:
 	virtual QList<CProduct> getRootProduct() = 0;
 	virtual QList<CProduct> getChildrenProduct(const QString &parentCode) = 0;
 	virtual void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results) = 0;
+	///////参数管理///////////
+	virtual const QList<CParaDict>& getParadict() = 0;
+	virtual bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val) = 0;
+	virtual bool setParadict(const CParaDict &val) = 0;
 };
 
 

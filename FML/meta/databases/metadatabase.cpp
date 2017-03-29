@@ -267,9 +267,9 @@ bool MetaDatabase::removeProduct(const QStringList &codeList)
 	return false;
 }
 
-bool MetaDatabase::getParadict(QMap<QString, CParaDict> &val)
+bool MetaDatabase::getParadict(QList<CParaDict> &val)
 {
-	FUNCLOG("MetaDatabase::getParadict(QMap<QString, CParaDict> &val)");
+	FUNCLOG("MetaDatabase::getParadict(QList<CParaDict> &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
 	QVariantList paramList;
 	QStringList fieldList;
@@ -290,10 +290,27 @@ bool MetaDatabase::getParadict(QMap<QString, CParaDict> &val)
 		paraDict.setParaCode(valList.at(2).toString());
 		paraDict.setParaName(valList.at(3).toString());
 		paraDict.setParaExplain(valList.at(4).toString());
-		if (paraDict.getTypeCode().isEmpty() || paraDict.getParaCode().isEmpty()) {
+		if (paraDict.getTypeCode().isEmpty() && paraDict.getParaCode().isEmpty()) {
 			continue;
 		}
-		val[paraDict.getParaCode()] = paraDict;
+		val.push_back(paraDict);
 	}
 	return true;
+}
+
+bool MetaDatabase::setParadict(const CParaDict &val)
+{
+	FUNCLOG("MetaDatabase::setParadict(const CParaDict &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	paramList << val.getTypeCode()
+		<< val.getTypeName()
+		<< val.getParaCode()
+		<< val.getParaName()
+		<< val.getParaExplain();
+	if (m_DbMgr->ExecuteSQL(DB_SQL_ReplaceParadict, paramList)) {
+		return true;
+	}
+	QString xx = m_DbMgr->lastError();
+	return false;
 }

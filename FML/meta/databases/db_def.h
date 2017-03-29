@@ -59,12 +59,14 @@ constraint pk_product PRIMARY KEY(`productcode`)\
 );").arg(DB_TBNAME_PRODUCT)
 
 #define  DB_TBSQL_PARADICT QString("CREATE TABLE IF NOT EXISTS `%1` (\
-`typecode` varchar(180), \
+`inc` int NOT NULL auto_increment, \
+`typecode` varchar(180) NOT NULL, \
 `typename` varchar(255), \
 `paracode` varchar(180), \
 `paraname` varchar(255), \
 `paraexplain` text, \
-constraint pk_paradict PRIMARY KEY(`paracode`)\
+constraint pk_paradict PRIMARY KEY(`inc`), \
+constraint uk_paradict UNIQUE(`typecode`,`paracode`)\
 );").arg(DB_TBNAME_PARADICT)
 
 #endif // !TB_CREATE
@@ -94,7 +96,7 @@ constraint pk_paradict PRIMARY KEY(`paracode`)\
 
 // ²ÎÊý×Öµä
 #define DB_SQL_SelectParadict QString("SELECT * from %1;").arg(DB_TBNAME_PARADICT)
-#define DB_SQL_ReplaceParadict QString("replace info %1(typecode,typename,paracode,paraname,paraexplain) values(?,?,?,?,?);").arg(DB_TBNAME_PARADICT)
+#define DB_SQL_ReplaceParadict QString("replace into %1(typecode,typename,paracode,paraname,paraexplain) values(?,?,?,?,?);").arg(DB_TBNAME_PARADICT)
 #define DB_SQL_DeleteParadict QString("delete from %1 where `paracode`=?;").arg(DB_TBNAME_PARADICT)
 
 #endif // !TB_OPERATE

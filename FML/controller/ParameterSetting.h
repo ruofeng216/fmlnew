@@ -36,11 +36,13 @@ public:
 	void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results);
 
 	///////²ÎÊý×Öµä///////////
-	const QMap<QString, CParaDict>& getParadict();
+	const QList<CParaDict>& getParadict();
+	bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val);
+	bool setParadict(const CParaDict &val);
 
 private:
 	QMap<QString, CPortfolio> m_portfolio;
 	QMap<QString, CProduct> m_product;
-	QMap<QString, CParaDict> m_paradict;
+	QList<CParaDict> m_paradict;
 };
 
