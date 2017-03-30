@@ -39,6 +39,7 @@ public:
 	const QList<CParaDict>& getParadict();
 	bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val);
 	bool setParadict(const CParaDict &val);
+	bool removeParadict(const QString &typeCode, const QString &paraCode);
 
 private:
 	QMap<QString, CPortfolio> m_portfolio;

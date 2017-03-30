@@ -97,7 +97,8 @@ constraint uk_paradict UNIQUE(`typecode`,`paracode`)\
 // ²ÎÊý×Öµä
 #define DB_SQL_SelectParadict QString("SELECT * from %1;").arg(DB_TBNAME_PARADICT)
 #define DB_SQL_ReplaceParadict QString("replace into %1(typecode,typename,paracode,paraname,paraexplain) values(?,?,?,?,?);").arg(DB_TBNAME_PARADICT)
-#define DB_SQL_DeleteParadict QString("delete from %1 where `paracode`=?;").arg(DB_TBNAME_PARADICT)
+#define DB_SQL_DeleteParadictByTypeParaCode QString("delete from %1 where `typecode`=? and `paracode`=?;").arg(DB_TBNAME_PARADICT)
+#define DB_SQL_DeleteParadictByTypeCode QString("delete from %1 where `typecode`=?;").arg(DB_TBNAME_PARADICT)
 
 #endif // !TB_OPERATE
 

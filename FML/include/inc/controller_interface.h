@@ -62,6 +62,7 @@ public:
 	virtual const QList<CParaDict>& getParadict() = 0;
 	virtual bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val) = 0;
 	virtual bool setParadict(const CParaDict &val) = 0;
+	virtual bool removeParadict(const QString &typeCode, const QString &paraCode) = 0;
 };
 
 

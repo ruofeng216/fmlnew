@@ -23,6 +23,8 @@ public slots:
 	void slotModify();
 	void slotDelete();
 	void slotTreeDoubleClicked(const QModelIndex &index);
+	void slotTypeCodeChanged(int index);
+	void slotTypeNameChanged(int index);
 
 private:
 	QList<QStandardItem*> createRowItems(const CParaDict &val, bool isRoot);

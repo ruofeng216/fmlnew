@@ -1,6 +1,7 @@
 #include "ParameterSetting.h"
 #include "metadatabase.h"
 #include <QSet>
+#include "util/util.h"
 
 CParameterSetting::CParameterSetting()
 {
@@ -229,24 +230,18 @@ const QList<CParaDict>& CParameterSetting::getParadict()
 		METADATABASE->getParadict(m_paradict);
 #if 1 // 调试
 		if (m_paradict.isEmpty()) {
-			CParaDict val1("CouponFrequency", "32141");
-			CParaDict val11("CouponFrequency", "435435", "quarterly", "54656");
-			CParaDict val12("CouponFrequency", "5465", "yearly", "34634");
-			CParaDict val13("CouponFrequency", "67457", "monthly", "345435");
-			CParaDict val14("CouponFrequency", "34543", "halfyear", "345346");
-			CParaDict val2("Calendar", "5467364");
-			CParaDict val21("Calendar", "456346", "CFETS", "3456346");
-			CParaDict val22("Calendar", "333", "SHSE", "546546");
-			if (!setParadict(val1)) {
-				
+			QList<CParaDict> strList;
+			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率")));
+			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "quarterly", QString::fromLocal8Bit("按季")));
+			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "yearly", QString::fromLocal8Bit("按年")));
+			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "monthly", QString::fromLocal8Bit("按月")));
+			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "halfyear", QString::fromLocal8Bit("按半年")));
+			strList.push_back(CParaDict("Calendar", QString::fromLocal8Bit("日历")));
+			strList.push_back(CParaDict("Calendar", QString::fromLocal8Bit("日历"), "CFETS", QString::fromLocal8Bit("银行间市场日历")));
+			strList.push_back(CParaDict("Calendar", QString::fromLocal8Bit("日历"), "SHSE", QString::fromLocal8Bit("中国上海交易所日历")));
+			foreach(const CParaDict &str, strList) {
+				setParadict(str);
 			}
-			setParadict(val11);
-			setParadict(val12);
-			setParadict(val13);
-			setParadict(val14);
-			setParadict(val2);
-			setParadict(val21);
-			setParadict(val22);
 		}
 #endif
 	}
@@ -268,8 +263,46 @@ bool CParameterSetting::getParadict(const QString &typeCode, const QString &para
 bool CParameterSetting::setParadict(const CParaDict &val)
 {
 	if (METADATABASE->setParadict(val)) {
-		m_paradict.push_back(val);
+		bool isUpdate = false;
+		for (int i = 0; i < m_paradict.size(); i++) {
+			if (m_paradict[i].getTypeCode() == val.getTypeCode() && m_paradict[i].getParaCode() == val.getParaCode()) {
+				isUpdate = true;
+				m_paradict[i] = val;
+				break;
+			}
+		}
+		if (!isUpdate) {
+			m_paradict.push_back(val);
+		}
 		return true;
+	}
+	return false;
+}
+
+bool CParameterSetting::removeParadict(const QString &typeCode, const QString &paraCode)
+{
+	if (typeCode.isEmpty()) {
+		return false;
+	}
+	if (!paraCode.isEmpty()) {
+		if (METADATABASE->removeParadict(QStringList() << typeCode, QStringList() << paraCode)) {
+			for (int i = m_paradict.size() - 1; i >= 0; i--) {
+				if (m_paradict[i].getTypeCode() == typeCode && m_paradict[i].getParaCode() == paraCode) {
+					m_paradict.removeAt(i);
+					break;
+				}
+			}
+			return true;
+		}
+	} else {
+		if (METADATABASE->removeParadict(QStringList() << typeCode)) {
+			for (int i = m_paradict.size() - 1; i >= 0; i--) {
+				if (m_paradict[i].getTypeCode() == typeCode) {
+					m_paradict.removeAt(i);
+				}
+			}
+			return true;
+		}
 	}
 	return false;
 }

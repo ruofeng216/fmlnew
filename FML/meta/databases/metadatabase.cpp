@@ -314,3 +314,42 @@ bool MetaDatabase::setParadict(const CParaDict &val)
 	QString xx = m_DbMgr->lastError();
 	return false;
 }
+
+bool MetaDatabase::removeParadict(const QStringList &typeCodeList, const QStringList &paraCodeList)
+{
+	FUNCLOG("MetaDatabase::removeParadict(const QStringList &typeCodeList, const QStringList &paraCodeList)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	if (typeCodeList.isEmpty() || typeCodeList.size() != paraCodeList.size()) {
+		return false;
+	}
+	QList<QVariantList> allParamList;
+	QVariantList typeList, paraList;
+	for (int i = 0; i < typeCodeList.size(); i++) {
+		typeList << typeCodeList[i];
+		paraList << paraCodeList[i];
+	}
+	allParamList << typeList << paraList;
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteParadictByTypeParaCode, allParamList)) {
+		return true;
+	}
+	return false;
+}
+
+bool MetaDatabase::removeParadict(const QStringList &typeCodeList)
+{
+	FUNCLOG("MetaDatabase::removeParadict(const QStringList &typeCodeList)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	if (typeCodeList.isEmpty()) {
+		return false;
+	}
+	QList<QVariantList> allParamList;
+	QVariantList typeList;
+	for (int i = 0; i < typeCodeList.size(); i++) {
+		typeList << typeCodeList[i];
+	}
+	allParamList << typeList;
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteParadictByTypeCode, allParamList)) {
+		return true;
+	}
+	return false;
+}
