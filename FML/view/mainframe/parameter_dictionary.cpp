@@ -69,6 +69,7 @@ void ParameterDictionary::init()
 
 		ui.treeView->setModel(m_model);
 		ui.treeView->setColumnWidth(0, 160);
+		ui.treeView->setColumnWidth(1, 160);
 		ui.treeView->expandAll();
 	}
 
