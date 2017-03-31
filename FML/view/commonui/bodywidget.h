@@ -2,6 +2,20 @@
 
 #include <QWidget>
 
+template <class T>
+class CAction
+{
+public:
+	CAction() {}
+	~CAction() {}
+	void setCurData(const T &val) { m_CurData = val; }
+	const T &getCurData() const { return m_CurData; }
+	bool isEqual(const T &val) { return m_CurData == val; }
+	bool isKeyModify(const T &val) = 0;
+private:
+	T m_CurData;
+};
+
 class BodyWidget : public QWidget
 {
 	Q_OBJECT
@@ -10,6 +24,7 @@ public:
 	BodyWidget(QWidget *parent = NULL);
 	virtual ~BodyWidget();
 
+	
 public slots:
 	virtual void slotSkinChange() = 0;
 };
