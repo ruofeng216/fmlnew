@@ -68,21 +68,34 @@ void DragInOutTabBar::mouseMoveEvent(QMouseEvent * event)
 {
 	if (m_HaveDraged)
 	{
-		setCursor(Qt::SizeAllCursor);
-		if (m_MovingPic->pixmap()->isNull()) {
-			QTabWidget *tab = (QTabWidget*)this->parentWidget();
-			QRect tabRect = tab->rect();
-			tabRect.setTop(tab->tabBar()->rect().height());
-			QPixmap pixmap = tab->grab(tabRect).scaled(QSize(tabRect.width()*MOVING_PIXMAP_PERSENT, tabRect.height()*MOVING_PIXMAP_PERSENT));
-			m_MovingPic->setPixmap(pixmap);
+		if (m_MoveIndex != -1 &&
+			m_MoveIndex<count() &&
+			(event->pos().y() > 1.5*height() || event->pos().y() + height()/2 < 0))
+		{
+			setMovable(false);
+			setCursor(Qt::SizeAllCursor);
+			if (m_MovingPic->pixmap()->isNull()) {
+				QTabWidget *tab = (QTabWidget*)this->parentWidget();
+				QRect tabRect = tab->rect();
+				tabRect.setTop(tab->tabBar()->rect().height());
+				QPixmap pixmap = tab->grab(tabRect).scaled(QSize(tabRect.width()*MOVING_PIXMAP_PERSENT, tabRect.height()*MOVING_PIXMAP_PERSENT));
+				m_MovingPic->setPixmap(pixmap);
+			}
+			m_MovingWidget->show();
+			m_MovingWidget->move(QCursor::pos());
 		}
-		m_MovingWidget->show();
-		m_MovingWidget->move(QCursor::pos());
+		else
+		{
+			setMovable(true);
+			unsetCursor();
+			m_MovingWidget->hide();
+		}
 	}
 	QTabBar::mouseMoveEvent(event);
 }
 void DragInOutTabBar::mouseReleaseEvent(QMouseEvent * event)
 {
+	setMovable(true);
 	if (m_HaveDraged && 
 		m_MoveIndex!=-1 && 
 		m_MoveIndex<count() &&
