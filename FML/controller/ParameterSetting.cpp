@@ -309,6 +309,13 @@ bool CParameterSetting::setParadict(const CParaDict &val)
 	if (!setTypeParadict(val)) {
 		return false;
 	}
+
+	// 修改完类型后相等
+	CParaDict oldVal;
+	if (getParadict(val.getTypeCode(), val.getParaCode(), oldVal) && oldVal == val) {
+		return true;
+	}
+
 	// 再更新参数代码
 	if (METADATABASE->setParadict(val)) {
 		bool isUpdate = false;
