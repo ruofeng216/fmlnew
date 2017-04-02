@@ -230,32 +230,40 @@ const QList<CParaDict>& CParameterSetting::getParadict()
 		METADATABASE->getParadict(m_paradict);
 		if (m_paradict.isEmpty()) {
 			QList<CParaDict> strList;
+			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "", ""));
 			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "quarterly", QString::fromLocal8Bit("按季")));
 			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "yearly", QString::fromLocal8Bit("按年")));
 			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "monthly", QString::fromLocal8Bit("按月")));
 			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "halfyear", QString::fromLocal8Bit("按半年")));
+			strList.push_back(CParaDict("Calendar", QString::fromLocal8Bit("日历"), "", ""));
 			strList.push_back(CParaDict("Calendar", QString::fromLocal8Bit("日历"), "CFETS", QString::fromLocal8Bit("银行间市场日历")));
 			strList.push_back(CParaDict("Calendar", QString::fromLocal8Bit("日历"), "SHSE", QString::fromLocal8Bit("中国上海交易所日历")));
+			strList.push_back(CParaDict("Convention", QString::fromLocal8Bit("计息日调整"), "", ""));
 			strList.push_back(CParaDict("Convention", QString::fromLocal8Bit("计息日调整"), "Modified Following", QString::fromLocal8Bit("修正的下一工作日")));
 			strList.push_back(CParaDict("Convention", QString::fromLocal8Bit("计息日调整"), "Following", QString::fromLocal8Bit("下一工作日")));
 			strList.push_back(CParaDict("Convention", QString::fromLocal8Bit("计息日调整"), "Preceding", QString::fromLocal8Bit("前一工作日")));
+			strList.push_back(CParaDict("DayCount", QString::fromLocal8Bit("天数计数"), "", ""));
 			strList.push_back(CParaDict("DayCount", QString::fromLocal8Bit("天数计数"), "Act/Act", QString::fromLocal8Bit("实际天数/实际天数")));
 			strList.push_back(CParaDict("DayCount", QString::fromLocal8Bit("天数计数"), "Act/365", QString::fromLocal8Bit("实际天数/365")));
 			strList.push_back(CParaDict("DayCount", QString::fromLocal8Bit("天数计数"), "Act/360", QString::fromLocal8Bit("实际天数/360")));
+			strList.push_back(CParaDict("CouponType", QString::fromLocal8Bit("息票类型"), "", ""));
 			strList.push_back(CParaDict("CouponType", QString::fromLocal8Bit("息票类型"), "ZeroCoupon", QString::fromLocal8Bit("零息票")));
 			strList.push_back(CParaDict("CouponType", QString::fromLocal8Bit("息票类型"), "FixedCoupon", QString::fromLocal8Bit("固定息票")));
 			strList.push_back(CParaDict("CouponType", QString::fromLocal8Bit("息票类型"), "FloatCoupon", QString::fromLocal8Bit("浮动息票")));
+			strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "", ""));
 			strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "shibor3m", QString::fromLocal8Bit("")));
 			strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "repo7d", QString::fromLocal8Bit("")));
 			strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "depo1y", QString::fromLocal8Bit("")));
+			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "", ""));
 			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "IBMoneyMarket", QString::fromLocal8Bit("银行间货币市场")));
 			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "IBBondMarket", QString::fromLocal8Bit("银行间债券市场")));
 			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "SHEXMoneyMarket", QString::fromLocal8Bit("上海交易所货币市场")));
 			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "SHEXStockMarket", QString::fromLocal8Bit("上海股票交易所市场")));
+			strList.push_back(CParaDict("ZeroRateCompoundFrequency", QString::fromLocal8Bit("零息利率复利类型"), "", ""));
 			strList.push_back(CParaDict("ZeroRateCompoundFrequency", QString::fromLocal8Bit("零息利率复利类型"), "ContinuousCompound", QString::fromLocal8Bit("连续复利")));
 			strList.push_back(CParaDict("ZeroRateCompoundFrequency", QString::fromLocal8Bit("零息利率复利类型"), "yearlyCompound", QString::fromLocal8Bit("年复利")));
-			foreach(const CParaDict &str, strList) {
-				setParadict(str);
+			if (METADATABASE->setParadict(strList)) {
+				m_paradict = strList;
 			}
 		}
 	}
@@ -264,7 +272,7 @@ const QList<CParaDict>& CParameterSetting::getParadict()
 
 bool CParameterSetting::getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val)
 {
-	if (typeCode.isEmpty() || paraCode.isEmpty()) {
+	if (typeCode.isEmpty()) {
 		return false;
 	}
 	const QList<CParaDict> &items = this->getParadict();
@@ -277,7 +285,7 @@ bool CParameterSetting::getParadict(const QString &typeCode, const QString &para
 	return false;
 }
 
-bool CParameterSetting::getParadict(const QString &typeCode, QList<CParaDict> &valList)
+bool CParameterSetting::getAllParadict(const QString &typeCode, QList<CParaDict> &valList)
 {
 	if (typeCode.isEmpty()) {
 		return false;
@@ -296,6 +304,12 @@ bool CParameterSetting::setParadict(const CParaDict &val)
 	if (val.getTypeCode().isEmpty()) {
 		return false;
 	}
+
+	// 先更新类型代码
+	if (!setTypeParadict(val)) {
+		return false;
+	}
+	// 再更新参数代码
 	if (METADATABASE->setParadict(val)) {
 		bool isUpdate = false;
 		for (int i = 0; i < m_paradict.size(); i++) {
@@ -335,6 +349,64 @@ bool CParameterSetting::removeParadict(const QString &typeCode, const QString &p
 					m_paradict.removeAt(i);
 				}
 			}
+			return true;
+		}
+	}
+	return false;
+}
+
+bool CParameterSetting::setTypeParadict(const CParaDict &val)
+{
+	if (val.getTypeCode().isEmpty()) {
+		return false;
+	}
+
+	auto getNewTypeData = [](const CParaDict &val, const CParaDict &oldTypeVal) -> CParaDict {
+		if (val.isTypeData()) {
+			return val;
+		} else {
+			CParaDict result;
+			result.setTypeCode(val.getTypeCode());
+			result.setTypeName(val.getTypeName());
+			result.setParaExplain(oldTypeVal.getParaExplain());
+			return result;
+		}
+	};
+
+	bool isModify = false;
+	CParaDict oldTypeData;
+	CParaDict typeData;
+	if (this->getParadict(val.getTypeCode(), "", oldTypeData)) {
+		typeData = getNewTypeData(val, oldTypeData);
+		// 存在并且相等
+		if (typeData == oldTypeData) {
+			return true;
+		} else {
+			isModify = true;
+		}
+	} else {
+		// 不存在
+		typeData = getNewTypeData(val, oldTypeData);
+		if (METADATABASE->setParadict(typeData)) {
+			m_paradict.push_back(typeData);
+			return true;
+		}
+	}
+
+	if (isModify) {
+		// 存在不相等
+		QList<CParaDict> modifyList, tempList;
+		tempList = m_paradict;
+		for (int i = 0; i < tempList.size(); i++) {
+			if (tempList[i].getTypeCode() == typeData.getTypeCode()) {
+				if (!tempList[i].isTypeDataEqual(typeData)) {
+					tempList[i].setTypeData(typeData);
+					modifyList.push_back(tempList[i]);
+				}
+			}
+		}
+		if (METADATABASE->setParadict(modifyList)) {
+			m_paradict = tempList;
 			return true;
 		}
 	}

@@ -38,9 +38,13 @@ public:
 	///////参数字典///////////
 	const QList<CParaDict>& getParadict();
 	bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val);
-	bool getParadict(const QString &typeCode, QList<CParaDict> &valList);
+	bool getAllParadict(const QString &typeCode, QList<CParaDict> &valList);
 	bool setParadict(const CParaDict &val);
 	bool removeParadict(const QString &typeCode, const QString &paraCode);
+
+private:
+	// 更新参数字典类型代码
+	bool setTypeParadict(const CParaDict &val);
 
 private:
 	QMap<QString, CPortfolio> m_portfolio;

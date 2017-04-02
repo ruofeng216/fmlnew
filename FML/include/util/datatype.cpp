@@ -508,6 +508,35 @@ const QString& CParaDict::getParaExplain() const
 {
 	return m_paraExplain;
 }
+
+bool CParaDict::isTypeData() const
+{
+	return !m_typeCode.isEmpty() && m_paraCode.isEmpty();
+}
+
+CParaDict CParaDict::getTypeData() const
+{
+	if (this->isTypeData()) {
+		return *this;
+	} else {
+		return CParaDict(m_typeCode, m_typeName);
+	}
+}
+
+void CParaDict::setTypeData(const CParaDict &val)
+{
+	if (this->isTypeData()) {
+		m_paraExplain = val.getParaExplain();
+	}
+	m_typeCode = val.getTypeCode();
+	m_typeName = val.getTypeName();
+}
+
+bool CParaDict::isTypeDataEqual(const CParaDict &val)
+{
+	return this->getTypeData() == val.getTypeData();
+}
+
 ////////////////////////////////////////////////////////////////
 
 demoStruct::demoStruct(const QVariant &val)

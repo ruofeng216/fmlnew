@@ -302,16 +302,28 @@ bool MetaDatabase::setParadict(const CParaDict &val)
 {
 	FUNCLOG("MetaDatabase::setParadict(const CParaDict &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
-	QVariantList paramList;
-	paramList << val.getTypeCode()
-		<< val.getTypeName()
-		<< val.getParaCode()
-		<< val.getParaName()
-		<< val.getParaExplain();
-	if (m_DbMgr->ExecuteSQL(DB_SQL_ReplaceParadict, paramList)) {
+	QList<CParaDict> valList;
+	valList.push_back(val);
+	return setParadict(valList);
+}
+
+bool MetaDatabase::setParadict(const QList<CParaDict> &valList)
+{
+	FUNCLOG("MetaDatabase::setParadict(const QList<CParaDict> &valList)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QList<QVariantList> allParamList;
+	QVariantList typeCodeList, typeNameList, paraCodeList, paraNameList, paraExplainList;
+	foreach(const CParaDict &val, valList) {
+		typeCodeList << val.getTypeCode();
+		typeNameList << val.getTypeName();
+		paraCodeList << val.getParaCode();
+		paraNameList << val.getParaName();
+		paraExplainList << val.getParaExplain();
+	}
+	allParamList << typeCodeList << typeNameList << paraCodeList << paraNameList << paraExplainList;
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_ReplaceParadict, allParamList)) {
 		return true;
 	}
-	QString xx = m_DbMgr->lastError();
 	return false;
 }
 

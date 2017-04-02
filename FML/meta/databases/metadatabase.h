@@ -33,6 +33,7 @@ public:
 	// ²ÎÊý×Öµä
 	bool getParadict(QList<CParaDict> &val);
 	bool setParadict(const CParaDict &val);
+	bool setParadict(const QList<CParaDict> &valList);
 	bool removeParadict(const QStringList &typeCodeList, const QStringList &paraCodeList);
 	bool removeParadict(const QStringList &typeCodeList);
 

@@ -219,6 +219,10 @@ public:
 	const QString& getParaName() const;
 	void setParaExplain(const QString &paraExplain);
 	const QString& getParaExplain() const;
+	bool isTypeData() const;
+	CParaDict getTypeData() const;
+	void setTypeData(const CParaDict &val);
+	bool isTypeDataEqual(const CParaDict &val);
 
 private:
 	QString m_typeCode;

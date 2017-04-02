@@ -46,7 +46,7 @@ void ParameterDictionary::init()
 		const QList<CParaDict>& data = PARASETCTL->getParadict();
 		QMap<QString, QStandardItem*> roots;
 		foreach(const CParaDict &val, data) {
-			if (!val.getTypeCode().isEmpty()) {
+			if (val.isTypeData()) {
 				QList<QStandardItem*> items = createRowItems(val, true);
 				if (!items.isEmpty() && !roots.contains(val.getTypeCode())) {
 					roots[val.getTypeCode()] = items[0];
@@ -135,8 +135,8 @@ void ParameterDictionary::slotAdd()
 void ParameterDictionary::slotModify()
 {
 	CParaDict val = getViewData();
-	if (val.getTypeCode().isEmpty() || val.getTypeName().isEmpty()) {
-		ShowWarnMessage(tr("modify"), tr("code or name is empty"), this);
+	if (val.getTypeCode().isEmpty()) {
+		ShowWarnMessage(tr("modify"), tr("type code is empty"), this);
 		return;
 	}
 
@@ -164,14 +164,8 @@ void ParameterDictionary::slotDelete()
 {
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this)) {
 		CParaDict val = getViewData();
-		bool isFind = false;
-		if (val.getParaCode().isEmpty()) {
-			QList<CParaDict> oldValList;
-			isFind = PARASETCTL->getParadict(val.getTypeCode(), oldValList);
-		} else {
-			CParaDict oldVal;
-			isFind = PARASETCTL->getParadict(val.getTypeCode(), val.getParaCode(), oldVal);
-		}
+		CParaDict oldVal;
+		bool isFind = PARASETCTL->getParadict(val.getTypeCode(), val.getParaCode(), oldVal);
 		if (!isFind) {
 			ShowWarnMessage(tr("delete"), tr("The paradict is not existing!"), this);
 			return;
