@@ -11,6 +11,7 @@ class KeyPointDefinition : public BodyWidget
 public:
 	KeyPointDefinition(QWidget *parent = Q_NULLPTR);
 	~KeyPointDefinition();
+	void init();
 
 public slots:
 	void slotSkinChange();

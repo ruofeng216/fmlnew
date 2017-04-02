@@ -17,6 +17,7 @@
 #define  DB_TBNAME_PORTFOLIO "portfolio"				// 组合管理
 #define  DB_TBNAME_PRODUCT "product"					// 产品管理
 #define  DB_TBNAME_PARADICT "paradict"					// 参数字典
+#define  DB_TBNAME_KEYPOINT "keypoint"					// 关键点
 
 #endif // !TB_NAME
 //////////////////////////////////////////////////////////
@@ -67,6 +68,23 @@ constraint pk_product PRIMARY KEY(`productcode`)\
 `paraexplain` text, \
 constraint pk_paradict PRIMARY KEY(`inc`), \
 constraint uk_paradict UNIQUE(`typecode`,`paracode`)\
+);").arg(DB_TBNAME_PARADICT)
+
+#define  DB_TBSQL_KEYPOINT QString("CREATE TABLE IF NOT EXISTS `%1` (\
+`kpcode` varchar(180) NOT NULL, \
+`kpname` varchar(255), \
+`productcode` varchar(180), \
+`productname` varchar(255), \
+`tenor` text NOT NULL, \
+`marketcode` varchar(180), \
+`marketname` varchar(255), \
+`calendar` varchar(180), \
+`convention` varchar(180), \
+`daycount` varchar(180), \
+`spotlag` varchar(180), \
+`couponfrequency` varchar(180), \
+`refindex` varchar(180), \
+constraint pk_markettenor PRIMARY KEY(`kpcode`) \
 );").arg(DB_TBNAME_PARADICT)
 
 #endif // !TB_CREATE

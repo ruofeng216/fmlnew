@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>991</width>
+    <width>972</width>
     <height>475</height>
    </rect>
   </property>
@@ -70,7 +70,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit"/>
+          <widget class="QLineEdit" name="leKPCode"/>
          </item>
         </layout>
        </item>
@@ -102,7 +102,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_2"/>
+          <widget class="QLineEdit" name="leKPName"/>
          </item>
         </layout>
        </item>
@@ -134,7 +134,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_3"/>
+          <widget class="QLineEdit" name="leProductCode"/>
          </item>
         </layout>
        </item>
@@ -166,7 +166,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_4"/>
+          <widget class="QLineEdit" name="leProductName"/>
          </item>
         </layout>
        </item>
@@ -198,36 +198,122 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,1">
+          <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
            <item>
-            <widget class="QRadioButton" name="radioButton">
+            <widget class="QRadioButton" name="rbDay">
              <property name="text">
               <string>天</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QRadioButton" name="radioButton_2">
+            <widget class="QRadioButton" name="rbMonth">
              <property name="text">
               <string>月</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QRadioButton" name="radioButton_3">
+            <widget class="QRadioButton" name="rbYear">
              <property name="text">
               <string>年</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QRadioButton" name="radioButton_4">
-             <property name="text">
-              <string>其他</string>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
              </property>
-            </widget>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
           </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_12">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
+         </property>
+         <property name="bottomMargin">
+          <number>0</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="label_12">
+           <property name="minimumSize">
+            <size>
+             <width>95</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>95</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>开始日期</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="deStart">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_11">
+           <property name="minimumSize">
+            <size>
+             <width>95</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>95</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>结束日期</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QDateEdit" name="deEnd">
+           <property name="calendarPopup">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -235,6 +321,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_7">
          <property name="spacing">
           <number>20</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
          </property>
          <item>
           <widget class="QLabel" name="label_7">
@@ -259,15 +348,8 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox"/>
+          <widget class="QComboBox" name="cbMarket"/>
          </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_8">
-         <property name="spacing">
-          <number>20</number>
-         </property>
          <item>
           <widget class="QLabel" name="label_6">
            <property name="minimumSize">
@@ -291,7 +373,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="dateEdit">
+          <widget class="QDateEdit" name="deCalendar">
            <property name="calendarPopup">
             <bool>true</bool>
            </property>
@@ -303,6 +385,9 @@
         <layout class="QHBoxLayout" name="horizontalLayout_9">
          <property name="spacing">
           <number>20</number>
+         </property>
+         <property name="rightMargin">
+          <number>0</number>
          </property>
          <item>
           <widget class="QLabel" name="label_8">
@@ -327,7 +412,32 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_2"/>
+          <widget class="QComboBox" name="cbConvention"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_10">
+           <property name="minimumSize">
+            <size>
+             <width>95</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>95</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>交割天数</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="cbSpotlag"/>
          </item>
         </layout>
        </item>
@@ -359,7 +469,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBox_3"/>
+          <widget class="QComboBox" name="cbDayCount"/>
          </item>
         </layout>
        </item>
@@ -368,95 +478,6 @@
          <property name="spacing">
           <number>20</number>
          </property>
-         <item>
-          <widget class="QLabel" name="label_10">
-           <property name="minimumSize">
-            <size>
-             <width>95</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>95</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>交割天数</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_4"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_12">
-         <property name="spacing">
-          <number>20</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="label_11">
-           <property name="minimumSize">
-            <size>
-             <width>95</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>95</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>付息频率</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_5"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_13">
-         <property name="spacing">
-          <number>20</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="label_12">
-           <property name="minimumSize">
-            <size>
-             <width>95</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>95</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>参考利率</string>
-           </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QComboBox" name="comboBox_6"/>
-         </item>
         </layout>
        </item>
       </layout>
@@ -486,7 +507,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="pbAdd">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -505,7 +526,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="pbModify">
          <property name="minimumSize">
           <size>
            <width>100</width>
@@ -524,7 +545,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_3">
+        <widget class="QPushButton" name="pbDelete">
          <property name="minimumSize">
           <size>
            <width>100</width>
