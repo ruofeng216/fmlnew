@@ -25,6 +25,18 @@ ParameterDictionary::~ParameterDictionary()
 {
 }
 
+bool ParameterDictionary::isEqual(const CParaDict &newVal)
+{
+	CParaDict oldValdd;
+	return PARASETCTL->getParadict(newVal.getTypeCode(), newVal.getParaCode(), oldValdd) && newVal == oldValdd;
+}
+
+bool ParameterDictionary::isKeyModify(const CParaDict &newVal)
+{
+	CParaDict oldValdd;
+	return !PARASETCTL->getParadict(newVal.getTypeCode(), newVal.getParaCode(), oldValdd);
+}
+
 void ParameterDictionary::init()
 {
 	CParaDict oldVal = getViewData();
@@ -135,18 +147,11 @@ void ParameterDictionary::slotAdd()
 void ParameterDictionary::slotModify()
 {
 	CParaDict val = getViewData();
-	if (val.getTypeCode().isEmpty()) {
-		ShowWarnMessage(tr("modify"), tr("type code is empty"), this);
+	if (this->isKeyModify(val)) {
+		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
 		return;
 	}
-
-	CParaDict oldVal;
-	if (!PARASETCTL->getParadict(val.getTypeCode(), val.getParaCode(), oldVal)) {
-		ShowWarnMessage(tr("modify"), tr("The paradict is not existing!"), this);
-		return;
-	}
-
-	if (oldVal == val) {
+	if (this->isEqual(val)) {
 		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
 		return;
 	}

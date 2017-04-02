@@ -6,13 +6,15 @@
 
 class QStandardItemModel;
 class QStandardItem;
-class ProductManage : public BodyWidget
+class ProductManage : public BodyWidget, public CAction<CProduct>
 {
 	Q_OBJECT
 
 public:
 	ProductManage(QWidget *parent = Q_NULLPTR);
 	~ProductManage();
+	bool isEqual(const CProduct &newVal);
+	bool isKeyModify(const CProduct &newVal);
 	void init();
 
 public slots:

@@ -173,7 +173,7 @@ public:
 		int edate = 0,
 		const QString &annotation = QString());
 	~CProduct();
-	bool operator==(const CProduct &val);
+	bool operator==(const CProduct &val) const;
 	void setCode(const QString &code);
 	const QString& getCode() const;
 	void setName(const QString &name);
@@ -208,7 +208,7 @@ public:
 		const QString &paraName = QString(),
 		const QString &paraExplain = QString());
 	~CParaDict();
-	bool operator==(const CParaDict &val);
+	bool operator==(const CParaDict &val) const;
 	void setTypeCode(const QString &typeCode);
 	const QString& getTypeCode() const;
 	void setTypeName(const QString &typeName);

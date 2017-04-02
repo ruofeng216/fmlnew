@@ -22,6 +22,17 @@ PortfolioManage::~PortfolioManage()
 {
 }
 
+bool PortfolioManage::isKeyModify(const CPortfolio &newVal)
+{
+	CPortfolio oldVal;
+	return !PARASETCTL->getPortfolio(newVal.getPortcode(), oldVal);
+}
+bool PortfolioManage::isEqual(const CPortfolio &newVal)
+{
+	CPortfolio oldVal;
+	return PARASETCTL->getPortfolio(newVal.getPortcode(), oldVal) && oldVal == newVal;
+}
+
 void PortfolioManage::init()
 {
 	{
@@ -100,25 +111,24 @@ void PortfolioManage::modifyPortfolio()
 	int _edate = ui.dateEdit_dateend->date().toJulianDay();
 	QString _annotation = ui.textEdit->toPlainText();
 	CPortfolio cp(_portcode, _portname, _parentcode, _parentname, _sdate, _edate, _annotation);
-	if (!PARASETCTL->isExistCode(_portcode))
-		ShowWarnMessage(tr("modify"), tr("the code is not existing."), this);
-	else
-	{
-		CPortfolio oldVal;
-		if (PARASETCTL->getPortfolio(_portcode, oldVal) && oldVal == cp) {
-			ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
-			return;
-		}
-
-		if (PARASETCTL->setPortfolio(cp))
-		{
-			ShowSuccessMessage(tr("modify"), tr("modify success."), this);
-			// 同步
-			initDateView();
-		}
-		else
-			ShowWarnMessage(tr("modify"), tr("modify fail."), this);
+	if (this->isKeyModify(cp)) {
+		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
+		return;
 	}
+
+	if (this->isEqual(cp)) {
+		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
+		return;
+	}
+
+	if (PARASETCTL->setPortfolio(cp))
+	{
+		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
+		// 同步
+		initDateView();
+	}
+	else
+		ShowWarnMessage(tr("modify"), tr("modify fail."), this);
 }
 void PortfolioManage::delPortfolio()
 {

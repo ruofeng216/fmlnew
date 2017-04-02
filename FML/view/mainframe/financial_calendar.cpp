@@ -23,6 +23,18 @@ FinancialCalendar::~FinancialCalendar()
 {
 }
 
+bool FinancialCalendar::isKeyModify(const CFinancialCalendar &newVal)
+{
+	CFinancialCalendar oldVal;
+	return !PARASETCTL->getFinancialCalendar(newVal.getDate(), oldVal);
+}
+
+bool FinancialCalendar::isEqual(const CFinancialCalendar &newVal)
+{
+	CFinancialCalendar oldVal;
+	return PARASETCTL->getFinancialCalendar(newVal.getDate(), oldVal) && oldVal == newVal;
+}
+
 void FinancialCalendar::init()
 {
 	{
@@ -103,13 +115,12 @@ void FinancialCalendar::modifyHoliday()
 	if (tr("holiday") == strDayType) e = CFinancialCalendar::eHoliday;
 	CFinancialCalendar fc(_y, _d, e, strDayInfo);
 
-	CFinancialCalendar oldVal;
-	if (!PARASETCTL->getFinancialCalendar(fc.getDate(), oldVal)) {
-		ShowWarnMessage(tr("modify"), tr("the time does not exist."), this);
+	if (this->isKeyModify(fc)) {
+		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
 		return;
 	}
 
-	if (oldVal == fc) {
+	if (this->isEqual(fc)) {
 		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
 		return;
 	}
@@ -117,7 +128,6 @@ void FinancialCalendar::modifyHoliday()
 	if (PARASETCTL->setFinancialCalendar(fc))
 	{
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
-		// Í¬²½
 		initDateView();
 		expand(_y);
 	} else {

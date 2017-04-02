@@ -6,13 +6,16 @@
 
 class QStandardItemModel;
 class QStandardItem;
-class ParameterDictionary : public BodyWidget
+class ParameterDictionary : public BodyWidget, public CAction<CParaDict>
 {
 	Q_OBJECT
 
 public:
 	ParameterDictionary(QWidget *parent = Q_NULLPTR);
 	~ParameterDictionary();
+	bool isEqual(const CParaDict &newVal);
+	bool isKeyModify(const CParaDict &newVal);
+
 	void init();
 	CParaDict getViewData();
 	void setViewData(const CParaDict &val);

@@ -7,14 +7,15 @@
 class QStandardItemModel;
 class QStandardItem;
 // 组合管理
-class PortfolioManage : public BodyWidget
+class PortfolioManage : public BodyWidget, public CAction<CPortfolio>
 {
 	Q_OBJECT
 
 public:
 	PortfolioManage(QWidget *parent = Q_NULLPTR);
 	~PortfolioManage();
-	
+	bool isKeyModify(const CPortfolio &newVal);
+	bool isEqual(const CPortfolio &newVal);
 	void init();
 
 public slots:

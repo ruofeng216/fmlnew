@@ -7,13 +7,9 @@ class CAction
 {
 public:
 	CAction() {}
-	~CAction() {}
-	void setCurData(const T &val) { m_CurData = val; }
-	const T &getCurData() const { return m_CurData; }
-	bool isEqual(const T &val) { return m_CurData == val; }
-	bool isKeyModify(const T &val) = 0;
-private:
-	T m_CurData;
+	virtual ~CAction() {}
+	virtual bool isEqual(const T &newVal) = 0;
+	virtual bool isKeyModify(const T &newVal) = 0;
 };
 
 class BodyWidget : public QWidget

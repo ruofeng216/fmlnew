@@ -2,18 +2,20 @@
 
 #include "ui_financial_calendar.h"
 #include "bodywidget.h"
+#include "util/datatype.h"
 
 // ½ğÈÚÈÕÀú
 class QStandardItemModel;
 class QStandardItem;
-class FinancialCalendar : public BodyWidget
+class FinancialCalendar : public BodyWidget, public CAction<CFinancialCalendar>
 {
 	Q_OBJECT
 
 public:
 	FinancialCalendar(QWidget *parent = Q_NULLPTR);
 	~FinancialCalendar();
-
+	bool isKeyModify(const CFinancialCalendar &newVal);
+	bool isEqual(const CFinancialCalendar &newVal);
 	void init();
 
 public slots:

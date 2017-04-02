@@ -369,7 +369,7 @@ CProduct::~CProduct()
 
 }
 
-bool CProduct::operator==(const CProduct &val)
+bool CProduct::operator==(const CProduct &val) const
 {
 	return m_code == val.getCode() &&
 		m_name == val.getName() &&
@@ -460,7 +460,7 @@ CParaDict::~CParaDict()
 {
 }
 
-bool CParaDict::operator==(const CParaDict &val)
+bool CParaDict::operator==(const CParaDict &val) const
 {
 	return m_typeCode == val.getTypeCode() && 
 		m_typeName == val.getTypeName() &&

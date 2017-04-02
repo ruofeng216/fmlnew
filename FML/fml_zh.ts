@@ -55,109 +55,113 @@
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="52"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="79"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="103"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="136"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="162"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="64"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="91"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="115"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="146"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="172"/>
         <source>holiday</source>
         <translation type="unfinished">假日</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="52"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="64"/>
         <source>workday</source>
         <translation type="unfinished">工作日</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="63"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="82"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="87"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="93"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="75"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="94"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="99"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="105"/>
         <source>add</source>
         <translation type="unfinished">增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="65"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="108"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="113"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="77"/>
         <location filename="view/mainframe/financial_calendar.cpp" line="119"/>
         <location filename="view/mainframe/financial_calendar.cpp" line="124"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="130"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="134"/>
         <source>modify</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="67"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="129"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="142"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="148"/>
-        <location filename="view/mainframe/financial_calendar.cpp" line="151"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="79"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="139"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="152"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="158"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="161"/>
         <source>delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="82"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="94"/>
         <source>the time is existing.</source>
         <translation type="unfinished">此日期已存在。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="87"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="99"/>
         <source>add success.</source>
         <translation type="unfinished">新增成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="93"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="105"/>
         <source>add fail.</source>
         <translation type="unfinished">新增失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="108"/>
         <source>the time does not exist.</source>
-        <translation type="unfinished">此日期不存在。</translation>
+        <translation type="obsolete">此日期不存在。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="113"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="119"/>
+        <source>The key is modify!</source>
+        <translation>主键被修改了！</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/financial_calendar.cpp" line="124"/>
         <source>Records do not change, do not need to modify!</source>
         <translation>记录没有发生变化，不需要修改!</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="119"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="130"/>
         <source>modify success.</source>
-        <translation type="unfinished">修改成功。</translation>
+        <translation>修改成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="124"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="134"/>
         <source>modify fail.</source>
-        <translation type="unfinished">修改失败。</translation>
+        <translation>修改失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="129"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="139"/>
         <source>confirm to delete.</source>
-        <translation type="unfinished">请确认是否删除？</translation>
+        <translation>请确认是否删除？</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="142"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="152"/>
         <source>delete fail.</source>
-        <translation type="unfinished">删除失败。</translation>
+        <translation>删除失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="148"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="158"/>
         <source>no day dist.</source>
-        <translation type="unfinished">不存在此交易日信息。</translation>
+        <translation>不存在此交易日信息。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="151"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="161"/>
         <source>delete success.</source>
-        <translation type="unfinished">删除成功。</translation>
+        <translation>删除成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="162"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="172"/>
         <source>hyear</source>
-        <translation type="unfinished">年份</translation>
+        <translation>年份</translation>
     </message>
     <message>
-        <location filename="view/mainframe/financial_calendar.cpp" line="162"/>
+        <location filename="view/mainframe/financial_calendar.cpp" line="172"/>
         <source>holidayinfo</source>
-        <translation type="unfinished">假日说明</translation>
+        <translation>假日说明</translation>
     </message>
 </context>
 <context>
@@ -584,99 +588,101 @@
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="35"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="47"/>
         <source>paracode</source>
         <translation>参数代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="35"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="47"/>
         <source>paraname</source>
         <translation>参数名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="35"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="47"/>
         <source>paraexplain</source>
         <translation>说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="116"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="122"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="127"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="130"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="129"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="135"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="140"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="143"/>
         <source>add</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="116"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="138"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="129"/>
         <source>code or name is empty</source>
         <translation>产品代码或者产品名称不能为空！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="122"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="135"/>
         <source>The para code already exists</source>
         <translation>此参数字典已存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="127"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="140"/>
         <source>add success.</source>
         <translation>新增成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="130"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="143"/>
         <source>add fail.</source>
         <translation>新增失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="138"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="144"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="149"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="154"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="158"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="151"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="155"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="160"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="164"/>
         <source>modify</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="144"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="168"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="151"/>
+        <source>The key is modify!</source>
+        <translation>主键被修改了！</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="175"/>
         <source>The paradict is not existing!</source>
         <translation>此参数字典不存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="149"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="155"/>
         <source>Records do not change, do not need to modify!</source>
         <translation>记录没有发生变化，不需要修改!</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="154"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="160"/>
         <source>modify success.</source>
         <translation>修改成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="158"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="164"/>
         <source>modify fail.</source>
         <translation>修改失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="164"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="168"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="172"/>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="176"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="170"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="175"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="179"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="182"/>
         <source>delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="164"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="170"/>
         <source>confirm to delete.</source>
         <translation>请确认是否删除？</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="172"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="179"/>
         <source>delete success.</source>
         <translation>删除成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/parameter_dictionary.cpp" line="176"/>
+        <location filename="view/mainframe/parameter_dictionary.cpp" line="182"/>
         <source>delete fail.</source>
         <translation>删除失败。</translation>
     </message>
@@ -734,247 +740,255 @@
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="54"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="75"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="80"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="85"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="65"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="86"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="91"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="96"/>
         <source>add</source>
         <translation type="unfinished">增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="56"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="94"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="104"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="109"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="67"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="105"/>
         <location filename="view/mainframe/portfolio_manage.cpp" line="115"/>
         <location filename="view/mainframe/portfolio_manage.cpp" line="120"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="126"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="131"/>
         <source>modify</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="58"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="125"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="132"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="138"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="141"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="69"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="135"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="142"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="148"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="151"/>
         <source>delete</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="75"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="86"/>
         <source>the code is existing.</source>
         <translation type="unfinished">代码已存在。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="80"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="91"/>
         <source>add success.</source>
         <translation type="unfinished">新增成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="85"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="96"/>
         <source>add fail.</source>
         <translation type="unfinished">新增失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="94"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="105"/>
         <source>the code parent is invalid.do not choose its child or self.</source>
         <translation type="unfinished">代码的父级代码不合法。请不要设置为子代码或自己。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="104"/>
         <source>the code is not existing.</source>
-        <translation type="unfinished">代码不存在。</translation>
+        <translation type="obsolete">代码不存在。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="109"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="115"/>
+        <source>The key is modify!</source>
+        <translation>主键被修改了！</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="120"/>
         <source>Records do not change, do not need to modify!</source>
         <translation>记录没有发生变化，不需要修改!</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="115"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="126"/>
         <source>modify success.</source>
-        <translation type="unfinished">修改成功。</translation>
+        <translation>修改成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="120"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="131"/>
         <source>modify fail.</source>
-        <translation type="unfinished">修改失败。</translation>
+        <translation>修改失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="125"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="135"/>
         <source>confirm to delete.</source>
-        <translation type="unfinished">请确认是否删除？</translation>
+        <translation>请确认是否删除？</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="132"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="142"/>
         <source>delete fail.</source>
-        <translation type="unfinished">删除失败。</translation>
+        <translation>删除失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="138"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="148"/>
         <source>no code.</source>
-        <translation type="unfinished">不存在此code。</translation>
+        <translation>不存在此code。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="141"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="151"/>
         <source>delete success.</source>
-        <translation type="unfinished">删除成功。</translation>
+        <translation>删除成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="151"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="161"/>
         <source>portcode</source>
-        <translation type="unfinished">组合代码</translation>
+        <translation>组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="151"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="161"/>
         <source>portname</source>
-        <translation type="unfinished">组合名称</translation>
+        <translation>组合名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="151"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="161"/>
         <source>parentcode</source>
-        <translation type="unfinished">父组合代码</translation>
+        <translation>父组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="152"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="162"/>
         <source>parentname</source>
-        <translation type="unfinished">父组合名称</translation>
+        <translation>父组合名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="152"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="162"/>
         <source>sdate</source>
-        <translation type="unfinished">开始日期</translation>
+        <translation>开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="152"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="162"/>
         <source>edate</source>
-        <translation type="unfinished">关闭日期</translation>
+        <translation>关闭日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="152"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="162"/>
         <source>annotation</source>
-        <translation type="unfinished">注释</translation>
+        <translation>注释</translation>
     </message>
 </context>
 <context>
     <name>ProductManage</name>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <location filename="view/mainframe/product_manage.cpp" line="48"/>
         <source>productcode</source>
         <translation>产品代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <location filename="view/mainframe/product_manage.cpp" line="48"/>
         <source>productname</source>
         <translation>产品名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="36"/>
+        <location filename="view/mainframe/product_manage.cpp" line="48"/>
         <source>parentcode</source>
         <translation>上级产品代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="37"/>
+        <location filename="view/mainframe/product_manage.cpp" line="49"/>
         <source>parentname</source>
         <translation>上级产品名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="37"/>
+        <location filename="view/mainframe/product_manage.cpp" line="49"/>
         <source>sdate</source>
         <translation>开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="37"/>
+        <location filename="view/mainframe/product_manage.cpp" line="49"/>
         <source>edate</source>
         <translation>结束日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="37"/>
+        <location filename="view/mainframe/product_manage.cpp" line="49"/>
         <source>annotation</source>
         <translation>说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="84"/>
-        <location filename="view/mainframe/product_manage.cpp" line="98"/>
-        <location filename="view/mainframe/product_manage.cpp" line="104"/>
-        <location filename="view/mainframe/product_manage.cpp" line="109"/>
-        <location filename="view/mainframe/product_manage.cpp" line="112"/>
+        <location filename="view/mainframe/product_manage.cpp" line="96"/>
+        <location filename="view/mainframe/product_manage.cpp" line="110"/>
+        <location filename="view/mainframe/product_manage.cpp" line="116"/>
+        <location filename="view/mainframe/product_manage.cpp" line="121"/>
+        <location filename="view/mainframe/product_manage.cpp" line="124"/>
         <source>add</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="86"/>
-        <location filename="view/mainframe/product_manage.cpp" line="120"/>
-        <location filename="view/mainframe/product_manage.cpp" line="126"/>
-        <location filename="view/mainframe/product_manage.cpp" line="131"/>
-        <location filename="view/mainframe/product_manage.cpp" line="136"/>
-        <location filename="view/mainframe/product_manage.cpp" line="139"/>
+        <location filename="view/mainframe/product_manage.cpp" line="98"/>
+        <location filename="view/mainframe/product_manage.cpp" line="132"/>
+        <location filename="view/mainframe/product_manage.cpp" line="137"/>
+        <location filename="view/mainframe/product_manage.cpp" line="142"/>
+        <location filename="view/mainframe/product_manage.cpp" line="147"/>
+        <location filename="view/mainframe/product_manage.cpp" line="150"/>
         <source>modify</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="88"/>
-        <location filename="view/mainframe/product_manage.cpp" line="145"/>
-        <location filename="view/mainframe/product_manage.cpp" line="149"/>
-        <location filename="view/mainframe/product_manage.cpp" line="153"/>
+        <location filename="view/mainframe/product_manage.cpp" line="100"/>
         <location filename="view/mainframe/product_manage.cpp" line="156"/>
+        <location filename="view/mainframe/product_manage.cpp" line="160"/>
+        <location filename="view/mainframe/product_manage.cpp" line="164"/>
+        <location filename="view/mainframe/product_manage.cpp" line="167"/>
         <source>delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="98"/>
-        <location filename="view/mainframe/product_manage.cpp" line="120"/>
+        <location filename="view/mainframe/product_manage.cpp" line="110"/>
+        <location filename="view/mainframe/product_manage.cpp" line="132"/>
         <source>code or name is empty</source>
         <translation>产品代码或者产品名称不能为空！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="104"/>
+        <location filename="view/mainframe/product_manage.cpp" line="116"/>
         <source>The product already exists</source>
         <translation>此产品已经存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="109"/>
+        <location filename="view/mainframe/product_manage.cpp" line="121"/>
         <source>add success.</source>
         <translation>新增成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="112"/>
+        <location filename="view/mainframe/product_manage.cpp" line="124"/>
         <source>add fail.</source>
         <translation>新增失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="126"/>
-        <location filename="view/mainframe/product_manage.cpp" line="149"/>
+        <location filename="view/mainframe/product_manage.cpp" line="137"/>
+        <source>The key is modify!</source>
+        <translation>主键被修改了！</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="160"/>
         <source>The product is not existing!</source>
         <translation>此产品不存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="131"/>
+        <location filename="view/mainframe/product_manage.cpp" line="142"/>
         <source>Records do not change, do not need to modify!</source>
         <translation>记录没有发生变化，不需要修改!</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="136"/>
+        <location filename="view/mainframe/product_manage.cpp" line="147"/>
         <source>modify success.</source>
         <translation>修改成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="139"/>
+        <location filename="view/mainframe/product_manage.cpp" line="150"/>
         <source>modify fail.</source>
         <translation>修改失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="145"/>
+        <location filename="view/mainframe/product_manage.cpp" line="156"/>
         <source>confirm to delete.</source>
         <translation>请确认是否删除？</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="153"/>
+        <location filename="view/mainframe/product_manage.cpp" line="164"/>
         <source>delete success.</source>
         <translation>删除成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="156"/>
+        <location filename="view/mainframe/product_manage.cpp" line="167"/>
         <source>delete fail.</source>
         <translation>删除失败。</translation>
     </message>

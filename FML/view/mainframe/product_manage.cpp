@@ -27,6 +27,18 @@ ProductManage::~ProductManage()
 {
 }
 
+bool ProductManage::isEqual(const CProduct &newVal)
+{
+	CProduct oldVal;
+	return PARASETCTL->getProduct(newVal.getCode(), oldVal) && newVal == oldVal;
+}
+
+bool ProductManage::isKeyModify(const CProduct &newVal)
+{
+	CProduct oldVal;
+	return !PARASETCTL->getProduct(newVal.getCode(), oldVal);
+}
+
 void ProductManage::init()
 {
 	CProduct oldVal = getViewProduct();
@@ -121,13 +133,12 @@ void ProductManage::slotModify()
 		return;
 	}
 
-	CProduct oldVal;
-	if (!PARASETCTL->getProduct(val.getCode(), oldVal)) {
-		ShowWarnMessage(tr("modify"), tr("The product is not existing!"), this);
+	if (this->isKeyModify(val)) {
+		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
 		return;
 	}
 
-	if (oldVal == val) {
+	if (this->isEqual(val)) {
 		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
 		return;
 	}
@@ -164,9 +175,11 @@ void ProductManage::slotTreeDoubleClicked(const QModelIndex &index)
 	QString name = index.sibling(index.row(), 1).data().toString();
 	QString parentCode = index.sibling(index.row(), 2).data().toString();
 	QString parentName = index.sibling(index.row(), 3).data().toString();
-	int sdate = index.sibling(index.row(), 4).data().toInt();
-	int edate = index.sibling(index.row(), 5).data().toInt();
+	QString strStartDate = index.sibling(index.row(), 4).data().toString();
+	QString strEndDate = index.sibling(index.row(), 5).data().toString();
 	QString annotation = index.sibling(index.row(), 6).data().toString();
+	int sdate = QDate::fromString(strStartDate, "yyyy-MM-dd").toJulianDay();
+	int edate = QDate::fromString(strEndDate, "yyyy-MM-dd").toJulianDay();
 	CProduct val(code, name, parentCode, parentName, sdate, edate, annotation);
 	setViewProduct(val);
 }
@@ -250,7 +263,7 @@ void ProductManage::setViewProduct(const CProduct &val)
 	ui.leName->setText(val.getName());
 	ui.cbParentCode->setCurrentText(val.getParentCode());
 	ui.cbParentName->setCurrentText(val.getParentName());
-	ui.deStart->setDate(QDate::fromString(QString::number(val.getSdate()), "yyyy-MM-dd"));
-	ui.deEnd->setDate(QDate::fromString(QString::number(val.getEdate()), "yyyy-MM-dd"));
+	ui.deStart->setDate(QDate::fromJulianDay(val.getSdate()));
+	ui.deEnd->setDate(QDate::fromJulianDay(val.getEdate()));
 	ui.pteAnnotation->setPlainText(val.getAnnotation());
 }
