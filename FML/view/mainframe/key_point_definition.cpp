@@ -74,7 +74,7 @@ void KeyPointDefinition::init()
 		QList<CParaDict> paraList;
 		if (PARASETCTL->getAllParadict(typeCode, paraList)) {
 			foreach(const CParaDict &para, paraList) {
-				cb->addItem(para.getParaName(), para.getParaCode());
+				cb->addItem(para.getParaName().trimmed(), para.getParaCode().trimmed());
 			}
 		}
 	};
@@ -135,19 +135,69 @@ void KeyPointDefinition::slotModify()
 
 void KeyPointDefinition::slotDelete()
 {
+	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this)) {
+		CKeypoint val = getViewData();
+		CKeypoint oldVal;
+		if (!YIELDCURVECTL->getKeyPoint(val.getKpcode(), oldVal)) {
+			ShowWarnMessage(tr("delete"), tr("The kpcode is not existing!"), this);
+			return;
+		}
 
+		if (YIELDCURVECTL->removeKeyPoint(val.getKpcode())) {
+			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
+			init();
+		} else {
+			ShowErrorMessage(tr("delete"), tr("delete fail."), this);
+		}
+	}
 }
 
 void KeyPointDefinition::slotTreeDoubleClicked(const QModelIndex &index)
 {
+	auto getTextData = [this, &index](int col, QString &text, QString &data) {
+		text = "";
+		data = "";
+		QModelIndex sibling = index.sibling(index.row(), col);
+		QStandardItem *item = m_model->itemFromIndex(sibling);
+		if (item) {
+			data = item->data().toString();
+			text = item->text();
+		}
+	};
+
+	QString text, data; // text:UI上展示的名称，data：对应的代码
 	CKeypoint val;
-	val.setKpcode(index.sibling(index.row(), 0).data().toString());
-	val.setKpname(index.sibling(index.row(), 1).data().toString());
-	val.setProductName(index.sibling(index.row(), 2).data().toString());
-	val.setTenor(index.sibling(index.row(), 3).data().toString());
-	val.setCalendar(index.sibling(index.row(), 4).data().toString());
-	val.setConvention(index.sibling(index.row(), 5).data().toString());
-	val.setDayCount(index.sibling(index.row(), 6).data().toString());
+	QString startDate, endDate;
+	QModelIndex parentIndex = index.parent();
+	if (parentIndex.isValid()) {
+		getTextData(0, text, data);
+		val.setKpcode(text);
+		getTextData(1, text, data);
+		val.setKpname(text);
+		getTextData(2, text, data);
+		val.setProductCode(data);
+		val.setProductName(text);
+		getTextData(3, text, data);
+		val.setTenor(text);
+		getTextData(4, text, data);
+		val.setCalendar(data); // 存放code， 显示name
+		getTextData(5, text, data);
+		val.setConvention(data);
+		getTextData(6, text, data);
+		val.setDayCount(data);
+		getTextData(7, text, data); // startDate
+		startDate = text;
+		getTextData(8, text, data); // endDate
+		endDate = text;
+	} else {
+		getTextData(0, text, data);
+		val.setMarketCode(data);
+		val.setMarketName(text);
+	}
+
+	setViewData(val);
+	ui.deStart->setDate(QDate::fromString(startDate, "yyyy-MM-dd"));
+	ui.deEnd->setDate(QDate::fromString(endDate, "yyyy-MM-dd"));
 }
 
 void KeyPointDefinition::setViewData(const CKeypoint &val)
@@ -169,11 +219,11 @@ void KeyPointDefinition::setViewData(const CKeypoint &val)
 	} else {
 		qWarning() << "get product faild, code:" << val.getProductCode();
 	}
-	ui.cbMarket->setCurrentText(getParaNameFromCode(val.getMarketCode()));
-	ui.cbCalendar->setCurrentText(getParaNameFromCode(val.getCalendar()));
-	ui.cbConvention->setCurrentText(getParaNameFromCode(val.getConvention()));
-	ui.cbSpotlag->setCurrentText(getParaNameFromCode(val.getSpotlat()));
-	ui.cbDayCount->setCurrentText(getParaNameFromCode(val.getDayCount()));
+	ui.cbMarket->setCurrentText(getParaNameFromCode("MarketType", val.getMarketCode()));
+	ui.cbCalendar->setCurrentText(getParaNameFromCode("Calendar", val.getCalendar()));
+	ui.cbConvention->setCurrentText(getParaNameFromCode("Convention", val.getConvention()));
+	ui.cbSpotlag->setCurrentText(getParaNameFromCode("CouponFrequency", val.getSpotlat()));
+	ui.cbDayCount->setCurrentText(getParaNameFromCode("DayCount", val.getDayCount()));
 }
 
 CKeypoint KeyPointDefinition::getViewData()
@@ -217,11 +267,11 @@ QString KeyPointDefinition::spliceTenor(int num, QString unit)
 	return QString("%1%2").arg(num).arg(unit.toLower());
 }
 
-QString KeyPointDefinition::getParaNameFromCode(const QString &code)
+QString KeyPointDefinition::getParaNameFromCode(const QString &typecode, const QString &paracode)
 {
-	CProduct product;
-	if (PARASETCTL->getProduct(code, product)) {
-		return product.getName();
+	CParaDict paradict;
+	if (PARASETCTL->getParadict(typecode, paracode, paradict)) {
+		return paradict.getParaName();
 	}
 	return "";
 }
@@ -229,22 +279,19 @@ QList<QStandardItem *> KeyPointDefinition::createParentRowItems(const CKeypoint 
 {
 	QList<QStandardItem *> result;
 	QStandardItem *marketName = new QStandardItem(val.getMarketName());
-	marketName->setData(val.getMarketCode(), Qt::UserRole);
+	marketName->setData(val.getMarketCode());
 	result.push_back(marketName);
 	return result;
 }
 
 QList<QStandardItem *> KeyPointDefinition::createChildtRowItems(const CKeypoint &val)
 {
-	QList<QStandardItem *> result;
-	QStandardItem *kpcode = new QStandardItem(val.getKpcode());
-	QStandardItem *kpname = new QStandardItem(val.getKpname());
-	QStandardItem *productName = new QStandardItem(val.getProductName());
-	QStandardItem *tendor = new QStandardItem(val.getTenor());
-	QStandardItem *calendar = new QStandardItem(val.getCalendar());
-	QStandardItem *convention = new QStandardItem(val.getConvention());
-	QStandardItem *dayCount = new QStandardItem(val.getDayCount());
-	QStandardItem *spotlat = new QStandardItem(val.getSpotlat());
+	auto createItem = [](const QString &text, const QString &data = "") -> QStandardItem* {
+		QStandardItem *item = new QStandardItem(text);
+		item->setData(data);
+		return item;
+	};
+
 	QString strStartDate, strEndDate;
 	CProduct product;
 	if (PARASETCTL->getProduct(val.getProductCode(), product)) {
@@ -253,17 +300,16 @@ QList<QStandardItem *> KeyPointDefinition::createChildtRowItems(const CKeypoint 
 	} else {
 		qWarning() << "get product failed, code:" << val.getProductCode();
 	}
-	QStandardItem *startDate = new QStandardItem(strStartDate);
-	QStandardItem *endDate = new QStandardItem(strEndDate);
-	result.push_back(kpcode);
-	result.push_back(kpname);
-	result.push_back(productName);
-	result.push_back(tendor);
-	result.push_back(calendar);
-	result.push_back(convention);
-	result.push_back(dayCount);
-	result.push_back(spotlat);
-	result.push_back(startDate);
-	result.push_back(endDate);
+
+	QList<QStandardItem *> result;
+	result.push_back(createItem(val.getKpcode()));
+	result.push_back(createItem(val.getKpname()));
+	result.push_back(createItem(val.getProductName(), val.getProductCode()));
+	result.push_back(createItem(val.getTenor()));
+	result.push_back(createItem(getParaNameFromCode("Calendar", val.getCalendar()), val.getCalendar()));
+	result.push_back(createItem(getParaNameFromCode("Convention", val.getConvention()), val.getConvention()));
+	result.push_back(createItem(getParaNameFromCode("DayCount", val.getDayCount()), val.getDayCount()));
+	result.push_back(createItem(strStartDate));
+	result.push_back(createItem(strEndDate));
 	return result;
 }

@@ -27,7 +27,7 @@ private:
 	CKeypoint getViewData();
 	QPair<int, QString> parseTenor(const QString& tenor);
 	QString spliceTenor(int num, QString unit);
-	QString getParaNameFromCode(const QString &code);
+	QString getParaNameFromCode(const QString &typecode, const QString &paracode);
 	QList<QStandardItem *> createParentRowItems(const CKeypoint &val);
 	QList<QStandardItem *> createChildtRowItems(const CKeypoint &val);
 
