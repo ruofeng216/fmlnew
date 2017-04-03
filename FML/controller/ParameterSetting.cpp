@@ -292,7 +292,7 @@ bool CParameterSetting::getAllParadict(const QString &typeCode, QList<CParaDict>
 	}
 	const QList<CParaDict> &items = this->getParadict();
 	foreach(const CParaDict &item, items) {
-		if (item.getTypeCode() == typeCode) {
+		if (item.getTypeCode().toLower() == typeCode.toLower() && !item.isTypeData()) {
 			valList.push_back(item);
 		}
 	}

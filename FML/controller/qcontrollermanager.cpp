@@ -2,7 +2,7 @@
 #include "LoginController.h"
 #include "globalsetcontroller.h"
 #include "ParameterSetting.h"
-
+#include "YieldCurveDefinition.h"
 #include "DemoController.h"
 
 
@@ -13,6 +13,7 @@ QControllerManager::QControllerManager(QObject *parent)
 	, m_pDemo(NULL)
 	, m_pGlobalSetting(NULL)
 	, m_pParameterSetting(NULL)
+	, m_pYieldCurveDefinition(NULL)
 {
 }
 
@@ -34,7 +35,11 @@ QControllerManager::~QControllerManager()
 		m_pParameterSetting = NULL;
 	}
 
-
+	if (m_pYieldCurveDefinition)
+	{
+		delete m_pYieldCurveDefinition;
+		m_pYieldCurveDefinition = NULL;
+	}
 
 	if (m_pDemo)
 	{
@@ -94,6 +99,14 @@ IParameterSetting *QControllerManager::getParameterSetting()
 	return m_pParameterSetting;
 }
 
+IYieldCurveDefinition* QControllerManager::getYieldCurveDefinition()
+{
+	if (m_pYieldCurveDefinition == NULL)
+	{
+		m_pYieldCurveDefinition = new CYieldCurveDefinition();
+	}
+	return m_pYieldCurveDefinition;
+}
 
 IDemo *QControllerManager::getDemoInst()
 {

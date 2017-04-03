@@ -198,7 +198,7 @@
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0">
+          <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0,0">
            <property name="spacing">
             <number>10</number>
            </property>
@@ -209,9 +209,15 @@
             <number>0</number>
            </property>
            <item>
+            <widget class="QLineEdit" name="leTenor"/>
+           </item>
+           <item>
             <widget class="QRadioButton" name="rbDay">
              <property name="text">
               <string>天</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
@@ -373,11 +379,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="deCalendar">
-           <property name="calendarPopup">
-            <bool>true</bool>
-           </property>
-          </widget>
+          <widget class="QComboBox" name="cbCalendar"/>
          </item>
         </layout>
        </item>

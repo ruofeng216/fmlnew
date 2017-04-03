@@ -71,7 +71,10 @@ class IYieldCurveDefinition
 public:
 	virtual ~IYieldCurveDefinition() = 0;
 	// 关键期限定义
-
+	virtual const QMap<QString, CKeypoint>& getKeyPoint() = 0;
+	virtual bool getKeyPoint(const QString &kpcode, CKeypoint &val) = 0;
+	virtual bool setKeyPoint(const CKeypoint &val) = 0;
+	virtual bool removeKeyPoint(const QString &kpcode) = 0;
 };
 
 
