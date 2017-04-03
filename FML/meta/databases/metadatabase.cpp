@@ -202,6 +202,7 @@ bool MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val)
 	return true;
 }
 
+//////////////////////////////////产品管理////////////////////////////////////////
 bool MetaDatabase::getProduct(QMap<QString, CProduct> &val)
 {
 	FUNCLOG("MetaDatabase::getProduct(QMap<QString, CProduct> &val)");
@@ -267,6 +268,7 @@ bool MetaDatabase::removeProduct(const QStringList &codeList)
 	return false;
 }
 
+///////////////////////////////////参数字典///////////////////////////////////////
 bool MetaDatabase::getParadict(QList<CParaDict> &val)
 {
 	FUNCLOG("MetaDatabase::getParadict(QList<CParaDict> &val)");
@@ -361,6 +363,94 @@ bool MetaDatabase::removeParadict(const QStringList &typeCodeList)
 	}
 	allParamList << typeList;
 	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteParadictByTypeCode, allParamList)) {
+		return true;
+	}
+	return false;
+}
+
+/////////////////////////////////////关键点定义/////////////////////////////////////
+bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val)
+{
+	FUNCLOG("MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QVariantList paramList;
+	QStringList fieldList;
+	fieldList << "kpcode" << "kpname" << "productcode" << "productname" << "tenor" << "marketcode" << "marketname" << "calendar" << "convention" << "daycount" << "spotlag" << "couponfrequency" << "refindex";
+	QList<QVariantList> results;
+	m_DbMgr->QueryFields(DB_SQL_SelectKeypoint, paramList, fieldList, results);
+	if (results.isEmpty()) {
+		return false;
+	}
+	for (int i = 0; i < results.size(); i++) {
+		const QVariantList &valList = results[i];
+		if (valList.size() != 13) {
+			continue;
+		}
+		CKeypoint keypoint;
+		keypoint.setKpcode(valList.at(0).toString());
+		keypoint.setKpname(valList.at(1).toString());
+		keypoint.setProductCode(valList.at(2).toString());
+		keypoint.setProductName(valList.at(3).toString());
+		keypoint.setTenor(valList.at(4).toString());
+		keypoint.setMarketCode(valList.at(5).toString());
+		keypoint.setMarketName(valList.at(6).toString());
+		keypoint.setCalendar(valList.at(7).toString());
+		keypoint.setConvention(valList.at(8).toString());
+		keypoint.setDayCount(valList.at(9).toString());
+		keypoint.setSpotlat(valList.at(10).toString());
+		keypoint.setCouponfrequency(valList.at(11).toString());
+		keypoint.setRefindex(valList.at(12).toString());
+		if (keypoint.getKpcode().isEmpty() || keypoint.getTenor().isEmpty()) {
+			continue;
+		}
+		val[keypoint.getKpcode()] = keypoint;
+	}
+	return true;
+
+}
+bool MetaDatabase::setKeypoint(const QList<CKeypoint> &valList)
+{
+	FUNCLOG("MetaDatabase::setKeypoint(const QList<CKeypoint> &valList)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	QList<QVariantList> allParamList;
+	QVariantList kpcodeList, kpnameList, productcodeList, productnameList, tenorList, marketcodeList, 
+		marketnameList, calendarList, conventionList, daycountList, spotlagList, couponfrequencyList, refindexList;
+	foreach(const CKeypoint &val, valList) {
+		kpcodeList << val.getKpcode();
+		kpnameList << val.getKpname();
+		productcodeList << val.getProductCode();
+		productnameList << val.getProductName();
+		tenorList << val.getTenor();
+		marketcodeList << val.getMarketCode();
+		marketnameList << val.getMarketName();
+		calendarList << val.getCalendar();
+		conventionList << val.getConvention();
+		daycountList << val.getDayCount();
+		spotlagList << val.getSpotlat();
+		couponfrequencyList << val.getCouponfrequency();
+		refindexList << val.getRefindex();
+	}
+	allParamList << kpcodeList << kpnameList << productcodeList << productnameList << tenorList << marketcodeList
+		<< marketnameList << calendarList << conventionList << daycountList << spotlagList << couponfrequencyList << refindexList;
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_ReplaceKeypoint, allParamList)) {
+		return true;
+	}
+	return false;
+}
+bool MetaDatabase::removeKeypoint(const QStringList &valList)
+{
+	FUNCLOG("MetaDatabase::removeKeypoint(const QStringList &valList)");
+	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
+	if (valList.isEmpty()) {
+		return false;
+	}
+	QList<QVariantList> allParamList;
+	QVariantList kpcodeList;
+	for (int i = 0; i < valList.size(); i++) {
+		kpcodeList << valList[i];
+	}
+	allParamList << kpcodeList;
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteKeypoint, allParamList)) {
 		return true;
 	}
 	return false;

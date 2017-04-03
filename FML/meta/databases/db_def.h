@@ -75,7 +75,7 @@ constraint uk_paradict UNIQUE(`typecode`,`paracode`)\
 `kpname` varchar(255), \
 `productcode` varchar(180), \
 `productname` varchar(255), \
-`tenor` text NOT NULL, \
+`tenor` varchar(180) NOT NULL, \
 `marketcode` varchar(180), \
 `marketname` varchar(255), \
 `calendar` varchar(180), \
@@ -85,7 +85,7 @@ constraint uk_paradict UNIQUE(`typecode`,`paracode`)\
 `couponfrequency` varchar(180), \
 `refindex` varchar(180), \
 constraint pk_markettenor PRIMARY KEY(`kpcode`) \
-);").arg(DB_TBNAME_PARADICT)
+);").arg(DB_TBNAME_KEYPOINT)
 
 #endif // !TB_CREATE
 /////////////////////////////////////////////////////////////
@@ -117,6 +117,11 @@ constraint pk_markettenor PRIMARY KEY(`kpcode`) \
 #define DB_SQL_ReplaceParadict QString("replace into %1(typecode,typename,paracode,paraname,paraexplain) values(?,?,?,?,?);").arg(DB_TBNAME_PARADICT)
 #define DB_SQL_DeleteParadictByTypeParaCode QString("delete from %1 where `typecode`=? and `paracode`=?;").arg(DB_TBNAME_PARADICT)
 #define DB_SQL_DeleteParadictByTypeCode QString("delete from %1 where `typecode`=?;").arg(DB_TBNAME_PARADICT)
+
+// 关键点定义
+#define DB_SQL_SelectKeypoint QString("SELECT * from %1;").arg(DB_TBNAME_KEYPOINT)
+#define DB_SQL_ReplaceKeypoint QString("replace into %1(kpcode,kpname,productcode,productname,tenor,marketcode,marketname,calendar,convention,daycount,spotlag,couponfrequency,refindex) values(?,?,?,?,?,?,?,?,?,?,?,?,?);").arg(DB_TBNAME_KEYPOINT)
+#define DB_SQL_DeleteKeypoint QString("delete from %1 where `kpcode`=?;").arg(DB_TBNAME_KEYPOINT)
 
 #endif // !TB_OPERATE
 

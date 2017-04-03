@@ -232,6 +232,54 @@ private:
 	QString m_paraExplain;
 };
 
+// 关键点定义
+class CKeypoint {
+public:
+	CKeypoint();
+	~CKeypoint();
+	bool operator==(const CKeypoint &val) const;
+	void setKpcode(const QString &val);
+	const QString& getKpcode() const;
+	void setKpname(const QString &val);
+	const QString& getKpname() const;
+	void setProductCode(const QString &val);
+	const QString& getProductCode() const;
+	void setProductName(const QString &val);
+	const QString& getProductName() const;
+	void setTenor(const QString &val);
+	const QString& getTenor() const;
+	void setMarketCode(const QString &val);
+	const QString& getMarketCode() const;
+	void setMarketName(const QString &val);
+	const QString& getMarketName() const;
+	void setCalendar(const QString &val);
+	const QString& getCalendar() const;
+	void setConvention(const QString &val);
+	const QString& getConvention() const;
+	void setDayCount(const QString &val);
+	const QString& getDayCount() const;
+	void setSpotlat(const QString &val);
+	const QString& getSpotlat() const;
+	void setCouponfrequency(const QString &val);
+	const QString& getCouponfrequency() const;
+	void setRefindex(const QString &val);
+	const QString& getRefindex() const;
+
+private:
+	QString m_kpcode;
+	QString m_kpname;
+	QString m_productcode;
+	QString m_productname;
+	QString m_tenor;
+	QString m_marketcode;
+	QString m_marketname;
+	QString m_calendar;
+	QString m_convention;
+	QString m_daycount;
+	QString m_spotlat;
+	QString m_couponfrequency;
+	QString m_refindex;
+};
 ///////////////////////////////////////////////////////////
 // demo
 #define CLASSNAME_DEMOSTRUCT "DEMOSTRUCT"

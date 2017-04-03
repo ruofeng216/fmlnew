@@ -90,6 +90,7 @@
     <ClCompile Include="controller\LoginController.cpp" />
     <ClCompile Include="controller\ParameterSetting.cpp" />
     <ClCompile Include="controller\qcontrollermanager.cpp" />
+    <ClCompile Include="controller\YieldCurveDefinition.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_basewebchannel.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -965,6 +966,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controller\ParameterSetting.h" />
+    <ClInclude Include="controller\YieldCurveDefinition.h" />
     <ClInclude Include="GeneratedFiles\ui_financial_calendar.h" />
     <ClInclude Include="GeneratedFiles\ui_key_point_definition.h" />
     <ClInclude Include="GeneratedFiles\ui_main_home_page.h" />

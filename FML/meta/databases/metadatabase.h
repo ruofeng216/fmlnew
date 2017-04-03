@@ -36,6 +36,10 @@ public:
 	bool setParadict(const QList<CParaDict> &valList);
 	bool removeParadict(const QStringList &typeCodeList, const QStringList &paraCodeList);
 	bool removeParadict(const QStringList &typeCodeList);
+	// 关键点定义
+	bool getKeypoint(QMap<QString, CKeypoint> &val);
+	bool setKeypoint(const QList<CKeypoint> &valList);
+	bool removeKeypoint(const QStringList &valList);
 
 private:
 	MetaDatabase(QObject *parent = NULL);

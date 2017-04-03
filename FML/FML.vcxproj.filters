@@ -447,6 +447,9 @@
     <ClCompile Include="view\mainframe\parameter_dictionary.cpp">
       <Filter>view\function\param_manage\parameter_dictionary</Filter>
     </ClCompile>
+    <ClCompile Include="controller\YieldCurveDefinition.cpp">
+      <Filter>controller</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -666,6 +669,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_parameter_dictionary.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="controller\YieldCurveDefinition.h">
+      <Filter>controller</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

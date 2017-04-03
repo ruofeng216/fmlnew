@@ -66,7 +66,13 @@ public:
 	virtual bool removeParadict(const QString &typeCode, const QString &paraCode) = 0;
 };
 
+class IYieldCurveDefinition
+{
+public:
+	virtual ~IYieldCurveDefinition() = 0;
+	// 关键期限定义
 
+};
 
 
 class IDemo
