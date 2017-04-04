@@ -200,7 +200,9 @@ void FinancialCalendar::initDateView()
 		itemHolidayinfo->setToolTip(qutil::splitTooltip(itor->getHolidayinfo(),200));
 		items.back()->appendRow(childItems);
 	}
-	expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
+	if (!val.isEmpty()) {
+		expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
+	}
 }
 
 void FinancialCalendar::expand(int y)
