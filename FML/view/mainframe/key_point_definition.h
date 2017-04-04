@@ -6,13 +6,15 @@
 
 class QStandardItemModel;
 class QStandardItem;
-class KeyPointDefinition : public BodyWidget
+class KeyPointDefinition : public BodyWidget, public CAction<CKeypoint>
 {
 	Q_OBJECT
 
 public:
 	KeyPointDefinition(QWidget *parent = Q_NULLPTR);
 	~KeyPointDefinition();
+	bool isEqual(const CKeypoint &newVal);
+	bool isKeyModify(const CKeypoint &newVal);
 	void init();
 
 public slots:

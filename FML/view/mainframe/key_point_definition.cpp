@@ -26,6 +26,18 @@ KeyPointDefinition::~KeyPointDefinition()
 {
 }
 
+bool KeyPointDefinition::isEqual(const CKeypoint &newVal)
+{
+	CKeypoint oldVal;
+	return YIELDCURVECTL->getKeyPoint(newVal.getKpcode(), oldVal) && oldVal == newVal;
+}
+
+bool KeyPointDefinition::isKeyModify(const CKeypoint &newVal)
+{
+	CKeypoint oldVal;
+	return !YIELDCURVECTL->getKeyPoint(newVal.getKpcode(), oldVal);
+}
+
 void KeyPointDefinition::init()
 {
 	CKeypoint oldVal = getViewData();
@@ -130,7 +142,23 @@ void KeyPointDefinition::slotAdd()
 
 void KeyPointDefinition::slotModify()
 {
+	CKeypoint val = getViewData();
+	if (this->isKeyModify(val)) {
+		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
+		return;
+	}
 
+	if (this->isEqual(val)) {
+		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
+		return;
+	}
+
+	if (YIELDCURVECTL->setKeyPoint(val)) {
+		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
+		init();
+	} else {
+		ShowErrorMessage(tr("modify"), tr("modify fail."), this);
+	}
 }
 
 void KeyPointDefinition::slotDelete()
