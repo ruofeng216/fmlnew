@@ -182,9 +182,8 @@ void KeyPointDefinition::slotDelete()
 
 void KeyPointDefinition::slotTreeDoubleClicked(const QModelIndex &index)
 {
-	auto getTextData = [this, &index](int col, QString &text, QString &data) {
-		text = "";
-		data = "";
+	auto getChildData = [this, &index](int col, QString &text, QString &data) {
+		text = ""; data = "";
 		QModelIndex sibling = index.sibling(index.row(), col);
 		QStandardItem *item = m_model->itemFromIndex(sibling);
 		if (item) {
@@ -192,35 +191,47 @@ void KeyPointDefinition::slotTreeDoubleClicked(const QModelIndex &index)
 			text = item->text();
 		}
 	};
+	auto getParentData = [this, &index](QString &text, QString &data) {
+		text = ""; data = "";
+		QModelIndex parentIndex = index.parent();
+		if (index.parent().isValid()) {
+			parentIndex = parentIndex.sibling(parentIndex.row(), 0);
+		} else {
+			parentIndex = index.sibling(index.row(), 0);
+		}
+		QStandardItem *item = m_model->itemFromIndex(parentIndex);
+		if (item) {
+			text = item->text();
+			data = item->data().toString();
+		}
+	};
 
 	QString text, data; // text:UI上展示的名称，data：对应的代码
 	CKeypoint val;
 	QString startDate, endDate;
-	QModelIndex parentIndex = index.parent();
-	if (parentIndex.isValid()) {
-		getTextData(0, text, data);
+	getParentData(text, data);
+	val.setMarketCode(data);
+	val.setMarketName(text);
+	if (index.parent().isValid()) {
+		getChildData(0, text, data);
 		val.setKpcode(text);
-		getTextData(1, text, data);
+		getChildData(1, text, data);
 		val.setKpname(text);
-		getTextData(2, text, data);
+		getChildData(2, text, data);
 		val.setProductCode(data);
 		val.setProductName(text);
-		getTextData(3, text, data);
-		val.setTenor(text);
-		getTextData(4, text, data);
+		getChildData(3, text, data);
+		val.setTenor(text.toLower());
+		getChildData(4, text, data);
 		val.setCalendar(data); // 存放code， 显示name
-		getTextData(5, text, data);
+		getChildData(5, text, data);
 		val.setConvention(data);
-		getTextData(6, text, data);
+		getChildData(6, text, data);
 		val.setDayCount(data);
-		getTextData(7, text, data); // startDate
+		getChildData(7, text, data); // startDate
 		startDate = text;
-		getTextData(8, text, data); // endDate
+		getChildData(8, text, data); // endDate
 		endDate = text;
-	} else {
-		getTextData(0, text, data);
-		val.setMarketCode(data);
-		val.setMarketName(text);
 	}
 
 	setViewData(val);
@@ -333,7 +344,7 @@ QList<QStandardItem *> KeyPointDefinition::createChildtRowItems(const CKeypoint 
 	result.push_back(createItem(val.getKpcode()));
 	result.push_back(createItem(val.getKpname()));
 	result.push_back(createItem(val.getProductName(), val.getProductCode()));
-	result.push_back(createItem(val.getTenor()));
+	result.push_back(createItem(val.getTenor().toUpper()));
 	result.push_back(createItem(getParaNameFromCode("Calendar", val.getCalendar()), val.getCalendar()));
 	result.push_back(createItem(getParaNameFromCode("Convention", val.getConvention()), val.getConvention()));
 	result.push_back(createItem(getParaNameFromCode("DayCount", val.getDayCount()), val.getDayCount()));
