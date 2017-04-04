@@ -18,6 +18,7 @@ KeyPointDefinition::KeyPointDefinition(QWidget *parent)
 
 	init();
 	slotSkinChange();
+	ui.leTenor->setValidator(new QIntValidator(0, 99999, this));
 	ui.deStart->setDate(QDate::currentDate());
 	ui.deEnd->setDate(QDate::currentDate());
 }
@@ -104,6 +105,11 @@ void KeyPointDefinition::init()
 		initParaList(ui.cbSpotlag, "CouponFrequency");
 	}
 	setViewData(oldVal);
+	// 选中当前行
+	QModelIndexList findIndex = m_model->match(m_model->index(0, 0), Qt::DisplayRole, oldVal.getKpcode(), 1, Qt::MatchRecursive);
+	if (findIndex.size() > 0) {
+		ui.treeView->setCurrentIndex(findIndex[0]);
+	}
 }
 
 void KeyPointDefinition::slotSkinChange()

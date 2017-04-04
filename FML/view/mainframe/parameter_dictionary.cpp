@@ -95,6 +95,11 @@ void ParameterDictionary::init()
 		}
 	}
 	setViewData(oldVal);
+	// 选中当前行
+	QModelIndexList findIndex = m_model->match(m_model->index(0, 0), Qt::DisplayRole, oldVal.getParaCode(), 1, Qt::MatchRecursive);
+	if (findIndex.size() > 0) {
+		ui.treeView->setCurrentIndex(findIndex[0]);
+	}
 }
 
 CParaDict ParameterDictionary::getViewData()
