@@ -14,7 +14,7 @@ class FinancialCalendar : public BodyWidget, public CAction<CFinancialCalendar>
 public:
 	FinancialCalendar(QWidget *parent = Q_NULLPTR);
 	~FinancialCalendar();
-	bool isKeyModify(const CFinancialCalendar &newVal);
+	QString getKey(const CFinancialCalendar &newVal) const;
 	bool isEqual(const CFinancialCalendar &newVal);
 	void init();
 

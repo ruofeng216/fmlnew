@@ -25,16 +25,14 @@ ParameterDictionary::~ParameterDictionary()
 {
 }
 
-bool ParameterDictionary::isEqual(const CParaDict &newVal)
+QString ParameterDictionary::getKey(const CParaDict &newVal) const
 {
-	CParaDict oldValdd;
-	return PARASETCTL->getParadict(newVal.getTypeCode(), newVal.getParaCode(), oldValdd) && newVal == oldValdd;
+	return newVal.getParaCode();
 }
 
-bool ParameterDictionary::isKeyModify(const CParaDict &newVal)
+bool ParameterDictionary::isEqual(const CParaDict &newVal)
 {
-	CParaDict oldValdd;
-	return !PARASETCTL->getParadict(newVal.getTypeCode(), newVal.getParaCode(), oldValdd);
+	return newVal == getCurrentData();
 }
 
 void ParameterDictionary::init()
@@ -120,6 +118,7 @@ void ParameterDictionary::setViewData(const CParaDict &val)
 	ui.cbTypeCode->setCurrentText(val.getTypeCode());
 	ui.cbTypeName->setCurrentText(val.getTypeName());
 	ui.pteParaExplain->setPlainText(val.getParaExplain());
+	setCurrentData(val);
 }
 
 void ParameterDictionary::slotSkinChange()
@@ -151,6 +150,11 @@ void ParameterDictionary::slotAdd()
 
 void ParameterDictionary::slotModify()
 {
+	if (getCurrentData().getParaCode().isEmpty()) {
+		ShowWarnMessage(tr("modify"), tr("No selected content can not be modified"), this);
+		return;
+	}
+
 	CParaDict val = getViewData();
 	if (this->isKeyModify(val)) {
 		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);

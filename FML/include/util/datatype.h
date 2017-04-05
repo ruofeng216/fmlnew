@@ -116,6 +116,8 @@ public:
 	const QString getHolidayTypeStr() const;
 	void setHolidayinfo(const QString &val);
 	const QString &getHolidayinfo() const;
+	static int getHolidayType(const QString &val);
+
 protected:
 	int m_year;
 	int m_date;

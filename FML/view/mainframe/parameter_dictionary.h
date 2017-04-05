@@ -13,8 +13,8 @@ class ParameterDictionary : public BodyWidget, public CAction<CParaDict>
 public:
 	ParameterDictionary(QWidget *parent = Q_NULLPTR);
 	~ParameterDictionary();
+	QString getKey(const CParaDict &newVal) const;
 	bool isEqual(const CParaDict &newVal);
-	bool isKeyModify(const CParaDict &newVal);
 
 	void init();
 	CParaDict getViewData();

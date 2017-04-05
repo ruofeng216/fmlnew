@@ -22,15 +22,14 @@ PortfolioManage::~PortfolioManage()
 {
 }
 
-bool PortfolioManage::isKeyModify(const CPortfolio &newVal)
+QString PortfolioManage::getKey(const CPortfolio &newVal) const
 {
-	CPortfolio oldVal;
-	return !PARASETCTL->getPortfolio(newVal.getPortcode(), oldVal);
+	return newVal.getPortcode();
 }
+
 bool PortfolioManage::isEqual(const CPortfolio &newVal)
 {
-	CPortfolio oldVal;
-	return PARASETCTL->getPortfolio(newVal.getPortcode(), oldVal) && oldVal == newVal;
+	return newVal == getCurrentData();
 }
 
 void PortfolioManage::init()
@@ -40,6 +39,7 @@ void PortfolioManage::init()
 		
 		initDateView();
 		connect(ui.treeView, &QTreeView::doubleClicked, [this](const QModelIndex &index) {
+			
 			QVariant s = index.sibling(index.row(), 0).data();
 			if (s.isValid()) ui.lineEdit_portcode->setText(s.toString());
 			s = index.sibling(index.row(), 1).data();
@@ -52,6 +52,15 @@ void PortfolioManage::init()
 			if (s.isValid()) ui.comboBox_parentcode->setCurrentText(s.toString());
 			s = index.sibling(index.row(), 6).data();
 			if (s.isValid()) ui.textEdit->setText(s.toString());
+
+			CPortfolio currentData;
+			currentData.setPortcode(ui.lineEdit_portcode->text().trimmed());
+			currentData.setPortname(ui.lineEdit_portname->text().trimmed());
+			currentData.setSdate(ui.dateEdit_datebegin->date().toJulianDay());
+			currentData.setEdate(ui.dateEdit_dateend->date().toJulianDay());
+			currentData.setParentcode(ui.comboBox_parentcode->currentText().trimmed());
+			currentData.setAnnotation(ui.textEdit->toPlainText().trimmed());
+			setCurrentData(currentData);
 		});
 	}
 
@@ -98,6 +107,11 @@ void PortfolioManage::addPortfolio()
 }
 void PortfolioManage::modifyPortfolio()
 {
+	if (getCurrentData().getPortcode().isEmpty()) {
+		ShowWarnMessage(tr("modify"), tr("No selected content can not be modified"), this);
+		return;
+	}
+
 	QString _portcode = ui.lineEdit_portcode->text();
 	QString _parentcode = ui.comboBox_parentcode->currentText();
 	if (PARASETCTL->isParentCode(_portcode, _parentcode))

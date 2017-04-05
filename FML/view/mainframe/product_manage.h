@@ -13,8 +13,8 @@ class ProductManage : public BodyWidget, public CAction<CProduct>
 public:
 	ProductManage(QWidget *parent = Q_NULLPTR);
 	~ProductManage();
+	QString getKey(const CProduct &newVal) const;
 	bool isEqual(const CProduct &newVal);
-	bool isKeyModify(const CProduct &newVal);
 	void init();
 
 public slots:

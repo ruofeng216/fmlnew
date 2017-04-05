@@ -27,16 +27,14 @@ ProductManage::~ProductManage()
 {
 }
 
-bool ProductManage::isEqual(const CProduct &newVal)
+QString ProductManage::getKey(const CProduct &newVal) const
 {
-	CProduct oldVal;
-	return PARASETCTL->getProduct(newVal.getCode(), oldVal) && newVal == oldVal;
+	return newVal.getCode();
 }
 
-bool ProductManage::isKeyModify(const CProduct &newVal)
+bool ProductManage::isEqual(const CProduct &newVal)
 {
-	CProduct oldVal;
-	return !PARASETCTL->getProduct(newVal.getCode(), oldVal);
+	return newVal == getCurrentData();
 }
 
 void ProductManage::init()
@@ -132,23 +130,23 @@ void ProductManage::slotAdd()
 
 void ProductManage::slotModify()
 {
-	CProduct val = getViewProduct();
-	if (val.getCode().isEmpty() || val.getName().isEmpty()) {
-		ShowWarnMessage(tr("modify"), tr("code or name is empty"), this);
+	if (getCurrentData().getCode().isEmpty()) {
+		ShowWarnMessage(tr("modify"), tr("No selected content can not be modified"), this);
 		return;
 	}
 
-	if (this->isKeyModify(val)) {
-		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
+	CProduct newVal = getViewProduct();
+	if (isKeyModify(newVal.getCode())) {
+		ShowWarnMessage(tr("modify"), tr("product code can not be modified!"), this);
 		return;
 	}
 
-	if (this->isEqual(val)) {
-		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
+	if (this->isEqual(newVal)) {
+		ShowWarnMessage(tr("modify"), tr("records do not change, do not need to modify!"), this);
 		return;
 	}
 
-	if (PARASETCTL->setProduct(val)) {
+	if (PARASETCTL->setProduct(newVal)) {
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		init();
 	} else {
@@ -271,4 +269,5 @@ void ProductManage::setViewProduct(const CProduct &val)
 	ui.deStart->setDate(QDate::fromJulianDay(val.getSdate()));
 	ui.deEnd->setDate(QDate::fromJulianDay(val.getEdate()));
 	ui.pteAnnotation->setPlainText(val.getAnnotation());
+	setCurrentData(val);
 }

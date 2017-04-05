@@ -23,16 +23,14 @@ FinancialCalendar::~FinancialCalendar()
 {
 }
 
-bool FinancialCalendar::isKeyModify(const CFinancialCalendar &newVal)
+QString FinancialCalendar::getKey(const CFinancialCalendar &newVal) const
 {
-	CFinancialCalendar oldVal;
-	return !PARASETCTL->getFinancialCalendar(newVal.getDate(), oldVal);
+	return newVal.getDate();
 }
 
 bool FinancialCalendar::isEqual(const CFinancialCalendar &newVal)
 {
-	CFinancialCalendar oldVal;
-	return PARASETCTL->getFinancialCalendar(newVal.getDate(), oldVal) && oldVal == newVal;
+	return newVal == getCurrentData();
 }
 
 void FinancialCalendar::init()
@@ -42,6 +40,7 @@ void FinancialCalendar::init()
 		initDateView();
 		connect(ui.treeView, &QTreeView::clicked, [this](const QModelIndex &index) {
 			QVariant s = index.sibling(index.row(),0).data();
+			CFinancialCalendar currentData;
 			if (s.isValid())
 			{
 				ui.dateEdit->setDate(QDate::fromString(s.toString(),"yyyy-MM-dd"));
@@ -54,6 +53,12 @@ void FinancialCalendar::init()
 				QVariant sDayinfo = index.sibling(index.row(), 2).data();
 				if (sDayinfo.isValid())
 					ui.textEdit_def->setText(sDayinfo.toString());
+
+				currentData.setDate(ui.dateEdit->date().toJulianDay());
+				currentData.setYear(ui.lineEdit_year->text().toInt());
+				currentData.setHolidayType(CFinancialCalendar::getHolidayType(ui.comboBox->currentText()));
+				currentData.setHolidayinfo(ui.textEdit_def->toPlainText().trimmed());
+				setCurrentData(currentData);
 			}
 		});
 	}
@@ -107,6 +112,11 @@ void FinancialCalendar::addHoliday()
 }
 void FinancialCalendar::modifyHoliday()
 {
+	if (getCurrentData().getDate() == 0) {
+		ShowWarnMessage(tr("modify"), tr("No selected content can not be modified"), this);
+		return;
+	}
+
 	qint64 _d = ui.dateEdit->date().toJulianDay(); // 单位1为 一天
 	QString strDayType = ui.comboBox->currentText();
 	QString strDayInfo = ui.textEdit_def->toPlainText();
@@ -212,7 +222,9 @@ void FinancialCalendar::expand(int y)
 	{
 		QMap<int, CFinancialCalendar> val;
 		PARASETCTL->getFinancialCalendar(val);
-		expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
+		if (!val.isEmpty()) {
+			expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
+		}
 		return;
 	}
 	for each (QStandardItem* var in lst)

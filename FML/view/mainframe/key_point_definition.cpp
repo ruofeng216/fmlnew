@@ -27,16 +27,14 @@ KeyPointDefinition::~KeyPointDefinition()
 {
 }
 
-bool KeyPointDefinition::isEqual(const CKeypoint &newVal)
+QString KeyPointDefinition::getKey(const CKeypoint &newVal) const
 {
-	CKeypoint oldVal;
-	return YIELDCURVECTL->getKeyPoint(newVal.getKpcode(), oldVal) && oldVal == newVal;
+	return newVal.getKpcode();
 }
 
-bool KeyPointDefinition::isKeyModify(const CKeypoint &newVal)
+bool KeyPointDefinition::isEqual(const CKeypoint &newVal)
 {
-	CKeypoint oldVal;
-	return !YIELDCURVECTL->getKeyPoint(newVal.getKpcode(), oldVal);
+	return newVal == getCurrentData();
 }
 
 void KeyPointDefinition::init()
@@ -148,6 +146,11 @@ void KeyPointDefinition::slotAdd()
 
 void KeyPointDefinition::slotModify()
 {
+	if (getCurrentData().getKpcode().isEmpty()) {
+		ShowWarnMessage(tr("modify"), tr("No selected content can not be modified"), this);
+		return;
+	}
+
 	CKeypoint val = getViewData();
 	if (this->isKeyModify(val)) {
 		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
@@ -269,6 +272,7 @@ void KeyPointDefinition::setViewData(const CKeypoint &val)
 	ui.cbConvention->setCurrentText(getParaNameFromCode("Convention", val.getConvention()));
 	ui.cbSpotlag->setCurrentText(getParaNameFromCode("CouponFrequency", val.getSpotlat()));
 	ui.cbDayCount->setCurrentText(getParaNameFromCode("DayCount", val.getDayCount()));
+	setCurrentData(val);
 }
 
 CKeypoint KeyPointDefinition::getViewData()

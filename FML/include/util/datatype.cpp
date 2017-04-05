@@ -255,6 +255,15 @@ const QString &CFinancialCalendar::getHolidayinfo() const
 	return m_holidayinfo;
 }
 
+int CFinancialCalendar::getHolidayType(const QString &val)
+{
+	if (QObject::tr("holiday") == val) {
+		return eHoliday;
+	} else if (QObject::tr("workday") == val) {
+		return eWorkDay;
+	}
+	return 0;
+}
 //////////////////////////////////////////////////////////////////
 CPortfolio::CPortfolio(const QString& _portcode,
 	const QString& _portname,

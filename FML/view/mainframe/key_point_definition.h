@@ -13,8 +13,8 @@ class KeyPointDefinition : public BodyWidget, public CAction<CKeypoint>
 public:
 	KeyPointDefinition(QWidget *parent = Q_NULLPTR);
 	~KeyPointDefinition();
+	QString getKey(const CKeypoint &newVal) const;
 	bool isEqual(const CKeypoint &newVal);
-	bool isKeyModify(const CKeypoint &newVal);
 	void init();
 
 public slots:

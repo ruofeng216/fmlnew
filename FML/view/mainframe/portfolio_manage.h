@@ -14,7 +14,7 @@ class PortfolioManage : public BodyWidget, public CAction<CPortfolio>
 public:
 	PortfolioManage(QWidget *parent = Q_NULLPTR);
 	~PortfolioManage();
-	bool isKeyModify(const CPortfolio &newVal);
+	QString getKey(const CPortfolio &newVal) const;
 	bool isEqual(const CPortfolio &newVal);
 	void init();
 
