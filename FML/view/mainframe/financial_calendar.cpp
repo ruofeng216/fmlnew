@@ -40,7 +40,6 @@ void FinancialCalendar::init()
 		initDateView();
 		connect(ui.treeView, &QTreeView::clicked, [this](const QModelIndex &index) {
 			QVariant s = index.sibling(index.row(),0).data();
-			CFinancialCalendar currentData;
 			if (s.isValid())
 			{
 				ui.dateEdit->setDate(QDate::fromString(s.toString(),"yyyy-MM-dd"));
@@ -54,11 +53,7 @@ void FinancialCalendar::init()
 				if (sDayinfo.isValid())
 					ui.textEdit_def->setText(sDayinfo.toString());
 
-				currentData.setDate(ui.dateEdit->date().toJulianDay());
-				currentData.setYear(ui.lineEdit_year->text().toInt());
-				currentData.setHolidayType(CFinancialCalendar::getHolidayType(ui.comboBox->currentText()));
-				currentData.setHolidayinfo(ui.textEdit_def->toPlainText().trimmed());
-				setCurrentData(currentData);
+				setCurrentData(getViewData());
 			}
 		});
 	}
@@ -88,13 +83,7 @@ void FinancialCalendar::slotSkinChange()
 
 void FinancialCalendar::addHoliday()
 {
-	qint64 _d = ui.dateEdit->date().toJulianDay(); // 单位1为 一天
-	QString strDayType = ui.comboBox->currentText();
-	QString strDayInfo = ui.textEdit_def->toPlainText();
-	int _y = ui.dateEdit->date().year();
-	CFinancialCalendar::EHType e = CFinancialCalendar::eWorkDay;
-	if (tr("holiday") == strDayType) e = CFinancialCalendar::eHoliday;
-	CFinancialCalendar fc(_y, _d, e, strDayInfo);
+	CFinancialCalendar fc = getViewData();
 	if (PARASETCTL->isExistFinancialCalendar(fc))
 		ShowWarnMessage(tr("add"), tr("the time is existing."), this);
 	else
@@ -104,7 +93,7 @@ void FinancialCalendar::addHoliday()
 			ShowSuccessMessage(tr("add"), tr("add success."), this);
 			// 同步
 			initDateView();
-			expand(_y);
+			expand(fc.getYear());
 		}
 		else
 			ShowWarnMessage(tr("add"), tr("add fail."), this);
@@ -112,21 +101,14 @@ void FinancialCalendar::addHoliday()
 }
 void FinancialCalendar::modifyHoliday()
 {
-	if (getCurrentData().getDate() == 0) {
+	if (getCurrentData().getDate() == 0 || getCurrentData().getYear() == 0) {
 		ShowWarnMessage(tr("modify"), tr("No selected content can not be modified"), this);
 		return;
 	}
 
-	qint64 _d = ui.dateEdit->date().toJulianDay(); // 单位1为 一天
-	QString strDayType = ui.comboBox->currentText();
-	QString strDayInfo = ui.textEdit_def->toPlainText();
-	int _y = ui.dateEdit->date().year();
-	CFinancialCalendar::EHType e = CFinancialCalendar::eWorkDay;
-	if (tr("holiday") == strDayType) e = CFinancialCalendar::eHoliday;
-	CFinancialCalendar fc(_y, _d, e, strDayInfo);
-
+	CFinancialCalendar fc = getViewData();
 	if (this->isKeyModify(fc)) {
-		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
+		ShowWarnMessage(tr("modify"), tr("date can not be modified!"), this);
 		return;
 	}
 
@@ -139,7 +121,7 @@ void FinancialCalendar::modifyHoliday()
 	{
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		initDateView();
-		expand(_y);
+		expand(fc.getYear());
 	} else {
 		ShowWarnMessage(tr("modify"), tr("modify fail."), this);
 	}
@@ -148,16 +130,10 @@ void FinancialCalendar::delHoliday()
 {
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this))
 	{
-		qint64 _d = ui.dateEdit->date().toJulianDay(); // 单位1为 一天
-		QString strDayType = ui.comboBox->currentText();
-		QString strDayInfo = ui.textEdit_def->toPlainText();
-		int _y = ui.dateEdit->date().year();
-		CFinancialCalendar::EHType e = CFinancialCalendar::eWorkDay;
-		if (tr("holiday") == strDayType) e = CFinancialCalendar::eHoliday;
-		CFinancialCalendar fc(_y, _d, e, strDayInfo);
+		CFinancialCalendar fc = getViewData();
 		if (PARASETCTL->isExistFinancialCalendar(fc))
 		{
-			if (!PARASETCTL->removeFinancialCalendar(_d))
+			if (!PARASETCTL->removeFinancialCalendar(fc.getDate()))
 			{
 				ShowWarnMessage(tr("delete"), tr("delete fail."), this);
 				return;
@@ -169,14 +145,16 @@ void FinancialCalendar::delHoliday()
 			return;
 		}
 		ShowSuccessMessage(tr("delete"), tr("delete success."), this);
+		setViewData(CFinancialCalendar());
 		// 同步
 		initDateView();
-		expand(_y);
+		expand(fc.getYear());
 	}
 }
 
 void FinancialCalendar::initDateView()
 {
+	CFinancialCalendar oldVal = getViewData();
 	if (m_pGoodsModel) m_pGoodsModel->clear();
 	QStringList treeHeader;
 	treeHeader << tr("hyear") << tr("holiday") << tr("holidayinfo");
@@ -213,10 +191,14 @@ void FinancialCalendar::initDateView()
 	if (!val.isEmpty()) {
 		expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
 	}
+	setViewData(oldVal);
 }
 
 void FinancialCalendar::expand(int y)
 {
+	ui.treeView->expandAll();
+	return;
+	// fixme 有死循环
 	QList<QStandardItem*> lst = m_pGoodsModel->findItems(QString::number(y));
 	if (lst.isEmpty())
 	{
@@ -231,4 +213,23 @@ void FinancialCalendar::expand(int y)
 	{
 		ui.treeView->expand(var->index());
 	}
+}
+
+CFinancialCalendar FinancialCalendar::getViewData()
+{
+	CFinancialCalendar result;
+	result.setDate(ui.dateEdit->date().toJulianDay());
+	result.setYear(ui.lineEdit_year->text().toInt());
+	result.setHolidayType(CFinancialCalendar::getHolidayType(ui.comboBox->currentText()));
+	result.setHolidayinfo(ui.textEdit_def->toPlainText().trimmed());
+	return result;
+}
+
+void FinancialCalendar::setViewData(const CFinancialCalendar &val)
+{
+	ui.dateEdit->setDate(val.getDate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(val.getDate()));
+	ui.lineEdit_year->setText(val.getYear() == 0 ? QString::number(QDate::currentDate().year()) : QString::number(val.getYear()));
+	ui.comboBox->setCurrentText(val.getHolidayTypeStr());
+	ui.textEdit_def->setPlainText(val.getHolidayinfo());
+	setCurrentData(getViewData());
 }

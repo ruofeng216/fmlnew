@@ -153,7 +153,7 @@ void KeyPointDefinition::slotModify()
 
 	CKeypoint val = getViewData();
 	if (this->isKeyModify(val)) {
-		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
+		ShowWarnMessage(tr("modify"), tr("keypoint code can not be modified"), this);
 		return;
 	}
 
@@ -182,6 +182,7 @@ void KeyPointDefinition::slotDelete()
 
 		if (YIELDCURVECTL->removeKeyPoint(val.getKpcode())) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
+			setViewData(CKeypoint());
 			init();
 		} else {
 			ShowErrorMessage(tr("delete"), tr("delete fail."), this);
@@ -262,8 +263,8 @@ void KeyPointDefinition::setViewData(const CKeypoint &val)
 
 	CProduct product;
 	if (PARASETCTL->getProduct(val.getProductCode(), product)) {
-		ui.deStart->setDate(QDate::fromJulianDay(product.getSdate()));
-		ui.deEnd->setDate(QDate::fromJulianDay(product.getEdate()));
+		ui.deStart->setDate(product.getSdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(product.getSdate()));
+		ui.deEnd->setDate(product.getEdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(product.getEdate()));
 	} else {
 		qWarning() << "get product faild, code:" << val.getProductCode();
 	}
@@ -272,7 +273,7 @@ void KeyPointDefinition::setViewData(const CKeypoint &val)
 	ui.cbConvention->setCurrentText(getParaNameFromCode("Convention", val.getConvention()));
 	ui.cbSpotlag->setCurrentText(getParaNameFromCode("CouponFrequency", val.getSpotlat()));
 	ui.cbDayCount->setCurrentText(getParaNameFromCode("DayCount", val.getDayCount()));
-	setCurrentData(val);
+	setCurrentData(getViewData()); // 从UI获取，保持与UI一致
 }
 
 CKeypoint KeyPointDefinition::getViewData()

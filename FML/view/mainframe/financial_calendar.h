@@ -29,6 +29,9 @@ private slots:
 private:
 	void initDateView();
 	void expand(int y);
+	CFinancialCalendar getViewData();
+	void setViewData(const CFinancialCalendar &val);
+
 private:
 	Ui::FinancialCalendar ui;
 	QStandardItemModel *m_pGoodsModel;

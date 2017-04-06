@@ -32,8 +32,8 @@ private:
 	// 递归插入所有孩子节点
 	void appendChildrenProduct(QStandardItem *item, const QString &parentCode);
 	// 界面设置获取产品信息
-	CProduct getViewProduct();
-	void setViewProduct(const CProduct &val);
+	CProduct getViewData();
+	void setViewData(const CProduct &val);
 
 private:
 	Ui::product_manage ui;

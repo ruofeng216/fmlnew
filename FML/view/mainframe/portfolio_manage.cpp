@@ -52,15 +52,7 @@ void PortfolioManage::init()
 			if (s.isValid()) ui.comboBox_parentcode->setCurrentText(s.toString());
 			s = index.sibling(index.row(), 6).data();
 			if (s.isValid()) ui.textEdit->setText(s.toString());
-
-			CPortfolio currentData;
-			currentData.setPortcode(ui.lineEdit_portcode->text().trimmed());
-			currentData.setPortname(ui.lineEdit_portname->text().trimmed());
-			currentData.setSdate(ui.dateEdit_datebegin->date().toJulianDay());
-			currentData.setEdate(ui.dateEdit_dateend->date().toJulianDay());
-			currentData.setParentcode(ui.comboBox_parentcode->currentText().trimmed());
-			currentData.setAnnotation(ui.textEdit->toPlainText().trimmed());
-			setCurrentData(currentData);
+			setCurrentData(getViewData());
 		});
 	}
 
@@ -83,15 +75,12 @@ void PortfolioManage::slotSkinChange()
 
 void PortfolioManage::addPortfolio()
 {
-	QString _portcode = ui.lineEdit_portcode->text();
-	QString _parentcode = ui.comboBox_parentcode->currentText();
-	QString _portname = ui.lineEdit_portname->text();
-	QString _parentname = PARASETCTL->isExistCode(_parentcode)? PARASETCTL->getPortfolio()[_parentcode].getPortname():"";
-	int _sdate = ui.dateEdit_datebegin->date().toJulianDay();
-	int _edate = ui.dateEdit_dateend->date().toJulianDay();
-	QString _annotation = ui.textEdit->toPlainText();
-	CPortfolio cp(_portcode, _portname, _parentcode, _parentname, _sdate, _edate, _annotation);
-	if (PARASETCTL->isExistCode(_portcode))
+	CPortfolio cp = getViewData();
+	if (cp.getPortcode().isEmpty()) {
+		ShowWarnMessage(tr("add"), tr("the code can not empty!"), this);
+		return;
+	}
+	if (PARASETCTL->isExistCode(cp.getPortcode()))
 		ShowWarnMessage(tr("add"), tr("the code is existing."), this);
 	else
 	{
@@ -112,21 +101,14 @@ void PortfolioManage::modifyPortfolio()
 		return;
 	}
 
-	QString _portcode = ui.lineEdit_portcode->text();
-	QString _parentcode = ui.comboBox_parentcode->currentText();
-	if (PARASETCTL->isParentCode(_portcode, _parentcode))
+	CPortfolio cp = getViewData();
+	if (PARASETCTL->isParentCode(cp.getPortcode(), cp.getParentcode()))
 	{
 		ShowWarnMessage(tr("modify"), tr("the code parent is invalid.do not choose its child or self."), this);
 		return;
 	}
-	QString _portname = ui.lineEdit_portname->text();
-	QString _parentname = PARASETCTL->isExistCode(_parentcode) ? PARASETCTL->getPortfolio()[_parentcode].getPortname() : "";
-	int _sdate = ui.dateEdit_datebegin->date().toJulianDay();
-	int _edate = ui.dateEdit_dateend->date().toJulianDay();
-	QString _annotation = ui.textEdit->toPlainText();
-	CPortfolio cp(_portcode, _portname, _parentcode, _parentname, _sdate, _edate, _annotation);
 	if (this->isKeyModify(cp)) {
-		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
+		ShowWarnMessage(tr("modify"), tr("port code can not be modified!"), this);
 		return;
 	}
 
@@ -148,7 +130,11 @@ void PortfolioManage::delPortfolio()
 {
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this))
 	{
-		QString _portcode = ui.lineEdit_portcode->text();
+		QString _portcode = ui.lineEdit_portcode->text().trimmed();
+		if (_portcode.isEmpty()) {
+			ShowWarnMessage(tr("delete"), tr("the code can not empty!"), this);
+			return;
+		}
 		if (PARASETCTL->isExistCode(_portcode))
 		{
 			if (!PARASETCTL->removePortfolio(_portcode))
@@ -163,6 +149,7 @@ void PortfolioManage::delPortfolio()
 			return;
 		}
 		ShowSuccessMessage(tr("delete"), tr("delete success."), this);
+		setViewData(CPortfolio());
 		// Í¬²½
 		initDateView();
 	}
@@ -170,6 +157,7 @@ void PortfolioManage::delPortfolio()
 
 void PortfolioManage::initDateView()
 {
+	CPortfolio oldVal = getViewData();
 	if (m_pGoodsModel) m_pGoodsModel->clear();
 	QStringList treeHeader;
 	treeHeader << tr("portcode") << tr("portname") << tr("parentcode")
@@ -197,10 +185,6 @@ void PortfolioManage::initDateView()
 	ui.treeView->expandAll();
 
 	{
-		ui.dateEdit_datebegin->setDate(QDate::currentDate());
-		ui.dateEdit_dateend->setDate(QDate::currentDate());
-	}
-	{
 		QString last = ui.comboBox_parentcode->currentText();
 		QStringList s;
 		s << "" << PARASETCTL->getPortfolio().keys();
@@ -208,6 +192,8 @@ void PortfolioManage::initDateView()
 		ui.comboBox_parentcode->addItems(s);
 		if (s.contains(last)) ui.comboBox_parentcode->setCurrentText(last);
 	}
+
+	setViewData(oldVal);
 }
 
 void PortfolioManage::packItem(QList<QStandardItem *> &childItems, const CPortfolio &val)
@@ -251,4 +237,27 @@ void PortfolioManage::packChild(QStandardItem *parent, const QString &curID)
 
 		packChild(items.front(), *itorRoot);
 	}
+}
+
+CPortfolio PortfolioManage::getViewData()
+{
+	QString _portcode = ui.lineEdit_portcode->text().trimmed();
+	QString _parentcode = ui.comboBox_parentcode->currentText().trimmed();
+	QString _portname = ui.lineEdit_portname->text().trimmed();
+	QString _parentname = PARASETCTL->isExistCode(_parentcode) ? PARASETCTL->getPortfolio()[_parentcode].getPortname() : "";
+	int _sdate = ui.dateEdit_datebegin->date().toJulianDay();
+	int _edate = ui.dateEdit_dateend->date().toJulianDay();
+	QString _annotation = ui.textEdit->toPlainText();
+	return CPortfolio(_portcode, _portname, _parentcode, _parentname, _sdate, _edate, _annotation);
+}
+
+void PortfolioManage::setViewData(const CPortfolio &val)
+{
+	ui.lineEdit_portcode->setText(val.getPortcode());
+	ui.lineEdit_portname->setText(val.getPortname());
+	ui.dateEdit_datebegin->setDate(val.getSdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(val.getSdate()));
+	ui.dateEdit_dateend->setDate(val.getEdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(val.getEdate()));
+	ui.comboBox_parentcode->setCurrentText(val.getParentcode());
+	ui.textEdit->setText(val.getAnnotation());
+	setCurrentData(getViewData());
 }

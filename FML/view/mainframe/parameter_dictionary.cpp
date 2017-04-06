@@ -118,7 +118,7 @@ void ParameterDictionary::setViewData(const CParaDict &val)
 	ui.cbTypeCode->setCurrentText(val.getTypeCode());
 	ui.cbTypeName->setCurrentText(val.getTypeName());
 	ui.pteParaExplain->setPlainText(val.getParaExplain());
-	setCurrentData(val);
+	setCurrentData(getViewData());
 }
 
 void ParameterDictionary::slotSkinChange()
@@ -157,7 +157,7 @@ void ParameterDictionary::slotModify()
 
 	CParaDict val = getViewData();
 	if (this->isKeyModify(val)) {
-		ShowWarnMessage(tr("modify"), tr("The key is modify!"), this);
+		ShowWarnMessage(tr("modify"), tr("param code can not be modified!"), this);
 		return;
 	}
 	if (this->isEqual(val)) {
@@ -186,6 +186,7 @@ void ParameterDictionary::slotDelete()
 		}
 		if (PARASETCTL->removeParadict(val.getTypeCode(), val.getParaCode())) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
+			setViewData(CParaDict());
 			init();
 		} else {
 			ShowErrorMessage(tr("delete"), tr("delete fail."), this);

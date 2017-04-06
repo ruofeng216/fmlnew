@@ -39,7 +39,7 @@ bool ProductManage::isEqual(const CProduct &newVal)
 
 void ProductManage::init()
 {
-	CProduct oldVal = getViewProduct();
+	CProduct oldVal = getViewData();
 	{
 		// 初始化treeView
 		QStringList treeHeader;
@@ -86,7 +86,7 @@ void ProductManage::init()
 		ui.cbParentCode->addItems(parentCodeList);
 		ui.cbParentName->addItems(parentNameList);
 	}
-	setViewProduct(oldVal);
+	setViewData(oldVal);
 	// 选中当前行
 	QModelIndexList findIndex = m_model->match(m_model->index(0, 0), Qt::DisplayRole, oldVal.getCode(), 1, Qt::MatchRecursive);
 	if (findIndex.size() > 0) {
@@ -108,7 +108,7 @@ void ProductManage::slotSkinChange()
 
 void ProductManage::slotAdd()
 {
-	CProduct val = getViewProduct();
+	CProduct val = getViewData();
 	if (val.getCode().isEmpty() || val.getName().isEmpty()) {
 		ShowWarnMessage(tr("add"), tr("code or name is empty"), this);
 		return;
@@ -135,7 +135,7 @@ void ProductManage::slotModify()
 		return;
 	}
 
-	CProduct newVal = getViewProduct();
+	CProduct newVal = getViewData();
 	if (isKeyModify(newVal.getCode())) {
 		ShowWarnMessage(tr("modify"), tr("product code can not be modified!"), this);
 		return;
@@ -157,7 +157,7 @@ void ProductManage::slotModify()
 void ProductManage::slotDelete()
 {
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this)) {
-		CProduct val = getViewProduct();
+		CProduct val = getViewData();
 		CProduct oldVal;
 		if (!PARASETCTL->getProduct(val.getCode(), oldVal)) {
 			ShowWarnMessage(tr("delete"), tr("The product is not existing!"), this);
@@ -165,6 +165,7 @@ void ProductManage::slotDelete()
 		}
 		if (PARASETCTL->removeProduct(val.getCode())) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
+			setViewData(CProduct());
 			init();
 		} else {
 			ShowErrorMessage(tr("delete"), tr("delete fail."), this);
@@ -184,7 +185,7 @@ void ProductManage::slotTreeDoubleClicked(const QModelIndex &index)
 	int sdate = QDate::fromString(strStartDate, "yyyy-MM-dd").toJulianDay();
 	int edate = QDate::fromString(strEndDate, "yyyy-MM-dd").toJulianDay();
 	CProduct val(code, name, parentCode, parentName, sdate, edate, annotation);
-	setViewProduct(val);
+	setViewData(val);
 }
 
 void ProductManage::slotParentCodeChanged(int index)
@@ -248,7 +249,7 @@ void ProductManage::appendChildrenProduct(QStandardItem *item, const QString &pa
 	} 
 }
 
-CProduct ProductManage::getViewProduct()
+CProduct ProductManage::getViewData()
 {
 	QString code = ui.leCode->text().trimmed();
 	QString name = ui.leName->text().trimmed();
@@ -260,14 +261,15 @@ CProduct ProductManage::getViewProduct()
 	return CProduct(code, name, parentCode, parentName, sdate, edate, annotation);
 }
 
-void ProductManage::setViewProduct(const CProduct &val)
+void ProductManage::setViewData(const CProduct &val)
 {
 	ui.leCode->setText(val.getCode());
 	ui.leName->setText(val.getName());
 	ui.cbParentCode->setCurrentText(val.getParentCode());
 	ui.cbParentName->setCurrentText(val.getParentName());
-	ui.deStart->setDate(QDate::fromJulianDay(val.getSdate()));
-	ui.deEnd->setDate(QDate::fromJulianDay(val.getEdate()));
+
+	ui.deStart->setDate(val.getSdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(val.getSdate()));
+	ui.deEnd->setDate(val.getEdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(val.getEdate()));
 	ui.pteAnnotation->setPlainText(val.getAnnotation());
-	setCurrentData(val);
+	setCurrentData(getViewData());
 }

@@ -30,6 +30,9 @@ private:
 	void initDateView();
 	void packItem(QList<QStandardItem *> &childItems, const CPortfolio &val);
 	void packChild(QStandardItem *parent, const QString &curID);
+	CPortfolio getViewData();
+	void setViewData(const CPortfolio &val);
+
 private:
 	Ui::PortfolioManage ui;
 	QStandardItemModel *m_pGoodsModel;
