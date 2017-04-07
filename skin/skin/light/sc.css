@@ -275,7 +275,7 @@ MessageBoxWidget {
 }
 
 MessageBoxWidget QLabel[objectName="labelContent"] {
-	color:#ffffff;
+	color:#666666;
 	font:16px;
 }
 
