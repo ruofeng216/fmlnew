@@ -975,7 +975,7 @@
     <message>
         <location filename="view/mainframe/portfolio_manage.cpp" line="111"/>
         <source>port code can not be modified!</source>
-        <translation>组合代码不能为空！</translation>
+        <translation>组合代码不能修改！</translation>
     </message>
     <message>
         <location filename="view/mainframe/portfolio_manage.cpp" line="116"/>

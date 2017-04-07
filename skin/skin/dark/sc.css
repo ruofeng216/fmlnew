@@ -271,7 +271,6 @@ MessageBoxWidget {
 	background-color: #0e2e37;
 	border-radius: 5px;
 	border: 1px solid #206c93;
-	opacity: 0.75;
 }
 
 MessageBoxWidget QLabel[objectName="labelContent"] {
