@@ -15,8 +15,9 @@ KeyPointDefinition::KeyPointDefinition(QWidget *parent)
 	connect(ui.pbModify, SIGNAL(clicked()), this, SLOT(slotModify()));
 	connect(ui.pbDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
 	connect(ui.treeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotTreeDoubleClicked(QModelIndex)));
+	connect(ui.cbProductCode, SIGNAL(activated(int)), this, SLOT(slotProductCodeChanged(int)));
+	connect(ui.cbProductName, SIGNAL(activated(int)), this, SLOT(slotProductNameChanged(int)));
 
-	init();
 	slotSkinChange();
 	ui.leTenor->setValidator(new QIntValidator(0, 99999, this));
 	ui.deStart->setDate(QDate::currentDate());
@@ -80,6 +81,17 @@ void KeyPointDefinition::init()
 		ui.treeView->expandAll();
 	}
 
+	auto initProductList = [this]() {
+		ui.cbProductCode->clear();
+		ui.cbProductName->clear();
+		const QMap<QString, CProduct> &productList = PARASETCTL->getProduct();
+		for (auto iter = productList.constBegin(); iter != productList.constEnd(); ++iter) {
+			const CProduct &product = iter.value();
+			ui.cbProductCode->addItem(product.getCode());
+			ui.cbProductName->addItem(product.getName());
+		}
+	};
+
 	auto initParaList = [](QComboBox *cb, const QString &typeCode) {
 		cb->clear();
 		QList<CParaDict> paraList;
@@ -91,6 +103,8 @@ void KeyPointDefinition::init()
 	};
 
 	{
+		// 初始化产品列表
+		initProductList();
 		// 市场初始化
 		initParaList(ui.cbMarket, "MarketType");
 		// 日历初始化
@@ -136,6 +150,10 @@ void KeyPointDefinition::slotAdd()
 		return;
 	}
 
+	if (!isProductExist(val.getProductCode())) {
+		return;
+	}
+
 	if (YIELDCURVECTL->setKeyPoint(val)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
 		init();
@@ -159,6 +177,10 @@ void KeyPointDefinition::slotModify()
 
 	if (this->isEqual(val)) {
 		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
+		return;
+	}
+
+	if (!isProductExist(val.getProductCode())) {
 		return;
 	}
 
@@ -249,12 +271,32 @@ void KeyPointDefinition::slotTreeDoubleClicked(const QModelIndex &index)
 	ui.deEnd->setDate(QDate::fromString(endDate, "yyyy-MM-dd"));
 }
 
+void KeyPointDefinition::slotProductCodeChanged(int index)
+{
+	if (ui.cbProductName->currentIndex() != index) {
+		ui.cbProductName->setCurrentIndex(index);
+	}
+}
+
+void KeyPointDefinition::slotProductNameChanged(int index)
+{
+	if (ui.cbProductCode->currentIndex() != index) {
+		ui.cbProductCode->setCurrentIndex(index);
+	}
+}
+
+void KeyPointDefinition::showEvent(QShowEvent *event)
+{
+	BodyWidget::showEvent(event);
+	init();
+}
+
 void KeyPointDefinition::setViewData(const CKeypoint &val)
 {
 	ui.leKPCode->setText(val.getKpcode());
 	ui.leKPName->setText(val.getKpname());
-	ui.leProductCode->setText(val.getProductCode());
-	ui.leProductName->setText(val.getProductName());
+	ui.cbProductCode->setCurrentText(val.getProductCode());
+	ui.cbProductName->setCurrentText(val.getProductName());
 	QPair<int, QString> tenor = parseTenor(val.getTenor());
 	ui.leTenor->setText(QString::number(tenor.first));
 	ui.rbDay->setChecked(tenor.second == "d");
@@ -281,8 +323,8 @@ CKeypoint KeyPointDefinition::getViewData()
 	CKeypoint result;
 	result.setKpcode(ui.leKPCode->text().trimmed());
 	result.setKpname(ui.leKPName->text().trimmed());
-	result.setProductCode(ui.leProductCode->text().trimmed());
-	result.setProductName(ui.leProductName->text().trimmed());
+	result.setProductCode(ui.cbProductCode->currentText().trimmed());
+	result.setProductName(ui.cbProductName->currentText().trimmed());
 	QString tenor;
 	if (ui.rbDay->isChecked()) {
 		tenor = "d"; 
@@ -362,4 +404,14 @@ QList<QStandardItem *> KeyPointDefinition::createChildtRowItems(const CKeypoint 
 	result.push_back(createItem(strStartDate));
 	result.push_back(createItem(strEndDate));
 	return result;
+}
+
+bool KeyPointDefinition::isProductExist(const QString &productCode)
+{
+	CProduct product;
+	if (!PARASETCTL->getProduct(productCode, product)) {
+		ShowWarnMessage(tr("warning"), tr("product is not existing!"), this);
+		return false;
+	}
+	return true;
 }

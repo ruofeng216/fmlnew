@@ -179,234 +179,244 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="69"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="72"/>
         <source>关键点代码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="101"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="104"/>
         <source>关键点名称</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="133"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="136"/>
         <source>产品代码</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="165"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="168"/>
         <source>产品名称</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="197"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="200"/>
         <source>期限</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="237"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="240"/>
         <source>天</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="247"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="250"/>
         <source>月</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="254"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="257"/>
         <source>年</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="301"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="304"/>
         <source>开始日期</source>
         <translation type="unfinished">开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="330"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="333"/>
         <source>结束日期</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="369"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="372"/>
         <source>所属市场</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="394"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="397"/>
         <source>日历</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="429"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="432"/>
         <source>假日调整</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="486"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="489"/>
         <source>天数计数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="454"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="457"/>
         <source>交割天数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="546"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="549"/>
         <source>增加</source>
         <translation type="unfinished">增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="565"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="568"/>
         <source>修改</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="584"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="587"/>
         <source>删除</source>
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="46"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="47"/>
         <source>kpcode</source>
         <translation>关键点代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="46"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="47"/>
         <source>kpname</source>
         <translation>关键点名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="46"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="47"/>
         <source>productname</source>
         <translation>产品</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="46"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="47"/>
         <source>tenor</source>
         <translation>期限</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="46"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="47"/>
         <source>calendar</source>
         <translation>日历</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="47"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="48"/>
         <source>convention</source>
         <translation>假日调整</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="47"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="48"/>
         <source>daycount</source>
         <translation>天数计数</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="47"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="48"/>
         <source>startdate</source>
         <translation>开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="47"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="48"/>
         <source>enddate</source>
         <translation>结束日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="115"/>
         <location filename="view/mainframe/key_point_definition.cpp" line="129"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="135"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="140"/>
         <location filename="view/mainframe/key_point_definition.cpp" line="143"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="149"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="158"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="161"/>
         <source>add</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="117"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="150"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="156"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="161"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="166"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="169"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="131"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="168"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="174"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="179"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="188"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="191"/>
         <source>modify</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="119"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="175"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="179"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="184"/>
-        <location filename="view/mainframe/key_point_definition.cpp" line="188"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="133"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="197"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="201"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="206"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="210"/>
         <source>delete</source>
         <translation>删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="129"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="143"/>
         <source>kpcode is empty</source>
         <translation>关键点代码为空！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="135"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="149"/>
         <source>The kpcode already exists</source>
         <translation>关键点代码已存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="140"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="158"/>
         <source>add success.</source>
         <translation>新增成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="143"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="161"/>
         <source>add fail.</source>
         <translation>新增失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="150"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="168"/>
         <source>No selected content can not be modified</source>
         <translation>没有选中内容不能修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="156"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="174"/>
         <source>keypoint code can not be modified</source>
         <translation>关键点代码不能被修改！</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/key_point_definition.cpp" line="413"/>
+        <source>warning</source>
+        <translation>警告</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/key_point_definition.cpp" line="413"/>
+        <source>product is not existing!</source>
+        <translation>产品代码不存在！</translation>
     </message>
     <message>
         <source>The key is modify!</source>
         <translation type="vanished">主键被修改了！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="161"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="179"/>
         <source>Records do not change, do not need to modify!</source>
         <translation>记录没有发生变化，不需要修改!</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="166"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="188"/>
         <source>modify success.</source>
         <translation>修改成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="169"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="191"/>
         <source>modify fail.</source>
         <translation>修改失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="175"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="197"/>
         <source>confirm to delete.</source>
         <translation>请确认是否删除？</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="179"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="201"/>
         <source>The kpcode is not existing!</source>
         <translation>关键点代码不存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="184"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="206"/>
         <source>delete success.</source>
         <translation>删除成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.cpp" line="188"/>
+        <location filename="view/mainframe/key_point_definition.cpp" line="210"/>
         <source>delete fail.</source>
         <translation>删除失败。</translation>
     </message>

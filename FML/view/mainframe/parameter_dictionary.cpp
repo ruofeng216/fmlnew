@@ -14,8 +14,8 @@ ParameterDictionary::ParameterDictionary(QWidget *parent)
 	connect(ui.pbModify, SIGNAL(clicked()), this, SLOT(slotModify()));
 	connect(ui.pbDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
 	connect(ui.treeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotTreeDoubleClicked(QModelIndex)));
-	connect(ui.cbTypeCode, SIGNAL(currentIndexChanged(int)), this, SLOT(slotTypeCodeChanged(int)));
-	connect(ui.cbTypeName, SIGNAL(currentIndexChanged(int)), this, SLOT(slotTypeNameChanged(int)));
+	connect(ui.cbTypeCode, SIGNAL(activated(int)), this, SLOT(slotTypeCodeChanged(int)));
+	connect(ui.cbTypeName, SIGNAL(activated(int)), this, SLOT(slotTypeNameChanged(int)));
 
 	init();
 	slotSkinChange();

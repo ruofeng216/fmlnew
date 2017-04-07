@@ -14,8 +14,8 @@ ProductManage::ProductManage(QWidget *parent)
 	connect(ui.pbModify, SIGNAL(clicked()), this, SLOT(slotModify()));
 	connect(ui.pbDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
 	connect(ui.treeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotTreeDoubleClicked(QModelIndex)));
-	connect(ui.cbParentCode, SIGNAL(currentIndexChanged(int)), this, SLOT(slotParentCodeChanged(int)));
-	connect(ui.cbParentName, SIGNAL(currentIndexChanged(int)), this, SLOT(slotParentNameChanged(int)));
+	connect(ui.cbParentCode, SIGNAL(activated(int)), this, SLOT(slotParentCodeChanged(int)));
+	connect(ui.cbParentName, SIGNAL(activated(int)), this, SLOT(slotParentNameChanged(int)));
 
 	init();
 	slotSkinChange();

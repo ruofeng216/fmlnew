@@ -23,6 +23,11 @@ public slots:
 	void slotModify();
 	void slotDelete();
 	void slotTreeDoubleClicked(const QModelIndex &index);
+	void slotProductCodeChanged(int index);
+	void slotProductNameChanged(int index);
+
+protected:
+	void showEvent(QShowEvent *event);
 
 private:
 	void setViewData(const CKeypoint &val);
@@ -32,6 +37,7 @@ private:
 	QString getParaNameFromCode(const QString &typecode, const QString &paracode);
 	QList<QStandardItem *> createParentRowItems(const CKeypoint &val);
 	QList<QStandardItem *> createChildtRowItems(const CKeypoint &val);
+	bool isProductExist(const QString &productCode);
 
 private:
 	Ui::KeyPointDefinition ui;
