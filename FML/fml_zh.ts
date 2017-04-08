@@ -100,12 +100,12 @@
     <message>
         <location filename="view/mainframe/financial_calendar.cpp" line="93"/>
         <source>add success.</source>
-        <translation type="unfinished">新增成功。</translation>
+        <translation type="unfinished">增加成功。</translation>
     </message>
     <message>
         <location filename="view/mainframe/financial_calendar.cpp" line="99"/>
         <source>add fail.</source>
-        <translation type="unfinished">新增失败。</translation>
+        <translation type="unfinished">增加失败。</translation>
     </message>
     <message>
         <source>the time does not exist.</source>
@@ -113,8 +113,8 @@
     </message>
     <message>
         <location filename="view/mainframe/financial_calendar.cpp" line="105"/>
-        <source>No selected content can not be modified</source>
-        <translation>没有选中内容不能修改</translation>
+        <source>Please confirm the date you want to modify first</source>
+        <translation>请从左侧窗口中选中要进行修改的假日安排，然后双击鼠标左键。</translation>
     </message>
     <message>
         <source>The key is modify!</source>
@@ -143,7 +143,7 @@
     <message>
         <location filename="view/mainframe/financial_calendar.cpp" line="131"/>
         <source>confirm to delete.</source>
-        <translation>请确认是否删除？</translation>
+        <translation>请再次确认是否删除？</translation>
     </message>
     <message>
         <location filename="view/mainframe/financial_calendar.cpp" line="138"/>
@@ -152,8 +152,8 @@
     </message>
     <message>
         <location filename="view/mainframe/financial_calendar.cpp" line="144"/>
-        <source>no day dist.</source>
-        <translation>不存在此交易日信息。</translation>
+        <source>No record in database.</source>
+        <translation>数据库中不存在该日期 [%1] 的相关记录!</translation>
     </message>
     <message>
         <location filename="view/mainframe/financial_calendar.cpp" line="147"/>
@@ -359,7 +359,7 @@
     <message>
         <location filename="view/mainframe/key_point_definition.cpp" line="161"/>
         <source>add fail.</source>
-        <translation>新增失败。</translation>
+        <translation>增加失败。</translation>
     </message>
     <message>
         <location filename="view/mainframe/key_point_definition.cpp" line="168"/>
@@ -772,7 +772,7 @@
     <message>
         <location filename="view/mainframe/parameter_dictionary.cpp" line="139"/>
         <source>The para code already exists</source>
-        <translation>此参数字典已存在！</translation>
+        <translation>参数 [ %1 %2] 已存在！</translation>
     </message>
     <message>
         <location filename="view/mainframe/parameter_dictionary.cpp" line="144"/>
@@ -941,8 +941,8 @@
     </message>
     <message>
         <location filename="view/mainframe/portfolio_manage.cpp" line="84"/>
-        <source>the code is existing.</source>
-        <translation>代码已存在。</translation>
+        <source>the portfolio already exists.</source>
+        <translation>组合 [ %1 ] 已经存在！</translation>
     </message>
     <message>
         <location filename="view/mainframe/portfolio_manage.cpp" line="89"/>
@@ -956,8 +956,8 @@
     </message>
     <message>
         <location filename="view/mainframe/portfolio_manage.cpp" line="100"/>
-        <source>No selected content can not be modified</source>
-        <translation>没有选中内容不能修改</translation>
+        <source>Please confirm the portfolio you want to modify first</source>
+        <translation>请从左侧窗口中选中要进行修改的组合，然后双击鼠标左键。</translation>
     </message>
     <message>
         <location filename="view/mainframe/portfolio_manage.cpp" line="107"/>
@@ -1002,10 +1002,11 @@
         <source>delete fail.</source>
         <translation>删除失败。</translation>
     </message>
-    <message>
+    
+	<message>
         <location filename="view/mainframe/portfolio_manage.cpp" line="148"/>
-        <source>no code.</source>
-        <translation>不存在此code。</translation>
+        <source>the portfolio doesn't exist!</source>
+        <translation>组合: [ %1 ] 不存在, 请重新选择要删除的组合!</translation>
     </message>
     <message>
         <location filename="view/mainframe/portfolio_manage.cpp" line="151"/>
