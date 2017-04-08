@@ -81,7 +81,7 @@ void PortfolioManage::addPortfolio()
 		return;
 	}
 	if (PARASETCTL->isExistCode(cp.getPortcode()))
-		ShowWarnMessage(tr("add"), tr("the code is existing."), this);
+		ShowWarnMessage(tr("add"), tr("the portfolio already exists.").arg(cp.getPortcode()), this);
 	else
 	{
 		if (PARASETCTL->setPortfolio(cp))
@@ -97,7 +97,7 @@ void PortfolioManage::addPortfolio()
 void PortfolioManage::modifyPortfolio()
 {
 	if (getCurrentData().getPortcode().isEmpty()) {
-		ShowWarnMessage(tr("modify"), tr("No selected content can not be modified"), this);
+		ShowWarnMessage(tr("modify"), tr("Please confirm the portfolio you want to modify first"), this);
 		return;
 	}
 
@@ -145,7 +145,8 @@ void PortfolioManage::delPortfolio()
 		}
 		else
 		{
-			ShowWarnMessage(tr("delete"), tr("no code."), this);
+			QString errMsg = tr("the portfolio doesn't exist!").arg(_portcode);
+			ShowWarnMessage(tr("delete"), errMsg, this);
 			return;
 		}
 		ShowSuccessMessage(tr("delete"), tr("delete success."), this);
@@ -169,7 +170,7 @@ void PortfolioManage::initDateView()
 	ui.treeView->setModel(m_pGoodsModel);
 	ui.treeView->setColumnHidden(2, true);
 	ui.treeView->setColumnHidden(3, true);
-	
+	ui.treeView->setColumnWidth(1, 200);
 	QStringList roots;
 	PARASETCTL->getAllRootCodes(roots);
 	for (QStringList::const_iterator itorRoot = roots.begin();

@@ -102,7 +102,7 @@ void FinancialCalendar::addHoliday()
 void FinancialCalendar::modifyHoliday()
 {
 	if (getCurrentData().getDate() == 0 || getCurrentData().getYear() == 0) {
-		ShowWarnMessage(tr("modify"), tr("No selected content can not be modified"), this);
+		ShowWarnMessage(tr("modify"), tr("Please confirm the date you want to modify first"), this);
 		return;
 	}
 
@@ -141,7 +141,8 @@ void FinancialCalendar::delHoliday()
 		}
 		else
 		{
-			ShowWarnMessage(tr("delete"), tr("no day dist."), this);
+			QString errMsg = tr("No record in database.").arg(QDate::fromJulianDay(fc.getDate()).toString("yyyy-MM-dd"));
+			ShowWarnMessage(tr("delete"), errMsg, this);
 			return;
 		}
 		ShowSuccessMessage(tr("delete"), tr("delete success."), this);

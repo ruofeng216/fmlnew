@@ -136,7 +136,7 @@ void ParameterDictionary::slotAdd()
 
 	CParaDict oldVal;
 	if (PARASETCTL->getParadict(val.getTypeCode(), val.getParaCode(), oldVal)) {
-		ShowWarnMessage(tr("add"), tr("The para code already exists"), this);
+		ShowWarnMessage(tr("add"), tr("The para code already exists").arg(val.getTypeCode()).arg(val.getParaCode()), this);
 		return;
 	}
 
