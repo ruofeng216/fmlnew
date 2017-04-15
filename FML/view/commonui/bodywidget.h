@@ -54,7 +54,7 @@ inline bool CAction<T>::checkNull(std::initializer_list<QLineEdit*> les) {
 	for (auto le : les) {
 		if (le->text().trimmed().isEmpty()) {
 			//if(nullNo==0)m_oldQLineEditBackgroundColor = le->palette().color(QPalette::Background).name();
-			le->setStyleSheet("background-color: red");
+			le->setStyleSheet("background-color: #CD7054");
 			nullNo++;
 		}
 		else {

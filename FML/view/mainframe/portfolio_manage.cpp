@@ -105,6 +105,10 @@ void PortfolioManage::modifyPortfolio()
 		return;
 	}
 
+	if (checkNull({ ui.lineEdit_portname })) {
+		ShowWarnMessage(tr("modify"), tr("portfolio name cann't be empty!"), this);
+		return;
+	}
 	CPortfolio cp = getViewData();
 	if (PARASETCTL->isParentCode(cp.getPortcode(), cp.getParentcode()))
 	{
