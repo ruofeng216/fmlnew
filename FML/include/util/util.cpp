@@ -35,15 +35,6 @@ namespace qutil
 			FmlStyle::instance()->init(str);
 		}
 	}
-	void refreshSkin()
-	{
-		QFile file(qutil::skin("sc.css"));
-		if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-			QString str = file.readAll();
-			qApp->setStyleSheet(str);
-			FmlStyle::instance()->init(str);
-		}
-	}
 	QString currentSkin()
 	{
 		return Skin::instance().skinName();

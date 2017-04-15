@@ -31,7 +31,6 @@ QString FinancialCalendar::getKey(const CFinancialCalendar &newVal) const
 bool FinancialCalendar::checkValid()
 {
 	bool bValid = true;
-	bool bRefresh = false;
 	if (!ui.dateEdit->date().isValid())
 	{
 		bValid = false;
@@ -45,7 +44,7 @@ bool FinancialCalendar::checkValid()
 		if (ui.lineEdit_year->property("property").toString() != "error")
 		{
 			ui.lineEdit_year->setProperty("property", "error");
-			bRefresh = true;
+			style()->polish(ui.lineEdit_year);
 		}
 		bValid = false;
 	}
@@ -54,11 +53,9 @@ bool FinancialCalendar::checkValid()
 		if (ui.lineEdit_year->property("property").toString() != "")
 		{
 			ui.lineEdit_year->setProperty("property", "");
-			bRefresh = true;
+			style()->polish(ui.lineEdit_year);
 		}
-		qutil::refreshSkin();
 	}
-	if (bRefresh) qutil::refreshSkin();
 	return bValid;
 }
 
