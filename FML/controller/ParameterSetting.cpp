@@ -5,10 +5,11 @@
 
 CParameterSetting::CParameterSetting()
 {
+	if (m_mapFinancialCalendar.isEmpty())
+		METADATABASE->getFinancialCalendar(m_mapFinancialCalendar);
 	if (m_portfolio.isEmpty()) 
 		METADATABASE->getPortfolio(m_portfolio);
 }
-
 
 CParameterSetting::~CParameterSetting()
 {
@@ -17,24 +18,29 @@ CParameterSetting::~CParameterSetting()
 //////金融日历////
 bool CParameterSetting::isExistFinancialCalendar(const CFinancialCalendar &val)
 {
-	return METADATABASE->isExistFinancialCalendar(val);
+	return m_mapFinancialCalendar.contains(val.getDate());
 }
 bool CParameterSetting::setFinancialCalendar(const CFinancialCalendar &val)
 {
-	return METADATABASE->setFinancialCalendar(val);
+	if (METADATABASE->setFinancialCalendar(val))
+	{
+		m_mapFinancialCalendar[val.getDate()] = val;
+		return true;
+	}
+	return false;
 }
 bool CParameterSetting::removeFinancialCalendar(int val)
 {
-	return METADATABASE->removeFinancialCalendar(val);
+	if (METADATABASE->removeFinancialCalendar(val))
+	{
+		m_mapFinancialCalendar.remove(val);
+		return true;
+	}
+	return false;
 }
-bool CParameterSetting::getFinancialCalendar(QMap<int, CFinancialCalendar> &val)
+const QMap<int, CFinancialCalendar> &CParameterSetting::getFinancialCalendar() const
 {
-	return METADATABASE->getFinancialCalendar(val);
-}
-
-bool CParameterSetting::getFinancialCalendar(int bwdate, CFinancialCalendar &val)
-{
-	return METADATABASE->getFinancialCalendar(bwdate, val);
+	return m_mapFinancialCalendar;
 }
 
 ///////组合管理///////////

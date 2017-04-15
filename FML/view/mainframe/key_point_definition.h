@@ -14,7 +14,9 @@ public:
 	KeyPointDefinition(QWidget *parent = Q_NULLPTR);
 	~KeyPointDefinition();
 	QString getKey(const CKeypoint &newVal) const;
-	bool isEqual(const CKeypoint &newVal);
+	// 提交时，检查相关控件值是否合法。
+	bool checkValid();
+
 	void init();
 
 public slots:

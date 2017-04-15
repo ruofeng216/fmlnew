@@ -14,9 +14,12 @@ public:
 	const T& getCurrentData() const { return m_data;  }
 	bool isKeyModify(const T &newVal) { return getKey(newVal) != getKey(m_data); };
 	virtual QString getKey(const T &newVal) const = 0;
-	virtual bool isEqual(const T &newVal) = 0;
+	bool isEqual(const T &newVal) { return newVal == m_data; }
 
 	bool checkNull(std::initializer_list<QLineEdit*> les);
+
+	// 提交时，检查相关控件值是否合法。
+	virtual bool checkValid() = 0;
 
 private:
 	T m_data;

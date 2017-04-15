@@ -27,9 +27,10 @@ QString PortfolioManage::getKey(const CPortfolio &newVal) const
 	return newVal.getPortcode();
 }
 
-bool PortfolioManage::isEqual(const CPortfolio &newVal)
+// 提交时，检查相关控件值是否合法。
+bool PortfolioManage::checkValid()
 {
-	return newVal == getCurrentData();
+	return true;
 }
 
 void PortfolioManage::init()

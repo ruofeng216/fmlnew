@@ -15,7 +15,9 @@ public:
 	FinancialCalendar(QWidget *parent = Q_NULLPTR);
 	~FinancialCalendar();
 	QString getKey(const CFinancialCalendar &newVal) const;
-	bool isEqual(const CFinancialCalendar &newVal);
+	// 提交时，检查相关控件值是否合法。
+	bool checkValid();
+
 	void init();
 
 public slots:

@@ -14,7 +14,9 @@ public:
 	ProductManage(QWidget *parent = Q_NULLPTR);
 	~ProductManage();
 	QString getKey(const CProduct &newVal) const;
-	bool isEqual(const CProduct &newVal);
+	// 提交时，检查相关控件值是否合法。
+	bool checkValid();
+
 	void init();
 
 public slots:

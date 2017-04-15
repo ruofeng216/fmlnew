@@ -30,9 +30,10 @@ QString ParameterDictionary::getKey(const CParaDict &newVal) const
 	return newVal.getParaCode();
 }
 
-bool ParameterDictionary::isEqual(const CParaDict &newVal)
+// 提交时，检查相关控件值是否合法。
+bool ParameterDictionary::checkValid()
 {
-	return newVal == getCurrentData();
+	return true;
 }
 
 void ParameterDictionary::init()

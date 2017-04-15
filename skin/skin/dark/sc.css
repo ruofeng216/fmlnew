@@ -211,6 +211,14 @@ QLineEdit {
     /*selection-background-color:#0e9496;*/
     border: 1px solid #1b4b63;
 }
+QLineEdit[property="error"] {
+    background:red;
+    color:#e8e5d5;
+    font-size:12px;
+    height:20px;
+    /*selection-background-color:#0e9496;*/
+    border: 1px solid red;
+}
 
 QLineEdit::hover, 
 QLineEdit::pressed {

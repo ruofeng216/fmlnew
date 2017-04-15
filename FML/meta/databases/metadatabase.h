@@ -17,25 +17,27 @@ public:
 	bool setLoginInfo(const CLogin &uinfo);
 	bool updateLoginInfo(const CLogin &uinfo);
 	// 金融日历
-	bool isExistFinancialCalendar(const CFinancialCalendar &val);
 	bool setFinancialCalendar(const CFinancialCalendar &val);
 	bool removeFinancialCalendar(int val);
 	bool getFinancialCalendar(QMap<int, CFinancialCalendar> &val);
-	bool getFinancialCalendar(int bwdate, CFinancialCalendar &val);
+
 	// 组合管理
 	bool setPortfolio(const CPortfolio &val);
 	bool removePortfolio(const QStringList &val);
 	bool getPortfolio(QMap<QString, CPortfolio> &val);
+
 	// 产品管理
 	bool getProduct(QMap<QString, CProduct> &val);
 	bool setProduct(const CProduct &val);
 	bool removeProduct(const QStringList &codeList);
+
 	// 参数字典
 	bool getParadict(QList<CParaDict> &val);
 	bool setParadict(const CParaDict &val);
 	bool setParadict(const QList<CParaDict> &valList);
 	bool removeParadict(const QStringList &typeCodeList, const QStringList &paraCodeList);
 	bool removeParadict(const QStringList &typeCodeList);
+
 	// 关键点定义
 	bool getKeypoint(QMap<QString, CKeypoint> &val);
 	bool setKeypoint(const QList<CKeypoint> &valList);

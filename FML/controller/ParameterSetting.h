@@ -11,8 +11,7 @@ public:
 	bool isExistFinancialCalendar(const CFinancialCalendar &val);
 	bool setFinancialCalendar(const CFinancialCalendar &val);
 	bool removeFinancialCalendar(int val);
-	bool getFinancialCalendar(QMap<int, CFinancialCalendar> &val);
-	bool getFinancialCalendar(int bwdate, CFinancialCalendar &val);
+	const QMap<int, CFinancialCalendar> &getFinancialCalendar() const;
 
 	///////组合管理///////////
 	bool setPortfolio(const CPortfolio &val);
@@ -47,6 +46,9 @@ private:
 	bool setTypeParadict(const CParaDict &val);
 
 private:
+	//金融日历
+	QMap<int, CFinancialCalendar> m_mapFinancialCalendar;
+
 	QMap<QString, CPortfolio> m_portfolio;
 	QMap<QString, CProduct> m_product;
 	QList<CParaDict> m_paradict;

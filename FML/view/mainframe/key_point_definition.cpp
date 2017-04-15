@@ -33,9 +33,10 @@ QString KeyPointDefinition::getKey(const CKeypoint &newVal) const
 	return newVal.getKpcode();
 }
 
-bool KeyPointDefinition::isEqual(const CKeypoint &newVal)
+// 提交时，检查相关控件值是否合法。
+bool KeyPointDefinition::checkValid()
 {
-	return newVal == getCurrentData();
+	return true;
 }
 
 void KeyPointDefinition::init()

@@ -18,6 +18,7 @@ namespace qutil
 
 	// ªÒ»°∆§∑Ù
 	void initSkin(const QString &skinName);
+	void refreshSkin();
 	QString currentSkin();
 	QString skin(const QString &name);
 	QString websrc(const QString &name);

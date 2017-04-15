@@ -6,7 +6,6 @@
 #include "util/util.h"
 #include "view/commonui/message_box_widget.h"
 
-
 FinancialCalendar::FinancialCalendar(QWidget *parent)
 	: BodyWidget(parent)
 	, m_pGoodsModel(NULL)
@@ -28,9 +27,39 @@ QString FinancialCalendar::getKey(const CFinancialCalendar &newVal) const
 	return newVal.getDate();
 }
 
-bool FinancialCalendar::isEqual(const CFinancialCalendar &newVal)
+// 提交时，检查相关控件值是否合法。
+bool FinancialCalendar::checkValid()
 {
-	return newVal == getCurrentData();
+	bool bValid = true;
+	bool bRefresh = false;
+	if (!ui.dateEdit->date().isValid())
+	{
+		bValid = false;
+	}
+	else
+	{
+		
+	}
+	if (ui.dateEdit->date().year() != ui.lineEdit_year->text().toInt())
+	{
+		if (ui.lineEdit_year->property("property").toString() != "error")
+		{
+			ui.lineEdit_year->setProperty("property", "error");
+			bRefresh = true;
+		}
+		bValid = false;
+	}
+	else
+	{
+		if (ui.lineEdit_year->property("property").toString() != "")
+		{
+			ui.lineEdit_year->setProperty("property", "");
+			bRefresh = true;
+		}
+		qutil::refreshSkin();
+	}
+	if (bRefresh) qutil::refreshSkin();
+	return bValid;
 }
 
 void FinancialCalendar::init()
@@ -83,6 +112,7 @@ void FinancialCalendar::slotSkinChange()
 
 void FinancialCalendar::addHoliday()
 {
+	if (!checkValid()) return;
 	CFinancialCalendar fc = getViewData();
 	if (PARASETCTL->isExistFinancialCalendar(fc))
 		ShowWarnMessage(tr("add"), tr("the time is existing."), this);
@@ -101,6 +131,8 @@ void FinancialCalendar::addHoliday()
 }
 void FinancialCalendar::modifyHoliday()
 {
+	if (!checkValid()) return;
+
 	if (getCurrentData().getDate() == 0 || getCurrentData().getYear() == 0) {
 		ShowWarnMessage(tr("modify"), tr("Please confirm the date you want to modify first"), this);
 		return;
@@ -128,6 +160,8 @@ void FinancialCalendar::modifyHoliday()
 }
 void FinancialCalendar::delHoliday()
 {
+	if (!checkValid()) return;
+
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this))
 	{
 		CFinancialCalendar fc = getViewData();
@@ -165,8 +199,7 @@ void FinancialCalendar::initDateView()
 		m_pGoodsModel->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
 	ui.treeView->setModel(m_pGoodsModel);
 	ui.treeView->header()->setDefaultSectionSize(130);
-	QMap<int, CFinancialCalendar> val;
-	PARASETCTL->getFinancialCalendar(val);
+	QMap<int, CFinancialCalendar> val = PARASETCTL->getFinancialCalendar();
 	QList<QStandardItem *> items;
 	for (QMap<int, CFinancialCalendar>::const_iterator itor = val.begin();
 		itor != val.end(); itor++)
@@ -203,8 +236,7 @@ void FinancialCalendar::expand(int y)
 	QList<QStandardItem*> lst = m_pGoodsModel->findItems(QString::number(y));
 	if (lst.isEmpty())
 	{
-		QMap<int, CFinancialCalendar> val;
-		PARASETCTL->getFinancialCalendar(val);
+		QMap<int, CFinancialCalendar> val = PARASETCTL->getFinancialCalendar();
 		if (!val.isEmpty()) {
 			expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
 		}

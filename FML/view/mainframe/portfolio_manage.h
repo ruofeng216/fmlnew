@@ -15,7 +15,10 @@ public:
 	PortfolioManage(QWidget *parent = Q_NULLPTR);
 	~PortfolioManage();
 	QString getKey(const CPortfolio &newVal) const;
-	bool isEqual(const CPortfolio &newVal);
+
+	// 提交时，检查相关控件值是否合法。
+	bool checkValid();
+
 	void init();
 
 public slots:

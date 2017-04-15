@@ -32,9 +32,10 @@ QString ProductManage::getKey(const CProduct &newVal) const
 	return newVal.getCode();
 }
 
-bool ProductManage::isEqual(const CProduct &newVal)
+// 提交时，检查相关控件值是否合法。
+bool ProductManage::checkValid()
 {
-	return newVal == getCurrentData();
+	return true;
 }
 
 void ProductManage::init()

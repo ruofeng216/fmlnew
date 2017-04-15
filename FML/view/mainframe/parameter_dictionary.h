@@ -14,7 +14,9 @@ public:
 	ParameterDictionary(QWidget *parent = Q_NULLPTR);
 	~ParameterDictionary();
 	QString getKey(const CParaDict &newVal) const;
-	bool isEqual(const CParaDict &newVal);
+	
+	// 提交时，检查相关控件值是否合法。
+	bool checkValid();
 
 	void init();
 	CParaDict getViewData();
