@@ -76,10 +76,14 @@ void PortfolioManage::slotSkinChange()
 void PortfolioManage::addPortfolio()
 {
 	CPortfolio cp = getViewData();
-	if (cp.getPortcode().isEmpty()) {
+	if (checkNull({ ui.lineEdit_portcode,ui.lineEdit_portname})) { 
+		ShowWarnMessage(tr("add"), tr("Red input box can not be empty!"), this);
+		return; 
+	}
+	/*if (cp.getPortcode().isEmpty()) {
 		ShowWarnMessage(tr("add"), tr("the code can not empty!"), this);
 		return;
-	}
+	}*/
 	if (PARASETCTL->isExistCode(cp.getPortcode()))
 		ShowWarnMessage(tr("add"), tr("the portfolio already exists.").arg(cp.getPortcode()), this);
 	else
@@ -96,7 +100,7 @@ void PortfolioManage::addPortfolio()
 }
 void PortfolioManage::modifyPortfolio()
 {
-	if (getCurrentData().getPortcode().isEmpty()) {
+	if (checkNull({ui.lineEdit_portcode})) {
 		ShowWarnMessage(tr("modify"), tr("Please confirm the portfolio you want to modify first"), this);
 		return;
 	}
@@ -130,11 +134,15 @@ void PortfolioManage::delPortfolio()
 {
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this))
 	{
-		QString _portcode = ui.lineEdit_portcode->text().trimmed();
-		if (_portcode.isEmpty()) {
+		if (checkNull({ ui.lineEdit_portcode })) {
 			ShowWarnMessage(tr("delete"), tr("the code can not empty!"), this);
 			return;
 		}
+		QString _portcode = ui.lineEdit_portcode->text().trimmed();
+		/*if (_portcode.isEmpty()) {
+			ShowWarnMessage(tr("delete"), tr("the code can not empty!"), this);
+			return;
+		}*/
 		if (PARASETCTL->isExistCode(_portcode))
 		{
 			if (!PARASETCTL->removePortfolio(_portcode))
@@ -245,6 +253,7 @@ CPortfolio PortfolioManage::getViewData()
 	QString _portcode = ui.lineEdit_portcode->text().trimmed();
 	QString _parentcode = ui.comboBox_parentcode->currentText().trimmed();
 	QString _portname = ui.lineEdit_portname->text().trimmed();
+
 	QString _parentname = PARASETCTL->isExistCode(_parentcode) ? PARASETCTL->getPortfolio()[_parentcode].getPortname() : "";
 	int _sdate = ui.dateEdit_datebegin->date().toJulianDay();
 	int _edate = ui.dateEdit_dateend->date().toJulianDay();
