@@ -450,6 +450,15 @@
     <ClCompile Include="controller\YieldCurveDefinition.cpp">
       <Filter>controller</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_xlineedit.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_xlineedit.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\commonui\xlineedit.cpp">
+      <Filter>view\commonui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -634,6 +643,9 @@
     </CustomBuild>
     <CustomBuild Include="view\mainframe\parameter_dictionary.h">
       <Filter>view\function\param_manage\parameter_dictionary</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\commonui\xlineedit.h">
+      <Filter>view\commonui</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

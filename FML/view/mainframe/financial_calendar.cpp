@@ -31,30 +31,14 @@ QString FinancialCalendar::getKey(const CFinancialCalendar &newVal) const
 bool FinancialCalendar::checkValid()
 {
 	bool bValid = true;
-	if (!ui.dateEdit->date().isValid())
-	{
-		bValid = false;
-	}
-	else
-	{
-		
-	}
 	if (ui.dateEdit->date().year() != ui.lineEdit_year->text().toInt())
 	{
-		if (ui.lineEdit_year->property("property").toString() != "error")
-		{
-			ui.lineEdit_year->setProperty("property", "error");
-			style()->polish(ui.lineEdit_year);
-		}
+		ui.lineEdit_year->setError();
 		bValid = false;
 	}
 	else
 	{
-		if (ui.lineEdit_year->property("property").toString() != "")
-		{
-			ui.lineEdit_year->setProperty("property", "");
-			style()->polish(ui.lineEdit_year);
-		}
+		ui.lineEdit_year->restore();
 	}
 	return bValid;
 }
