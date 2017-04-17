@@ -16,9 +16,9 @@ public:
 	virtual QString getKey(const T &newVal) const = 0;
 	bool isEqual(const T &newVal) { return newVal == m_data; }
 
-	void setNotNullCtls(std::initializer_list<QLineEdit*> les);
-	bool checkNull(std::initializer_list<QLineEdit*> les);
-	void slotSetNotNull(QLineEdit* les);
+	void setNotNullCtls(const QWidget *parent, std::initializer_list<QLineEdit*> les);
+	bool checkNull(const QWidget *parent, std::initializer_list<QLineEdit*> les);
+	void slotSetNotNull(const QWidget *parent, QLineEdit* les);
 
 	// 提交时，检查相关控件值是否合法。
 	virtual bool checkValid() = 0;
@@ -54,14 +54,14 @@ public slots:
 };
 
 template<class T> 
-inline bool CAction<T>::checkNull(std::initializer_list<QLineEdit*> les) {
+inline bool CAction<T>::checkNull(const QWidget *parent, std::initializer_list<QLineEdit*> les) {
 	short nullNo = 0;
 	for (auto le : les) {
 		if (le->text().trimmed().isEmpty()) {
 			if (le->property("property").toString() != "error")
 			{
 				le->setProperty("property", "error");
-				le->style()->polish(le);
+				parent->style()->polish(le);
 			}
 			//if(nullNo==0)m_oldQLineEditBackgroundColor = le->palette().color(QPalette::Background).name();
 			//le->setStyleSheet("background-color: #CD7054");
@@ -78,25 +78,25 @@ inline bool CAction<T>::checkNull(std::initializer_list<QLineEdit*> les) {
 }
 
 template<class T>
-inline void CAction<T>::setNotNullCtls(std::initializer_list<QLineEdit*> les) {
+inline void CAction<T>::setNotNullCtls(const QWidget *parent, std::initializer_list<QLineEdit*> les) {
 	for (auto le : les) {
 		QObject::connect(le, &QLineEdit::textChanged, [&le]() {
 			if (le->property("property").toString() != "")
 			{
 				le->setProperty("property", "");
-				le->style()->unpolish(le);
-				le->style()->polish(le);
+				parent->style()->unpolish(le);
+				parent->style()->polish(le);
 			}
 		});
 	}
 }
 
 template<class T>
-inline void CAction<T>::slotSetNotNull(QLineEdit* le) {
+inline void CAction<T>::slotSetNotNull(const QWidget *parent, QLineEdit* le) {
 	if (le->property("property").toString() != "")
 	{
 		le->setProperty("property", "");
-		le->style()->unpolish(le);
-		le->style()->polish(le);
+		parent->style()->unpolish(le);
+		parent->style()->polish(le);
 	}
 }

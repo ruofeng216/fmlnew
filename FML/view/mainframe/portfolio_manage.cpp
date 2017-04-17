@@ -17,8 +17,8 @@ PortfolioManage::PortfolioManage(QWidget *parent)
 	init();
 	slotSkinChange();
 
-	connect(ui.lineEdit_portcode, SIGNAL(textChanged()), this, SLOT(slotSetNotNull(ui.lineEdit_portcode)));
-	connect(ui.lineEdit_portname, SIGNAL(textChanged()), this, SLOT(slotSetNotNull(ui.lineEdit_portname)));
+	connect(ui.lineEdit_portcode, &QLineEdit::textChanged, [this] {this->slotSetNotNull(this, ui.lineEdit_portcode);});
+	connect(ui.lineEdit_portname, &QLineEdit::textChanged, [this] {this->slotSetNotNull(this, ui.lineEdit_portname);});
 }
 
 PortfolioManage::~PortfolioManage()
@@ -80,7 +80,7 @@ void PortfolioManage::slotSkinChange()
 void PortfolioManage::addPortfolio()
 {
 	CPortfolio cp = getViewData();
-	if (checkNull({ ui.lineEdit_portcode,ui.lineEdit_portname})) { 
+	if (checkNull(this,{ ui.lineEdit_portcode,ui.lineEdit_portname})) { 
 		ShowWarnMessage(tr("add"), tr("Red input box can not be empty!"), this);
 		return; 
 	}
@@ -104,12 +104,12 @@ void PortfolioManage::addPortfolio()
 }
 void PortfolioManage::modifyPortfolio()
 {
-	if (checkNull({ui.lineEdit_portcode})) {
+	if (checkNull(this,{ui.lineEdit_portcode})) {
 		ShowWarnMessage(tr("modify"), tr("Please confirm the portfolio you want to modify first"), this);
 		return;
 	}
 
-	if (checkNull({ ui.lineEdit_portname })) {
+	if (checkNull(this,{ ui.lineEdit_portname })) {
 		ShowWarnMessage(tr("modify"), tr("portfolio name cann't be empty!"), this);
 		return;
 	}
@@ -142,7 +142,7 @@ void PortfolioManage::delPortfolio()
 {
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this))
 	{
-		if (checkNull({ ui.lineEdit_portcode })) {
+		if (checkNull(this,{ ui.lineEdit_portcode })) {
 			ShowWarnMessage(tr("delete"), tr("the code can not empty!"), this);
 			return;
 		}
