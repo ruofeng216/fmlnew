@@ -16,7 +16,9 @@ public:
 	virtual QString getKey(const T &newVal) const = 0;
 	bool isEqual(const T &newVal) { return newVal == m_data; }
 
+	void setNotNullCtls(std::initializer_list<QLineEdit*> les);
 	bool checkNull(std::initializer_list<QLineEdit*> les);
+	void slotSetNotNull(QLineEdit* les);
 
 	// 提交时，检查相关控件值是否合法。
 	virtual bool checkValid() = 0;
@@ -56,16 +58,45 @@ inline bool CAction<T>::checkNull(std::initializer_list<QLineEdit*> les) {
 	short nullNo = 0;
 	for (auto le : les) {
 		if (le->text().trimmed().isEmpty()) {
+			if (le->property("property").toString() != "error")
+			{
+				le->setProperty("property", "error");
+				le->style()->polish(le);
+			}
 			//if(nullNo==0)m_oldQLineEditBackgroundColor = le->palette().color(QPalette::Background).name();
-			le->setStyleSheet("background-color: #CD7054");
+			//le->setStyleSheet("background-color: #CD7054");
 			nullNo++;
 		}
 		else {
 			//QString colorStr = QString("background-color:%1").arg(m_oldQLineEditBackgroundColor);
-			le->setStyleSheet("");
+			//le->setStyleSheet("");
 		}
 	}
 
 	if (nullNo > 0) return true;
 	else return false;
+}
+
+template<class T>
+inline void CAction<T>::setNotNullCtls(std::initializer_list<QLineEdit*> les) {
+	for (auto le : les) {
+		QObject::connect(le, &QLineEdit::textChanged, [&le]() {
+			if (le->property("property").toString() != "")
+			{
+				le->setProperty("property", "");
+				le->style()->unpolish(le);
+				le->style()->polish(le);
+			}
+		});
+	}
+}
+
+template<class T>
+inline void CAction<T>::slotSetNotNull(QLineEdit* le) {
+	if (le->property("property").toString() != "")
+	{
+		le->setProperty("property", "");
+		le->style()->unpolish(le);
+		le->style()->polish(le);
+	}
 }

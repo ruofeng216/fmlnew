@@ -16,6 +16,9 @@ PortfolioManage::PortfolioManage(QWidget *parent)
 	connect(ui.pushButton_delete, &QPushButton::clicked, this, &PortfolioManage::delPortfolio);
 	init();
 	slotSkinChange();
+
+	connect(ui.lineEdit_portcode, SIGNAL(textChanged()), this, SLOT(slotSetNotNull(ui.lineEdit_portcode)));
+	connect(ui.lineEdit_portname, SIGNAL(textChanged()), this, SLOT(slotSetNotNull(ui.lineEdit_portname)));
 }
 
 PortfolioManage::~PortfolioManage()
