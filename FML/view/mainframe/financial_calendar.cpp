@@ -33,7 +33,7 @@ bool FinancialCalendar::checkValid()
 	bool bValid = true;
 	if (ui.dateEdit->date().year() != ui.lineEdit_year->text().toInt())
 	{
-		ui.lineEdit_year->setError();
+		ui.lineEdit_year->setError(tr("the year must equal to the date-year!"));
 		bValid = false;
 	}
 	else

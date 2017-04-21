@@ -59,6 +59,7 @@ void QDBMgr::initTables()
 				qDebug() << "更新数据库失败!";
 				ShowErrorMessage(tr("Database"), tr("Update DataBase Faile."), NULL);
 				emit VIEWSIGNAL->sigExitProgramme();
+				return;
 			}
 		}
 		else
@@ -69,6 +70,7 @@ void QDBMgr::initTables()
 				qDebug() << "创建表失败!" << "table name: "<< itor.value();
 				ShowErrorMessage(tr("Database"), tr("Create table Faile."), NULL);
 				emit VIEWSIGNAL->sigExitProgramme();
+				return;
 			}
 		}
 	}
@@ -89,6 +91,7 @@ void QDBMgr::initTables()
 				m_sqlQuery->lastError().databaseText();
 			ShowErrorMessage(tr("Database"), tr("Get tables Faile."), NULL);
 			emit VIEWSIGNAL->sigExitProgramme();
+			return;
 		}
 		for (QVariantList::iterator itor = tables.begin(); itor != tables.end(); itor++)
 		{
