@@ -9,11 +9,11 @@ CLoginController::~CLoginController()
 {
 }
 // µÇÂ¼ÑéÖ¤
-eERR CLoginController::chkLogin(const QString &uname, const QString &pswd)
+eERR CLoginController::chkLogin(const QString &uname, const QString &pswd, QString &err)
 {
 	FUNCLOG("CLoginController::chkLogin(const QString &uname, const QString &pswd)");
 	CLogin cinfo;
-	if (METADATABASE->getLoginInfo(uname, cinfo))
+	if (METADATABASE->getLoginInfo(uname, cinfo, err))
 	{
 		const QString &u = cinfo.getUname();
 		if (u == uname)
@@ -32,15 +32,15 @@ eERR CLoginController::chkLogin(const QString &uname, const QString &pswd)
 	return e_NoUser;
 }
 // ×¢²á
-eERR CLoginController::regLogin(const QString &uname, const QString &pswd)
+eERR CLoginController::regLogin(const QString &uname, const QString &pswd, QString &err)
 {
 	FUNCLOG("CLoginController::regLogin(const QString &uname, const QString &pswd)");
-	eERR e = chkLogin(uname, pswd);
+	eERR e = chkLogin(uname, pswd, err);
 	if (e == e_Success)
 		return e_Success;
 	if (e == e_NoUser)
 	{
-		if (!METADATABASE->setLoginInfo(CLogin(uname, pswd)))
+		if (!METADATABASE->setLoginInfo(CLogin(uname, pswd), err))
 			return e_RegErr;
 		m_curLogin.setUname(uname);
 		m_curLogin.setPassword(pswd);
@@ -51,13 +51,13 @@ eERR CLoginController::regLogin(const QString &uname, const QString &pswd)
 	return e_RegErr;
 }
 // ÐÞ¸ÄÃÜÂë
-eERR CLoginController::modifyLogin(const QString &uname, const QString &pswd)
+eERR CLoginController::modifyLogin(const QString &uname, const QString &pswd, QString &err)
 {
 	FUNCLOG("CLoginController::modifyLogin(const QString &uname, const QString &pswd)");
 	CLogin cinfo;
-	if (METADATABASE->getLoginInfo(uname, cinfo))
+	if (METADATABASE->getLoginInfo(uname, cinfo, err))
 	{
-		if (!METADATABASE->updateLoginInfo(CLogin(uname, pswd)))
+		if (!METADATABASE->updateLoginInfo(CLogin(uname, pswd), err))
 			return e_ModifyErr;
 		return e_Success;
 	}

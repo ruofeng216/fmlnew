@@ -20,7 +20,7 @@ MetaDatabase *MetaDatabase::instance()
 }
 
 
-bool MetaDatabase::getLoginInfo(const QString &username, CLogin &lval)
+bool MetaDatabase::getLoginInfo(const QString &username, CLogin &lval, QString &err)
 {
 	FUNCLOG("MetaDatabase::getLoginInfo(const QString &username, CLogin &lval)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -29,8 +29,12 @@ bool MetaDatabase::getLoginInfo(const QString &username, CLogin &lval)
 	QStringList fieldList;
 	fieldList << "user" << "pswd";
 	QList<QVariantList> results;
-	m_DbMgr->QueryFields(DB_SQL_SelectLoginUser, paramList, fieldList, results);
-	if (results.isEmpty()) return false;
+	bool res = m_DbMgr->QueryFields(DB_SQL_SelectLoginUser, paramList, fieldList, results);
+	if (!res)
+	{
+		err = m_DbMgr->lastError();
+		return false;
+	}
 	for (int i = 0; i < results.size(); i++)
 	{
 		if (results[i].size() == 2)
@@ -40,9 +44,10 @@ bool MetaDatabase::getLoginInfo(const QString &username, CLogin &lval)
 			return true;
 		}
 	}
+	err = "no user.";
 	return false;
 }
-bool MetaDatabase::setLoginInfo(const CLogin &uinfo)
+bool MetaDatabase::setLoginInfo(const CLogin &uinfo, QString &err)
 {
 	FUNCLOG("MetaDatabase::setLoginInfo(const CLogin &uinfo)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -50,9 +55,10 @@ bool MetaDatabase::setLoginInfo(const CLogin &uinfo)
 	paramList << uinfo.getUname() << uinfo.getPassword();
 	if (m_DbMgr->ExecuteSQL(DB_SQL_InsertLoginUser, paramList))
 		return true;
+	err = m_DbMgr->lastError();
 	return false;
 }
-bool MetaDatabase::updateLoginInfo(const CLogin &uinfo)
+bool MetaDatabase::updateLoginInfo(const CLogin &uinfo, QString &err)
 {
 	FUNCLOG("MetaDatabase::updateLoginInfo(const CLogin &uinfo)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -60,11 +66,12 @@ bool MetaDatabase::updateLoginInfo(const CLogin &uinfo)
 	paramList << uinfo.getPassword() << uinfo.getUname();
 	if (m_DbMgr->ExecuteSQL(DB_SQL_UpdateLoginUser, paramList))
 		return true;
+	err = m_DbMgr->lastError();
 	return false;
 }
 
 // 金融日历
-bool MetaDatabase::setFinancialCalendar(const CFinancialCalendar &val)
+bool MetaDatabase::setFinancialCalendar(const CFinancialCalendar &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::setFinancialCalendar(const CFinancialCalendar &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -72,9 +79,10 @@ bool MetaDatabase::setFinancialCalendar(const CFinancialCalendar &val)
 	paramList << val.getYear() << val.getDate() << val.getHolidayType() << val.getHolidayinfo();
 	if (m_DbMgr->ExecuteSQL(DB_SQL_ReplaceFinancialHoliday, paramList))
 		return true;
+	err = m_DbMgr->lastError();
 	return false;
 }
-bool MetaDatabase::removeFinancialCalendar(int val)
+bool MetaDatabase::removeFinancialCalendar(int val, QString &err)
 {
 	FUNCLOG("MetaDatabase::removeFinancialCalendar(int val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -82,9 +90,10 @@ bool MetaDatabase::removeFinancialCalendar(int val)
 	paramList << val;
 	if (m_DbMgr->ExecuteSQL(DB_SQL_DeleteFinancialHoliday, paramList))
 		return true;
+	err = m_DbMgr->lastError();
 	return false;
 }
-bool MetaDatabase::getFinancialCalendar(QMap<int, CFinancialCalendar> &val)
+bool MetaDatabase::getFinancialCalendar(QMap<int, CFinancialCalendar> &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::getFinancialCalendar(const QMap<int, CFinancialCalendar> &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -92,8 +101,12 @@ bool MetaDatabase::getFinancialCalendar(QMap<int, CFinancialCalendar> &val)
 	QStringList fieldList;
 	fieldList << "bwyear" << "bwdate" << "daytype" << "annotation";
 	QList<QVariantList> results;
-	m_DbMgr->QueryFields(DB_SQL_SelectFinancialHolidays, paramList, fieldList, results);
-	if (results.isEmpty()) return false;
+	bool ret = m_DbMgr->QueryFields(DB_SQL_SelectFinancialHolidays, paramList, fieldList, results);
+	if (!ret)
+	{
+		err = m_DbMgr->lastError();
+		return false;
+	}
 	for (int i = 0; i < results.size(); i++)
 	{
 		if (results[i].size() == 4)
@@ -110,7 +123,7 @@ bool MetaDatabase::getFinancialCalendar(QMap<int, CFinancialCalendar> &val)
 }
 
 // 组合管理
-bool MetaDatabase::setPortfolio(const CPortfolio &val)
+bool MetaDatabase::setPortfolio(const CPortfolio &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::setPortfolio(const CPortfolio &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -124,9 +137,10 @@ bool MetaDatabase::setPortfolio(const CPortfolio &val)
 		<< val.getAnnotation();
 	if (m_DbMgr->ExecuteSQL(DB_SQL_ReplacePortfolio, paramList))
 		return true;
+	err = m_DbMgr->lastError();
 	return false;
 }
-bool MetaDatabase::removePortfolio(const QStringList &val)
+bool MetaDatabase::removePortfolio(const QStringList &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::removePortfolio(const QVector<CPortfolio> &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -140,9 +154,10 @@ bool MetaDatabase::removePortfolio(const QStringList &val)
 	lsts << paramList;
 	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeletePortfolio, lsts))
 		return true;
+	err = m_DbMgr->lastError();
 	return false;
 }
-bool MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val)
+bool MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -150,8 +165,12 @@ bool MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val)
 	QStringList fieldList;
 	fieldList << "portcode" << "portname" << "parentcode" << "parentname" << "sdate" << "edate" << "annotation";
 	QList<QVariantList> results;
-	m_DbMgr->QueryFields(DB_SQL_SelectPortfolios, paramList, fieldList, results);
-	if (results.isEmpty()) return false;
+	bool ret = m_DbMgr->QueryFields(DB_SQL_SelectPortfolios, paramList, fieldList, results);
+	if (!ret)
+	{
+		err = m_DbMgr->lastError();
+		return false;
+	}
 	for (int i = 0; i < results.size(); i++)
 	{
 		if (results[i].size() == 7)
@@ -174,7 +193,7 @@ bool MetaDatabase::getPortfolio(QMap<QString, CPortfolio> &val)
 }
 
 //////////////////////////////////产品管理////////////////////////////////////////
-bool MetaDatabase::getProduct(QMap<QString, CProduct> &val)
+bool MetaDatabase::getProduct(QMap<QString, CProduct> &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::getProduct(QMap<QString, CProduct> &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -182,8 +201,10 @@ bool MetaDatabase::getProduct(QMap<QString, CProduct> &val)
 	QStringList fieldList;
 	fieldList << "productcode" << "productname" << "parentcode" << "parentname" << "sdate" << "edate" << "annotation";
 	QList<QVariantList> results;
-	m_DbMgr->QueryFields(DB_SQL_SelectProduct, paramList, fieldList, results);
-	if (results.isEmpty()) {
+	bool ret = m_DbMgr->QueryFields(DB_SQL_SelectProduct, paramList, fieldList, results);
+	if (!ret)
+	{
+		err = m_DbMgr->lastError();
 		return false;
 	}
 	for (int i = 0; i < results.size(); i++) {
@@ -206,7 +227,7 @@ bool MetaDatabase::getProduct(QMap<QString, CProduct> &val)
 	}
 	return true;
 }
-bool MetaDatabase::setProduct(const CProduct &val)
+bool MetaDatabase::setProduct(const CProduct &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::setProduct(const CProduct &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -218,12 +239,12 @@ bool MetaDatabase::setProduct(const CProduct &val)
 		<< val.getSdate()
 		<< val.getEdate()
 		<< val.getAnnotation();
-	if (m_DbMgr->ExecuteSQL(DB_SQL_ReplaceProduct, paramList)) {
+	if (m_DbMgr->ExecuteSQL(DB_SQL_ReplaceProduct, paramList))
 		return true;
-	}
+	err = m_DbMgr->lastError();
 	return false;
 }
-bool MetaDatabase::removeProduct(const QStringList &codeList)
+bool MetaDatabase::removeProduct(const QStringList &codeList, QString &err)
 {
 	FUNCLOG("MetaDatabase::removeProduct(const QStringList &codeList)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -233,14 +254,14 @@ bool MetaDatabase::removeProduct(const QStringList &codeList)
 		paramList << code;
 	}
 	allParamList << paramList;
-	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteProduct, allParamList)) {
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteProduct, allParamList))
 		return true;
-	}
+	err = m_DbMgr->lastError();
 	return false;
 }
 
 ///////////////////////////////////参数字典///////////////////////////////////////
-bool MetaDatabase::getParadict(QList<CParaDict> &val)
+bool MetaDatabase::getParadict(QList<CParaDict> &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::getParadict(QList<CParaDict> &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -248,8 +269,10 @@ bool MetaDatabase::getParadict(QList<CParaDict> &val)
 	QStringList fieldList;
 	fieldList << "typecode" << "typename" << "paracode" << "paraname" << "paraexplain";
 	QList<QVariantList> results;
-	m_DbMgr->QueryFields(DB_SQL_SelectParadict, paramList, fieldList, results);
-	if (results.isEmpty()) {
+	bool ret = m_DbMgr->QueryFields(DB_SQL_SelectParadict, paramList, fieldList, results);
+	if (!ret)
+	{
+		err = m_DbMgr->lastError();
 		return false;
 	}
 	for (int i = 0; i < results.size(); i++) {
@@ -271,16 +294,16 @@ bool MetaDatabase::getParadict(QList<CParaDict> &val)
 	return true;
 }
 
-bool MetaDatabase::setParadict(const CParaDict &val)
+bool MetaDatabase::setParadict(const CParaDict &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::setParadict(const CParaDict &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
 	QList<CParaDict> valList;
 	valList.push_back(val);
-	return setParadict(valList);
+	return setParadict(valList, err);
 }
 
-bool MetaDatabase::setParadict(const QList<CParaDict> &valList)
+bool MetaDatabase::setParadict(const QList<CParaDict> &valList, QString &err)
 {
 	FUNCLOG("MetaDatabase::setParadict(const QList<CParaDict> &valList)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -294,17 +317,19 @@ bool MetaDatabase::setParadict(const QList<CParaDict> &valList)
 		paraExplainList << val.getParaExplain();
 	}
 	allParamList << typeCodeList << typeNameList << paraCodeList << paraNameList << paraExplainList;
-	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_ReplaceParadict, allParamList)) {
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_ReplaceParadict, allParamList))
 		return true;
-	}
+	err = m_DbMgr->lastError();
 	return false;
 }
 
-bool MetaDatabase::removeParadict(const QStringList &typeCodeList, const QStringList &paraCodeList)
+bool MetaDatabase::removeParadict(const QStringList &typeCodeList, const QStringList &paraCodeList, QString &err)
 {
 	FUNCLOG("MetaDatabase::removeParadict(const QStringList &typeCodeList, const QStringList &paraCodeList)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
-	if (typeCodeList.isEmpty() || typeCodeList.size() != paraCodeList.size()) {
+	if (typeCodeList.isEmpty() || typeCodeList.size() != paraCodeList.size()) 
+	{
+		err = QString("parameters error.");
 		return false;
 	}
 	QList<QVariantList> allParamList;
@@ -314,17 +339,19 @@ bool MetaDatabase::removeParadict(const QStringList &typeCodeList, const QString
 		paraList << paraCodeList[i];
 	}
 	allParamList << typeList << paraList;
-	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteParadictByTypeParaCode, allParamList)) {
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteParadictByTypeParaCode, allParamList)) 
 		return true;
-	}
+	err = m_DbMgr->lastError();
 	return false;
 }
 
-bool MetaDatabase::removeParadict(const QStringList &typeCodeList)
+bool MetaDatabase::removeParadict(const QStringList &typeCodeList, QString &err)
 {
 	FUNCLOG("MetaDatabase::removeParadict(const QStringList &typeCodeList)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
-	if (typeCodeList.isEmpty()) {
+	if (typeCodeList.isEmpty()) 
+	{
+		err = QString("parameters empty.");
 		return false;
 	}
 	QList<QVariantList> allParamList;
@@ -333,14 +360,14 @@ bool MetaDatabase::removeParadict(const QStringList &typeCodeList)
 		typeList << typeCodeList[i];
 	}
 	allParamList << typeList;
-	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteParadictByTypeCode, allParamList)) {
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteParadictByTypeCode, allParamList))
 		return true;
-	}
+	err = m_DbMgr->lastError();
 	return false;
 }
 
 /////////////////////////////////////关键点定义/////////////////////////////////////
-bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val)
+bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -348,10 +375,13 @@ bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val)
 	QStringList fieldList;
 	fieldList << "kpcode" << "kpname" << "productcode" << "productname" << "tenor" << "marketcode" << "marketname" << "calendar" << "convention" << "daycount" << "spotlag" << "couponfrequency" << "refindex";
 	QList<QVariantList> results;
-	m_DbMgr->QueryFields(DB_SQL_SelectKeypoint, paramList, fieldList, results);
-	if (results.isEmpty()) {
+	bool ret = m_DbMgr->QueryFields(DB_SQL_SelectKeypoint, paramList, fieldList, results);
+	if (!ret)
+	{
+		err = m_DbMgr->lastError();
 		return false;
 	}
+	
 	for (int i = 0; i < results.size(); i++) {
 		const QVariantList &valList = results[i];
 		if (valList.size() != 13) {
@@ -379,7 +409,7 @@ bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val)
 	return true;
 
 }
-bool MetaDatabase::setKeypoint(const QList<CKeypoint> &valList)
+bool MetaDatabase::setKeypoint(const QList<CKeypoint> &valList, QString &err)
 {
 	FUNCLOG("MetaDatabase::setKeypoint(const QList<CKeypoint> &valList)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -403,16 +433,18 @@ bool MetaDatabase::setKeypoint(const QList<CKeypoint> &valList)
 	}
 	allParamList << kpcodeList << kpnameList << productcodeList << productnameList << tenorList << marketcodeList
 		<< marketnameList << calendarList << conventionList << daycountList << spotlagList << couponfrequencyList << refindexList;
-	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_ReplaceKeypoint, allParamList)) {
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_ReplaceKeypoint, allParamList))
 		return true;
-	}
+	err = m_DbMgr->lastError();
 	return false;
 }
-bool MetaDatabase::removeKeypoint(const QStringList &valList)
+bool MetaDatabase::removeKeypoint(const QStringList &valList, QString &err)
 {
 	FUNCLOG("MetaDatabase::removeKeypoint(const QStringList &valList)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
-	if (valList.isEmpty()) {
+	if (valList.isEmpty()) 
+	{
+		err = QString("parameters empty.");
 		return false;
 	}
 	QList<QVariantList> allParamList;
@@ -421,8 +453,8 @@ bool MetaDatabase::removeKeypoint(const QStringList &valList)
 		kpcodeList << valList[i];
 	}
 	allParamList << kpcodeList;
-	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteKeypoint, allParamList)) {
+	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_DeleteKeypoint, allParamList))
 		return true;
-	}
+	err = m_DbMgr->lastError();
 	return false;
 }

@@ -57,8 +57,6 @@ typedef enum e_ErrType
 
 
 
-
-
 /////////////////////////////////////////////////////
 // ´°¿Úid
 const QString Main_HomePage = QString("Main_HomePage"); // home

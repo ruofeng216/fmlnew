@@ -7,11 +7,11 @@ class ILogin
 public:
 	virtual ~ILogin() = 0;
 	// µÇÂ¼ÑéÖ¤
-	virtual eERR chkLogin(const QString &uname, const QString &pswd) = 0;
+	virtual eERR chkLogin(const QString &uname, const QString &pswd, QString &err) = 0;
 	// ×¢²á
-	virtual eERR regLogin(const QString &uname, const QString &pswd) = 0;
+	virtual eERR regLogin(const QString &uname, const QString &pswd, QString &err) = 0;
 	// ÐÞ¸ÄÃÜÂë
-	virtual eERR modifyLogin(const QString &uname, const QString &pswd) = 0;
+	virtual eERR modifyLogin(const QString &uname, const QString &pswd, QString &err) = 0;
 };
 
 class IGlobalSetting

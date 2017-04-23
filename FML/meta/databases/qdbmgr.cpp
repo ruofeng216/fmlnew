@@ -351,7 +351,7 @@ bool QDBMgr::ExecuteBatchSQL(const QString& sql, const QList<QVariantList>& para
 }
 
 // 查询单个字段
-void QDBMgr::QueryOneField(const QString& sql, const QVariantList& paramList,
+bool QDBMgr::QueryOneField(const QString& sql, const QVariantList& paramList,
 	QVariantList& results)
 {
 	QMutexLocker guard(&m_dbLock);
@@ -360,7 +360,7 @@ void QDBMgr::QueryOneField(const QString& sql, const QVariantList& paramList,
 		results.clear();
 		if (NULL == m_sqlQuery)
 		{
-			return;
+			return false;
 		}
 		m_sqlQuery->clear();
 
@@ -369,12 +369,15 @@ void QDBMgr::QueryOneField(const QString& sql, const QVariantList& paramList,
 		{
 			m_sqlQuery->addBindValue(paramList[i]);
 		}
-		m_sqlQuery->exec();
-
-		while (m_sqlQuery->next())
+		bool res = m_sqlQuery->exec();
+		if (res)
 		{
-			results << m_sqlQuery->value(0);
+			while (m_sqlQuery->next())
+			{
+				results << m_sqlQuery->value(0);
+			}
 		}
+		return res;
 	}
 	catch (...)
 	{
@@ -384,10 +387,11 @@ void QDBMgr::QueryOneField(const QString& sql, const QVariantList& paramList,
 			qDebug() << QString("DB Error: param: ") << paramList[i].toString();
 		}
 	}
+	return false;
 }
 
 // 查询多个字段
-void QDBMgr::QueryFields(const QString& sql, const QVariantList& paramList,
+bool QDBMgr::QueryFields(const QString& sql, const QVariantList& paramList,
 	const QStringList& fieldList, QList<QVariantList>& results)
 {
 	QMutexLocker guard(&m_dbLock);
@@ -396,7 +400,7 @@ void QDBMgr::QueryFields(const QString& sql, const QVariantList& paramList,
 		results.clear();
 		if (NULL == m_sqlQuery)
 		{
-			return;
+			return false;
 		}
 		m_sqlQuery->clear();
 
@@ -405,20 +409,23 @@ void QDBMgr::QueryFields(const QString& sql, const QVariantList& paramList,
 		{
 			m_sqlQuery->addBindValue(paramList[i]);
 		}
-		m_sqlQuery->exec();
+		bool res = m_sqlQuery->exec();
 
-		//QSqlRecord rec = m_sqlQuery->record();
-		while (m_sqlQuery->next())
+		if (res)
 		{
-			QVariantList resultList;
-			for (int i = 0; i < fieldList.size(); i++)
+			while (m_sqlQuery->next())
 			{
-				//int index = rec.indexOf(fieldList[i]);
-				//resultList << m_sqlQuery->value(index);
-				resultList << m_sqlQuery->value(fieldList[i]);
+				QVariantList resultList;
+				for (int i = 0; i < fieldList.size(); i++)
+				{
+					//int index = rec.indexOf(fieldList[i]);
+					//resultList << m_sqlQuery->value(index);
+					resultList << m_sqlQuery->value(fieldList[i]);
+				}
+				results << resultList;
 			}
-			results << resultList;
 		}
+		return res;
 	}
 	catch (...)
 	{
@@ -432,6 +439,7 @@ void QDBMgr::QueryFields(const QString& sql, const QVariantList& paramList,
 			qDebug() << QString("DB Error: field: ") << fieldList[i];
 		}
 	}
+	return false;
 }
 
 // 删除表
