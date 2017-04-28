@@ -37,12 +37,12 @@ public:
 	virtual ~IParameterSetting() = 0;
 	//////金融日历////
 	virtual bool isExistFinancialCalendar(const CFinancialCalendar &val) = 0;
-	virtual bool setFinancialCalendar(const CFinancialCalendar &val) = 0;
-	virtual bool removeFinancialCalendar(int val) = 0;
+	virtual bool setFinancialCalendar(const CFinancialCalendar &val, QString &err) = 0;
+	virtual bool removeFinancialCalendar(int val, QString &err) = 0;
 	virtual const QMap<int, CFinancialCalendar> &getFinancialCalendar() const = 0;
 	///////组合管理///////////
-	virtual bool setPortfolio(const CPortfolio &val) = 0;
-	virtual bool removePortfolio(const QString &val) = 0;
+	virtual bool setPortfolio(const CPortfolio &val, QString &err) = 0;
+	virtual bool removePortfolio(const QString &val, QString &err) = 0;
 	virtual const QMap<QString, CPortfolio> &getPortfolio() = 0;
 	virtual bool isParentCode(const QString &parent, const QString &child) = 0;
 	virtual bool isExistCode(const QString &val) = 0;
@@ -52,8 +52,8 @@ public:
 	///////产品管理///////////
 	virtual const QMap<QString, CProduct>& getProduct() = 0;
 	virtual bool getProduct(const QString &code, CProduct &val) = 0;
-	virtual bool setProduct(const CProduct &val) = 0;
-	virtual bool removeProduct(const QString &code) = 0;
+	virtual bool setProduct(const CProduct &val, QString &err) = 0;
+	virtual bool removeProduct(const QString &code, QString &err) = 0;
 	virtual QList<CProduct> getRootProduct() = 0;
 	virtual QList<CProduct> getChildrenProduct(const QString &parentCode) = 0;
 	virtual void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results) = 0;
@@ -61,8 +61,8 @@ public:
 	virtual const QList<CParaDict>& getParadict() = 0;
 	virtual bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val) = 0;
 	virtual bool getAllParadict(const QString &typeCode, QList<CParaDict> &valList) = 0;
-	virtual bool setParadict(const CParaDict &val) = 0;
-	virtual bool removeParadict(const QString &typeCode, const QString &paraCode) = 0;
+	virtual bool setParadict(const CParaDict &val, QString &err) = 0;
+	virtual bool removeParadict(const QString &typeCode, const QString &paraCode, QString &err) = 0;
 };
 
 class IYieldCurveDefinition

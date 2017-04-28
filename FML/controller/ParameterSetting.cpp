@@ -1,14 +1,38 @@
 #include "ParameterSetting.h"
 #include "metadatabase.h"
 #include <QSet>
+#include <QObject>
+#include <QDebug>
 #include "util/util.h"
 
 CParameterSetting::CParameterSetting()
 {
 	if (m_mapFinancialCalendar.isEmpty())
-		METADATABASE->getFinancialCalendar(m_mapFinancialCalendar);
-	if (m_portfolio.isEmpty()) 
-		METADATABASE->getPortfolio(m_portfolio);
+	{// 金融日历缓存初始化
+		QString strErr;
+		if (!METADATABASE->getFinancialCalendar(m_mapFinancialCalendar, strErr) && !strErr.isEmpty())
+			qDebug() << strErr;
+	}
+	if (m_portfolio.isEmpty())
+	{// 组合管理缓存初始化
+		QString strErr;
+		if (!METADATABASE->getPortfolio(m_portfolio, strErr) && !strErr.isEmpty())
+			qDebug() << strErr;
+	}
+	if (m_product.isEmpty())
+	{// 产品管理缓存初始化
+		QString strErr;
+		if (!METADATABASE->getProduct(m_product, strErr) && !strErr.isEmpty())
+			qDebug() << strErr;
+	}
+	if (m_paradict.isEmpty())
+	{// 参数管理缓存初始化
+		QString strErr;
+		if (!METADATABASE->getParadict(m_paradict, strErr) && !strErr.isEmpty())
+			qDebug() << strErr;
+		else
+			initParaDict();
+	}
 }
 
 CParameterSetting::~CParameterSetting()
@@ -20,18 +44,18 @@ bool CParameterSetting::isExistFinancialCalendar(const CFinancialCalendar &val)
 {
 	return m_mapFinancialCalendar.contains(val.getDate());
 }
-bool CParameterSetting::setFinancialCalendar(const CFinancialCalendar &val)
+bool CParameterSetting::setFinancialCalendar(const CFinancialCalendar &val, QString &err)
 {
-	if (METADATABASE->setFinancialCalendar(val))
+	if (METADATABASE->setFinancialCalendar(val, err))
 	{
 		m_mapFinancialCalendar[val.getDate()] = val;
 		return true;
 	}
 	return false;
 }
-bool CParameterSetting::removeFinancialCalendar(int val)
+bool CParameterSetting::removeFinancialCalendar(int val, QString &err)
 {
-	if (METADATABASE->removeFinancialCalendar(val))
+	if (METADATABASE->removeFinancialCalendar(val, err))
 	{
 		m_mapFinancialCalendar.remove(val);
 		return true;
@@ -44,16 +68,16 @@ const QMap<int, CFinancialCalendar> &CParameterSetting::getFinancialCalendar() c
 }
 
 ///////组合管理///////////
-bool CParameterSetting::setPortfolio(const CPortfolio &val)
+bool CParameterSetting::setPortfolio(const CPortfolio &val, QString &err)
 {
-	if (METADATABASE->setPortfolio(val))
+	if (METADATABASE->setPortfolio(val, err))
 	{
 		m_portfolio[val.getPortcode()] = val;
 		return true;
 	}
 	return false;
 }
-bool CParameterSetting::removePortfolio(const QString &val)
+bool CParameterSetting::removePortfolio(const QString &val, QString &err)
 {
 	if (!isExistCode(val)) return false;
 	QSet<QString> dellst;
@@ -68,7 +92,7 @@ bool CParameterSetting::removePortfolio(const QString &val)
 		}
 		itor++;
 	}
-	if (METADATABASE->removePortfolio(dellst.toList()))
+	if (METADATABASE->removePortfolio(dellst.toList(), err))
 	{
 		for (QMap<QString, CPortfolio>::iterator it = m_portfolio.begin();
 			it != m_portfolio.end();)
@@ -84,7 +108,6 @@ bool CParameterSetting::removePortfolio(const QString &val)
 }
 const QMap<QString, CPortfolio> &CParameterSetting::getPortfolio()
 {
-	if (m_portfolio.isEmpty()) METADATABASE->getPortfolio(m_portfolio);
 	return m_portfolio;
 }
 bool CParameterSetting::isParentCode(const QString &parent, const QString &child)
@@ -130,32 +153,11 @@ bool CParameterSetting::getPortfolio(const QString &key, CPortfolio &val)
 ///////产品管理///////////
 const QMap<QString, CProduct>& CParameterSetting::getProduct()
 {
-	if (m_product.isEmpty()) {
-		METADATABASE->getProduct(m_product);
-
-#if 0
-		// 删除脏数据，有些产品有parentCode，但其实parentCode对应的产品不存在
-		QStringList deleteList;
-		for (auto iter = m_product.begin(); iter != m_product.end(); ) {
-			const QString &parentCode = iter.value().getParentCode();
-			if (!parentCode.isEmpty() && !m_product.contains(parentCode)) {
-				qDebug() << "parent code is not existing, invalid product:" << iter.key();
-				deleteList << iter.key();
-				iter = m_product.erase(iter);
-			} else {
-				++iter;
-			}
-		}
-		foreach(const QString &code, deleteList) {
-			this->removeProduct(code);
-		}
-#endif
-	}
 	return m_product;
 }
-bool CParameterSetting::setProduct(const CProduct &val)
+bool CParameterSetting::setProduct(const CProduct &val, QString &err)
 {
-	if (METADATABASE->setProduct(val)) {
+	if (METADATABASE->setProduct(val, err)) {
 		m_product[val.getCode()] = val;
 		return true;
 	}
@@ -172,7 +174,7 @@ bool CParameterSetting::getProduct(const QString &code, CProduct &val)
 	return false;
 }
 
-bool CParameterSetting::removeProduct(const QString &code)
+bool CParameterSetting::removeProduct(const QString &code, QString &err)
 {
 	if (!m_product.contains(code)) {
 		return false;
@@ -184,7 +186,7 @@ bool CParameterSetting::removeProduct(const QString &code)
 	foreach(const CProduct &child, children) {
 		deleteList << child.getCode();
 	}
-	if (METADATABASE->removeProduct(deleteList)) {
+	if (METADATABASE->removeProduct(deleteList, err)) {
 		foreach(const QString &deleteCode, deleteList) {
 			m_product.remove(deleteCode);
 		}
@@ -234,43 +236,9 @@ const QList<CParaDict>& CParameterSetting::getParadict()
 {
 	if (m_paradict.isEmpty()) {
 		METADATABASE->getParadict(m_paradict);
-		if (m_paradict.isEmpty()) {
-			QList<CParaDict> strList;
-			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "", ""));
-			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "quarterly", QString::fromLocal8Bit("按季")));
-			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "yearly", QString::fromLocal8Bit("按年")));
-			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "monthly", QString::fromLocal8Bit("按月")));
-			strList.push_back(CParaDict("CouponFrequency", QString::fromLocal8Bit("付息频率"), "halfyear", QString::fromLocal8Bit("按半年")));
-			strList.push_back(CParaDict("Calendar", QString::fromLocal8Bit("日历"), "", ""));
-			strList.push_back(CParaDict("Calendar", QString::fromLocal8Bit("日历"), "CFETS", QString::fromLocal8Bit("银行间市场日历")));
-			strList.push_back(CParaDict("Calendar", QString::fromLocal8Bit("日历"), "SHSE", QString::fromLocal8Bit("中国上海交易所日历")));
-			strList.push_back(CParaDict("Convention", QString::fromLocal8Bit("计息日调整"), "", ""));
-			strList.push_back(CParaDict("Convention", QString::fromLocal8Bit("计息日调整"), "Modified Following", QString::fromLocal8Bit("修正的下一工作日")));
-			strList.push_back(CParaDict("Convention", QString::fromLocal8Bit("计息日调整"), "Following", QString::fromLocal8Bit("下一工作日")));
-			strList.push_back(CParaDict("Convention", QString::fromLocal8Bit("计息日调整"), "Preceding", QString::fromLocal8Bit("前一工作日")));
-			strList.push_back(CParaDict("DayCount", QString::fromLocal8Bit("天数计数"), "", ""));
-			strList.push_back(CParaDict("DayCount", QString::fromLocal8Bit("天数计数"), "Act/Act", QString::fromLocal8Bit("实际天数/实际天数")));
-			strList.push_back(CParaDict("DayCount", QString::fromLocal8Bit("天数计数"), "Act/365", QString::fromLocal8Bit("实际天数/365")));
-			strList.push_back(CParaDict("DayCount", QString::fromLocal8Bit("天数计数"), "Act/360", QString::fromLocal8Bit("实际天数/360")));
-			strList.push_back(CParaDict("CouponType", QString::fromLocal8Bit("息票类型"), "", ""));
-			strList.push_back(CParaDict("CouponType", QString::fromLocal8Bit("息票类型"), "ZeroCoupon", QString::fromLocal8Bit("零息票")));
-			strList.push_back(CParaDict("CouponType", QString::fromLocal8Bit("息票类型"), "FixedCoupon", QString::fromLocal8Bit("固定息票")));
-			strList.push_back(CParaDict("CouponType", QString::fromLocal8Bit("息票类型"), "FloatCoupon", QString::fromLocal8Bit("浮动息票")));
-			strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "", ""));
-			strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "shibor3m", QString::fromLocal8Bit("")));
-			strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "repo7d", QString::fromLocal8Bit("")));
-			strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "depo1y", QString::fromLocal8Bit("")));
-			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "", ""));
-			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "IBMoneyMarket", QString::fromLocal8Bit("银行间货币市场")));
-			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "IBBondMarket", QString::fromLocal8Bit("银行间债券市场")));
-			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "SHEXMoneyMarket", QString::fromLocal8Bit("上海交易所货币市场")));
-			strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "SHEXStockMarket", QString::fromLocal8Bit("上海股票交易所市场")));
-			strList.push_back(CParaDict("ZeroRateCompoundFrequency", QString::fromLocal8Bit("零息利率复利类型"), "", ""));
-			strList.push_back(CParaDict("ZeroRateCompoundFrequency", QString::fromLocal8Bit("零息利率复利类型"), "ContinuousCompound", QString::fromLocal8Bit("连续复利")));
-			strList.push_back(CParaDict("ZeroRateCompoundFrequency", QString::fromLocal8Bit("零息利率复利类型"), "yearlyCompound", QString::fromLocal8Bit("年复利")));
-			if (METADATABASE->setParadict(strList)) {
-				m_paradict = strList;
-			}
+		if (m_paradict.isEmpty()) 
+		{
+			initParaDict();
 		}
 	}
 	return m_paradict;
@@ -305,14 +273,14 @@ bool CParameterSetting::getAllParadict(const QString &typeCode, QList<CParaDict>
 	return valList.size() > 0;
 }
 
-bool CParameterSetting::setParadict(const CParaDict &val)
+bool CParameterSetting::setParadict(const CParaDict &val, QString &err)
 {
 	if (val.getTypeCode().isEmpty()) {
 		return false;
 	}
 
 	// 先更新类型代码
-	if (!setTypeParadict(val)) {
+	if (!setTypeParadict(val,err)) {
 		return false;
 	}
 
@@ -323,7 +291,7 @@ bool CParameterSetting::setParadict(const CParaDict &val)
 	}
 
 	// 再更新参数代码
-	if (METADATABASE->setParadict(val)) {
+	if (METADATABASE->setParadict(val, err)) {
 		bool isUpdate = false;
 		for (int i = 0; i < m_paradict.size(); i++) {
 			if (m_paradict[i].getTypeCode() == val.getTypeCode() && m_paradict[i].getParaCode() == val.getParaCode()) {
@@ -340,13 +308,13 @@ bool CParameterSetting::setParadict(const CParaDict &val)
 	return false;
 }
 
-bool CParameterSetting::removeParadict(const QString &typeCode, const QString &paraCode)
+bool CParameterSetting::removeParadict(const QString &typeCode, const QString &paraCode, QString &err)
 {
 	if (typeCode.isEmpty()) {
 		return false;
 	}
 	if (!paraCode.isEmpty()) {
-		if (METADATABASE->removeParadict(QStringList() << typeCode, QStringList() << paraCode)) {
+		if (METADATABASE->removeParadict(QStringList() << typeCode, QStringList() << paraCode, err)) {
 			for (int i = m_paradict.size() - 1; i >= 0; i--) {
 				if (m_paradict[i].getTypeCode() == typeCode && m_paradict[i].getParaCode() == paraCode) {
 					m_paradict.removeAt(i);
@@ -356,7 +324,7 @@ bool CParameterSetting::removeParadict(const QString &typeCode, const QString &p
 			return true;
 		}
 	} else {
-		if (METADATABASE->removeParadict(QStringList() << typeCode)) {
+		if (METADATABASE->removeParadict(QStringList() << typeCode, err)) {
 			for (int i = m_paradict.size() - 1; i >= 0; i--) {
 				if (m_paradict[i].getTypeCode() == typeCode) {
 					m_paradict.removeAt(i);
@@ -368,7 +336,7 @@ bool CParameterSetting::removeParadict(const QString &typeCode, const QString &p
 	return false;
 }
 
-bool CParameterSetting::setTypeParadict(const CParaDict &val)
+bool CParameterSetting::setTypeParadict(const CParaDict &val, QString &err)
 {
 	if (val.getTypeCode().isEmpty()) {
 		return false;
@@ -400,7 +368,7 @@ bool CParameterSetting::setTypeParadict(const CParaDict &val)
 	} else {
 		// 不存在
 		typeData = getNewTypeData(val, oldTypeData);
-		if (METADATABASE->setParadict(typeData)) {
+		if (METADATABASE->setParadict(typeData, err)) {
 			m_paradict.push_back(typeData);
 			return true;
 		}
@@ -418,10 +386,59 @@ bool CParameterSetting::setTypeParadict(const CParaDict &val)
 				}
 			}
 		}
-		if (METADATABASE->setParadict(modifyList)) {
+		if (METADATABASE->setParadict(modifyList, err)) {
 			m_paradict = tempList;
 			return true;
 		}
 	}
 	return false;
+}
+
+// 初始化参数字典
+void CParameterSetting::initParaDict()
+{
+	if (!m_paradict.isEmpty()) return;
+	QList<CParaDict> strList;
+	strList.push_back(CParaDict("CouponFrequency", QObject::tr("CouponFrequency"), "", ""));
+	strList.push_back(CParaDict("CouponFrequency", QObject::tr("CouponFrequency"), "quarterly", QObject::tr("quarterly")));
+	strList.push_back(CParaDict("CouponFrequency", QObject::tr("CouponFrequency"), "yearly", QObject::tr("yearly")));
+	strList.push_back(CParaDict("CouponFrequency", QObject::tr("CouponFrequency"), "monthly", QObject::tr("monthly")));
+	strList.push_back(CParaDict("CouponFrequency", QObject::tr("CouponFrequency"), "halfyear", QObject::tr("halfyear")));
+	strList.push_back(CParaDict("Calendar", QObject::tr("Calendar"), "", ""));
+	strList.push_back(CParaDict("Calendar", QObject::tr("Calendar"), "CFETS", QObject::tr("CFETS")));
+	strList.push_back(CParaDict("Calendar", QObject::tr("Calendar"), "SHSE", QObject::tr("SHSE")));
+	strList.push_back(CParaDict("Convention", QObject::tr("Convention"), "", ""));
+	strList.push_back(CParaDict("Convention", QObject::tr("Convention"), "Modified Following", QObject::tr("Modified Following")));
+	strList.push_back(CParaDict("Convention", QObject::tr("Convention"), "Following", QObject::tr("Following")));
+	strList.push_back(CParaDict("Convention", QObject::tr("Convention"), "Preceding", QObject::tr("Preceding")));
+	strList.push_back(CParaDict("DayCount", QObject::tr("DayCount"), "", ""));
+	strList.push_back(CParaDict("DayCount", QObject::tr("DayCount"), "Act/Act", QObject::tr("Act/Act")));
+	strList.push_back(CParaDict("DayCount", QObject::tr("DayCount"), "Act/365", QObject::tr("Act/365")));
+	strList.push_back(CParaDict("DayCount", QObject::tr("DayCount"), "Act/360", QObject::tr("Act/360")));
+	strList.push_back(CParaDict("CouponType", QObject::tr("CouponType"), "", ""));
+	strList.push_back(CParaDict("CouponType", QObject::tr("CouponType"), "ZeroCoupon", QString::fromLocal8Bit("零息票")));
+	strList.push_back(CParaDict("CouponType", QObject::tr("CouponType"), "FixedCoupon", QString::fromLocal8Bit("固定息票")));
+	strList.push_back(CParaDict("CouponType", QObject::tr("CouponType"), "FloatCoupon", QString::fromLocal8Bit("浮动息票")));
+	strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "", ""));
+	strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "shibor3m", QString::fromLocal8Bit("")));
+	strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "repo7d", QString::fromLocal8Bit("")));
+	strList.push_back(CParaDict("ReferenceIndex", QString::fromLocal8Bit("参考利率"), "depo1y", QString::fromLocal8Bit("")));
+	strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "", ""));
+	strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "IBMoneyMarket", QString::fromLocal8Bit("银行间货币市场")));
+	strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "IBBondMarket", QString::fromLocal8Bit("银行间债券市场")));
+	strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "SHEXMoneyMarket", QString::fromLocal8Bit("上海交易所货币市场")));
+	strList.push_back(CParaDict("MarketType", QString::fromLocal8Bit("市场类型"), "SHEXStockMarket", QString::fromLocal8Bit("上海股票交易所市场")));
+	strList.push_back(CParaDict("ZeroRateCompoundFrequency", QString::fromLocal8Bit("零息利率复利类型"), "", ""));
+	strList.push_back(CParaDict("ZeroRateCompoundFrequency", QString::fromLocal8Bit("零息利率复利类型"), "ContinuousCompound", QString::fromLocal8Bit("连续复利")));
+	strList.push_back(CParaDict("ZeroRateCompoundFrequency", QString::fromLocal8Bit("零息利率复利类型"), "yearlyCompound", QString::fromLocal8Bit("年复利")));
+	
+	QString strErr;
+	if (METADATABASE->setParadict(strList, strErr)) 
+	{
+		m_paradict = strList;
+	}
+	else
+	{
+		qDebug() << strErr;
+	}
 }

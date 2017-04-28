@@ -234,42 +234,42 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="372"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="382"/>
         <source>所属市场</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="397"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="407"/>
         <source>日历</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="432"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="442"/>
         <source>假日调整</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="489"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="499"/>
         <source>天数计数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="457"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="467"/>
         <source>交割天数</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="549"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="559"/>
         <source>增加</source>
         <translation type="unfinished">增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="568"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="578"/>
         <source>修改</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/key_point_definition.ui" line="587"/>
+        <location filename="view/mainframe/key_point_definition.ui" line="597"/>
         <source>删除</source>
         <translation type="unfinished">删除</translation>
     </message>
@@ -884,27 +884,27 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.ui" line="346"/>
+        <location filename="view/mainframe/portfolio_manage.ui" line="356"/>
         <source>上级组合代码</source>
         <translation type="unfinished">上级组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.ui" line="398"/>
+        <location filename="view/mainframe/portfolio_manage.ui" line="408"/>
         <source>组合说明</source>
         <translation type="unfinished">组合说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.ui" line="467"/>
+        <location filename="view/mainframe/portfolio_manage.ui" line="477"/>
         <source>增加</source>
         <translation type="unfinished">增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.ui" line="491"/>
+        <location filename="view/mainframe/portfolio_manage.ui" line="501"/>
         <source>修改</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.ui" line="515"/>
+        <location filename="view/mainframe/portfolio_manage.ui" line="525"/>
         <source>删除</source>
         <translation type="unfinished">删除</translation>
     </message>
@@ -1207,8 +1207,8 @@
     <message>
         <location filename="meta/databases/qdbmgr.cpp" line="21"/>
         <location filename="meta/databases/qdbmgr.cpp" line="60"/>
-        <location filename="meta/databases/qdbmgr.cpp" line="70"/>
-        <location filename="meta/databases/qdbmgr.cpp" line="90"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="71"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="92"/>
         <source>Database</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1223,12 +1223,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="meta/databases/qdbmgr.cpp" line="70"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="71"/>
         <source>Create table Faile.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="meta/databases/qdbmgr.cpp" line="90"/>
+        <location filename="meta/databases/qdbmgr.cpp" line="92"/>
         <source>Get tables Faile.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1246,6 +1246,118 @@
         <location filename="include/util/datatype.cpp" line="262"/>
         <source>workday</source>
         <translation>工作日</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="423"/>
+        <location filename="controller/ParameterSetting.cpp" line="424"/>
+        <location filename="controller/ParameterSetting.cpp" line="425"/>
+        <location filename="controller/ParameterSetting.cpp" line="426"/>
+        <location filename="controller/ParameterSetting.cpp" line="427"/>
+        <source>CouponFrequency</source>
+        <translation>付息频率</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="424"/>
+        <source>quarterly</source>
+        <translation>按季</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="425"/>
+        <source>yearly</source>
+        <translation>按年</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="426"/>
+        <source>monthly</source>
+        <translation>按月</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="427"/>
+        <source>halfyear</source>
+        <translation>按半年</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="428"/>
+        <location filename="controller/ParameterSetting.cpp" line="429"/>
+        <location filename="controller/ParameterSetting.cpp" line="430"/>
+        <source>Calendar</source>
+        <translation>日历</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="429"/>
+        <source>CFETS</source>
+        <translation>银行间市场日历</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="430"/>
+        <source>SHSE</source>
+        <translation>中国上海交易所日历</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="431"/>
+        <location filename="controller/ParameterSetting.cpp" line="432"/>
+        <location filename="controller/ParameterSetting.cpp" line="433"/>
+        <location filename="controller/ParameterSetting.cpp" line="434"/>
+        <source>Convention</source>
+        <translation>计息日调整</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="432"/>
+        <source>Modified Following</source>
+        <translation>修正的下一工作日</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="433"/>
+        <source>Following</source>
+        <translation>下一工作日</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="434"/>
+        <source>Preceding</source>
+        <translation>前一工作日</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="435"/>
+        <location filename="controller/ParameterSetting.cpp" line="436"/>
+        <location filename="controller/ParameterSetting.cpp" line="437"/>
+        <location filename="controller/ParameterSetting.cpp" line="438"/>
+        <source>DayCount</source>
+        <translation>天数计数</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="436"/>
+        <source>Act/Act</source>
+        <translation>实际天数/实际天数</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="437"/>
+        <source>Act/365</source>
+        <translation>实际天数/365</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="438"/>
+        <source>Act/360</source>
+        <translation>实际天数/360</translation>
+    </message>
+    <message>
+        <location filename="controller/ParameterSetting.cpp" line="439"/>
+        <location filename="controller/ParameterSetting.cpp" line="440"/>
+        <location filename="controller/ParameterSetting.cpp" line="441"/>
+        <location filename="controller/ParameterSetting.cpp" line="442"/>
+        <source>CouponType</source>
+        <translation>息票类型</translation>
+    </message>
+    <message>
+        <source>ReferenceIndex</source>
+        <translation type="vanished">参考利率</translation>
+    </message>
+    <message>
+        <source>MarketType</source>
+        <translation type="vanished">市场类型</translation>
+    </message>
+    <message>
+        <source>ZeroRateCompoundFrequency</source>
+        <translation type="vanished">零息利率复利类型</translation>
     </message>
 </context>
 <context>
@@ -1309,11 +1421,11 @@
     <message>
         <location filename="view/login/login.ui" line="111"/>
         <location filename="view/login/login.cpp" line="39"/>
-        <location filename="view/login/login.cpp" line="53"/>
-        <location filename="view/login/login.cpp" line="60"/>
-        <location filename="view/login/login.cpp" line="72"/>
-        <location filename="view/login/login.cpp" line="86"/>
-        <location filename="view/login/login.cpp" line="93"/>
+        <location filename="view/login/login.cpp" line="54"/>
+        <location filename="view/login/login.cpp" line="61"/>
+        <location filename="view/login/login.cpp" line="73"/>
+        <location filename="view/login/login.cpp" line="88"/>
+        <location filename="view/login/login.cpp" line="95"/>
         <source>login</source>
         <translation type="unfinished">登录</translation>
     </message>
@@ -1329,33 +1441,33 @@
     </message>
     <message>
         <location filename="view/login/login.cpp" line="39"/>
-        <location filename="view/login/login.cpp" line="72"/>
+        <location filename="view/login/login.cpp" line="73"/>
         <source>The user name or password cannot be empty</source>
         <translation type="unfinished">用户名或密码不能为空！</translation>
     </message>
     <message>
-        <location filename="view/login/login.cpp" line="48"/>
-        <location filename="view/login/login.cpp" line="81"/>
+        <location filename="view/login/login.cpp" line="49"/>
+        <location filename="view/login/login.cpp" line="83"/>
         <source>Financial Market Leader</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/login/login.cpp" line="53"/>
+        <location filename="view/login/login.cpp" line="54"/>
         <source>no user. if you have none, please register.</source>
         <translation type="unfinished">用户不存在，请先注册。</translation>
     </message>
     <message>
-        <location filename="view/login/login.cpp" line="60"/>
+        <location filename="view/login/login.cpp" line="61"/>
         <source>user pswd error, no login.</source>
         <translation type="unfinished">用户密码错误，不能登录。</translation>
     </message>
     <message>
-        <location filename="view/login/login.cpp" line="86"/>
+        <location filename="view/login/login.cpp" line="88"/>
         <source>user existed, please register another.</source>
         <translation type="unfinished">用户已存在，请重新注册。</translation>
     </message>
     <message>
-        <location filename="view/login/login.cpp" line="93"/>
+        <location filename="view/login/login.cpp" line="95"/>
         <source>register error, call IT.</source>
         <translation type="unfinished">注册失败，请找IT。</translation>
     </message>
@@ -1398,22 +1510,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="280"/>
+        <location filename="view/mainframe/product_manage.ui" line="290"/>
         <source>说明</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="350"/>
+        <location filename="view/mainframe/product_manage.ui" line="360"/>
         <source>增加</source>
         <translation type="unfinished">增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="369"/>
+        <location filename="view/mainframe/product_manage.ui" line="379"/>
         <source>修改</source>
         <translation type="unfinished">修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.ui" line="388"/>
+        <location filename="view/mainframe/product_manage.ui" line="398"/>
         <source>删除</source>
         <translation type="unfinished">删除</translation>
     </message>

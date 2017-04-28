@@ -41,7 +41,8 @@ void login::loginSys()
 		ui.btn_login->setFocus();
 		return;
 	}
-	eERR er = LONGINCTL->chkLogin(username, password);
+	QString strErr;
+	eERR er = LONGINCTL->chkLogin(username, password, strErr);
 	if (e_Success == er)
 	{
 		ViewController::instance()->closewnd(LOGIN_WINDOW_ID);
@@ -50,7 +51,7 @@ void login::loginSys()
 	}
 	if (e_NoUser == er)
 	{
-		ShowWarnMessage(tr("login"), tr("no user. if you have none, please register."), this);
+		ShowWarnMessage(tr("login"), strErr.isEmpty()?tr("no user. if you have none, please register."):strErr, this);
 		ViewController::instance()->showwnd(LOGIN_WINDOW_ID);
 		ui.btn_login->setFocus();
 		return;
@@ -74,7 +75,8 @@ void login::registerSys()
 		ui.btn_login->setFocus();
 		return;
 	}
-	eERR er = LONGINCTL->regLogin(username, password);
+	QString strErr;
+	eERR er = LONGINCTL->regLogin(username, password, strErr);
 	if (e_Success == er)
 	{
 		ViewController::instance()->closewnd(LOGIN_WINDOW_ID);
@@ -83,14 +85,14 @@ void login::registerSys()
 	}
 	if (e_Exist == er)
 	{
-		ShowWarnMessage(tr("login"), tr("user existed, please register another."), this);
+		ShowWarnMessage(tr("login"), strErr.isEmpty()?tr("user existed, please register another."): strErr, this);
 		ViewController::instance()->showwnd(LOGIN_WINDOW_ID);
 		ui.btn_login->setFocus();
 		return;
 	}
 	if (e_RegErr == er)
 	{
-		ShowWarnMessage(tr("login"), tr("register error, call IT."), this);
+		ShowWarnMessage(tr("login"), strErr.isEmpty()?tr("register error, call IT."): strErr, this);
 		ViewController::instance()->showwnd(LOGIN_WINDOW_ID);
 		ui.btn_login->setFocus();
 		return;
