@@ -155,11 +155,12 @@ void KeyPointDefinition::slotAdd()
 		return;
 	}
 
-	if (YIELDCURVECTL->setKeyPoint(val)) {
+	QString err;
+	if (YIELDCURVECTL->setKeyPoint(val, err)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
 		init();
 	} else {
-		ShowErrorMessage(tr("add"), tr("add fail."), this);
+		ShowErrorMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
 	}
 }
 
@@ -184,12 +185,12 @@ void KeyPointDefinition::slotModify()
 	if (!isProductExist(val.getProductCode())) {
 		return;
 	}
-
-	if (YIELDCURVECTL->setKeyPoint(val)) {
+	QString err;
+	if (YIELDCURVECTL->setKeyPoint(val,err)) {
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		init();
 	} else {
-		ShowErrorMessage(tr("modify"), tr("modify fail."), this);
+		ShowErrorMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
 	}
 }
 
@@ -202,13 +203,13 @@ void KeyPointDefinition::slotDelete()
 			ShowWarnMessage(tr("delete"), tr("The kpcode is not existing!"), this);
 			return;
 		}
-
-		if (YIELDCURVECTL->removeKeyPoint(val.getKpcode())) {
+		QString err;
+		if (YIELDCURVECTL->removeKeyPoint(val.getKpcode(), err)) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
 			setViewData(CKeypoint());
 			init();
 		} else {
-			ShowErrorMessage(tr("delete"), tr("delete fail."), this);
+			ShowErrorMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 		}
 	}
 }

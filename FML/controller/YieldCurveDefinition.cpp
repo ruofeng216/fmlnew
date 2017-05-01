@@ -4,7 +4,12 @@
 
 CYieldCurveDefinition::CYieldCurveDefinition()
 {
-
+	if (m_keypoint.isEmpty())
+	{
+		QString strErr;
+		if (!METADATABASE->getKeypoint(m_keypoint, strErr) && !strErr.isEmpty())
+			qDebug() << strErr;
+	}
 }
 
 CYieldCurveDefinition::~CYieldCurveDefinition()
@@ -12,11 +17,8 @@ CYieldCurveDefinition::~CYieldCurveDefinition()
 
 }
 
-const QMap<QString, CKeypoint>& CYieldCurveDefinition::getKeyPoint()
+const QMap<QString, CKeypoint>& CYieldCurveDefinition::getKeyPoint() const
 {
-	if (m_keypoint.isEmpty()) {
-		METADATABASE->getKeypoint(m_keypoint);
-	}
 	return m_keypoint;
 }
 bool CYieldCurveDefinition::getKeyPoint(const QString &kpcode, CKeypoint &val)
@@ -30,19 +32,19 @@ bool CYieldCurveDefinition::getKeyPoint(const QString &kpcode, CKeypoint &val)
 	}
 	return false;
 }
-bool CYieldCurveDefinition::setKeyPoint(const CKeypoint &val)
+bool CYieldCurveDefinition::setKeyPoint(const CKeypoint &val, QString &err)
 {
 	QList<CKeypoint> valList;
 	valList.push_back(val);
-	if (METADATABASE->setKeypoint(valList)) {
+	if (METADATABASE->setKeypoint(valList, err)) {
 		m_keypoint[val.getKpcode()] = val;
 		return true;
 	}
 	return false;
 }
-bool CYieldCurveDefinition::removeKeyPoint(const QString &kpcode)
+bool CYieldCurveDefinition::removeKeyPoint(const QString &kpcode, QString &err)
 {
-	if (METADATABASE->removeKeypoint(QStringList() << kpcode)) {
+	if (METADATABASE->removeKeypoint(QStringList() << kpcode, err)) {
 		m_keypoint.remove(kpcode);
 		return true;
 	}

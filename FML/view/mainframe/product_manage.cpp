@@ -120,12 +120,12 @@ void ProductManage::slotAdd()
 		ShowWarnMessage(tr("add"), tr("The product already exists"), this);
 		return;
 	}
-
-	if (PARASETCTL->setProduct(val)) {
+	QString err;
+	if (PARASETCTL->setProduct(val, err)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
 		init();
 	} else {
-		ShowErrorMessage(tr("add"), tr("add fail."), this);
+		ShowErrorMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
 	}
 }
 
@@ -146,12 +146,12 @@ void ProductManage::slotModify()
 		ShowWarnMessage(tr("modify"), tr("records do not change, do not need to modify!"), this);
 		return;
 	}
-
-	if (PARASETCTL->setProduct(newVal)) {
+	QString err;
+	if (PARASETCTL->setProduct(newVal, err)) {
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		init();
 	} else {
-		ShowErrorMessage(tr("modify"), tr("modify fail."), this);
+		ShowErrorMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
 	}
 }
 
@@ -164,12 +164,13 @@ void ProductManage::slotDelete()
 			ShowWarnMessage(tr("delete"), tr("The product is not existing!"), this);
 			return;
 		}
-		if (PARASETCTL->removeProduct(val.getCode())) {
+		QString err;
+		if (PARASETCTL->removeProduct(val.getCode(), err)) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
 			setViewData(CProduct());
 			init();
 		} else {
-			ShowErrorMessage(tr("delete"), tr("delete fail."), this);
+			ShowErrorMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 		}
 	}
 }

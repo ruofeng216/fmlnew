@@ -7,10 +7,10 @@ public:
 	CYieldCurveDefinition();
 	~CYieldCurveDefinition();
 	/////////////////////////////////////关键点定义/////////////////////////////////////
-	const QMap<QString, CKeypoint>& getKeyPoint();
+	const QMap<QString, CKeypoint>& getKeyPoint() const;
 	bool getKeyPoint(const QString &kpcode, CKeypoint &val);
-	bool setKeyPoint(const CKeypoint &val);
-	bool removeKeyPoint(const QString &kpcode);
+	bool setKeyPoint(const CKeypoint &val, QString &err);
+	bool removeKeyPoint(const QString &kpcode, QString &err);
 
 private:
 	QMap<QString, CKeypoint> m_keypoint;

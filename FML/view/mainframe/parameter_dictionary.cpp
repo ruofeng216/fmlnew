@@ -54,9 +54,9 @@ void ParameterDictionary::init()
 		for (int i = 0; i < treeHeader.size(); i++) {
 			m_model->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
 		}
-		const QList<CParaDict>& data = PARASETCTL->getParadict();
+		const QMap<QString, QList<CParaDict>>& data = PARASETCTL->getParadict();
 		QMap<QString, QStandardItem*> roots;
-		foreach(const CParaDict &val, data) {
+		/*foreach(const CParaDict &val, data) {
 			if (val.isTypeData()) {
 				QList<QStandardItem*> items = createRowItems(val, true);
 				if (!items.isEmpty() && !roots.contains(val.getTypeCode())) {
@@ -76,7 +76,7 @@ void ParameterDictionary::init()
 					roots[val.getTypeCode()]->appendRow(items);
 				}
 			}
-		}
+		}*/
 
 		ui.treeView->setModel(m_model);
 		ui.treeView->setColumnWidth(0, 160);
@@ -140,12 +140,12 @@ void ParameterDictionary::slotAdd()
 		ShowWarnMessage(tr("add"), tr("The para code already exists").arg(val.getTypeCode()).arg(val.getParaCode()), this);
 		return;
 	}
-
-	if (PARASETCTL->setParadict(val)) {
+	QString err;
+	if (PARASETCTL->setParadict(val, err)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
 		init();
 	} else {
-		ShowErrorMessage(tr("add"), tr("add fail."), this);
+		ShowErrorMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
 	}
 }
 
@@ -165,13 +165,13 @@ void ParameterDictionary::slotModify()
 		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
 		return;
 	}
-
-	if (PARASETCTL->setParadict(val)) {
+	QString err;
+	if (PARASETCTL->setParadict(val, err)) {
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		init();
 	}
 	else {
-		ShowErrorMessage(tr("modify"), tr("modify fail."), this);
+		ShowErrorMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
 	}
 }
 
@@ -185,12 +185,13 @@ void ParameterDictionary::slotDelete()
 			ShowWarnMessage(tr("delete"), tr("The paradict is not existing!"), this);
 			return;
 		}
-		if (PARASETCTL->removeParadict(val.getTypeCode(), val.getParaCode())) {
+		QString err;
+		if (PARASETCTL->removeParadict(val.getTypeCode(), val.getParaCode(), err)) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
 			setViewData(CParaDict());
 			init();
 		} else {
-			ShowErrorMessage(tr("delete"), tr("delete fail."), this);
+			ShowErrorMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 		}
 	}
 }

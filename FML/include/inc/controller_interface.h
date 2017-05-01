@@ -58,7 +58,7 @@ public:
 	virtual QList<CProduct> getChildrenProduct(const QString &parentCode) = 0;
 	virtual void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results) = 0;
 	///////参数管理///////////
-	virtual const QList<CParaDict>& getParadict() = 0;
+	virtual const QMap<QString, QList<CParaDict>>& getParadict() const = 0;
 	virtual bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val) = 0;
 	virtual bool getAllParadict(const QString &typeCode, QList<CParaDict> &valList) = 0;
 	virtual bool setParadict(const CParaDict &val, QString &err) = 0;
@@ -70,10 +70,10 @@ class IYieldCurveDefinition
 public:
 	virtual ~IYieldCurveDefinition() = 0;
 	// 关键期限定义
-	virtual const QMap<QString, CKeypoint>& getKeyPoint() = 0;
+	virtual const QMap<QString, CKeypoint>& getKeyPoint() const= 0;
 	virtual bool getKeyPoint(const QString &kpcode, CKeypoint &val) = 0;
-	virtual bool setKeyPoint(const CKeypoint &val) = 0;
-	virtual bool removeKeyPoint(const QString &kpcode) = 0;
+	virtual bool setKeyPoint(const CKeypoint &val, QString &err) = 0;
+	virtual bool removeKeyPoint(const QString &kpcode, QString &err) = 0;
 };
 
 

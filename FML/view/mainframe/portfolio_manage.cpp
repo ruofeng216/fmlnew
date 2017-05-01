@@ -92,14 +92,15 @@ void PortfolioManage::addPortfolio()
 		ShowWarnMessage(tr("add"), tr("the portfolio already exists.").arg(cp.getPortcode()), this);
 	else
 	{
-		if (PARASETCTL->setPortfolio(cp))
+		QString err;
+		if (PARASETCTL->setPortfolio(cp, err))
 		{
 			ShowSuccessMessage(tr("add"), tr("add success."), this);
 			// 同步
 			initDateView();
 		}
 		else
-			ShowWarnMessage(tr("add"), tr("add fail."), this);
+			ShowWarnMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
 	}
 }
 void PortfolioManage::modifyPortfolio()
@@ -128,15 +129,15 @@ void PortfolioManage::modifyPortfolio()
 		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
 		return;
 	}
-
-	if (PARASETCTL->setPortfolio(cp))
+	QString err;
+	if (PARASETCTL->setPortfolio(cp, err))
 	{
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		// 同步
 		initDateView();
 	}
 	else
-		ShowWarnMessage(tr("modify"), tr("modify fail."), this);
+		ShowWarnMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
 }
 void PortfolioManage::delPortfolio()
 {
@@ -153,9 +154,10 @@ void PortfolioManage::delPortfolio()
 		}*/
 		if (PARASETCTL->isExistCode(_portcode))
 		{
-			if (!PARASETCTL->removePortfolio(_portcode))
+			QString err;
+			if (!PARASETCTL->removePortfolio(_portcode, err))
 			{
-				ShowWarnMessage(tr("delete"), tr("delete fail."), this);
+				ShowWarnMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 				return;
 			}
 		}

@@ -459,6 +459,15 @@
     <ClCompile Include="view\commonui\xlineedit.cpp">
       <Filter>view\commonui</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_comboxtree.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_comboxtree.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\commonui\comboxtree.cpp">
+      <Filter>view\commonui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -645,6 +654,9 @@
       <Filter>view\function\param_manage\parameter_dictionary</Filter>
     </CustomBuild>
     <CustomBuild Include="view\commonui\xlineedit.h">
+      <Filter>view\commonui</Filter>
+    </CustomBuild>
+    <CustomBuild Include="view\commonui\comboxtree.h">
       <Filter>view\commonui</Filter>
     </CustomBuild>
   </ItemGroup>

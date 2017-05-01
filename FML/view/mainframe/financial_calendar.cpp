@@ -99,7 +99,8 @@ void FinancialCalendar::addHoliday()
 		ShowWarnMessage(tr("add"), tr("the time is existing."), this);
 	else
 	{
-		if (PARASETCTL->setFinancialCalendar(fc))
+		QString err;
+		if (PARASETCTL->setFinancialCalendar(fc, err))
 		{
 			ShowSuccessMessage(tr("add"), tr("add success."), this);
 			// Í¬²½
@@ -107,7 +108,7 @@ void FinancialCalendar::addHoliday()
 			expand(fc.getYear());
 		}
 		else
-			ShowWarnMessage(tr("add"), tr("add fail."), this);
+			ShowWarnMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
 	}
 }
 void FinancialCalendar::modifyHoliday()
@@ -129,14 +130,14 @@ void FinancialCalendar::modifyHoliday()
 		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
 		return;
 	}
-
-	if (PARASETCTL->setFinancialCalendar(fc))
+	QString err;
+	if (PARASETCTL->setFinancialCalendar(fc, err))
 	{
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		initDateView();
 		expand(fc.getYear());
 	} else {
-		ShowWarnMessage(tr("modify"), tr("modify fail."), this);
+		ShowWarnMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
 	}
 }
 void FinancialCalendar::delHoliday()
@@ -148,9 +149,10 @@ void FinancialCalendar::delHoliday()
 		CFinancialCalendar fc = getViewData();
 		if (PARASETCTL->isExistFinancialCalendar(fc))
 		{
-			if (!PARASETCTL->removeFinancialCalendar(fc.getDate()))
+			QString err;
+			if (!PARASETCTL->removeFinancialCalendar(fc.getDate(), err))
 			{
-				ShowWarnMessage(tr("delete"), tr("delete fail."), this);
+				ShowWarnMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 				return;
 			}
 		}

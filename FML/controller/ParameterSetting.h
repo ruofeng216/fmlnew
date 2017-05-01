@@ -35,16 +35,13 @@ public:
 	void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results);
 
 	///////参数字典///////////
-	const QList<CParaDict>& getParadict();
+	const QMap<QString, QList<CParaDict>>& getParadict()const;
 	bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val);
 	bool getAllParadict(const QString &typeCode, QList<CParaDict> &valList);
 	bool setParadict(const CParaDict &val, QString &err);
 	bool removeParadict(const QString &typeCode, const QString &paraCode, QString &err);
 
 private:
-	// 更新参数字典类型代码
-	bool setTypeParadict(const CParaDict &val, QString &err);
-
 	// 初始化参数字典
 	void initParaDict();
 
@@ -56,6 +53,6 @@ private:
 	//产品信息
 	QMap<QString, CProduct> m_product;
 	//参数字典
-	QList<CParaDict> m_paradict;
+	QMap<QString, QList<CParaDict>> m_paradict;
 };
 

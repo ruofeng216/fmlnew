@@ -261,7 +261,7 @@ bool MetaDatabase::removeProduct(const QStringList &codeList, QString &err)
 }
 
 ///////////////////////////////////²ÎÊý×Öµä///////////////////////////////////////
-bool MetaDatabase::getParadict(QList<CParaDict> &val, QString &err)
+bool MetaDatabase::getParadict(QMap<QString, QList<CParaDict>> &val, QString &err)
 {
 	FUNCLOG("MetaDatabase::getParadict(QList<CParaDict> &val)");
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
@@ -289,7 +289,7 @@ bool MetaDatabase::getParadict(QList<CParaDict> &val, QString &err)
 		if (paraDict.getTypeCode().isEmpty() && paraDict.getParaCode().isEmpty()) {
 			continue;
 		}
-		val.push_back(paraDict);
+		val[paraDict.getTypeCode()].push_back(paraDict);
 	}
 	return true;
 }
