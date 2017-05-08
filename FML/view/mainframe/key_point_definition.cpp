@@ -269,8 +269,8 @@ void KeyPointDefinition::slotTreeDoubleClicked(const QModelIndex &index)
 	}
 
 	setViewData(val);
-	ui.deStart->setDate(QDate::fromString(startDate, "yyyy-MM-dd"));
-	ui.deEnd->setDate(QDate::fromString(endDate, "yyyy-MM-dd"));
+	ui.deStart->setDate(QDate::fromString(startDate, YMD));
+	ui.deEnd->setDate(QDate::fromString(endDate, YMD));
 }
 
 void KeyPointDefinition::slotProductCodeChanged(int index)
@@ -336,8 +336,8 @@ CKeypoint KeyPointDefinition::getViewData()
 		tenor = "y";
 	}
 	result.setTenor(spliceTenor(ui.leTenor->text().toInt(), tenor));
-	QString strStartDate = ui.deStart->date().toString("yyyy-MM-dd");
-	QString strEndDate = ui.deEnd->date().toString("yyyy-MM-dd");
+	QString strStartDate = ui.deStart->date().toString(YMD);
+	QString strEndDate = ui.deEnd->date().toString(YMD);
 	result.setMarketCode(ui.cbMarket->currentData().toString().trimmed());
 	result.setMarketName(ui.cbMarket->currentText().trimmed());
 	result.setCalendar(ui.cbCalendar->currentData().toString().trimmed());
@@ -389,8 +389,8 @@ QList<QStandardItem *> KeyPointDefinition::createChildtRowItems(const CKeypoint 
 	QString strStartDate, strEndDate;
 	CProduct product;
 	if (PARASETCTL->getProduct(val.getProductCode(), product)) {
-		strStartDate = QDate::fromJulianDay(product.getSdate()).toString("yyyy-MM-dd");
-		strEndDate = QDate::fromJulianDay(product.getEdate()).toString("yyyy-MM-dd");
+		strStartDate = QDate::fromJulianDay(product.getSdate()).toString(YMD);
+		strEndDate = QDate::fromJulianDay(product.getEdate()).toString(YMD);
 	} else {
 		qWarning() << "get product failed, code:" << val.getProductCode();
 	}

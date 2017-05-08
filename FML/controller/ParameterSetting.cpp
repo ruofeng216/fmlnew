@@ -18,12 +18,41 @@ CParameterSetting::CParameterSetting()
 		QString strErr;
 		if (!METADATABASE->getPortfolio(m_portfolio, strErr) && !strErr.isEmpty())
 			qDebug() << strErr;
+		// 过滤非法数据
+		QStringList data;
+		for (QMap<QString, CPortfolio>::iterator itor = m_portfolio.begin();
+			itor != m_portfolio.end(); itor++)
+		{
+			if (!itor->getParentcode().isEmpty() && !m_portfolio.contains(itor->getParentcode()))
+				data << itor.key();
+		}
+		QStringList children;
+		foreach(const QString &c, data)
+		{
+			getPortfolioAllChildren(c, children);
+		}
+		data.append(children);
+		if (!removePortfoliolst(data, strErr)) qDebug() << strErr;
 	}
 	if (m_product.isEmpty())
 	{// 产品管理缓存初始化
 		QString strErr;
 		if (!METADATABASE->getProduct(m_product, strErr) && !strErr.isEmpty())
 			qDebug() << strErr;
+		// 过滤非法数据
+		QStringList data;
+		for (QMap<QString, CProduct>::iterator itor = m_product.begin();
+			itor != m_product.end(); itor++)
+		{
+			if (!itor->getParentCode().isEmpty() && !m_product.contains(itor->getParentCode()))
+				data << itor.key();
+		}
+		QList<CProduct> children;
+		foreach(const QString &c, data)
+			getAllChildrenProduct(c, children);
+		foreach(const CProduct &c, children)
+			data.append(c.getCode());
+		if (!removeProducts(data, strErr)) qDebug() << strErr;
 	}
 	if (m_paradict.isEmpty())
 	{// 参数管理缓存初始化
@@ -79,13 +108,13 @@ bool CParameterSetting::setPortfolio(const CPortfolio &val, QString &err)
 }
 bool CParameterSetting::removePortfolio(const QString &val, QString &err)
 {
-	if (!isExistCode(val))
+	if (!isExistPortfolioCode(val))
 	{
 		err = "no code.";
 		return false;
 	}
 	QStringList cldlst;
-	getChildren(val, cldlst);
+	getPortfolioChildren(val, cldlst);
 	if (!cldlst.isEmpty())
 	{
 		err = "still exist children!";
@@ -93,12 +122,16 @@ bool CParameterSetting::removePortfolio(const QString &val, QString &err)
 	}
 	QSet<QString> dellst;
 	dellst << val;
-	if (METADATABASE->removePortfolio(dellst.toList(), err))
+	return removePortfoliolst(dellst.toList(), err);
+}
+bool CParameterSetting::removePortfoliolst(const QStringList &val, QString &err)
+{
+	if (METADATABASE->removePortfolio(val, err))
 	{
 		for (QMap<QString, CPortfolio>::iterator it = m_portfolio.begin();
 			it != m_portfolio.end();)
 		{
-			if (dellst.contains(it.key()))
+			if (val.contains(it.key()))
 				m_portfolio.erase(it++);
 			else
 				it++;
@@ -111,26 +144,13 @@ const QMap<QString, CPortfolio> &CParameterSetting::getPortfolio()
 {
 	return m_portfolio;
 }
-bool CParameterSetting::isParentCode(const QString &parent, const QString &child)
-{
-	return isExistCode(child) && parent == m_portfolio[child].getParentcode();
-}
-bool CParameterSetting::isExistCode(const QString &val)
+bool CParameterSetting::isExistPortfolioCode(const QString &val)
 {
 	return m_portfolio.contains(val);
 }
-void CParameterSetting::getAllRootCodes(QStringList &val)
+void CParameterSetting::getPortfolioChildren(const QString &key, QStringList &val)
 {
-	for (QMap<QString, CPortfolio>::iterator it = m_portfolio.begin();
-		it != m_portfolio.end(); it++)
-	{
-		if (it->getParentcode().isEmpty())
-			val << it.key();
-	}
-}
-void CParameterSetting::getChildren(const QString &key, QStringList &val)
-{
-	if (isExistCode(key))
+	if (isExistPortfolioCode(key))
 	{
 		for (QMap<QString, CPortfolio>::iterator it = m_portfolio.begin();
 			it != m_portfolio.end(); it++)
@@ -140,14 +160,16 @@ void CParameterSetting::getChildren(const QString &key, QStringList &val)
 		}
 	}
 }
-
-bool CParameterSetting::getPortfolio(const QString &key, CPortfolio &val)
+void CParameterSetting::getPortfolioAllChildren(const QString &key, QStringList &results)
 {
-	if (m_portfolio.contains(key)) {
-		val = m_portfolio[key];
-		return true;
+	QStringList result;
+	getPortfolioChildren(key, result);
+	if (!result.isEmpty()) {
+		results.append(result);
+		foreach(const QString &code, result) {
+			getPortfolioChildren(code, results);
+		}
 	}
-	return false;
 }
 
 ///////产品管理///////////
@@ -176,16 +198,23 @@ bool CParameterSetting::getProduct(const QString &code, CProduct &val)
 
 bool CParameterSetting::removeProduct(const QString &code, QString &err)
 {
-	if (!m_product.contains(code)) {
+	if (!m_product.contains(code)) 
+	{
+		err = "no code.";
 		return false;
 	}
-	QList<CProduct> children;
-	getAllChildrenProduct(code, children);
+	if (!getChildrenProduct(code).isEmpty())
+	{
+		err = "still exist children!";
+		return false;
+	}
+
 	QStringList deleteList;
 	deleteList << code;
-	foreach(const CProduct &child, children) {
-		deleteList << child.getCode();
-	}
+	return removeProducts(deleteList, err);
+}
+bool CParameterSetting::removeProducts(const QStringList &deleteList, QString &err)
+{
 	if (METADATABASE->removeProduct(deleteList, err)) {
 		foreach(const QString &deleteCode, deleteList) {
 			m_product.remove(deleteCode);
@@ -194,7 +223,6 @@ bool CParameterSetting::removeProduct(const QString &code, QString &err)
 	}
 	return false;
 }
-
 QList<CProduct> CParameterSetting::getRootProduct()
 {
 	QList<CProduct> result;

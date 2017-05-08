@@ -373,6 +373,9 @@
             <pointsize>12</pointsize>
            </font>
           </property>
+          <property name="editable">
+           <bool>true</bool>
+          </property>
           <property name="frame">
            <bool>false</bool>
           </property>

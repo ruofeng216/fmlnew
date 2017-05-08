@@ -44,11 +44,9 @@ public:
 	virtual bool setPortfolio(const CPortfolio &val, QString &err) = 0;
 	virtual bool removePortfolio(const QString &val, QString &err) = 0;
 	virtual const QMap<QString, CPortfolio> &getPortfolio() = 0;
-	virtual bool isParentCode(const QString &parent, const QString &child) = 0;
-	virtual bool isExistCode(const QString &val) = 0;
-	virtual void getAllRootCodes(QStringList &val) = 0;
-	virtual void getChildren(const QString &key, QStringList &val) = 0;
-	virtual bool getPortfolio(const QString &key, CPortfolio &val) = 0;
+	virtual bool isExistPortfolioCode(const QString &val) = 0;
+	virtual void getPortfolioChildren(const QString &key, QStringList &val) = 0;
+	virtual void getPortfolioAllChildren(const QString &key, QStringList &val) = 0;
 	///////产品管理///////////
 	virtual const QMap<QString, CProduct>& getProduct() = 0;
 	virtual bool getProduct(const QString &code, CProduct &val) = 0;

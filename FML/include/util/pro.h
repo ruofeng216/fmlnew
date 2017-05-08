@@ -45,6 +45,7 @@ private:
 
 #define FUNCLOG(func) FuncLog fl(func);
 
+#pragma region ENUMDEF
 typedef enum e_ErrType
 {
 	e_Success = 0, // 成功
@@ -54,6 +55,10 @@ typedef enum e_ErrType
 	e_RegErr = 4,      // 注册失败
 	e_ModifyErr = 5,    // 修改失败
 } eERR;
+
+#pragma endregion
+
+
 
 
 
@@ -137,7 +142,15 @@ const QString yearlyCompound = QString("yearlyCompound");
 
 
 /////////////////////////////////////////////////////
+#pragma region WNDID
 // 窗口id
 const QString Main_HomePage = QString("Main_HomePage"); // home
 const QString ParaMgr_Holiday = QString("ParaMgr_Holiday"); // 金融日历
 const QString ParaMgr_Union = QString("ParaMgr_Union"); // 组合管理
+
+#pragma endregion
+
+/////////////////////////////////////////////////////////
+#pragma region CONST
+#define YMD "yyyy-MM-dd"
+#pragma endregion

@@ -44,9 +44,9 @@ private:
 	CPortfolio getViewData();
 	void setViewData(const CPortfolio &val);
 
-	void addPortfolioData(const CPortfolio & date);
-	void delPortfolioData(const CPortfolio & date);
-	void locatePortfolioData(const CPortfolio & date);
+	void addPortfolioData(const CPortfolio & val);
+	void delPortfolioData(const CPortfolio & val);
+	void locatePortfolioData(const CPortfolio & val);
 	void clear();
 private:
 	Ui::PortfolioManage ui;

@@ -136,7 +136,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="cbParentCode"/>
+        <widget class="QComboBox" name="cbParentCode">
+         <property name="editable">
+          <bool>true</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -168,7 +172,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="cbParentName"/>
+        <widget class="QLineEdit" name="lineEditParentName">
+         <property name="readOnly">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -244,7 +252,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="deEnd">
+          <widget class="xDateEdit" name="deEnd">
            <property name="dateTime">
             <datetime>
              <hour>23</hour>
@@ -437,6 +445,11 @@
    <class>XLineEdit</class>
    <extends>QLineEdit</extends>
    <header>xlineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>xDateEdit</class>
+   <extends>QDateEdit</extends>
+   <header>xdateedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

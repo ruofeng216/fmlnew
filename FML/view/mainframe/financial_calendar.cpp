@@ -48,7 +48,7 @@ void FinancialCalendar::init()
 			QVariant s = index.sibling(index.row(), eDate).data();
 			if (s.isValid())
 			{
-				ui.dateEdit->setDate(QDate::fromString(s.toString(),"yyyy-MM-dd"));
+				ui.dateEdit->setDate(QDate::fromString(s.toString(), YMD));
 				QStringList slist = s.toString().split("-");
 				if (slist.size() <= 1) return;
 				ui.lineEdit_year->setText(slist[0]);
@@ -154,7 +154,7 @@ void FinancialCalendar::delHoliday()
 		}
 		else
 		{
-			QString errMsg = tr("No record in database.").arg(QDate::fromJulianDay(fc.getDate()).toString("yyyy-MM-dd"));
+			QString errMsg = tr("No record in database.").arg(QDate::fromJulianDay(fc.getDate()).toString(YMD));
 			ShowWarnMessage(tr("delete"), errMsg, this);
 			return;
 		}
@@ -210,7 +210,7 @@ void FinancialCalendar::setViewData(const CFinancialCalendar &val)
 void FinancialCalendar::addDate(const CFinancialCalendar & date)
 {
 	auto insertData = [this](QStandardItem *rd, const CFinancialCalendar &val) {
-		QString dKey = QDate::fromJulianDay(val.getDate()).toString("yyyy-MM-dd");
+		QString dKey = QDate::fromJulianDay(val.getDate()).toString(YMD);
 		QList<QStandardItem *> childItems;
 		for (int i = 0; i < eEnd; i++)
 		{
@@ -253,7 +253,7 @@ void FinancialCalendar::addDate(const CFinancialCalendar & date)
 	}
 	else
 	{
-		QString dKey = QDate::fromJulianDay(date.getDate()).toString("yyyy-MM-dd");
+		QString dKey = QDate::fromJulianDay(date.getDate()).toString(YMD);
 		if (!m_tree.contains(dKey))
 		{
 			insertData(m_tree[ykey].front(), date);
@@ -274,7 +274,7 @@ void FinancialCalendar::addDate(const CFinancialCalendar & date)
 void FinancialCalendar::delDate(const CFinancialCalendar & date)
 {
 	QString ykey = QString::number(date.getYear());
-	QString dKey = QDate::fromJulianDay(date.getDate()).toString("yyyy-MM-dd");
+	QString dKey = QDate::fromJulianDay(date.getDate()).toString(YMD);
 	if (m_tree.contains(dKey))
 	{
 		m_pGoodsModel->removeRow(m_tree[dKey].front()->row(), m_tree[dKey].front()->parent()->index());
@@ -310,7 +310,7 @@ void FinancialCalendar::locateDate(const CFinancialCalendar & date)
 			this->clear();
 		}
 	};
-	QString dKey = QDate::fromJulianDay(date.getDate()).toString("yyyy-MM-dd");
+	QString dKey = QDate::fromJulianDay(date.getDate()).toString(YMD);
 	if (m_tree.contains(dKey))
 	{
 		locate(dKey);

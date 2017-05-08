@@ -9,7 +9,16 @@ class QStandardItem;
 class ProductManage : public BodyWidget, public CAction<CProduct>
 {
 	Q_OBJECT
-
+	enum clomun_e {
+		eProductCode = 0, //产品代码
+		eProductName,     //产品名称
+		eParentcode,   //父级代码
+		eParentname,   //父级代码名称
+		eSdate,        //开始时间
+		eEdate,        //截至时间
+		eAnnotation,   //组合说明
+		eEnd
+	};
 public:
 	ProductManage(QWidget *parent = Q_NULLPTR);
 	~ProductManage();
@@ -21,23 +30,29 @@ public:
 
 public slots:
 	void slotSkinChange();
-	void slotAdd();
-	void slotModify();
-	void slotDelete();
-	void slotTreeDoubleClicked(const QModelIndex &index);
-	void slotParentCodeChanged(int index);
-	void slotParentNameChanged(int index);
 
 private:
-	// 创建每行的items
-	QList<QStandardItem*> createRowItems(const CProduct &val);
-	// 递归插入所有孩子节点
-	void appendChildrenProduct(QStandardItem *item, const QString &parentCode);
+	void slotAdd(bool);
+	void slotModify(bool);
+	void slotDelete(bool);
+
+private:
+	void initDateView();
+	void packItem(QList<QStandardItem *> &childItems, const CProduct &val);
 	// 界面设置获取产品信息
 	CProduct getViewData();
 	void setViewData(const CProduct &val);
 
+	void addProductData(const CProduct & val);
+	void delProductData(const CProduct & val);
+	void locateProductData(const CProduct & val);
+	void clear();
+
 private:
 	Ui::product_manage ui;
-	QStandardItemModel *m_model;
+	QStandardItemModel *m_pGoodsModel;
+	QStandardItemModel *m_pGoodsModelCombobox;
+	// 映射节点
+	QMap<QString, QList<QStandardItem *>> m_tree;
+	QMap<QString, QList<QStandardItem *>> m_treeCombobox;
 };

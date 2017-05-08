@@ -15,19 +15,19 @@ public:
 
 	///////组合管理///////////
 	bool setPortfolio(const CPortfolio &val, QString &err);
-	bool removePortfolio(const QString &val, bool bDelChildren, QString &err);
+	bool removePortfolio(const QString &val, QString &err);
+	bool removePortfoliolst(const QStringList &val, QString &err);
 	const QMap<QString, CPortfolio> &getPortfolio();
-	bool isParentCode(const QString &parent, const QString &child);
-	bool isExistCode(const QString &val);
-	void getAllRootCodes(QStringList &val);
-	void getChildren(const QString &key, QStringList &val);
-	bool getPortfolio(const QString &key, CPortfolio &val);
+	bool isExistPortfolioCode(const QString &val);
+	void getPortfolioChildren(const QString &key, QStringList &val);
+	void getPortfolioAllChildren(const QString &key, QStringList &val);
 
 	///////产品管理///////////
 	const QMap<QString, CProduct>& getProduct();
 	bool getProduct(const QString &code, CProduct &val);
 	bool setProduct(const CProduct &val, QString &err);
 	bool removeProduct(const QString &code, QString &err);
+	bool removeProducts(const QStringList &code, QString &err);
 	QList<CProduct> getRootProduct();
 	// 获取直系子节点
 	QList<CProduct> getChildrenProduct(const QString &parentCode);
