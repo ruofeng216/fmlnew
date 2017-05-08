@@ -1,16 +1,17 @@
 #pragma once
 
-#include <QLineEdit>
+#include <QDateEdit>
+
+
 class QWidget;
 class QPropertyAnimation;
-class XLineEdit : public QLineEdit
+class xDateEdit : public QDateEdit
 {
 	Q_OBJECT
 	Q_PROPERTY(int warning READ warning WRITE setWarning)
 public:
-	XLineEdit(QWidget *parent);
-	~XLineEdit();
-
+	xDateEdit(QWidget *parent);
+	~xDateEdit();
 	void setError(const QString &msg);
 
 	void restore();

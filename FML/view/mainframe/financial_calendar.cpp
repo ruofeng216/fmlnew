@@ -36,10 +36,7 @@ bool FinancialCalendar::checkValid()
 		ui.lineEdit_year->setError(tr("the year must equal to the date-year!"));
 		bValid = false;
 	}
-	else
-	{
-		ui.lineEdit_year->restore();
-	}
+	
 	return bValid;
 }
 
@@ -47,28 +44,25 @@ void FinancialCalendar::init()
 {
 	{
 		ui.treeView->setAlternatingRowColors(true);
-		initDateView();
 		connect(ui.treeView, &QTreeView::clicked, [this](const QModelIndex &index) {
-			QVariant s = index.sibling(index.row(),0).data();
+			QVariant s = index.sibling(index.row(), eDate).data();
 			if (s.isValid())
 			{
 				ui.dateEdit->setDate(QDate::fromString(s.toString(),"yyyy-MM-dd"));
 				QStringList slist = s.toString().split("-");
-				if (slist.length() > 0)
-					ui.lineEdit_year->setText(slist[0]);
-				QVariant sDayType = index.sibling(index.row(), 1).data();
+				if (slist.size() <= 1) return;
+				ui.lineEdit_year->setText(slist[0]);
+				QVariant sDayType = index.sibling(index.row(), eDateType).data();
 				if (sDayType.isValid())
 					ui.comboBox->setCurrentText(sDayType.toString());
-				QVariant sDayinfo = index.sibling(index.row(), 2).data();
+				QVariant sDayinfo = index.sibling(index.row(), eInfo).data();
 				if (sDayinfo.isValid())
 					ui.textEdit_def->setText(sDayinfo.toString());
 
 				setCurrentData(getViewData());
 			}
 		});
-	}
-	{
-		ui.dateEdit->setDate(QDate::currentDate());
+		initDateView();
 	}
 	{
 		ui.comboBox->addItems(QStringList() << tr("holiday") << tr("workday"));
@@ -104,8 +98,9 @@ void FinancialCalendar::addHoliday()
 		{
 			ShowSuccessMessage(tr("add"), tr("add success."), this);
 			// 同步
-			initDateView();
-			expand(fc.getYear());
+			addDate(fc);
+			// 定位
+			locateDate(fc);
 		}
 		else
 			ShowWarnMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
@@ -134,8 +129,10 @@ void FinancialCalendar::modifyHoliday()
 	if (PARASETCTL->setFinancialCalendar(fc, err))
 	{
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
-		initDateView();
-		expand(fc.getYear());
+		// 同步
+		addDate(fc);
+		// 定位
+		locateDate(fc);
 	} else {
 		ShowWarnMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
 	}
@@ -143,10 +140,9 @@ void FinancialCalendar::modifyHoliday()
 void FinancialCalendar::delHoliday()
 {
 	if (!checkValid()) return;
-
+	CFinancialCalendar fc = getViewData();
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this))
 	{
-		CFinancialCalendar fc = getViewData();
 		if (PARASETCTL->isExistFinancialCalendar(fc))
 		{
 			QString err;
@@ -163,16 +159,15 @@ void FinancialCalendar::delHoliday()
 			return;
 		}
 		ShowSuccessMessage(tr("delete"), tr("delete success."), this);
-		setViewData(CFinancialCalendar());
 		// 同步
-		initDateView();
-		expand(fc.getYear());
+		delDate(fc);
+		// 定位
+		locateDate(fc);
 	}
 }
 
 void FinancialCalendar::initDateView()
 {
-	CFinancialCalendar oldVal = getViewData();
 	if (m_pGoodsModel) m_pGoodsModel->clear();
 	QStringList treeHeader;
 	treeHeader << tr("hyear") << tr("holiday") << tr("holidayinfo");
@@ -183,51 +178,13 @@ void FinancialCalendar::initDateView()
 	ui.treeView->setModel(m_pGoodsModel);
 	ui.treeView->header()->setDefaultSectionSize(130);
 	QMap<int, CFinancialCalendar> val = PARASETCTL->getFinancialCalendar();
-	QList<QStandardItem *> items;
 	for (QMap<int, CFinancialCalendar>::const_iterator itor = val.begin();
 		itor != val.end(); itor++)
 	{
-		if (items.isEmpty() ||
-			items.back()->text().toInt() != itor->getYear())
-		{
-			items << new QStandardItem(QString::number(itor->getYear()));
-			m_pGoodsModel->appendRow(items.back());
-		}
-
-		QList<QStandardItem *> childItems;
-		QStandardItem *itemDate = new QStandardItem(QDate::fromJulianDay(itor->getDate()).toString("yyyy-MM-dd"));
-		QStandardItem *itemHolidayType = new QStandardItem(itor->getHolidayTypeStr());
-		QStandardItem *itemHolidayinfo = new QStandardItem(itor->getHolidayinfo());
-		childItems.push_back(itemDate);
-		childItems.push_back(itemHolidayType);
-		childItems.push_back(itemHolidayinfo);
-		itemDate->setToolTip(QDate::fromJulianDay(itor->getDate()).toString("yyyy-MM-dd"));
-		itemHolidayinfo->setToolTip(qutil::splitTooltip(itor->getHolidayinfo(),200));
-		items.back()->appendRow(childItems);
+		addDate(itor.value());
 	}
 	if (!val.isEmpty()) {
-		expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
-	}
-	setViewData(oldVal);
-}
-
-void FinancialCalendar::expand(int y)
-{
-	ui.treeView->expandAll();
-	return;
-	// fixme 有死循环
-	QList<QStandardItem*> lst = m_pGoodsModel->findItems(QString::number(y));
-	if (lst.isEmpty())
-	{
-		QMap<int, CFinancialCalendar> val = PARASETCTL->getFinancialCalendar();
-		if (!val.isEmpty()) {
-			expand(QDate::fromJulianDay(val[val.keys().last()].getDate()).year());
-		}
-		return;
-	}
-	for each (QStandardItem* var in lst)
-	{
-		ui.treeView->expand(var->index());
+		locateDate(val[val.keys().back()]);
 	}
 }
 
@@ -247,5 +204,145 @@ void FinancialCalendar::setViewData(const CFinancialCalendar &val)
 	ui.lineEdit_year->setText(val.getYear() == 0 ? QString::number(QDate::currentDate().year()) : QString::number(val.getYear()));
 	ui.comboBox->setCurrentText(val.getHolidayTypeStr());
 	ui.textEdit_def->setPlainText(val.getHolidayinfo());
+	setCurrentData(getViewData());
+}
+
+void FinancialCalendar::addDate(const CFinancialCalendar & date)
+{
+	auto insertData = [this](QStandardItem *rd, const CFinancialCalendar &val) {
+		QString dKey = QDate::fromJulianDay(val.getDate()).toString("yyyy-MM-dd");
+		QList<QStandardItem *> childItems;
+		for (int i = 0; i < eEnd; i++)
+		{
+			switch (i)
+			{
+			case eDate:
+				{
+					QStandardItem *itemDate = new QStandardItem(dKey);
+					childItems.push_back(itemDate);
+					itemDate->setToolTip(dKey);
+					break;
+				}
+			case eDateType:
+				{
+					QStandardItem *itemHolidayType = new QStandardItem(val.getHolidayTypeStr());
+					childItems.push_back(itemHolidayType);
+					break;
+				}
+			case eInfo:
+				{
+					QStandardItem *itemHolidayinfo = new QStandardItem(val.getHolidayinfo());
+					childItems.push_back(itemHolidayinfo);
+					itemHolidayinfo->setToolTip(qutil::splitTooltip(val.getHolidayinfo(), 200));
+					break;
+				}
+			default:
+				break;
+			}
+		}
+		rd->appendRow(childItems);
+		this->m_tree[dKey] = childItems;
+	};
+	QString ykey = QString::number(date.getYear());
+	if (!m_tree.contains(ykey) || m_tree[ykey].isEmpty())
+	{
+		QStandardItem* pRoot = new QStandardItem(QString::number(date.getYear()));
+		m_pGoodsModel->appendRow(pRoot);
+		m_tree[ykey] = QList<QStandardItem*>() << pRoot;
+		insertData(pRoot, date);
+	}
+	else
+	{
+		QString dKey = QDate::fromJulianDay(date.getDate()).toString("yyyy-MM-dd");
+		if (!m_tree.contains(dKey))
+		{
+			insertData(m_tree[ykey].front(), date);
+		}
+		else
+		{
+			if (m_tree[dKey].size() == eEnd)
+			{
+				m_tree[dKey][eDate]->setText(dKey);
+				m_tree[dKey][eDateType]->setText(date.getHolidayTypeStr());
+				m_tree[dKey][eInfo]->setText(date.getHolidayinfo());
+				m_tree[dKey][eDateType]->setToolTip(dKey);
+				m_tree[dKey][eInfo]->setToolTip(qutil::splitTooltip(date.getHolidayinfo(), 200));
+			}
+		}
+	}
+}
+void FinancialCalendar::delDate(const CFinancialCalendar & date)
+{
+	QString ykey = QString::number(date.getYear());
+	QString dKey = QDate::fromJulianDay(date.getDate()).toString("yyyy-MM-dd");
+	if (m_tree.contains(dKey))
+	{
+		m_pGoodsModel->removeRow(m_tree[dKey].front()->row(), m_tree[dKey].front()->parent()->index());
+		m_tree.remove(dKey);
+	}
+	if (m_tree.contains(ykey))
+	{
+		QMap<QString, QList<QStandardItem *>>::iterator itor = m_tree.find(ykey);
+		if (itor != m_tree.end())
+		{
+			QMap<QString, QList<QStandardItem *>>::const_iterator itortmp = itor+1;
+			if (itortmp == m_tree.end() || itortmp.key().indexOf(ykey)==-1)
+			{
+				m_pGoodsModel->removeRow(m_tree[ykey].front()->row());
+				// 不存在子节点
+				m_tree.remove(ykey);
+			}
+		}
+	}
+}
+void FinancialCalendar::locateDate(const CFinancialCalendar & date)
+{
+	ui.treeView->sortByColumn(eDate, Qt::AscendingOrder);
+	auto locate = [this](const QString &dkey) {
+		QModelIndexList findIndex = this->m_pGoodsModel->match(this->m_pGoodsModel->index(0, 0), Qt::DisplayRole, dkey, 1, Qt::MatchRecursive);
+		if (findIndex.size() > 0)
+		{
+			this->ui.treeView->setCurrentIndex(findIndex[eDate]);
+			this->ui.treeView->clicked(findIndex[eDate]);
+		}
+		else
+		{
+			this->clear();
+		}
+	};
+	QString dKey = QDate::fromJulianDay(date.getDate()).toString("yyyy-MM-dd");
+	if (m_tree.contains(dKey))
+	{
+		locate(dKey);
+	}
+	else
+	{
+		QString nearKey = "";
+		for (QMap<QString, QList<QStandardItem *>>::const_iterator itor = m_tree.begin();
+			itor != m_tree.end(); itor++)
+		{
+			if (itor.key().compare(dKey) <= 0) nearKey = itor.key();
+			if (nearKey.isEmpty())
+			{
+				if (itor.key().size() == dKey.size())
+				{
+					nearKey = itor.key();
+					break;
+				}
+			}
+			else if (nearKey == QString::number(date.getYear()))
+				nearKey = "";
+		}
+		if (!nearKey.isEmpty()) locate(nearKey);
+		else clear();
+	}
+}
+
+void FinancialCalendar::clear()
+{
+	ui.dateEdit->setDate(QDate::currentDate());
+	ui.lineEdit_year->setText("");
+	ui.textEdit_def->setText("");
+
 	setCurrentData(getViewData());
 }

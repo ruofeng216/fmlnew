@@ -188,6 +188,9 @@
               <pointsize>12</pointsize>
              </font>
             </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhFormattedNumbersOnly</set>
+            </property>
            </widget>
           </item>
          </layout>

@@ -459,13 +459,13 @@
     <ClCompile Include="view\commonui\xlineedit.cpp">
       <Filter>view\commonui</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_comboxtree.cpp">
+    <ClCompile Include="GeneratedFiles\Debug\moc_xdateedit.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_comboxtree.cpp">
+    <ClCompile Include="GeneratedFiles\Release\moc_xdateedit.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="view\commonui\comboxtree.cpp">
+    <ClCompile Include="view\commonui\xdateedit.cpp">
       <Filter>view\commonui</Filter>
     </ClCompile>
   </ItemGroup>
@@ -656,7 +656,7 @@
     <CustomBuild Include="view\commonui\xlineedit.h">
       <Filter>view\commonui</Filter>
     </CustomBuild>
-    <CustomBuild Include="view\commonui\comboxtree.h">
+    <CustomBuild Include="view\commonui\xdateedit.h">
       <Filter>view\commonui</Filter>
     </CustomBuild>
   </ItemGroup>

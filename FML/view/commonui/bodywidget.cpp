@@ -8,3 +8,4 @@ BodyWidget::BodyWidget(QWidget *parent)
 BodyWidget::~BodyWidget()
 {
 }
+

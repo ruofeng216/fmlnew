@@ -79,19 +79,20 @@ bool CParameterSetting::setPortfolio(const CPortfolio &val, QString &err)
 }
 bool CParameterSetting::removePortfolio(const QString &val, QString &err)
 {
-	if (!isExistCode(val)) return false;
+	if (!isExistCode(val))
+	{
+		err = "no code.";
+		return false;
+	}
+	QStringList cldlst;
+	getChildren(val, cldlst);
+	if (!cldlst.isEmpty())
+	{
+		err = "still exist children!";
+		return false;
+	}
 	QSet<QString> dellst;
 	dellst << val;
-	for (QSet<QString>::iterator itor = dellst.begin(); itor != dellst.end();)
-	{
-		for (QMap<QString, CPortfolio>::const_iterator it = m_portfolio.begin();
-			it != m_portfolio.end(); it++)
-		{
-			if (isParentCode(*itor, it.key()))
-				dellst << it.key();
-		}
-		itor++;
-	}
 	if (METADATABASE->removePortfolio(dellst.toList(), err))
 	{
 		for (QMap<QString, CPortfolio>::iterator it = m_portfolio.begin();
@@ -112,8 +113,7 @@ const QMap<QString, CPortfolio> &CParameterSetting::getPortfolio()
 }
 bool CParameterSetting::isParentCode(const QString &parent, const QString &child)
 {
-	if (!isExistCode(parent) || !isExistCode(child)) return false;
-	return parent == m_portfolio[child].getParentcode() || parent==child;
+	return isExistCode(child) && parent == m_portfolio[child].getParentcode();
 }
 bool CParameterSetting::isExistCode(const QString &val)
 {

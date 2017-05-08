@@ -212,12 +212,11 @@ QLineEdit {
     border: 1px solid #1b4b63;
 }
 QLineEdit[property="error"] {
-    background:red;
-    color:#e8e5d5;
-    font-size:12px;
-    height:20px;
     /*selection-background-color:#0e9496;*/
-    border: 1px solid red;
+    border-left: 5px solid qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 rgba(255, 0, 0, 120), stop:1 transparent);
+	border-bottom: 5px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 0, 0, 120), stop:1 transparent);
+	border-right: 5px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 0, 0, 120), stop:1 transparent);
+	border-top: 5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(255, 0, 0, 120), stop:1 transparent);
 }
 
 QLineEdit::hover, 
@@ -440,6 +439,13 @@ QDateEdit {
 	height:20px;
     font-size:12px;
     border: 1px solid #1b4b63;
+}
+QDateEdit[property="error"] {
+    /*selection-background-color:#0e9496;*/
+    border-left: 5px solid qlineargradient(spread:pad, x1:1, y1:0, x2:0, y2:0, stop:0 rgba(255, 0, 0, 120), stop:1 transparent);
+	border-bottom: 5px solid qlineargradient(spread:pad, x1:0, y1:0, x2:0, y2:1, stop:0 rgba(255, 0, 0, 120), stop:1 transparent);
+	border-right: 5px solid qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(255, 0, 0, 120), stop:1 transparent);
+	border-top: 5px solid qlineargradient(spread:pad, x1:0, y1:1, x2:0, y2:0, stop:0 rgba(255, 0, 0, 120), stop:1 transparent);
 }
 QDateEdit::hover,
 QDateEdit::pressed,

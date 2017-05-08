@@ -10,7 +10,12 @@ class QStandardItem;
 class FinancialCalendar : public BodyWidget, public CAction<CFinancialCalendar>
 {
 	Q_OBJECT
-
+	enum clomun_e {
+		eDate = 0, //年份
+		eDateType,     //日期
+		eInfo,     //描述
+		eEnd       
+	};
 public:
 	FinancialCalendar(QWidget *parent = Q_NULLPTR);
 	~FinancialCalendar();
@@ -30,11 +35,16 @@ private slots:
 
 private:
 	void initDateView();
-	void expand(int y);
 	CFinancialCalendar getViewData();
 	void setViewData(const CFinancialCalendar &val);
+
+	void addDate(const CFinancialCalendar & date);
+	void delDate(const CFinancialCalendar & date);
+	void locateDate(const CFinancialCalendar & date);
+	void clear();
 
 private:
 	Ui::FinancialCalendar ui;
 	QStandardItemModel *m_pGoodsModel;
+	QMap<QString, QList<QStandardItem *>> m_tree;
 };

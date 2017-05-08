@@ -15,7 +15,7 @@ public:
 
 	///////组合管理///////////
 	bool setPortfolio(const CPortfolio &val, QString &err);
-	bool removePortfolio(const QString &val, QString &err);
+	bool removePortfolio(const QString &val, bool bDelChildren, QString &err);
 	const QMap<QString, CPortfolio> &getPortfolio();
 	bool isParentCode(const QString &parent, const QString &child);
 	bool isExistCode(const QString &val);

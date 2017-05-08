@@ -238,7 +238,7 @@
            <number>0</number>
           </property>
           <item>
-           <widget class="QDateEdit" name="dateEdit_datebegin">
+           <widget class="xDateEdit" name="dateEdit_datebegin">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -284,7 +284,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QDateEdit" name="dateEdit_dateend">
+           <widget class="xDateEdit" name="dateEdit_dateend">
             <property name="sizePolicy">
              <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
               <horstretch>0</horstretch>
@@ -361,7 +361,7 @@
          </widget>
         </item>
         <item>
-         <widget class="ComboxTree" name="comboBox_parentcode">
+         <widget class="QComboBox" name="comboBox_parentcode">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -567,9 +567,9 @@
    <header>xlineedit.h</header>
   </customwidget>
   <customwidget>
-   <class>ComboxTree</class>
-   <extends>QComboBox</extends>
-   <header>comboxtree.h</header>
+   <class>xDateEdit</class>
+   <extends>QDateEdit</extends>
+   <header>xdateedit.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
