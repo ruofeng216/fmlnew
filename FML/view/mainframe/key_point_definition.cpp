@@ -14,7 +14,7 @@ KeyPointDefinition::KeyPointDefinition(QWidget *parent)
 	connect(ui.pbAdd, SIGNAL(clicked()), this, SLOT(slotAdd()));
 	connect(ui.pbModify, SIGNAL(clicked()), this, SLOT(slotModify()));
 	connect(ui.pbDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
-	connect(ui.treeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(slotTreeDoubleClicked(QModelIndex)));
+	connect(ui.treeView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotTreeDoubleClicked(QModelIndex)));
 	connect(ui.cbProductCode, SIGNAL(activated(int)), this, SLOT(slotProductCodeChanged(int)));
 	connect(ui.cbProductName, SIGNAL(activated(int)), this, SLOT(slotProductNameChanged(int)));
 
@@ -95,7 +95,7 @@ void KeyPointDefinition::init()
 
 	auto initParaList = [](QComboBox *cb, const QString &typeCode) {
 		cb->clear();
-		QList<CParaDict> paraList;
+		QMap<QString, CParaDict> paraList;
 		if (PARASETCTL->getAllParadict(typeCode, paraList)) {
 			foreach(const CParaDict &para, paraList) {
 				cb->addItem(para.getParaName().trimmed(), para.getParaCode().trimmed());

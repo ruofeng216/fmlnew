@@ -68,73 +68,73 @@ typedef enum e_ErrType
 //重要字段
 #pragma region CF
 // 付息频率
-const QString CouponFrequency = QString("CouponFrequency");
+#define COUPONFREQUENCY  "CouponFrequency"
 // 按季
-const QString quarterly = QString("quarterly");
+#define QUARTERLY  "quarterly"
 // 按年
-const QString yearly = QString("yearly");
+#define YEARLY  "yearly"
 // 按月
-const QString monthly = QString("monthly");
+#define MONTHLY  "monthly"
 // 按半年
-const QString halfyear = QString("halfyear");
+#define HALFYEAR  "halfyear"
 
 // 日历
-const QString Calendar = QString("Calendar");
+#define CALENDAR  "Calendar"
 // 银行间市场日历
-const QString CFETS = QString("CFETS");
+#define CFETS  "CFETS"
 // 中国上海交易所日历
-const QString SHSE = QString("SHSE");
+#define SHSE  "SHSE"
 
 // 计息日调整
-const QString Convention = QString("Convention");
+#define CONVENTION  "Convention"
 // 修正的下一个工作日
-const QString ModifiedFollowing = QString("Modified Following");
+#define MODIFIEDFOLLOWING  "Modified Following"
 // 下一个工作日
-const QString Following = QString("Following");
+#define FOLLOWING  "Following"
 // 前一个工作日
-const QString Preceding = QString("Preceding");
+#define PRECEDING  "Preceding"
 
 // 天数计数
-const QString DayCount = QString("DayCount");
+#define DAYCOUNT  "DayCount"
 // 实际天数/实际天数
-const QString Act_Act = QString("Act/Act");
+#define ACT_ACT  "Act/Act"
 // 实际天数/365
-const QString Act_365 = QString("Act/365");
+#define ACT_365 "Act/365"
 // 实际天数/360
-const QString Act_360 = QString("Act/360");
+#define ACT_360 "Act/360"
 
 // 息票类型
-const QString CouponType = QString("CouponType");
+#define COUPONTYPE "CouponType"
 // 零息票
-const QString ZeroCoupon = QString("ZeroCoupon");
+#define ZEROCOUPON "ZeroCoupon"
 // 固定息票
-const QString FixedCoupon = QString("FixedCoupon");
+#define FIXEDCOUPON "FixedCoupon"
 // 浮动息票
-const QString FloatCoupon = QString("FloatCoupon");
+#define FLOATCOUPON "FloatCoupon"
 
 // 参考利率
-const QString ReferenceIndex = QString("ReferenceIndex");
-const QString shibor3m = QString("shibor3m");
-const QString repo7d = QString("repo7d");
-const QString depo1y = QString("depo1y");
+#define REFERENCEINDEX  "ReferenceIndex"
+#define SHIBOR3M "shibor3m"
+#define REPO7D "repo7d"
+#define DEPO1Y "depo1y"
 
 // 市场类型
-const QString MarketType = QString("MarketType");
+#define MARKETTYPE "MarketType"
 // 银行间货币市场
-const QString IBMoneyMarket = QString("IBMoneyMarket");
+#define IBMONEYMARKET "IBMoneyMarket"
 // 银行间债券市场
-const QString IBBondMarket = QString("IBBondMarket");
+#define IBBONDMARKET "IBBondMarket"
 // 上海交易所货币市场
-const QString SHEXMoneyMarket = QString("SHEXMoneyMarket");
+#define SHEXMONEYMARKET "SHEXMoneyMarket"
 // 上海股票交易所市场
-const QString SHEXStockMarket = QString("SHEXStockMarket");
+#define SHEXSTOCKMARKET "SHEXStockMarket"
 
 // 零息利率复利类型
-const QString ZeroRateCompoundFrequency = QString("ZeroRateCompoundFrequency");
+#define ZERORATECOMPOUNDFREQUENCY "ZeroRateCompoundFrequency"
 // 连续复利
-const QString ContinuousCompound = QString("ContinuousCompound");
+#define CONTINUOUSCOMPOUND "ContinuousCompound"
 // 年复利
-const QString yearlyCompound = QString("yearlyCompound");
+#define YEARLYCOMPOUND "yearlyCompound"
 
 #pragma endregion
 

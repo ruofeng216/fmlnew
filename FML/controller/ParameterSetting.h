@@ -35,15 +35,11 @@ public:
 	void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results);
 
 	///////参数字典///////////
-	const QMap<QString, QList<CParaDict>>& getParadict()const;
+	const QMap<QString, CParaDict>& getParadict()const;
 	bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val);
-	bool getAllParadict(const QString &typeCode, QList<CParaDict> &valList);
+	bool getAllParadict(const QString &typeCode, QMap<QString, CParaDict> &valList);
 	bool setParadict(const CParaDict &val, QString &err);
 	bool removeParadict(const QString &typeCode, const QString &paraCode, QString &err);
-
-private:
-	// 初始化参数字典
-	void initParaDict();
 
 private:
 	//金融日历
@@ -52,7 +48,7 @@ private:
 	QMap<QString, CPortfolio> m_portfolio;
 	//产品信息
 	QMap<QString, CProduct> m_product;
-	//参数字典
-	QMap<QString, QList<CParaDict>> m_paradict;
+	//参数字典 <key: pcode/tcode, info>
+	QMap<QString, CParaDict> m_paradict;
 };
 

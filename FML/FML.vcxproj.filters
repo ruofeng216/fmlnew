@@ -468,6 +468,15 @@
     <ClCompile Include="view\commonui\xdateedit.cpp">
       <Filter>view\commonui</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_xcombobox.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_xcombobox.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
+    <ClCompile Include="view\commonui\xcombobox.cpp">
+      <Filter>view\commonui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -659,6 +668,9 @@
     <CustomBuild Include="view\commonui\xdateedit.h">
       <Filter>view\commonui</Filter>
     </CustomBuild>
+    <CustomBuild Include="view\commonui\xcombobox.h">
+      <Filter>view\commonui</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="FML.rc" />
@@ -697,5 +709,8 @@
     <ClInclude Include="controller\YieldCurveDefinition.h">
       <Filter>controller</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

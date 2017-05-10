@@ -32,7 +32,9 @@ public:
 	bool removeProduct(const QStringList &codeList, QString &err);
 
 	// 参数字典
-	bool getParadict(QMap<QString, QList<CParaDict>> &val, QString &err);
+	// 初始化参数字典
+	bool initParaDict(QMap<QString, CParaDict> &val, QString &err);
+	bool getParadict(QMap<QString, CParaDict> &val, QString &err);
 	bool setParadict(const CParaDict &val, QString &err);
 	bool setParadict(const QList<CParaDict> &valList, QString &err);
 	bool removeParadict(const QStringList &typeCodeList, const QStringList &paraCodeList, QString &err);

@@ -64,7 +64,7 @@ void PortfolioManage::init()
 	}
 	{
 		ui.treeView->setAlternatingRowColors(true);
-		connect(ui.treeView, &QTreeView::doubleClicked, [this](const QModelIndex &index) {
+		connect(ui.treeView, &QTreeView::clicked, [this](const QModelIndex &index) {
 			QVariant s = index.sibling(index.row(), ePortcode).data();
 			if (s.isValid()) this->ui.lineEdit_portcode->setText(s.toString());
 			s = index.sibling(index.row(), ePortname).data();
@@ -456,26 +456,29 @@ void PortfolioManage::delPortfolioData(const CPortfolio & val)
 		}
 		else
 		{
-			int curRow = m_tree[val.getPortcode()].front()->row();
-			int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
-			QStandardItem* p = m_pGoodsModel->item(nearRow);
-			if (p)
+			if (m_tree.contains(val.getPortcode()))
 			{
-				QString nearCode = p->text();
-				if (PARASETCTL->getPortfolio().contains(nearCode))
-					locatePortfolioData(PARASETCTL->getPortfolio()[nearCode]);
+				int curRow = m_tree[val.getPortcode()].front()->row();
+				int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
+				QStandardItem* p = m_pGoodsModel->item(nearRow);
+				if (p)
+				{
+					QString nearCode = p->text();
+					if (PARASETCTL->getPortfolio().contains(nearCode))
+						locatePortfolioData(PARASETCTL->getPortfolio()[nearCode]);
+				}
 			}
 		}
 		delRoot(val.getPortcode());
 	}
 	else
 	{
-		if (m_tree[val.getParentcode()].front()->rowCount() <= 1)
+		if (m_tree.contains(val.getParentcode()) && m_tree[val.getParentcode()].front()->rowCount() <= 1)
 		{
 			if (PARASETCTL->getPortfolio().contains(val.getParentcode()))
 				locatePortfolioData(PARASETCTL->getPortfolio()[val.getParentcode()]);
 		}
-		else
+		else if (m_tree.contains(val.getParentcode()) && m_tree.contains(val.getPortcode()))
 		{
 			int curRow = m_tree[val.getPortcode()].front()->row();
 			int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
@@ -499,7 +502,7 @@ void PortfolioManage::locatePortfolioData(const CPortfolio & val)
 		if (findIndex.size() > 0)
 		{
 			this->ui.treeView->setCurrentIndex(findIndex[ePortcode]);
-			this->ui.treeView->doubleClicked(findIndex[ePortcode]);
+			this->ui.treeView->clicked(findIndex[ePortcode]);
 		}
 		else
 		{

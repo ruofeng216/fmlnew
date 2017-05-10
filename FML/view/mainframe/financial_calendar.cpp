@@ -43,6 +43,14 @@ bool FinancialCalendar::checkValid()
 void FinancialCalendar::init()
 {
 	{
+		ui.comboBox->addItems(QStringList() << tr("holiday") << tr("workday"));
+		ui.comboBox->view()->setAlternatingRowColors(true);
+	}
+
+	connect(ui.dateEdit, &QDateTimeEdit::dateChanged, [this](const QDate &date) {
+		ui.lineEdit_year->setText(QString::number(date.year()));
+	});
+	{
 		ui.treeView->setAlternatingRowColors(true);
 		connect(ui.treeView, &QTreeView::clicked, [this](const QModelIndex &index) {
 			QVariant s = index.sibling(index.row(), eDate).data();
@@ -64,14 +72,6 @@ void FinancialCalendar::init()
 		});
 		initDateView();
 	}
-	{
-		ui.comboBox->addItems(QStringList() << tr("holiday") << tr("workday"));
-		ui.comboBox->view()->setAlternatingRowColors(true);
-	}
-
-	connect(ui.dateEdit, &QDateTimeEdit::dateChanged, [this](const QDate &date) {
-		ui.lineEdit_year->setText(QString::number(date.year()));
-	});
 }
 
 void FinancialCalendar::slotSkinChange()

@@ -68,7 +68,7 @@ void ProductManage::init()
 	}
 	{
 		ui.treeView->setAlternatingRowColors(true);
-		connect(ui.treeView, &QTreeView::doubleClicked, [this](const QModelIndex &index) {
+		connect(ui.treeView, &QTreeView::clicked, [this](const QModelIndex &index) {
 			QString code = index.sibling(index.row(), eProductCode).data().toString();
 			QString name = index.sibling(index.row(), eProductName).data().toString();
 			QString parentCode = index.sibling(index.row(), eParentcode).data().toString();
@@ -445,26 +445,29 @@ void ProductManage::delProductData(const CProduct & val)
 		}
 		else
 		{
-			int curRow = m_tree[val.getCode()].front()->row();
-			int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
-			QStandardItem* p = m_pGoodsModel->item(nearRow);
-			if (p)
+			if (m_tree.contains(val.getCode()))
 			{
-				QString nearCode = p->text();
-				if (PARASETCTL->getProduct().contains(nearCode))
-					locateProductData(PARASETCTL->getProduct()[nearCode]);
+				int curRow = m_tree[val.getCode()].front()->row();
+				int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
+				QStandardItem* p = m_pGoodsModel->item(nearRow);
+				if (p)
+				{
+					QString nearCode = p->text();
+					if (PARASETCTL->getProduct().contains(nearCode))
+						locateProductData(PARASETCTL->getProduct()[nearCode]);
+				}
 			}
 		}
 		delRoot(val.getCode());
 	}
 	else
 	{
-		if (m_tree[val.getParentCode()].front()->rowCount() <= 1)
+		if (m_tree.contains(val.getParentCode()) && m_tree[val.getParentCode()].front()->rowCount() <= 1)
 		{
 			if (PARASETCTL->getProduct().contains(val.getParentCode()))
 				locateProductData(PARASETCTL->getProduct()[val.getParentCode()]);
 		}
-		else
+		else if (m_tree.contains(val.getParentCode()) && m_tree.contains(val.getCode()))
 		{
 			int curRow = m_tree[val.getCode()].front()->row();
 			int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
@@ -488,7 +491,7 @@ void ProductManage::locateProductData(const CProduct & val)
 		if (findIndex.size() > 0)
 		{
 			this->ui.treeView->setCurrentIndex(findIndex[eProductCode]);
-			this->ui.treeView->doubleClicked(findIndex[eProductCode]);
+			this->ui.treeView->clicked(findIndex[eProductCode]);
 		}
 		else
 		{

@@ -56,9 +56,9 @@ public:
 	virtual QList<CProduct> getChildrenProduct(const QString &parentCode) = 0;
 	virtual void getAllChildrenProduct(const QString &parentCode, QList<CProduct> &results) = 0;
 	///////参数管理///////////
-	virtual const QMap<QString, QList<CParaDict>>& getParadict() const = 0;
+	virtual const QMap<QString, CParaDict>& getParadict() const = 0;
 	virtual bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val) = 0;
-	virtual bool getAllParadict(const QString &typeCode, QList<CParaDict> &valList) = 0;
+	virtual bool getAllParadict(const QString &typeCode, QMap<QString, CParaDict> &valList) = 0;
 	virtual bool setParadict(const CParaDict &val, QString &err) = 0;
 	virtual bool removeParadict(const QString &typeCode, const QString &paraCode, QString &err) = 0;
 };

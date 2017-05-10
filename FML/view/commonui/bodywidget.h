@@ -12,7 +12,7 @@ public:
 	virtual ~CAction() {}
 	void setCurrentData(const T& data) {  m_data = data;  }
 	const T& getCurrentData() const { return m_data;  }
-	bool isKeyModify(const T &newVal) { return getKey(newVal) != getKey(m_data); };
+	virtual bool isKeyModify(const T &newVal) { return getKey(newVal) != getKey(m_data); };
 	virtual QString getKey(const T &newVal) const = 0;
 	bool isEqual(const T &newVal) { return newVal == m_data; }
 
