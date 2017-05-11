@@ -125,6 +125,7 @@ void PortfolioManage::modifyPortfolio(bool)
 {
 	if (!checkValid()) return;
 	CPortfolio cp = getViewData();
+
 	if (this->isKeyModify(cp)) {
 		ShowWarnMessage(tr("modify"), tr("port code can not be modified!"), this);
 		return;
@@ -154,6 +155,7 @@ void PortfolioManage::modifyPortfolio(bool)
 	{
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		// Í¬²½
+		
 		addPortfolioData(cp);
 		locatePortfolioData(cp);
 	}
@@ -233,6 +235,7 @@ void PortfolioManage::packItem(QList<QStandardItem *> &childItems, const CPortfo
 	if (val.getPortcode().isEmpty() || val.getPortname().isEmpty()) {
 		return;
 	}
+
 	for (int i = 0; i < eEnd; i++)
 	{
 		switch (i)
@@ -290,6 +293,7 @@ void PortfolioManage::packItem(QList<QStandardItem *> &childItems, const CPortfo
 			break;
 		}
 	}
+	
 }
 
 CPortfolio PortfolioManage::getViewData()
@@ -322,6 +326,7 @@ void PortfolioManage::addPortfolioData(const CPortfolio & val)
 		QList<QStandardItem *> items;
 		QList<QStandardItem *> itemsCombobox;
 		this->packItem(items, val);
+		qDebug() << "======" << val.getPortcode() << "******" << items[2]->data().toString();
 		if (items.size() > 0) {
 			this->m_pGoodsModel->appendRow(items);
 			this->m_tree[val.getPortcode()] = items;
@@ -337,6 +342,7 @@ void PortfolioManage::addPortfolioData(const CPortfolio & val)
 		{
 			QList<QStandardItem *> items;
 			this->packItem(items, val);
+			
 			if (items.size() > 0) {
 				this->m_tree[val.getParentcode()].front()->appendRow(items);
 				this->m_tree[val.getPortcode()] = items;
@@ -352,8 +358,9 @@ void PortfolioManage::addPortfolioData(const CPortfolio & val)
 	auto updateChild = [this](const CPortfolio &val) {
 		if (this->m_tree.contains(val.getPortcode()))
 		{
-			if (val.getParentcode() != this->m_tree[val.getPortcode()][eParentcode]->data().toString())
+			if (val.getParentcode() != this->m_tree[val.getPortcode()][eParentcode]->text())
 			{
+			
 				this->delPortfolioData(val);
 				this->addPortfolioData(val);
 			}
