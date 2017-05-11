@@ -341,7 +341,7 @@ void ProductManage::addProductData(const CProduct & val)
 	auto updateChild = [this](const CProduct &val) {
 		if (this->m_tree.contains(val.getCode()))
 		{
-			if (val.getParentCode() != this->m_tree[val.getCode()][eParentcode]->data().toString())
+			if (val.getParentCode() != this->m_tree[val.getCode()][eParentcode]->text())
 			{
 				this->delProductData(val);
 				this->addProductData(val);
