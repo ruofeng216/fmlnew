@@ -360,8 +360,11 @@ void PortfolioManage::addPortfolioData(const CPortfolio & val)
 		{
 			if (val.getParentcode() != this->m_tree[val.getPortcode()][eParentcode]->text())
 			{
-			
-				this->delPortfolioData(val);
+				CPortfolio del(this->m_tree[val.getPortcode()][ePortcode]->text(),
+					this->m_tree[val.getPortcode()][ePortname]->text(),
+					this->m_tree[val.getPortcode()][eParentcode]->text(),
+					this->m_tree[val.getPortcode()][eParentname]->text());
+				this->delPortfolioData(del);
 				this->addPortfolioData(val);
 			}
 			else if (this->m_tree[val.getPortcode()].size() == eEnd) {

@@ -343,7 +343,11 @@ void ProductManage::addProductData(const CProduct & val)
 		{
 			if (val.getParentCode() != this->m_tree[val.getCode()][eParentcode]->text())
 			{
-				this->delProductData(val);
+				CProduct del(this->m_tree[val.getCode()][eProductCode]->text(),
+					this->m_tree[val.getCode()][eProductName]->text(),
+					this->m_tree[val.getCode()][eParentcode]->text(),
+					this->m_tree[val.getCode()][eParentname]->text());
+				this->delProductData(del);
 				this->addProductData(val);
 			}
 			else if (this->m_tree[val.getCode()].size() == eEnd) {
@@ -437,7 +441,7 @@ void ProductManage::delProductData(const CProduct & val)
 			this->m_treeCombobox.remove(val);
 		}
 	};
-	if (val.getCode().isEmpty())
+	if (val.getParentCode().isEmpty())
 	{// ¸ù½Úµã
 		if (m_pGoodsModel->rowCount() <= 1)
 		{
