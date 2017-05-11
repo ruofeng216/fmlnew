@@ -210,7 +210,7 @@ void PortfolioManage::initDateView()
 	ui.treeView->setModel(m_pGoodsModel);
 	ui.treeView->setColumnHidden(2, true);
 	ui.treeView->setColumnHidden(3, true);
-	ui.treeView->setColumnWidth(1, 200);
+	ui.treeView->setColumnWidth(0, 200);
 
 	QMap<QString, CPortfolio> val = PARASETCTL->getPortfolio();
 	for (QMap<QString, CPortfolio>::const_iterator itor = val.begin();

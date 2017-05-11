@@ -122,6 +122,7 @@ void ParameterDictionary::slotAdd()
 		ShowWarnMessage(tr("add"), tr("type-code/paracode cant be equal to his-type-code/his-paracode!").arg(val.getTypeCode()).arg(val.getParaCode()), this);
 		return;
 	}
+	//if (PARASETCTL->getParadict().contains())
 	QString err;
 	if (PARASETCTL->setParadict(val, err)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
@@ -212,7 +213,7 @@ void ParameterDictionary::initDateView()
 	for (int i = 0; i < treeHeader.size(); i++)
 		m_model->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
 	ui.treeView->setModel(m_model);
-	ui.treeView->setColumnWidth(1, 200);
+	ui.treeView->setColumnWidth(0, 400);
 
 	QMap<QString,CParaDict> val = PARASETCTL->getParadict();
 	for (QMap<QString, CParaDict>::const_iterator itor = val.begin();

@@ -199,7 +199,7 @@ void ProductManage::initDateView()
 	for (int i = 0; i < treeHeader.size(); i++)
 		m_pGoodsModel->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
 	ui.treeView->setModel(m_pGoodsModel);
-	ui.treeView->setColumnWidth(1, 160);
+	ui.treeView->setColumnWidth(0, 200);
 
 	QMap<QString, CProduct> val = PARASETCTL->getProduct();
 	for (QMap<QString, CProduct>::const_iterator itor = val.begin();
