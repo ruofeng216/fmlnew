@@ -25,9 +25,6 @@ public slots:
 	void slotModify();
 	void slotDelete();
 	void slotTreeDoubleClicked(const QModelIndex &index);
-	void slotProductCodeChanged(int index);
-	void slotProductNameChanged(int index);
-
 protected:
 	void showEvent(QShowEvent *event);
 
