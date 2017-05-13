@@ -215,7 +215,7 @@ void PortfolioManage::initDateView()
 	ui.treeView->setModel(m_pGoodsModel);
 	ui.treeView->setColumnHidden(2, true);
 	ui.treeView->setColumnHidden(3, true);
-	ui.treeView->setColumnWidth(1, 200);
+	ui.treeView->setColumnWidth(0, 200);
 
 	QMap<QString, CPortfolio> val = PARASETCTL->getPortfolio();
 	for (QMap<QString, CPortfolio>::const_iterator itor = val.begin();
@@ -363,8 +363,11 @@ void PortfolioManage::addPortfolioData(const CPortfolio & val)
 		{
 			if (val.getParentcode() != this->m_tree[val.getPortcode()][eParentcode]->text())
 			{
-			
-				this->delPortfolioData(val);
+				CPortfolio del(this->m_tree[val.getPortcode()][ePortcode]->text(),
+					this->m_tree[val.getPortcode()][ePortname]->text(),
+					this->m_tree[val.getPortcode()][eParentcode]->text(),
+					this->m_tree[val.getPortcode()][eParentname]->text());
+				this->delPortfolioData(del);
 				this->addPortfolioData(val);
 			}
 			else if (this->m_tree[val.getPortcode()].size() == eEnd) {

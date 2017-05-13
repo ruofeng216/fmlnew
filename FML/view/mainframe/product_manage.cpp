@@ -199,7 +199,7 @@ void ProductManage::initDateView()
 	for (int i = 0; i < treeHeader.size(); i++)
 		m_pGoodsModel->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
 	ui.treeView->setModel(m_pGoodsModel);
-	ui.treeView->setColumnWidth(1, 160);
+	ui.treeView->setColumnWidth(0, 200);
 
 	QMap<QString, CProduct> val = PARASETCTL->getProduct();
 	for (QMap<QString, CProduct>::const_iterator itor = val.begin();
@@ -341,9 +341,13 @@ void ProductManage::addProductData(const CProduct & val)
 	auto updateChild = [this](const CProduct &val) {
 		if (this->m_tree.contains(val.getCode()))
 		{
-			if (val.getParentCode() != this->m_tree[val.getCode()][eParentcode]->data().toString())
+			if (val.getParentCode() != this->m_tree[val.getCode()][eParentcode]->text())
 			{
-				this->delProductData(val);
+				CProduct del(this->m_tree[val.getCode()][eProductCode]->text(),
+					this->m_tree[val.getCode()][eProductName]->text(),
+					this->m_tree[val.getCode()][eParentcode]->text(),
+					this->m_tree[val.getCode()][eParentname]->text());
+				this->delProductData(del);
 				this->addProductData(val);
 			}
 			else if (this->m_tree[val.getCode()].size() == eEnd) {
@@ -437,7 +441,7 @@ void ProductManage::delProductData(const CProduct & val)
 			this->m_treeCombobox.remove(val);
 		}
 	};
-	if (val.getCode().isEmpty())
+	if (val.getParentCode().isEmpty())
 	{// ¸ù½Úµã
 		if (m_pGoodsModel->rowCount() <= 1)
 		{

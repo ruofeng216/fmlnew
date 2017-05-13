@@ -15,8 +15,6 @@ KeyPointDefinition::KeyPointDefinition(QWidget *parent)
 	connect(ui.pbModify, SIGNAL(clicked()), this, SLOT(slotModify()));
 	connect(ui.pbDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
 	connect(ui.treeView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotTreeDoubleClicked(QModelIndex)));
-	connect(ui.cbProductCode, SIGNAL(activated(int)), this, SLOT(slotProductCodeChanged(int)));
-	connect(ui.cbProductName, SIGNAL(activated(int)), this, SLOT(slotProductNameChanged(int)));
 
 	slotSkinChange();
 	ui.leTenor->setValidator(new QIntValidator(0, 99999, this));
@@ -84,12 +82,10 @@ void KeyPointDefinition::init()
 
 	auto initProductList = [this]() {
 		ui.cbProductCode->clear();
-		ui.cbProductName->clear();
 		const QMap<QString, CProduct> &productList = PARASETCTL->getProduct();
 		for (auto iter = productList.constBegin(); iter != productList.constEnd(); ++iter) {
 			const CProduct &product = iter.value();
 			ui.cbProductCode->addItem(product.getCode());
-			ui.cbProductName->addItem(product.getName());
 		}
 	};
 
@@ -273,20 +269,6 @@ void KeyPointDefinition::slotTreeDoubleClicked(const QModelIndex &index)
 	ui.deEnd->setDate(QDate::fromString(endDate, YMD));
 }
 
-void KeyPointDefinition::slotProductCodeChanged(int index)
-{
-	if (ui.cbProductName->currentIndex() != index) {
-		ui.cbProductName->setCurrentIndex(index);
-	}
-}
-
-void KeyPointDefinition::slotProductNameChanged(int index)
-{
-	if (ui.cbProductCode->currentIndex() != index) {
-		ui.cbProductCode->setCurrentIndex(index);
-	}
-}
-
 void KeyPointDefinition::showEvent(QShowEvent *event)
 {
 	BodyWidget::showEvent(event);
@@ -298,7 +280,7 @@ void KeyPointDefinition::setViewData(const CKeypoint &val)
 	ui.leKPCode->setText(val.getKpcode());
 	ui.leKPName->setText(val.getKpname());
 	ui.cbProductCode->setCurrentText(val.getProductCode());
-	ui.cbProductName->setCurrentText(val.getProductName());
+	ui.cbProductName->setText(val.getProductName());
 	QPair<int, QString> tenor = parseTenor(val.getTenor());
 	ui.leTenor->setText(QString::number(tenor.first));
 	ui.rbDay->setChecked(tenor.second == "d");
@@ -326,7 +308,7 @@ CKeypoint KeyPointDefinition::getViewData()
 	result.setKpcode(ui.leKPCode->text().trimmed());
 	result.setKpname(ui.leKPName->text().trimmed());
 	result.setProductCode(ui.cbProductCode->currentText().trimmed());
-	result.setProductName(ui.cbProductName->currentText().trimmed());
+	result.setProductName(ui.cbProductName->text().trimmed());
 	QString tenor;
 	if (ui.rbDay->isChecked()) {
 		tenor = "d"; 

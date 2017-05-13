@@ -122,6 +122,33 @@ void ParameterDictionary::slotAdd()
 		ShowWarnMessage(tr("add"), tr("type-code/paracode cant be equal to his-type-code/his-paracode!").arg(val.getTypeCode()).arg(val.getParaCode()), this);
 		return;
 	}
+	
+	if (!val.getParaCode().isEmpty())
+	{// 新增参数
+		if (val.getParaName().isEmpty())
+		{
+			ShowWarnMessage(tr("add"), tr("paraname cant be empty!"), this);
+			return;
+		}
+		if (val.getTypeName().isEmpty())
+		{
+			ShowWarnMessage(tr("add"), tr("typename cant be empty!"), this);
+			return;
+		}
+		if (!PARASETCTL->getParadict().contains(val.getTypeCode()))
+		{
+			ShowWarnMessage(tr("add"), tr("typecode dont exist!"), this);
+			return;
+		}
+	}
+	else
+	{//新增类型
+		if (!val.getParaName().isEmpty())
+		{
+			ShowWarnMessage(tr("add"), tr("when add type, paraname should be empty!"), this);
+			return;
+		}
+	}
 	QString err;
 	if (PARASETCTL->setParadict(val, err)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
@@ -159,6 +186,11 @@ void ParameterDictionary::slotModify()
 			ShowWarnMessage(tr("modify"), tr("when modifying para, para cant be empty!"), this);
 			return;
 		}
+		if (!PARASETCTL->getParadict().contains(val.getTypeCode()))
+		{
+			ShowWarnMessage(tr("modify"), tr("typecode dont exist!"), this);
+			return;
+		}
 	}
 
 	QString err;
@@ -184,18 +216,21 @@ void ParameterDictionary::slotDelete()
 			ShowWarnMessage(tr("delete"), tr("The paradict is not existing!"), this);
 			return;
 		}
-		QMap<QString, CParaDict> cld;
-		PARASETCTL->getAllParadict(val.getTypeCode(), cld);
-		if (!cld.isEmpty())
-		{
-			ShowWarnMessage(tr("delete"), tr("The type has children, cant delete!"), this);
-			return;
+		if (val.getParaCode().isEmpty())
+		{// 删除类型
+			QMap<QString, CParaDict> cld;
+			PARASETCTL->getAllParadict(val.getTypeCode(), cld);
+			if (!cld.isEmpty())
+			{
+				ShowWarnMessage(tr("delete"), tr("The type has children, cant delete!"), this);
+				return;
+			}
 		}
+		
 		QString err;
 		if (PARASETCTL->removeParadict(val.getTypeCode(), val.getParaCode(), err)) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
-			setViewData(CParaDict());
-			init();
+			delData(val);
 		} else {
 			ShowErrorMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 		}
@@ -212,7 +247,7 @@ void ParameterDictionary::initDateView()
 	for (int i = 0; i < treeHeader.size(); i++)
 		m_model->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
 	ui.treeView->setModel(m_model);
-	ui.treeView->setColumnWidth(1, 200);
+	ui.treeView->setColumnWidth(0, 400);
 
 	QMap<QString,CParaDict> val = PARASETCTL->getParadict();
 	for (QMap<QString, CParaDict>::const_iterator itor = val.begin();
@@ -235,7 +270,7 @@ CParaDict ParameterDictionary::getViewData()
 	result.setTypeCode(ui.cbTypeCode->currentText().trimmed());
 	CParaDict t;
 	if (PARASETCTL->getParadict(ui.cbTypeCode->currentText().trimmed(), "", t))
-		result.setTypeName(t.getParaName());
+		result.setTypeName(t.getTypeName());
 	else
 		result.setTypeName(ui.cbTypeName->text().trimmed());
 	result.setParaCode(ui.leParaCode->text().trimmed());
@@ -324,7 +359,7 @@ void ParameterDictionary::addData(const CParaDict & val)
 			}
 			else
 			{// 参数
-				if (val.getTypeCode() != this->m_tree[k][eParaCode]->parent()->data().toString())
+				if (val.getTypeCode() != this->m_tree[k][eParaCode]->parent()->text())
 				{
 					this->delData(val);
 					this->addData(val);
