@@ -54,13 +54,15 @@ bool PortfolioManage::checkValid()
 void PortfolioManage::init()
 {
 	{
-		QTreeView *pView = new QTreeView(ui.comboBox_parentcode);
+		//QTreeView *pView = new QTreeView(ui.comboBox_parentcode);
+		//QTreeView *pView = (QTreeView *)ui.comboBox_parentcode->view();
 		if (!m_pGoodsModelCombobox) m_pGoodsModelCombobox = new QStandardItemModel(0, 1, this);
 		m_pGoodsModelCombobox->setColumnCount(1);
 		ui.comboBox_parentcode->setModel(m_pGoodsModelCombobox);
-		pView->setHeaderHidden(true);
-		ui.comboBox_parentcode->setView(pView);
-		ui.comboBox_parentcode->view()->setAlternatingRowColors(true);
+		//pView->setHeaderHidden(true);
+		//pView->setAlternatingRowColors(true);
+		//ui.comboBox_parentcode->setView(pView);
+		//ui.comboBox_parentcode->view()->setAlternatingRowColors(true);
 	}
 	{
 		ui.treeView->setAlternatingRowColors(true);
@@ -81,6 +83,7 @@ void PortfolioManage::init()
 		});
 		
 		initDateView();
+		
 	}
 }
 
@@ -326,7 +329,7 @@ void PortfolioManage::addPortfolioData(const CPortfolio & val)
 		QList<QStandardItem *> items;
 		QList<QStandardItem *> itemsCombobox;
 		this->packItem(items, val);
-		qDebug() << "======" << val.getPortcode() << "******" << items[2]->data().toString();
+		
 		if (items.size() > 0) {
 			this->m_pGoodsModel->appendRow(items);
 			this->m_tree[val.getPortcode()] = items;
