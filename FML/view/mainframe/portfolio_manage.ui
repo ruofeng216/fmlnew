@@ -361,7 +361,7 @@
          </widget>
         </item>
         <item>
-         <widget class="TreeComboBox" name="comboBox_parentcode">
+         <widget class="XComboBox" name="comboBox_parentcode">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
             <horstretch>0</horstretch>
@@ -575,9 +575,9 @@
    <header>xdateedit.h</header>
   </customwidget>
   <customwidget>
-   <class>TreeComboBox</class>
+   <class>XComboBox</class>
    <extends>QComboBox</extends>
-   <header>treecombobox.h</header>
+   <header>xcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

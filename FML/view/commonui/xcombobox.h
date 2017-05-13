@@ -20,5 +20,6 @@ private:
 private:
 	QPropertyAnimation *m_pAnimation;
 	int m_nWarning;
-
+protected:
+	bool eventFilter(QObject* obj, QEvent* evt);
 };

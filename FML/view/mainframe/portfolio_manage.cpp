@@ -48,6 +48,12 @@ bool PortfolioManage::checkValid()
 		ui.dateEdit_dateend->setError(tr("end-time cant be small than start-time!"));
 		bValid = false;
 	}
+	if (ui.lineEdit_portcode->text() == ui.comboBox_parentcode->currentText()) 
+	{
+		ui.lineEdit_portcode->setError(tr("portfolio code equals parent code error!"));
+		ui.comboBox_parentcode->setError(tr("portfolio code equals parent code error!"));
+		bValid = false;
+	}
 	return bValid;
 }
 
