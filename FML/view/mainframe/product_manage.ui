@@ -136,7 +136,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="cbParentCode">
+        <widget class="XComboBox" name="cbParentCode">
          <property name="editable">
           <bool>true</bool>
          </property>
@@ -450,6 +450,11 @@
    <class>xDateEdit</class>
    <extends>QDateEdit</extends>
    <header>xdateedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XComboBox</class>
+   <extends>QComboBox</extends>
+   <header>xcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

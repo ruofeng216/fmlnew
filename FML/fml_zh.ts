@@ -1157,32 +1157,32 @@
         <translation type="unfinished">删除</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="97"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="112"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="117"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="123"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="129"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="157"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="98"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="113"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="118"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="124"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="130"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="158"/>
         <source>add</source>
         <translation>增加</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="99"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="138"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="142"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="164"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="171"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="100"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="139"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="143"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="165"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="172"/>
         <source>modify</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="101"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="151"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="176"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="183"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="191"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="198"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="201"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="102"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="152"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="177"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="184"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="192"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="199"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="202"/>
         <source>delete</source>
         <translation>删除</translation>
     </message>
@@ -1191,17 +1191,17 @@
         <translation type="vanished">组合代码不能为空！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="112"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="113"/>
         <source>the portfolio already exists.</source>
         <translation>组合 [ %1 ] 已经存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="123"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="124"/>
         <source>add success.</source>
         <translation>新增成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="129"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="130"/>
         <source>add fail.</source>
         <translation>新增失败。</translation>
     </message>
@@ -1238,97 +1238,98 @@
     </message>
     <message>
         <location filename="view/mainframe/portfolio_manage.cpp" line="53"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="54"/>
         <source>portfolio code equals parent code error!</source>
-        <translation type="unfinished">组合代码不能等于父组合（上级组合）代码！</translation>
+        <translation type="unfinished">组合代码与上级组合代码相同！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="117"/>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="157"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="118"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="158"/>
         <source>the parent dont exists.</source>
         <translation>父级组合 [ %1 ] 不存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="138"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="139"/>
         <source>port code can not be modified!</source>
         <translation>组合代码不能修改！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="142"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="143"/>
         <source>Records do not change, do not need to modify!</source>
         <translation>记录没有发生变化，不需要修改!</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="151"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="152"/>
         <source>Cant modify parent-code, when it has children!</source>
-        <translation>当代码拥有下级代码时，不能修改其父级代码！</translation>
+        <translation type="unfinished">当组合有下级组合时，不能修改该组合的上级组合！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="164"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="165"/>
         <source>modify success.</source>
         <translation>修改成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="171"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="172"/>
         <source>modify fail.</source>
         <translation>修改失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="176"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="177"/>
         <source>confirm to delete.</source>
         <translation>请确认是否删除？</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="183"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="184"/>
         <source>Cant delete parent-code, when it has children!</source>
         <translation>当代码拥有下级代码时，不能删除此代码！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="191"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="192"/>
         <source>delete fail.</source>
         <translation>删除失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="197"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="198"/>
         <source>the portfolio doesn&apos;t exist!</source>
         <translation>组合: [ %1 ] 不存在, 请重新选择要删除的组合!</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="201"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="202"/>
         <source>delete success.</source>
         <translation>删除成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="214"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="215"/>
         <source>portcode</source>
         <translation>组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="214"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="215"/>
         <source>portname</source>
         <translation>组合名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="214"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="215"/>
         <source>parentcode</source>
         <translation>父组合代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="215"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="216"/>
         <source>parentname</source>
         <translation>父组合名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="215"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="216"/>
         <source>sdate</source>
         <translation>开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="215"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="216"/>
         <source>edate</source>
         <translation>关闭日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/portfolio_manage.cpp" line="215"/>
+        <location filename="view/mainframe/portfolio_manage.cpp" line="216"/>
         <source>annotation</source>
         <translation>注释</translation>
     </message>
@@ -1336,57 +1337,57 @@
 <context>
     <name>ProductManage</name>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="143"/>
+        <location filename="view/mainframe/product_manage.cpp" line="148"/>
         <source>Cant modify parent-code, when it has children!</source>
-        <translation type="unfinished">当代码拥有下级代码时，不能修改其父级代码！</translation>
+        <translation type="unfinished">当组合有下级组合时，不能修改该组合的上级组合！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="170"/>
+        <location filename="view/mainframe/product_manage.cpp" line="175"/>
         <source>Cant delete parent-code, when it has children!</source>
         <translation type="unfinished">当代码拥有下级代码时，不能删除此代码！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="195"/>
+        <location filename="view/mainframe/product_manage.cpp" line="200"/>
         <source>productcode</source>
         <translation>产品代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="195"/>
+        <location filename="view/mainframe/product_manage.cpp" line="200"/>
         <source>productname</source>
         <translation>产品名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="195"/>
+        <location filename="view/mainframe/product_manage.cpp" line="200"/>
         <source>parentcode</source>
         <translation>上级产品代码</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="196"/>
+        <location filename="view/mainframe/product_manage.cpp" line="201"/>
         <source>parentname</source>
         <translation>上级产品名称</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="196"/>
+        <location filename="view/mainframe/product_manage.cpp" line="201"/>
         <source>sdate</source>
         <translation>开始日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="196"/>
+        <location filename="view/mainframe/product_manage.cpp" line="201"/>
         <source>edate</source>
         <translation>结束日期</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="196"/>
+        <location filename="view/mainframe/product_manage.cpp" line="201"/>
         <source>annotation</source>
         <translation>说明</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="91"/>
-        <location filename="view/mainframe/product_manage.cpp" line="106"/>
+        <location filename="view/mainframe/product_manage.cpp" line="96"/>
         <location filename="view/mainframe/product_manage.cpp" line="111"/>
         <location filename="view/mainframe/product_manage.cpp" line="116"/>
         <location filename="view/mainframe/product_manage.cpp" line="121"/>
-        <location filename="view/mainframe/product_manage.cpp" line="148"/>
+        <location filename="view/mainframe/product_manage.cpp" line="126"/>
+        <location filename="view/mainframe/product_manage.cpp" line="153"/>
         <source>add</source>
         <translation>增加</translation>
     </message>
@@ -1406,22 +1407,28 @@
         <translation type="unfinished">截止时间不能小于开始时间！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="93"/>
-        <location filename="view/mainframe/product_manage.cpp" line="131"/>
+        <location filename="view/mainframe/product_manage.cpp" line="49"/>
+        <location filename="view/mainframe/product_manage.cpp" line="50"/>
+        <source>product code equal parent code error</source>
+        <translation type="unfinished">产品代码与上级产品代码 不能相同！</translation>
+    </message>
+    <message>
+        <location filename="view/mainframe/product_manage.cpp" line="98"/>
         <location filename="view/mainframe/product_manage.cpp" line="136"/>
-        <location filename="view/mainframe/product_manage.cpp" line="153"/>
+        <location filename="view/mainframe/product_manage.cpp" line="141"/>
         <location filename="view/mainframe/product_manage.cpp" line="158"/>
+        <location filename="view/mainframe/product_manage.cpp" line="163"/>
         <source>modify</source>
         <translation>修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="95"/>
-        <location filename="view/mainframe/product_manage.cpp" line="143"/>
-        <location filename="view/mainframe/product_manage.cpp" line="165"/>
+        <location filename="view/mainframe/product_manage.cpp" line="100"/>
+        <location filename="view/mainframe/product_manage.cpp" line="148"/>
         <location filename="view/mainframe/product_manage.cpp" line="170"/>
-        <location filename="view/mainframe/product_manage.cpp" line="174"/>
+        <location filename="view/mainframe/product_manage.cpp" line="175"/>
         <location filename="view/mainframe/product_manage.cpp" line="179"/>
-        <location filename="view/mainframe/product_manage.cpp" line="183"/>
+        <location filename="view/mainframe/product_manage.cpp" line="184"/>
+        <location filename="view/mainframe/product_manage.cpp" line="188"/>
         <source>delete</source>
         <translation>删除</translation>
     </message>
@@ -1430,23 +1437,23 @@
         <translation type="vanished">产品代码或者产品名称不能为空！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="106"/>
+        <location filename="view/mainframe/product_manage.cpp" line="111"/>
         <source>The product already exists</source>
         <translation>此产品已经存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="111"/>
-        <location filename="view/mainframe/product_manage.cpp" line="148"/>
+        <location filename="view/mainframe/product_manage.cpp" line="116"/>
+        <location filename="view/mainframe/product_manage.cpp" line="153"/>
         <source>the parent dont exists.</source>
         <translation>父级组合 [ %1 ] 不存在！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="116"/>
+        <location filename="view/mainframe/product_manage.cpp" line="121"/>
         <source>add success.</source>
         <translation>新增成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="121"/>
+        <location filename="view/mainframe/product_manage.cpp" line="126"/>
         <source>add fail.</source>
         <translation>新增失败。</translation>
     </message>
@@ -1455,12 +1462,12 @@
         <translation type="vanished">没有选中内容不能修改</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="131"/>
+        <location filename="view/mainframe/product_manage.cpp" line="136"/>
         <source>product code can not be modified!</source>
         <translation>产品代码不能被修改！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="136"/>
+        <location filename="view/mainframe/product_manage.cpp" line="141"/>
         <source>records do not change, do not need to modify!</source>
         <translation>记录没有改变不需要修改</translation>
     </message>
@@ -1469,7 +1476,7 @@
         <translation type="vanished">主键被修改了！</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="174"/>
+        <location filename="view/mainframe/product_manage.cpp" line="179"/>
         <source>The product is not existing!</source>
         <translation>此产品不存在！</translation>
     </message>
@@ -1478,27 +1485,27 @@
         <translation type="vanished">记录没有发生变化，不需要修改!</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="153"/>
+        <location filename="view/mainframe/product_manage.cpp" line="158"/>
         <source>modify success.</source>
         <translation>修改成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="158"/>
+        <location filename="view/mainframe/product_manage.cpp" line="163"/>
         <source>modify fail.</source>
         <translation>修改失败。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="165"/>
+        <location filename="view/mainframe/product_manage.cpp" line="170"/>
         <source>confirm to delete.</source>
         <translation>请确认是否删除？</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="179"/>
+        <location filename="view/mainframe/product_manage.cpp" line="184"/>
         <source>delete success.</source>
         <translation>删除成功。</translation>
     </message>
     <message>
-        <location filename="view/mainframe/product_manage.cpp" line="183"/>
+        <location filename="view/mainframe/product_manage.cpp" line="188"/>
         <source>delete fail.</source>
         <translation>删除失败。</translation>
     </message>

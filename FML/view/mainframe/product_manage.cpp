@@ -45,20 +45,25 @@ bool ProductManage::checkValid()
 		ui.deEnd->setError(tr("end-time cant be small than start-time!"));
 		bValid = false;
 	}
+	if (ui.leCode->text() == ui.cbParentCode->currentText()) {
+		ui.leCode->setError(tr("product code equal parent code error"));
+		ui.cbParentCode->setError(tr("product code equal parent code error"));
+		bValid = false;
+	}
 	return bValid;
 }
 
 void ProductManage::init()
 {
 	{
-		QTreeView *pView = new QTreeView(ui.cbParentCode);
+		//QTreeView *pView = new QTreeView(ui.cbParentCode);
 		if (!m_pGoodsModelCombobox) m_pGoodsModelCombobox = new QStandardItemModel(0, 1, this);
 		m_pGoodsModelCombobox->setColumnCount(1);
 		ui.cbParentCode->setModel(m_pGoodsModelCombobox);
-		pView->setHeaderHidden(true);
-		ui.cbParentCode->setView(pView);
-		ui.cbParentCode->view()->setAlternatingRowColors(true);
-		connect(ui.cbParentCode, static_cast<void(QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+		//pView->setHeaderHidden(true);
+		//ui.cbParentCode->setView(pView);
+		//ui.cbParentCode->view()->setAlternatingRowColors(true);
+		connect(ui.cbParentCode, static_cast<void(QComboBox::*)(const QString &)>(&QComboBox::currentTextChanged),
 			[this](const QString &text) {
 			if (PARASETCTL->getProduct().contains(text))
 				ui.lineEditParentName->setText(PARASETCTL->getProduct()[text].getName());
