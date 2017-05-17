@@ -32,7 +32,7 @@ public:
 		);
 
 public:
-	void delTree(QMap<QString,QList<QStandardItem *>> tree,QStandardItemModel *pGoodsModel,const QString &curCode, const QString &parentCode);
+	void delTree(QMap<QString,QList<QStandardItem *>> &tree,QStandardItemModel *pGoodsModel,const QString &curCode, const QString &parentCode);
 	void addTree(QMap<QString, QList<QStandardItem *>> &tree,QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, const T &val, const QList<int> cols);
 
 public:
@@ -151,7 +151,7 @@ int BWTreeOper<T>::lastRow(
 
 template<class T>
 void BWTreeOper<T>::delTree(
-	QMap<QString, QList<QStandardItem *>> tree,
+	QMap<QString, QList<QStandardItem *>> &tree,
 	QStandardItemModel *pGoodsModel,
 	const QString &curCode,
 	const QString &parentCode)
