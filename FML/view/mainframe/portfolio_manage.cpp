@@ -245,6 +245,7 @@ void PortfolioManage::initDateView()
 	{
 		bwClear();
 	}
+	((QTreeView *)(ui.comboBox_parentcode->view()))->expandAll();
 }
 
 CPortfolio PortfolioManage::getViewData()

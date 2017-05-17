@@ -56,13 +56,10 @@ bool ProductManage::checkValid()
 void ProductManage::init()
 {
 	{
-		//QTreeView *pView = new QTreeView(ui.cbParentCode);
 		if (!m_pGoodsModelCombobox) m_pGoodsModelCombobox = new QStandardItemModel(0, 1, this);
 		m_pGoodsModelCombobox->setColumnCount(1);
 		ui.cbParentCode->setModel(m_pGoodsModelCombobox);
-		//pView->setHeaderHidden(true);
-		//ui.cbParentCode->setView(pView);
-		//ui.cbParentCode->view()->setAlternatingRowColors(true);
+	
 		connect(ui.cbParentCode, static_cast<void(QComboBox::*)(const QString &)>(&QComboBox::currentTextChanged),
 			[this](const QString &text) {
 			if (PARASETCTL->getProduct().contains(text))
@@ -233,21 +230,19 @@ void ProductManage::initDateView()
 	for (QMap<QString, CProduct>::const_iterator itor = val.begin();
 		itor != val.end(); itor++)
 	{
-		//addProductData(itor.value());
 		addTree(m_tree, m_pGoodsModel, itor.value().getCode(), itor.value().getParentCode(), itor.value(), cols);
 		addTree(m_treeCombobox, m_pGoodsModelCombobox, itor.value().getCode(), itor.value().getParentCode(), itor.value(), colsComboBox);
 	}
 	if (!val.isEmpty()) 
 	{
-		//locateProductData(val[val.keys().back()]);
 		locator(m_tree, val[val.keys().back()].getCode());
 	}
 	else
 	{
 		bwClear();
 	}
+	((QTreeView *)(ui.cbParentCode->view()))->expandAll();
 }
-
 
 CProduct ProductManage::getViewData()
 {
@@ -276,7 +271,7 @@ void ProductManage::setViewData(const CProduct &val)
 
 
 //********************************************************************
-//* defime BWTreeOper virtual function  here
+//* define BWTreeOper virtual function  here
 //********************************************************************
 void ProductManage::bwLocate(const QString &code) {
 	QModelIndexList findIndex = this->m_pGoodsModel->match(this->m_pGoodsModel->index(0, 0), Qt::DisplayRole, code, 1, Qt::MatchRecursive | Qt::MatchExactly);
@@ -386,9 +381,14 @@ void ProductManage::updateChildNode(const CProduct &val){
 	QList<int> cols = QList<int>{ 0,1,2,3,4,5,6,7};
 	QList<int> colsComboBox = QList<int>{ 0 };
 
-	if (this->m_tree.contains(val.getCode()))
+	if (m_tree.contains(val.getCode()))
 	{
-		if (val.getParentCode() != this->m_tree[val.getCode()][eParentcode]->text())
+		qDebug() << "------"
+			<< val.getCode()
+			<< val.getParentCode()
+			<< m_tree[val.getCode()][eParentcode]->text()
+			<< "------";
+		if (val.getParentCode() != m_tree[val.getCode()][eParentcode]->text())
 		{
 			CProduct del(this->m_tree[val.getCode()][eProductCode]->text(),
 				this->m_tree[val.getCode()][eProductName]->text(),
