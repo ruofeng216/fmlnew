@@ -116,12 +116,21 @@ void ProductManage::slotAdd(bool)
 		ShowWarnMessage(tr("add"), tr("the parent dont exists.").arg(val.getParentCode()), this);
 		return;
 	}
+
+	QList<int> cols = QList<int>{ 0,1,2,3,4,5,6,7 };
+	QList<int> colsComboBox = QList<int>{ 0 };
+
 	QString err;
 	if (PARASETCTL->setProduct(val, err)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
 		// 同步
-		addProductData(val);
-		locateProductData(val);
+		//addProductData(val);
+		addTree(m_tree, m_pGoodsModel, val.getCode(), val.getParentCode(), val, cols);
+		addTree(m_treeCombobox, m_pGoodsModelCombobox, val.getCode(), val.getParentCode(), val, colsComboBox);
+
+		//locateProductData(val);
+		locator(m_tree, val.getCode());
+
 	} else {
 		ShowErrorMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
 	}
@@ -153,12 +162,21 @@ void ProductManage::slotModify(bool)
 		ShowWarnMessage(tr("add"), tr("the parent dont exists.").arg(newVal.getParentCode()), this);
 		return;
 	}
+
+	QList<int> cols = QList<int>{ 0,1,2,3,4,5,6,7 };
+	QList<int> colsComboBox = QList<int>{ 0 };
+
+
 	QString err;
 	if (PARASETCTL->setProduct(newVal, err)) {
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		// 同步
-		addProductData(newVal);
-		locateProductData(newVal);
+		//addProductData(newVal);
+		addTree(m_tree, m_pGoodsModel, newVal.getCode(), newVal.getParentCode(), newVal, cols);
+		addTree(m_treeCombobox, m_pGoodsModelCombobox, newVal.getCode(), newVal.getParentCode(), newVal, colsComboBox);
+
+		//locateProductData(newVal);
+		locator(m_tree, newVal.getCode());
 	} else {
 		ShowErrorMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
 	}
@@ -183,7 +201,9 @@ void ProductManage::slotDelete(bool)
 		if (PARASETCTL->removeProduct(val.getCode(), err)) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
 			// 同步
-			delProductData(val);
+			//delProductData(val);
+			delTree(m_tree, m_pGoodsModel, val.getCode(), val.getParentCode());
+			delTree(m_treeCombobox, m_pGoodsModelCombobox, val.getCode(), val.getParentCode());
 		} else {
 			ShowErrorMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 		}
@@ -192,6 +212,9 @@ void ProductManage::slotDelete(bool)
 
 void ProductManage::initDateView()
 {
+	QList<int> cols = QList<int>{ 0,1,2,3,4,5,6,7 };
+	QList<int> colsComboBox = QList<int>{ 0 };
+
 	if (m_pGoodsModel) m_pGoodsModel->clear();
 	if (m_pGoodsModelCombobox) m_pGoodsModelCombobox->clear();
 	m_pGoodsModelCombobox->appendRow(new QStandardItem(""));
@@ -210,81 +233,22 @@ void ProductManage::initDateView()
 	for (QMap<QString, CProduct>::const_iterator itor = val.begin();
 		itor != val.end(); itor++)
 	{
-		addProductData(itor.value());
+		//addProductData(itor.value());
+		addTree(m_tree, m_pGoodsModel, itor.value().getCode(), itor.value().getParentCode(), itor.value(), cols);
+		addTree(m_treeCombobox, m_pGoodsModelCombobox, itor.value().getCode(), itor.value().getParentCode(), itor.value(), colsComboBox);
 	}
 	if (!val.isEmpty()) 
 	{
-		locateProductData(val[val.keys().back()]);
+		//locateProductData(val[val.keys().back()]);
+		locator(m_tree, val[val.keys().back()].getCode());
 	}
 	else
 	{
-		clear();
+		bwClear();
 	}
 }
 
-void ProductManage::packItem(QList<QStandardItem *> &childItems, const CProduct &val)
-{
-	if (val.getCode().isEmpty() || val.getName().isEmpty()) {
-		return;
-	}
-	for (int i = 0; i < eEnd; i++)
-	{
-		switch (i)
-		{
-		case eProductCode:
-		{
-			QStandardItem *code = new QStandardItem(val.getCode());
-			childItems.push_back(code);
-			code->setToolTip(code->text());
-			break;
-		}
-		case eProductName:
-		{
-			QStandardItem *name = new QStandardItem(val.getName());
-			childItems.push_back(name);
-			name->setToolTip(name->text());
-			break;
-		}
-		case eParentcode:
-		{
-			QStandardItem *parentCode = new QStandardItem(val.getParentCode());
-			childItems.push_back(parentCode);
-			parentCode->setToolTip(parentCode->text());
-			break;
-		}
-		case eParentname:
-		{
-			QStandardItem *parentName = new QStandardItem(val.getParentName());
-			childItems.push_back(parentName);
-			parentName->setToolTip(parentName->text());
-			break;
-		}
-		case eSdate:
-		{
-			QStandardItem *sdate = new QStandardItem(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-			childItems.push_back(sdate);
-			sdate->setToolTip(sdate->text());
-			break;
-		}
-		case eEdate:
-		{
-			QStandardItem *edate = new QStandardItem(QDate::fromJulianDay(val.getEdate()).toString(YMD));
-			childItems.push_back(edate);
-			edate->setToolTip(edate->text());
-			break;
-		}
-		case eAnnotation:
-		{
-			QStandardItem *annotation = new QStandardItem(val.getAnnotation());
-			childItems.push_back(annotation);
-			annotation->setToolTip(qutil::splitTooltip(val.getAnnotation(), 200));
-			break;
-		}
-		default:
-			break;
-		}
-	}
-}
+
 CProduct ProductManage::getViewData()
 {
 	QString code = ui.leCode->text().trimmed();
@@ -310,215 +274,24 @@ void ProductManage::setViewData(const CProduct &val)
 	setCurrentData(getViewData());
 }
 
-void ProductManage::addProductData(const CProduct & val)
-{
-	auto insertRoot = [this](const CProduct &val) {
-		QList<QStandardItem *> items;
-		QList<QStandardItem *> itemsCombobox;
-		this->packItem(items, val);
-		if (items.size() > 0) {
-			this->m_pGoodsModel->appendRow(items);
-			this->m_tree[val.getCode()] = items;
-		}
-		this->packItem(itemsCombobox, val);
-		if (itemsCombobox.size() > 0) {
-			this->m_pGoodsModelCombobox->appendRow(itemsCombobox.front());
-			this->m_treeCombobox[val.getCode()] = itemsCombobox;
-		}
-	};
-	auto insertChild = [this](const CProduct &val) {
-		if (!this->m_tree.contains(val.getCode()) && this->m_tree.contains(val.getParentCode()))
-		{
-			QList<QStandardItem *> items;
-			this->packItem(items, val);
-			if (items.size() > 0) {
-				this->m_tree[val.getParentCode()].front()->appendRow(items);
-				this->m_tree[val.getCode()] = items;
-			}
-			QList<QStandardItem *> itemsCombobox;
-			this->packItem(itemsCombobox, val);
-			if (itemsCombobox.size() > 0) {
-				this->m_treeCombobox[val.getParentCode()].front()->appendRow(itemsCombobox.front());
-				this->m_treeCombobox[val.getCode()] = itemsCombobox;
-			}
-		}
-	};
-	auto updateChild = [this](const CProduct &val) {
-		if (this->m_tree.contains(val.getCode()))
-		{
-			if (val.getParentCode() != this->m_tree[val.getCode()][eParentcode]->text())
-			{
-				CProduct del(this->m_tree[val.getCode()][eProductCode]->text(),
-					this->m_tree[val.getCode()][eProductName]->text(),
-					this->m_tree[val.getCode()][eParentcode]->text(),
-					this->m_tree[val.getCode()][eParentname]->text());
-				this->delProductData(del);
-				this->addProductData(val);
-			}
-			else if (this->m_tree[val.getCode()].size() == eEnd) {
-				this->m_tree[val.getCode()][eProductName]->setText(val.getName());
-				this->m_tree[val.getCode()][eParentcode]->setText(val.getParentCode());
-				this->m_tree[val.getCode()][eParentname]->setText(val.getParentName());
-				this->m_tree[val.getCode()][eSdate]->setText(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-				this->m_tree[val.getCode()][eEdate]->setText(QDate::fromJulianDay(val.getEdate()).toString(YMD));
-				this->m_tree[val.getCode()][eAnnotation]->setText(val.getAnnotation());
 
-				this->m_tree[val.getCode()][eProductName]->setToolTip(val.getName());
-				this->m_tree[val.getCode()][eParentcode]->setToolTip(val.getParentCode());
-				this->m_tree[val.getCode()][eParentname]->setToolTip(val.getParentName());
-				this->m_tree[val.getCode()][eSdate]->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-				this->m_tree[val.getCode()][eEdate]->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-				this->m_tree[val.getCode()][eAnnotation]->setToolTip(qutil::splitTooltip(val.getAnnotation(), 200));
-			}
-		}
-	};
-	QString rootCode = val.getParentCode();
-	QString curCode = val.getCode();
-	if (rootCode.isEmpty())
-	{// 根节点
-		if (m_tree.contains(curCode))
-		{
-			if (m_tree[curCode].isEmpty())
-			{
-				insertRoot(val);
-			}
-			else
-			{
-				updateChild(val);
-			}
-		}
-		else
-		{
-			insertRoot(val);
-		}
-	}
-	else
-	{// 子节点
-		if (m_tree.contains(rootCode) && !m_tree[rootCode].isEmpty())
-		{// 父节点存在
-			if (m_tree.contains(curCode))
-			{
-				updateChild(val);
-			}
-			else
-			{
-				insertChild(val);
-			}
-		}
-		else
-		{// 父节点不存在
-			if (PARASETCTL->getProduct().contains(rootCode))
-			{// 父节点有效
-				CProduct parentCode = PARASETCTL->getProduct()[rootCode];
-				addProductData(parentCode);
-				insertChild(val);
-			}
-			else
-			{
-				qWarning() << "Do not exist parent-code: " << rootCode;
-			}
-		}
-	}
-}
-void ProductManage::delProductData(const CProduct & val)
-{
-	auto delRoot = [this](const QString &val) {
-		if (this->m_tree.contains(val))
-		{
-			this->m_pGoodsModel->removeRow(m_tree[val].front()->row());
-			this->m_tree.remove(val);
-		}
-		if (this->m_treeCombobox.contains(val))
-		{
-			this->m_pGoodsModelCombobox->removeRow(m_treeCombobox[val].front()->row());
-			this->m_treeCombobox.remove(val);
-		}
-	};
-	auto delChild = [this](const QString &val) {
-		if (this->m_tree.contains(val))
-		{
-			this->m_pGoodsModel->removeRow(m_tree[val].front()->row(), m_tree[val].front()->parent()->index());
-			this->m_tree.remove(val);
-		}
-		if (this->m_treeCombobox.contains(val))
-		{
-			this->m_pGoodsModelCombobox->removeRow(m_treeCombobox[val].front()->row(), m_treeCombobox[val].front()->parent()->index());
-			this->m_treeCombobox.remove(val);
-		}
-	};
-	if (val.getParentCode().isEmpty())
-	{// 根节点
-		if (m_pGoodsModel->rowCount() <= 1)
-		{
-			clear();
-		}
-		else
-		{
-			if (m_tree.contains(val.getCode()))
-			{
-				int curRow = m_tree[val.getCode()].front()->row();
-				int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
-				QStandardItem* p = m_pGoodsModel->item(nearRow);
-				if (p)
-				{
-					QString nearCode = p->text();
-					if (PARASETCTL->getProduct().contains(nearCode))
-						locateProductData(PARASETCTL->getProduct()[nearCode]);
-				}
-			}
-		}
-		delRoot(val.getCode());
+//********************************************************************
+//* defime BWTreeOper virtual function  here
+//********************************************************************
+void ProductManage::bwLocate(const QString &code) {
+	QModelIndexList findIndex = this->m_pGoodsModel->match(this->m_pGoodsModel->index(0, 0), Qt::DisplayRole, code, 1, Qt::MatchRecursive | Qt::MatchExactly);
+	if (findIndex.size() > 0)
+	{
+		this->ui.treeView->setCurrentIndex(findIndex[eProductCode]);
+		this->ui.treeView->clicked(findIndex[eProductCode]);
 	}
 	else
 	{
-		if (m_tree.contains(val.getParentCode()) && m_tree[val.getParentCode()].front()->rowCount() <= 1)
-		{
-			if (PARASETCTL->getProduct().contains(val.getParentCode()))
-				locateProductData(PARASETCTL->getProduct()[val.getParentCode()]);
-		}
-		else if (m_tree.contains(val.getParentCode()) && m_tree.contains(val.getCode()))
-		{
-			int curRow = m_tree[val.getCode()].front()->row();
-			int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
-			QStandardItem* p = m_tree[val.getParentCode()].front()->child(nearRow);
-			if (p)
-			{
-				QString nearCode = p->text();
-				if (PARASETCTL->getProduct().contains(nearCode))
-					locateProductData(PARASETCTL->getProduct()[nearCode]);
-			}
-		}
-		delChild(val.getCode());
+		this->bwClear();
 	}
 }
-void ProductManage::locateProductData(const CProduct & val)
-{
-	((QTreeView *)(ui.cbParentCode->view()))->expandAll();
 
-	auto locate = [this](const QString &dkey) {
-		QModelIndexList findIndex = this->m_pGoodsModel->match(this->m_pGoodsModel->index(0, 0), Qt::DisplayRole, dkey, 1, Qt::MatchRecursive | Qt::MatchExactly);
-		if (findIndex.size() > 0)
-		{
-			this->ui.treeView->setCurrentIndex(findIndex[eProductCode]);
-			this->ui.treeView->clicked(findIndex[eProductCode]);
-		}
-		else
-		{
-			this->clear();
-		}
-	};
-	QString curCode = val.getCode();
-	if (m_tree.contains(curCode))
-	{
-		locate(curCode);
-	}
-	else
-	{
-		locate(val.getParentCode());
-	}
-}
-void ProductManage::clear()
-{
+void ProductManage::bwClear() {
 	ui.leCode->setText("");
 	ui.leName->setText("");
 	ui.deStart->setDate(QDate::currentDate());
@@ -528,4 +301,122 @@ void ProductManage::clear()
 	ui.pteAnnotation->setPlainText("");
 
 	setCurrentData(getViewData());
+}
+
+bool ProductManage::recordExist(const QString &val) {
+	if (PARASETCTL->getProduct().contains(val))
+		return true;
+	else
+		return false;
+}
+
+CProduct ProductManage::getTFromDB(const QString &code, QString &parentCode) {
+	CProduct val;
+	val = PARASETCTL->getProduct()[code];
+	parentCode = val.getParentCode();
+	return val;
+}
+
+void ProductManage::packQStandardItem(QList<QStandardItem *> &childItems, const CProduct &val, const QList<int> cols) {
+
+	if (val.getCode().isEmpty() || val.getName().isEmpty()) {
+		return;
+	}
+	for (int i = 0; i < eEnd; i++)
+	{
+		switch (i)
+		{
+		case eProductCode:
+		{
+			QStandardItem *code = new QStandardItem(val.getCode());
+			if(cols.contains(eProductCode))childItems.push_back(code);
+			code->setToolTip(code->text());
+			break;
+		}
+		case eProductName:
+		{
+			QStandardItem *name = new QStandardItem(val.getName());
+			if(cols.contains(eProductName))childItems.push_back(name);
+			name->setToolTip(name->text());
+			break;
+		}
+		case eParentcode:
+		{
+			QStandardItem *parentCode = new QStandardItem(val.getParentCode());
+			if(cols.contains(eParentcode))childItems.push_back(parentCode);
+			parentCode->setToolTip(parentCode->text());
+			break;
+		}
+		case eParentname:
+		{
+			QStandardItem *parentName = new QStandardItem(val.getParentName());
+			if(cols.contains(eParentname))childItems.push_back(parentName);
+			parentName->setToolTip(parentName->text());
+			break;
+		}
+		case eSdate:
+		{
+			QStandardItem *sdate = new QStandardItem(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			if(cols.contains(eSdate))childItems.push_back(sdate);
+			sdate->setToolTip(sdate->text());
+			break;
+		}
+		case eEdate:
+		{
+			QStandardItem *edate = new QStandardItem(QDate::fromJulianDay(val.getEdate()).toString(YMD));
+			if(cols.contains(eEdate))childItems.push_back(edate);
+			edate->setToolTip(edate->text());
+			break;
+		}
+		case eAnnotation:
+		{
+			QStandardItem *annotation = new QStandardItem(val.getAnnotation());
+			if(cols.contains(eAnnotation))childItems.push_back(annotation);
+			annotation->setToolTip(qutil::splitTooltip(val.getAnnotation(), 200));
+			break;
+		}
+		default:
+			break;
+		}
+	}
+}
+
+void ProductManage::updateChildNode(const CProduct &val){
+	
+	QList<int> cols = QList<int>{ 0,1,2,3,4,5,6,7};
+	QList<int> colsComboBox = QList<int>{ 0 };
+
+	if (this->m_tree.contains(val.getCode()))
+	{
+		if (val.getParentCode() != this->m_tree[val.getCode()][eParentcode]->text())
+		{
+			CProduct del(this->m_tree[val.getCode()][eProductCode]->text(),
+				this->m_tree[val.getCode()][eProductName]->text(),
+				this->m_tree[val.getCode()][eParentcode]->text(),
+				this->m_tree[val.getCode()][eParentname]->text());
+			//this->delProductData(del);
+			delTree(m_tree, m_pGoodsModel, del.getCode(), del.getParentCode());
+			delTree(m_treeCombobox, m_pGoodsModelCombobox, del.getCode(), del.getParentCode());
+
+			//this->addProductData(val);
+			addTree(m_tree, m_pGoodsModel, val.getCode(), val.getParentCode(),val, cols);
+			addTree(m_treeCombobox, m_pGoodsModelCombobox, val.getCode(), val.getParentCode(),val,colsComboBox);
+
+		}
+		else if (this->m_tree[val.getCode()].size() == eEnd) {
+			this->m_tree[val.getCode()][eProductName]->setText(val.getName());
+			this->m_tree[val.getCode()][eParentcode]->setText(val.getParentCode());
+			this->m_tree[val.getCode()][eParentname]->setText(val.getParentName());
+			this->m_tree[val.getCode()][eSdate]->setText(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			this->m_tree[val.getCode()][eEdate]->setText(QDate::fromJulianDay(val.getEdate()).toString(YMD));
+			this->m_tree[val.getCode()][eAnnotation]->setText(val.getAnnotation());
+
+			this->m_tree[val.getCode()][eProductName]->setToolTip(val.getName());
+			this->m_tree[val.getCode()][eParentcode]->setToolTip(val.getParentCode());
+			this->m_tree[val.getCode()][eParentname]->setToolTip(val.getParentName());
+			this->m_tree[val.getCode()][eSdate]->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			this->m_tree[val.getCode()][eEdate]->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			this->m_tree[val.getCode()][eAnnotation]->setToolTip(qutil::splitTooltip(val.getAnnotation(), 200));
+		}
+	}
 }

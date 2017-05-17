@@ -3,11 +3,14 @@
 #include "ui_portfolio_manage.h"
 #include "util/datatype.h"
 #include "bodywidget.h"
+#include "bwtreeoper.h"
 
 class QStandardItemModel;
 class QStandardItem;
 // 组合管理
-class PortfolioManage : public BodyWidget, public CAction<CPortfolio>
+class PortfolioManage : public BodyWidget
+	,public CAction<CPortfolio>
+	,public BWTreeOper<CPortfolio>
 {
 	Q_OBJECT
 	enum clomun_e {
@@ -40,14 +43,10 @@ private slots:
 
 private:
 	void initDateView();
-	void packItem(QList<QStandardItem *> &childItems, const CPortfolio &val);
+	
 	CPortfolio getViewData();
 	void setViewData(const CPortfolio &val);
 
-	void addPortfolioData(const CPortfolio & val);
-	void delPortfolioData(const CPortfolio & val);
-	void locatePortfolioData(const CPortfolio & val);
-	void clear();
 private:
 	Ui::PortfolioManage ui;
 	QStandardItemModel *m_pGoodsModel;
@@ -55,4 +54,13 @@ private:
 	// 映射节点
 	QMap<QString, QList<QStandardItem *>> m_tree;
 	QMap<QString, QList<QStandardItem *>> m_treeCombobox;
+
+	//*******************************************************************************************
+public:
+	void bwLocate(const QString &code);
+	bool recordExist(const QString &val);
+	CPortfolio getTFromDB(const QString &code, QString &parentCode);
+	void packQStandardItem(QList<QStandardItem *> &items, const CPortfolio &val, const QList<int> cols);
+	void updateChildNode(const CPortfolio &val);
+	void bwClear();
 };

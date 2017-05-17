@@ -60,15 +60,9 @@ bool PortfolioManage::checkValid()
 void PortfolioManage::init()
 {
 	{
-		//QTreeView *pView = new QTreeView(ui.comboBox_parentcode);
-		//QTreeView *pView = (QTreeView *)ui.comboBox_parentcode->view();
 		if (!m_pGoodsModelCombobox) m_pGoodsModelCombobox = new QStandardItemModel(0, 1, this);
 		m_pGoodsModelCombobox->setColumnCount(1);
 		ui.comboBox_parentcode->setModel(m_pGoodsModelCombobox);
-		//pView->setHeaderHidden(true);
-		//pView->setAlternatingRowColors(true);
-		//ui.comboBox_parentcode->setView(pView);
-		//ui.comboBox_parentcode->view()->setAlternatingRowColors(true);
 	}
 	{
 		ui.treeView->setAlternatingRowColors(true);
@@ -113,6 +107,9 @@ void PortfolioManage::addPortfolio(bool)
 		ShowWarnMessage(tr("add"), tr("the portfolio already exists.").arg(cp.getPortcode()), this);
 	else
 	{
+		QList<int> cols = QList<int>{ 0,1,2,3,4,5,6 };
+		QList<int> colsComboBox = QList<int>{ 0 };
+
 		if (!cp.getParentcode().isEmpty() && !PARASETCTL->isExistPortfolioCode(cp.getParentcode()))
 		{
 			ShowWarnMessage(tr("add"), tr("the parent dont exists.").arg(cp.getParentcode()), this);
@@ -123,8 +120,9 @@ void PortfolioManage::addPortfolio(bool)
 		{
 			ShowSuccessMessage(tr("add"), tr("add success."), this);
 			// 同步
-			addPortfolioData(cp);
-			locatePortfolioData(cp);
+			addTree(m_tree, m_pGoodsModel, cp.getPortcode(), cp.getParentcode(), cp,cols);
+			addTree(m_treeCombobox, m_pGoodsModelCombobox, cp.getPortcode(), cp.getParentcode(), cp,colsComboBox);
+			locator(m_tree, cp.getPortcode());
 		}
 		else
 			ShowWarnMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
@@ -159,14 +157,18 @@ void PortfolioManage::modifyPortfolio(bool)
 		return;
 	}
 
+	QList<int> cols = QList<int>{ 0,1,2,3,4,5,6 };
+	QList<int> colsComboBox = QList<int>{ 0 };
+
 	QString err;
 	if (PARASETCTL->setPortfolio(cp, err))
 	{
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
 		// 同步
-		
-		addPortfolioData(cp);
-		locatePortfolioData(cp);
+	
+		addTree(m_tree, m_pGoodsModel, cp.getPortcode(), cp.getParentcode(), cp,cols);
+		addTree(m_treeCombobox, m_pGoodsModelCombobox, cp.getPortcode(), cp.getParentcode(), cp,colsComboBox);
+		locator(m_tree, cp.getPortcode());
 	}
 	else
 		ShowWarnMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
@@ -200,8 +202,9 @@ void PortfolioManage::delPortfolio(bool)
 			return;
 		}
 		ShowSuccessMessage(tr("delete"), tr("delete success."), this);
-		// 同步
-		delPortfolioData(cp);
+		
+		delTree(m_tree,m_pGoodsModel,cp.getPortcode(),cp.getParentcode());
+		delTree(m_treeCombobox, m_pGoodsModelCombobox, cp.getPortcode(), cp.getParentcode());
 	}
 }
 
@@ -224,85 +227,24 @@ void PortfolioManage::initDateView()
 	ui.treeView->setColumnWidth(0, 200);
 
 	QMap<QString, CPortfolio> val = PARASETCTL->getPortfolio();
+
+	QList<int> cols = QList<int>{ 0,1,2,3,4,5,6 };
+	QList<int> colsComboBox = QList<int>{ 0 };
+
 	for (QMap<QString, CPortfolio>::const_iterator itor = val.begin();
 		itor != val.end(); itor++)
 	{
-		addPortfolioData(itor.value());
+		addTree(m_tree, m_pGoodsModel, itor.value().getPortcode(), itor.value().getParentcode(), itor.value(),cols);
+		addTree(m_treeCombobox, m_pGoodsModelCombobox, itor.value().getPortcode(), itor.value().getParentcode(), itor.value(),colsComboBox);
 	}
 	if (!val.isEmpty()) 
 	{
-		locatePortfolioData(val[val.keys().back()]);
+		locator(m_tree, val[val.keys().back()].getPortcode());
 	}
 	else
 	{
-		clear();
+		bwClear();
 	}
-}
-
-void PortfolioManage::packItem(QList<QStandardItem *> &childItems, const CPortfolio &val)
-{
-	if (val.getPortcode().isEmpty() || val.getPortname().isEmpty()) {
-		return;
-	}
-
-	for (int i = 0; i < eEnd; i++)
-	{
-		switch (i)
-		{
-		case ePortcode:
-			{
-				QStandardItem *iportcode = new QStandardItem(val.getPortcode());
-				childItems.push_back(iportcode);
-				iportcode->setToolTip(val.getPortcode());
-				break;
-			}
-		case ePortname:
-			{
-				QStandardItem *iportname = new QStandardItem(val.getPortname());
-				childItems.push_back(iportname);
-				iportname->setToolTip(val.getPortname());
-				break;
-			}
-		case eParentcode:
-			{
-				QStandardItem *iparentcode = new QStandardItem(val.getParentcode());
-				childItems.push_back(iparentcode);
-				iparentcode->setToolTip(val.getParentcode());
-				break;
-			}
-		case eParentname:
-			{
-				QStandardItem *iparentname = new QStandardItem(val.getParentname());
-				childItems.push_back(iparentname);
-				iparentname->setToolTip(val.getParentname());
-				break;
-			}
-		case eSdate:
-			{
-				QStandardItem *isdate = new QStandardItem(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-				childItems.push_back(isdate);
-				isdate->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-				break;
-			}
-		case eEdate:
-			{
-				QStandardItem *iedate = new QStandardItem(QDate::fromJulianDay(val.getEdate()).toString(YMD));
-				childItems.push_back(iedate);
-				iedate->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-				break;
-			}
-		case eAnnotation:
-			{
-				QStandardItem *iannotation = new QStandardItem(val.getAnnotation());
-				childItems.push_back(iannotation);
-				iannotation->setToolTip(qutil::splitTooltip(val.getAnnotation(), 200));
-				break;
-			}
-		default:
-			break;
-		}
-	}
-	
 }
 
 CPortfolio PortfolioManage::getViewData()
@@ -329,216 +271,164 @@ void PortfolioManage::setViewData(const CPortfolio &val)
 	setCurrentData(getViewData());
 }
 
-void PortfolioManage::addPortfolioData(const CPortfolio & val)
-{
-	auto insertRoot = [this](const CPortfolio &val) {
-		QList<QStandardItem *> items;
-		QList<QStandardItem *> itemsCombobox;
-		this->packItem(items, val);
-		
-		if (items.size() > 0) {
-			this->m_pGoodsModel->appendRow(items);
-			this->m_tree[val.getPortcode()] = items;
-		}
-		this->packItem(itemsCombobox, val);
-		if (itemsCombobox.size() > 0) {
-			this->m_pGoodsModelCombobox->appendRow(itemsCombobox.front());
-			this->m_treeCombobox[val.getPortcode()] = itemsCombobox;
-		}
-	};
-	auto insertChild = [this](const CPortfolio &val) {
-		if (!this->m_tree.contains(val.getPortcode()) && this->m_tree.contains(val.getParentcode()))
-		{
-			QList<QStandardItem *> items;
-			this->packItem(items, val);
-			
-			if (items.size() > 0) {
-				this->m_tree[val.getParentcode()].front()->appendRow(items);
-				this->m_tree[val.getPortcode()] = items;
-			}
-			QList<QStandardItem *> itemsCombobox;
-			this->packItem(itemsCombobox, val);
-			if (itemsCombobox.size() > 0) {
-				this->m_treeCombobox[val.getParentcode()].front()->appendRow(itemsCombobox.front());
-				this->m_treeCombobox[val.getPortcode()] = itemsCombobox;
-			}
-		}
-	};
-	auto updateChild = [this](const CPortfolio &val) {
-		if (this->m_tree.contains(val.getPortcode()))
-		{
-			if (val.getParentcode() != this->m_tree[val.getPortcode()][eParentcode]->text())
-			{
-				CPortfolio del(this->m_tree[val.getPortcode()][ePortcode]->text(),
-					this->m_tree[val.getPortcode()][ePortname]->text(),
-					this->m_tree[val.getPortcode()][eParentcode]->text(),
-					this->m_tree[val.getPortcode()][eParentname]->text());
-				this->delPortfolioData(del);
-				this->addPortfolioData(val);
-			}
-			else if (this->m_tree[val.getPortcode()].size() == eEnd) {
-				this->m_tree[val.getPortcode()][ePortname]->setText(val.getPortname());
-				this->m_tree[val.getPortcode()][eParentcode]->setText(val.getParentcode());
-				this->m_tree[val.getPortcode()][eParentname]->setText(val.getParentname());
-				this->m_tree[val.getPortcode()][eSdate]->setText(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-				this->m_tree[val.getPortcode()][eEdate]->setText(QDate::fromJulianDay(val.getEdate()).toString(YMD));
-				this->m_tree[val.getPortcode()][eAnnotation]->setText(val.getAnnotation());
-				
-				this->m_tree[val.getPortcode()][ePortname]->setToolTip(val.getPortname());
-				this->m_tree[val.getPortcode()][eParentcode]->setToolTip(val.getParentcode());
-				this->m_tree[val.getPortcode()][eParentname]->setToolTip(val.getParentname());
-				this->m_tree[val.getPortcode()][eSdate]->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-				this->m_tree[val.getPortcode()][eEdate]->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
-				this->m_tree[val.getPortcode()][eAnnotation]->setToolTip(qutil::splitTooltip(val.getAnnotation(), 200));
-			}
-		}
-	};
-	QString rootCode = val.getParentcode();
-	QString curCode = val.getPortcode();
-	if (rootCode.isEmpty())
-	{// 根节点
-		if (m_tree.contains(curCode))
-		{
-			if (m_tree[curCode].isEmpty())
-			{
-				insertRoot(val);
-			}
-			else
-			{
-				updateChild(val);
-			}
-		}
-		else
-		{
-			insertRoot(val);
-		}
-	}
-	else
-	{// 子节点
-		if (m_tree.contains(rootCode) && !m_tree[rootCode].isEmpty())
-		{// 父节点存在
-			if (m_tree.contains(curCode))
-			{
-				updateChild(val);
-			}
-			else
-			{
-				insertChild(val);
-			}
-		}
-		else
-		{// 父节点不存在
-			if (PARASETCTL->getPortfolio().contains(rootCode))
-			{// 父节点有效
-				CPortfolio parentCode = PARASETCTL->getPortfolio()[rootCode];
-				addPortfolioData(parentCode);
-				insertChild(val);
-			}
-			else
-			{
-				qWarning() << "Do not exist parent-code: " << rootCode;
-			}
-		}
-	}
-}
-void PortfolioManage::delPortfolioData(const CPortfolio & val)
-{
-	auto delRoot = [this](const QString &val) {
-		if (this->m_tree.contains(val))
-		{
-			this->m_pGoodsModel->removeRow(m_tree[val].front()->row());
-			this->m_tree.remove(val);
-		}
-		if (this->m_treeCombobox.contains(val))
-		{
-			this->m_pGoodsModelCombobox->removeRow(m_treeCombobox[val].front()->row());
-			this->m_treeCombobox.remove(val);
-		}
-	};
-	auto delChild = [this](const QString &val) {
-		if (this->m_tree.contains(val))
-		{
-			this->m_pGoodsModel->removeRow(m_tree[val].front()->row(), m_tree[val].front()->parent()->index());
-			this->m_tree.remove(val);
-		}
-		if (this->m_treeCombobox.contains(val))
-		{
-			this->m_pGoodsModelCombobox->removeRow(m_treeCombobox[val].front()->row(), m_treeCombobox[val].front()->parent()->index());
-			this->m_treeCombobox.remove(val);
-		}
-	};
-	if (val.getParentcode().isEmpty())
-	{// 根节点
-		if (m_pGoodsModel->rowCount() <= 1)
-		{
-			clear();
-		}
-		else
-		{
-			if (m_tree.contains(val.getPortcode()))
-			{
-				int curRow = m_tree[val.getPortcode()].front()->row();
-				int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
-				QStandardItem* p = m_pGoodsModel->item(nearRow);
-				if (p)
-				{
-					QString nearCode = p->text();
-					if (PARASETCTL->getPortfolio().contains(nearCode))
-						locatePortfolioData(PARASETCTL->getPortfolio()[nearCode]);
-				}
-			}
-		}
-		delRoot(val.getPortcode());
-	}
-	else
-	{
-		if (m_tree.contains(val.getParentcode()) && m_tree[val.getParentcode()].front()->rowCount() <= 1)
-		{
-			if (PARASETCTL->getPortfolio().contains(val.getParentcode()))
-				locatePortfolioData(PARASETCTL->getPortfolio()[val.getParentcode()]);
-		}
-		else if (m_tree.contains(val.getParentcode()) && m_tree.contains(val.getPortcode()))
-		{
-			int curRow = m_tree[val.getPortcode()].front()->row();
-			int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
-			QStandardItem* p = m_tree[val.getParentcode()].front()->child(nearRow);
-			if (p)
-			{
-				QString nearCode = p->text();
-				if (PARASETCTL->getPortfolio().contains(nearCode))
-					locatePortfolioData(PARASETCTL->getPortfolio()[nearCode]);
-			}
-		}
-		delChild(val.getPortcode());
-	}
-}
-void PortfolioManage::locatePortfolioData(const CPortfolio & val)
-{
-	((QTreeView *)(ui.comboBox_parentcode->view()))->expandAll();
 
-	auto locate = [this](const QString &dkey) {
-		QModelIndexList findIndex = this->m_pGoodsModel->match(this->m_pGoodsModel->index(0, 0), Qt::DisplayRole, dkey, 1, Qt::MatchRecursive| Qt::MatchExactly);
-		if (findIndex.size() > 0)
-		{
-			this->ui.treeView->setCurrentIndex(findIndex[ePortcode]);
-			this->ui.treeView->clicked(findIndex[ePortcode]);
-		}
-		else
-		{
-			this->clear();
-		}
-	};
-	QString curCode = val.getPortcode();
-	if (m_tree.contains(curCode))
+//********************************************************************
+//* defime BWTreeOper virtual function  here
+//********************************************************************
+void PortfolioManage::bwLocate(const QString &code) {
+	QModelIndexList findIndex = this->m_pGoodsModel->match(this->m_pGoodsModel->index(0, 0), Qt::DisplayRole, code, 1, Qt::MatchRecursive | Qt::MatchExactly);
+	if (findIndex.size() > 0)
 	{
-		locate(curCode);
+		this->ui.treeView->setCurrentIndex(findIndex[ePortcode]);
+		this->ui.treeView->clicked(findIndex[ePortcode]);
 	}
 	else
 	{
-		locate(val.getParentcode());
+		this->bwClear();
 	}
 }
-void PortfolioManage::clear()
+
+bool PortfolioManage::recordExist(const QString &val){
+	if (PARASETCTL->getPortfolio().contains(val))
+		return true;
+	else
+		return false;
+}
+
+CPortfolio PortfolioManage::getTFromDB(const QString &code,QString &parentCode) {
+	CPortfolio val;
+	val=PARASETCTL->getPortfolio()[code];
+	parentCode = val.getParentcode();
+	return val;
+}
+
+void PortfolioManage::packQStandardItem(QList<QStandardItem *> &childItems, 
+		const CPortfolio &val, 
+		const QList<int> cols) 
+{
+	if (val.getPortcode().isEmpty() || val.getPortname().isEmpty()) {
+		return;
+	}
+
+	for (int i = 0; i < eEnd; i++)
+	{
+		switch (i)
+		{
+		case ePortcode:
+		{
+			QStandardItem *iportcode = new QStandardItem(val.getPortcode());
+			
+			if(cols.contains(ePortcode))
+				childItems.push_back(iportcode);
+			
+			iportcode->setToolTip(val.getPortcode());
+			break;
+		}
+		case ePortname:
+		{
+			QStandardItem *iportname = new QStandardItem(val.getPortname());
+			
+			if(cols.contains(ePortname))
+				childItems.push_back(iportname);
+			
+			iportname->setToolTip(val.getPortname());
+			break;
+		}
+		case eParentcode:
+		{
+			QStandardItem *iparentcode = new QStandardItem(val.getParentcode());
+			
+			if(cols.contains(eParentcode))
+				childItems.push_back(iparentcode);
+			
+			iparentcode->setToolTip(val.getParentcode());
+			break;
+		}
+		case eParentname:
+		{
+			QStandardItem *iparentname = new QStandardItem(val.getParentname());
+			
+			if (cols.contains(eParentname))
+				childItems.push_back(iparentname);
+			
+			iparentname->setToolTip(val.getParentname());
+			break;
+		}
+		case eSdate:
+		{
+			QStandardItem *isdate = new QStandardItem(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			if (cols.contains(eSdate))
+				childItems.push_back(isdate);
+			isdate->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			break;
+		}
+		case eEdate:
+		{
+			QStandardItem *iedate = new QStandardItem(QDate::fromJulianDay(val.getEdate()).toString(YMD));
+			
+			if (cols.contains(eEdate))
+				childItems.push_back(iedate);
+			
+			iedate->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			break;
+		}
+		case eAnnotation:
+		{
+			QStandardItem *iannotation = new QStandardItem(val.getAnnotation());
+			
+			if (cols.contains(eAnnotation))
+				childItems.push_back(iannotation);
+			
+			iannotation->setToolTip(qutil::splitTooltip(val.getAnnotation(), 200));
+			break;
+		}
+		default:
+			break;
+		}
+	}
+
+}
+
+void PortfolioManage::updateChildNode(const CPortfolio &val) {
+	QList<int> cols = QList<int>{ 0,1,2,3,4,5,6 };
+	QList<int> colsComboBox = QList<int>{ 0 };
+
+	if (this->m_tree.contains(val.getPortcode()))
+	{
+		if (val.getParentcode() != this->m_tree[val.getPortcode()][eParentcode]->text())
+		{
+			CPortfolio del(this->m_tree[val.getPortcode()][ePortcode]->text(),
+				this->m_tree[val.getPortcode()][ePortname]->text(),
+				this->m_tree[val.getPortcode()][eParentcode]->text(),
+				this->m_tree[val.getPortcode()][eParentname]->text());
+			
+			//this->delPortfolioData(del);
+			delTree(m_tree, m_pGoodsModel, del.getPortcode(), del.getParentcode());
+			delTree(m_treeCombobox, m_pGoodsModelCombobox, del.getPortcode(), del.getParentcode());
+			
+			addTree(m_tree, m_pGoodsModel, val.getPortcode(), val.getParentcode(), val,cols);
+			addTree(m_treeCombobox, m_pGoodsModelCombobox, val.getPortcode(), val.getParentcode(),val,colsComboBox);
+			//this->addPortfolioData(val);
+		}
+		else if (this->m_tree[val.getPortcode()].size() == eEnd) {
+			this->m_tree[val.getPortcode()][ePortname]->setText(val.getPortname());
+			this->m_tree[val.getPortcode()][eParentcode]->setText(val.getParentcode());
+			this->m_tree[val.getPortcode()][eParentname]->setText(val.getParentname());
+			this->m_tree[val.getPortcode()][eSdate]->setText(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			this->m_tree[val.getPortcode()][eEdate]->setText(QDate::fromJulianDay(val.getEdate()).toString(YMD));
+			this->m_tree[val.getPortcode()][eAnnotation]->setText(val.getAnnotation());
+
+			this->m_tree[val.getPortcode()][ePortname]->setToolTip(val.getPortname());
+			this->m_tree[val.getPortcode()][eParentcode]->setToolTip(val.getParentcode());
+			this->m_tree[val.getPortcode()][eParentname]->setToolTip(val.getParentname());
+			this->m_tree[val.getPortcode()][eSdate]->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			this->m_tree[val.getPortcode()][eEdate]->setToolTip(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			this->m_tree[val.getPortcode()][eAnnotation]->setToolTip(qutil::splitTooltip(val.getAnnotation(), 200));
+		}
+	}
+}
+
+void PortfolioManage::bwClear()
 {
 	ui.lineEdit_portcode->setText("");
 	ui.lineEdit_portname->setText("");
