@@ -3,10 +3,12 @@
 #include "util/util.h"
 #include "controller/qcontrollermanager.h"
 #include <QStandardItemModel>
+#include <QTableView>
 
 ParameterDictionary::ParameterDictionary(QWidget *parent)
 	: BodyWidget(parent)
 	, m_model(nullptr)
+	, m_modelCombobox(nullptr)
 {
 	ui.setupUi(this);
 	connect(ui.pbAdd, SIGNAL(clicked()), this, SLOT(slotAdd()));
@@ -37,24 +39,16 @@ bool ParameterDictionary::isKeyModify(const CParaDict &newVal)
 bool ParameterDictionary::checkValid()
 {
 	bool bValid = true;
-	if (ui.cbTypeCode->currentText().isEmpty())
-	{
-		ui.cbTypeCode->setError(tr("Typecode cant be empty!"));
-		bValid = false;
-	}
-	if (ui.cbTypeName->text().isEmpty())
-	{
-		ui.cbTypeName->setError(tr("Typecode-name cant be empty!"));
-		bValid = false;
-	}
-	if (!ui.leParaCode->text().isEmpty() && ui.leParaName->text().isEmpty())
-	{
-		ui.leParaName->setError(tr("ParaName cant be empty!"));
-		bValid = false;
-	}
-	if (ui.leParaCode->text().isEmpty() && !ui.leParaName->text().isEmpty())
+	
+	if (ui.leParaCode->text().isEmpty())
 	{
 		ui.leParaCode->setError(tr("ParaCode cant be empty!"));
+		bValid = false;
+	}
+
+	if (ui.leParaName->text().isEmpty())
+	{
+		ui.leParaCode->setError(tr("ParaName cant be empty!"));
 		bValid = false;
 	}
 	return bValid;
@@ -68,7 +62,8 @@ void ParameterDictionary::init()
 			[this](const QString &text) 
 		{
 			if (PARASETCTL->getParadict().contains(text))
-				ui.cbTypeName->setText(PARASETCTL->getParadict()[text].getTypeName());
+				//ui.cbTypeName->setText(PARASETCTL->getParadict()[text].getTypeName());
+				ui.cbTypeName->setText(PARASETCTL->getParadict()[text].getParaName());
 			else
 				ui.cbTypeName->setText("");
 		});
@@ -105,11 +100,10 @@ void ParameterDictionary::slotAdd()
 {
 	if (!checkValid()) return;
 
+	QList<int> cols = QList<int>{ 0,1,2,3,4,5 };
+	QList<int> colsTable = QList<int>{ 0 };
+
 	CParaDict val = getViewData();
-	if (val.getTypeCode().isEmpty() || val.getTypeName().isEmpty()) {
-		ShowWarnMessage(tr("add"), tr("code or name is empty"), this);
-		return;
-	}
 
 	CParaDict oldVal;
 	if (PARASETCTL->getParadict(val.getTypeCode(), val.getParaCode(), oldVal)) {
@@ -125,21 +119,21 @@ void ParameterDictionary::slotAdd()
 	
 	if (!val.getParaCode().isEmpty())
 	{// 新增参数
-		if (val.getParaName().isEmpty())
+		/*if (val.getParaName().isEmpty())
 		{
 			ShowWarnMessage(tr("add"), tr("paraname cant be empty!"), this);
 			return;
-		}
-		if (val.getTypeName().isEmpty())
+		}*/
+		/*if (val.getTypeName().isEmpty())
 		{
 			ShowWarnMessage(tr("add"), tr("typename cant be empty!"), this);
 			return;
-		}
-		if (!PARASETCTL->getParadict().contains(val.getTypeCode()))
+		}*/
+		/*if (!PARASETCTL->getParadict().contains(val.getTypeCode()))
 		{
 			ShowWarnMessage(tr("add"), tr("typecode dont exist!"), this);
 			return;
-		}
+		}*/
 	}
 	else
 	{//新增类型
@@ -152,8 +146,13 @@ void ParameterDictionary::slotAdd()
 	QString err;
 	if (PARASETCTL->setParadict(val, err)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
-		addData(val);
-		locateData(val);
+		//addData(val);
+		addTree(m_tree, m_model, val.getParaCode(), val.getTypeCode(), val, cols);
+		if (val.getTypeCode().isEmpty() && !m_table.contains(val.getParaCode()))
+			addRow(m_table, m_modelCombobox, val.getTypeCode(), val, colsTable);
+
+		//locateData(val);
+		locator(m_tree, val.getParaCode());
 	} else {
 		ShowErrorMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
 	}
@@ -162,6 +161,10 @@ void ParameterDictionary::slotAdd()
 void ParameterDictionary::slotModify()
 {
 	if (!checkValid()) return;
+
+	QList<int> cols = QList<int>{ 0,1,2,3,4,5 };
+	QList<int> colsTable = QList<int>{ 0 };
+
 	CParaDict val = getViewData();
 	if (this->isEqual(val)) {
 		ShowWarnMessage(tr("modify"), tr("Records do not change, do not need to modify!"), this);
@@ -196,8 +199,14 @@ void ParameterDictionary::slotModify()
 	QString err;
 	if (PARASETCTL->setParadict(val, err)) {
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
-		addData(val);
-		locateData(val);
+	
+		addTree(m_tree, m_model, val.getParaCode(), val.getTypeCode(), val, cols);
+		if (val.getTypeCode().isEmpty() && !m_table.contains(val.getParaCode())) {
+			addRow(m_table, m_modelCombobox, val.getTypeCode(), val, colsTable);
+		}
+			
+	
+		locator(m_tree, val.getParaCode());
 	}
 	else {
 		ShowErrorMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
@@ -230,7 +239,7 @@ void ParameterDictionary::slotDelete()
 		QString err;
 		if (PARASETCTL->removeParadict(val.getTypeCode(), val.getParaCode(), err)) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
-			delData(val);
+			delTree(m_tree, m_model, val.getParaCode(), val.getTypeCode());
 		} else {
 			ShowErrorMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 		}
@@ -239,38 +248,62 @@ void ParameterDictionary::slotDelete()
 
 void ParameterDictionary::initDateView()
 {
+	//************************************
+	QTableView *tv = new QTableView(ui.cbTypeCode);
+	tv->horizontalHeader()->setVisible(false);
+	tv->verticalHeader()->setVisible(false);
+	tv->horizontalHeader()->setStretchLastSection(true);
+
+	if (nullptr==m_modelCombobox) m_modelCombobox=new QStandardItemModel(0,1,this);	
+	ui.cbTypeCode->setModel(m_modelCombobox);
+	ui.cbTypeCode->setView(tv);
+	//*************************************
+	QList<int> cols = QList<int>{ 0,1,2,3,4};
+	QList<int> colsTable = QList<int>{ 0};
 	if (m_model) m_model->clear();
 	QStringList treeHeader;
-	treeHeader << tr("paracode") << tr("paraname") << tr("paraexplain");
+	treeHeader << tr("paracode") << tr("paraname") << tr("typecode")<<tr("typename")<<tr("paraexplain");
 	if (!m_model) m_model = new QStandardItemModel(0, treeHeader.size(), this);
 	m_model->setColumnCount(treeHeader.size());
 	for (int i = 0; i < treeHeader.size(); i++)
 		m_model->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
 	ui.treeView->setModel(m_model);
-	ui.treeView->setColumnWidth(0, 400);
+	ui.treeView->setColumnWidth(0, 200);
+	ui.treeView->setColumnWidth(1, 260);
+
+	ui.treeView->hideColumn(2);
+	ui.treeView->hideColumn(3);
 
 	QMap<QString,CParaDict> val = PARASETCTL->getParadict();
+	
 	for (QMap<QString, CParaDict>::const_iterator itor = val.begin();
 		itor != val.end(); itor++)
 	{
-		addData(itor.value());
+		addTree(m_tree, m_model, itor.value().getParaCode(), itor.value().getTypeCode(), itor.value(), cols);
+		
+		if (itor.value().getTypeCode().isEmpty() && !m_table.contains(itor.value().getParaCode())) {
+			addRow(m_table, m_modelCombobox, itor.value().getTypeCode(), itor.value(), colsTable);
+		}
 	}
 	if (!val.isEmpty())
 	{
-		locateData(val[val.keys().back()]);
+		locator(m_tree,val[val.keys().back()].getParaCode());
 	}
 	else
 	{
-		clear();
+		bwClear();
 	}
 }
+
 CParaDict ParameterDictionary::getViewData()
 {
 	CParaDict result;
 	result.setTypeCode(ui.cbTypeCode->currentText().trimmed());
+	
 	CParaDict t;
-	if (PARASETCTL->getParadict(ui.cbTypeCode->currentText().trimmed(), "", t))
-		result.setTypeName(t.getTypeName());
+
+	if (PARASETCTL->getParaDict(ui.cbTypeCode->currentText().trimmed(),t))
+		result.setTypeName(t.getParaName());
 	else
 		result.setTypeName(ui.cbTypeName->text().trimmed());
 	result.setParaCode(ui.leParaCode->text().trimmed());
@@ -288,32 +321,80 @@ void ParameterDictionary::setViewData(const CParaDict &val)
 	ui.pteParaExplain->setPlainText(val.getParaExplain());
 	setCurrentData(getViewData());
 }
-void ParameterDictionary::packItem(QList<QStandardItem *> &childItems, const CParaDict &val)
-{
-	if (val.getTypeCode().isEmpty()) return;
+
+//******************************************************************
+//BWTreeOper pure virtual function  
+//******************************************************************
+
+void ParameterDictionary::bwLocate(const QString &code) {
+	QModelIndexList findIndex = this->m_model->match(this->m_model->index(0, 0), Qt::DisplayRole, code, 1, Qt::MatchRecursive);
+	if (findIndex.size() > 0)
+	{
+		this->ui.treeView->setCurrentIndex(findIndex[eParaCode]);
+		this->ui.treeView->clicked(findIndex[eParaCode]);
+	}
+	else
+	{
+		this->bwClear();
+	}
+}
+
+void ParameterDictionary::bwClear() {
+	ui.leParaCode->setText("");
+	ui.leParaName->setText("");
+	ui.cbTypeCode->setCurrentText("");
+	ui.cbTypeName->setText("");
+	ui.pteParaExplain->setPlainText("");
+}
+
+bool ParameterDictionary::recordExist(const QString &val) {
+	if (PARASETCTL->getParadict().contains(val))
+		return true;
+	return false;
+}
+
+CParaDict ParameterDictionary::getTFromDB(const QString &code, QString &parentCode) {
+	CParaDict val;
+	val = PARASETCTL->getParadict()[code];
+	parentCode = val.getTypeCode();
+	return val;
+}
+
+void ParameterDictionary::packQStandardItem(QList<QStandardItem *> &childItems, const CParaDict &val, const QList<int> cols) {
+	
 	for (int i = 0; i < eEnd; i++)
 	{
 		switch (i)
 		{
 		case eParaCode:
 		{
-			QStandardItem *code = new QStandardItem(val.getParaCode().isEmpty() ? val.getTypeCode() : val.getParaCode());
-			childItems.push_back(code);
-			code->setToolTip(val.getParaCode().isEmpty() ? val.getTypeCode() : val.getParaCode());
+			QStandardItem *iParaCode = new QStandardItem(val.getParaCode());
+			if(cols.contains(eParaCode))childItems.push_back(iParaCode);
 			break;
 		}
 		case eParaName:
 		{
-			QStandardItem *name = new QStandardItem(val.getParaCode().isEmpty() ? val.getTypeName() : val.getParaName());
-			childItems.push_back(name);
-			name->setToolTip(val.getParaCode().isEmpty() ? val.getTypeName() : val.getParaName());
+			QStandardItem *iParaName = new QStandardItem(val.getParaName());
+			if (cols.contains(eParaName))childItems.push_back(iParaName);
+			break;
+		}
+
+		case eTypeCode:
+		{
+			QStandardItem *iTypeCode = new QStandardItem(val.getTypeCode());
+			if (cols.contains(eTypeCode))childItems.push_back(iTypeCode);
+			break;
+		}
+		case eTypeName:
+		{
+			QStandardItem *iTypeName = new QStandardItem(val.getTypeName());
+			if (cols.contains(eTypeCode))childItems.push_back(iTypeName);
 			break;
 		}
 		case eParaExplain:
 		{
 			QStandardItem *explain = new QStandardItem(val.getParaExplain());
-			childItems.push_back(explain);
-			explain->setToolTip(qutil::splitTooltip(explain->text(), 200));
+			if(cols.contains(eParaExplain))childItems.push_back(explain);
 			break;
 		}
 		default:
@@ -321,214 +402,46 @@ void ParameterDictionary::packItem(QList<QStandardItem *> &childItems, const CPa
 		}
 	}
 }
-void ParameterDictionary::addData(const CParaDict & val)
-{
-	auto insertRoot = [this](const CParaDict &val) {
-		QList<QStandardItem *> items;
-		this->packItem(items, val);
-		if (items.size() > 0) {
-			this->m_model->appendRow(items);
-			this->m_tree[val.getTypeCode()] = items;
-		}
-		this->ui.cbTypeCode->addItems(QStringList() << val.getTypeCode());
-	};
-	auto insertChild = [this](const CParaDict &val) {
-		if (!val.getTypeCode().isEmpty() &&
-			!val.getParaCode().isEmpty() &&
-			!this->m_tree.contains(val.getParaCode()) && 
-			this->m_tree.contains(val.getTypeCode()))
-		{
-			QList<QStandardItem *> items;
-			this->packItem(items, val);
-			if (items.size() > 0) {
-				this->m_tree[val.getTypeCode()].front()->appendRow(items);
-				this->m_tree[val.getParaCode()] = items;
-			}
-		}
-	};
-	auto updateChild = [this](const CParaDict &val) {
-		QString k = val.getParaCode().isEmpty() ? val.getTypeCode() : val.getParaCode();
-		if (!val.getTypeCode().isEmpty() && 
-			this->m_tree.contains(k))
-		{
-			if (val.getParaCode().isEmpty())
-			{// 类型
-				this->m_tree[k][eParaCode]->setText(k);
-				this->m_tree[k][eParaName]->setText(val.getTypeName());
-				this->m_tree[k][eParaExplain]->setText(val.getParaExplain());
-			}
-			else
-			{// 参数
-				if (val.getTypeCode() != this->m_tree[k][eParaCode]->parent()->text())
-				{
-					this->delData(val);
-					this->addData(val);
-				}
-				else if (this->m_tree[k].size() == eEnd) {
-					this->m_tree[k][eParaCode]->setText(k);
-					this->m_tree[k][eParaName]->setText(val.getParaName());
-					this->m_tree[k][eParaExplain]->setText(val.getParaExplain());
-					
-					this->m_tree[k][eParaCode]->setToolTip(k);
-					this->m_tree[k][eParaName]->setToolTip(val.getParaName());
-					this->m_tree[k][eParaExplain]->setToolTip(qutil::splitTooltip(val.getParaExplain(), 200));
-				}
-			}
-		}
-	};
-	if (val.getParaCode().isEmpty())
-	{// 根节点
-		if (m_tree.contains(val.getTypeCode()))
-		{
-			if (m_tree[val.getTypeCode()].isEmpty())
-			{
-				insertRoot(val);
-			}
-			else
-			{
-				updateChild(val);
-			}
-		}
-		else
-		{
-			insertRoot(val);
-		}
-	}
-	else
-	{// 子节点
-		if (m_tree.contains(val.getTypeCode()) && !m_tree[val.getTypeCode()].isEmpty())
-		{// 父节点存在
-			if (m_tree.contains(val.getParaCode()))
-			{
-				updateChild(val);
-			}
-			else
-			{
-				insertChild(val);
-			}
-		}
-		else
-		{// 父节点不存在
-			if (PARASETCTL->getParadict().contains(val.getTypeCode()))
-			{// 父节点有效
-				CParaDict parentCode;
-				if (PARASETCTL->getParadict(val.getTypeCode(), "", parentCode))
-				{
-					addData(parentCode);
-					insertChild(val);
-				}
-			}
-			else
-			{
-				qWarning() << "Do not exist parent-code: " << val.getTypeCode();
-			}
-		}
-	}
-}
-void ParameterDictionary::delData(const CParaDict & val)
-{
-	auto delRoot = [this](const QString &val) {
-		if (this->m_tree.contains(val))
-		{
-			this->m_model->removeRow(m_tree[val].front()->row());
-			this->m_tree.remove(val);
-		}
-	};
-	auto delChild = [this](const QString &val) {
-		if (this->m_tree.contains(val))
-		{
-			this->m_model->removeRow(m_tree[val].front()->row(), m_tree[val].front()->parent()->index());
-			this->m_tree.remove(val);
-		}
-	};
-	if (!val.getTypeCode().isEmpty() && val.getParaCode().isEmpty())
-	{// 根节点
-		if (m_model->rowCount() <= 1)
-		{
-			clear();
-		}
-		else
-		{
-			if (m_tree.contains(val.getTypeCode()))
-			{
-				int curRow = m_tree[val.getTypeCode()].front()->row();
-				int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
-				QStandardItem* p = m_model->item(nearRow);
-				if (p)
-				{
-					QString nearCode = p->text();
-					CParaDict nearP;
-					if (PARASETCTL->getParadict(nearCode, "", nearP))
-						locateData(nearP);
-				}
-			}
-		}
-		delRoot(val.getTypeCode());
-	}
-	else
+
+void ParameterDictionary::updateChildNode(const CParaDict &val) {
+	
+	QList<int> cols = QList<int>{ 0,1,2,3,4};
+	QList<int> colsTable = QList<int>{ 0 };
+	
+	if (m_tree.contains(val.getParaCode()))
 	{
-		if (m_tree.contains(val.getParaCode()) && m_tree[val.getParaCode()].front()->rowCount() <= 1)
-		{
-			CParaDict nearP;
-			if (PARASETCTL->getParadict(val.getTypeCode(), "", nearP))
-				locateData(nearP);
+		if (val.getTypeCode() != m_tree[val.getParaCode()][eTypeCode]->text()) {
+
+			QString code = val.getParaCode();
+
+			CParaDict del(
+				m_tree[val.getParaCode()][eTypeCode]->text(),
+				m_tree[val.getParaCode()][eTypeName]->text(),
+				m_tree[val.getParaCode()][eParaCode]->text(),
+				m_tree[val.getParaCode()][eParaName]->text(),
+				m_tree[val.getParaCode()][eParaExplain]->text()
+			);
+			delTree(m_tree, m_model, del.getParaCode(), val.getTypeCode());
+			if (del.getTypeCode().isEmpty()) delRow(m_table, m_modelCombobox, del.getParaCode());
+
+			addTree(m_tree, m_model, val.getParaCode(), val.getTypeCode(), val, cols);
+			if (val.getTypeCode().isEmpty())addRow(m_table, m_modelCombobox, val.getParaCode(), val, colsTable);
+
 		}
-		else if (m_tree.contains(val.getParaCode()) && m_tree.contains(val.getTypeCode()))
-		{
-			int curRow = m_tree[val.getParaCode()].front()->row();
-			int nearRow = curRow - 1 >= 0 ? curRow - 1 : curRow + 1;
-			QStandardItem* p = m_tree[val.getTypeCode()].front()->child(nearRow);
-			if (p)
-			{
-				QString nearCode = p->text();
-				CParaDict nearP;
-				if (PARASETCTL->getParadict(val.getTypeCode(), nearCode, nearP))
-					locateData(nearP);
-			}
+		else if (m_tree[val.getParaCode()].size() == eEnd) {
+			m_tree[val.getParaCode()][eTypeCode]->setText(val.getTypeCode());
+			m_tree[val.getParaCode()][eTypeName]->setText(val.getParaName());
+			
+			m_tree[val.getParaCode()][eParaName]->setText(val.getParaName());
+			m_tree[val.getParaCode()][eParaExplain]->setText(val.getParaExplain());
+
+			m_tree[val.getParaCode()][eTypeCode]->setToolTip(val.getTypeCode());
+			m_tree[val.getParaCode()][eTypeName]->setToolTip(val.getParaName());
+			
+			m_tree[val.getParaCode()][eParaName]->setToolTip(val.getParaName());
+			m_tree[val.getParaCode()][eParaExplain]->setToolTip(val.getParaExplain());
+
 		}
-		delChild(val.getParaCode());
 	}
-}
-void ParameterDictionary::locateData(const CParaDict & val)
-{
-	auto locate = [this](const QString &dkey) {
-		QModelIndexList findIndex = this->m_model->match(this->m_model->index(0, 0), Qt::DisplayRole, dkey, 1, Qt::MatchRecursive);
-		if (findIndex.size() > 0)
-		{
-			this->ui.treeView->setCurrentIndex(findIndex[eParaCode]);
-			this->ui.treeView->clicked(findIndex[eParaCode]);
-		}
-		else
-		{
-			this->clear();
-		}
-	};
-	if (!val.getTypeCode().isEmpty() &&
-		val.getParaCode().isEmpty() &&
-		m_tree.contains(val.getTypeCode()))
-	{// 根结点 - 类型
-		locate(val.getTypeCode());
-	}
-	else if (!val.getTypeCode().isEmpty() &&
-		!val.getParaCode().isEmpty() &&
-		m_tree.contains(val.getParaCode()))
-	{// 子节点 - 参数节点
-		locate(val.getParaCode());
-	}
-	else if (!val.getTypeCode().isEmpty() &&
-		!val.getParaCode().isEmpty() &&
-		!m_tree.contains(val.getParaCode()))
-	{// 子节点 - 参数节点不存在
-		locate(val.getTypeCode());
-	}
-	else
-		clear();
-}
-void ParameterDictionary::clear()
-{
-	ui.leParaCode->setText("");
-	ui.leParaName->setText("");
-	ui.cbTypeCode->setCurrentText("");
-	ui.cbTypeName->setText("");
-	ui.pteParaExplain->setPlainText("");
+
 }

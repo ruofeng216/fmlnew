@@ -3,15 +3,22 @@
 #include "bodywidget.h"
 #include "ui_parameter_dictionary.h"
 #include "util/datatype.h"
+#include "bwtreeoper.h"
+#include "bwtableoper.h"
 
 class QStandardItemModel;
 class QStandardItem;
-class ParameterDictionary : public BodyWidget, public CAction<CParaDict>
+class ParameterDictionary : public BodyWidget
+	, public CAction<CParaDict>
+	, public BWTreeOper<CParaDict>
+	, public BWTableOper<CParaDict>
 {
 	Q_OBJECT
 	enum clomun_e {
 		eParaCode = 0, //参数代码
 		eParaName,     //参数名称
+		eTypeCode,
+		eTypeName,
 		eParaExplain,  //类别说明
 		eEnd
 	};
@@ -43,6 +50,19 @@ private:
 
 private:
 	Ui::ParameterDictionary ui;
+
 	QStandardItemModel *m_model;
 	QMap<QString, QList<QStandardItem *>> m_tree;
+
+	QStandardItemModel *m_modelCombobox;
+	QMap<QString, QList<QStandardItem *>> m_table;
+	/*
+	 BWTreeOper pure virtual function
+	*/
+	void bwLocate(const QString &code);
+	bool recordExist(const QString &val) ;
+	void bwClear() ;
+	void packQStandardItem(QList<QStandardItem *> &items, const CParaDict &val, const QList<int> cols) ;
+	void updateChildNode(const CParaDict &val) ;
+	CParaDict getTFromDB(const QString &code, QString &parentCode) ;
 };

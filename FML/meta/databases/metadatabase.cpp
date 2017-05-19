@@ -265,36 +265,36 @@ bool MetaDatabase::removeProduct(const QStringList &codeList, QString &err)
 bool MetaDatabase::initParaDict(QMap<QString, CParaDict> &val, QString &err)
 {
 	QList<CParaDict> strList;
-	strList.push_back(CParaDict(COUPONFREQUENCY, tr("CouponFrequency")));
+	strList.push_back(CParaDict("","",COUPONFREQUENCY, tr("CouponFrequency")));
 	strList.push_back(CParaDict(COUPONFREQUENCY, tr("CouponFrequency"), QUARTERLY, tr("quarterly")));
 	strList.push_back(CParaDict(COUPONFREQUENCY, tr("CouponFrequency"), YEARLY, tr("yearly")));
 	strList.push_back(CParaDict(COUPONFREQUENCY, tr("CouponFrequency"), MONTHLY, tr("monthly")));
 	strList.push_back(CParaDict(COUPONFREQUENCY, tr("CouponFrequency"), HALFYEAR, tr("halfyear")));
-	strList.push_back(CParaDict(CALENDAR, tr("Calendar")));
+	strList.push_back(CParaDict("","",CALENDAR, tr("Calendar")));
 	strList.push_back(CParaDict(CALENDAR, tr("Calendar"), CFETS, tr("CFETS")));
 	strList.push_back(CParaDict(CALENDAR, tr("Calendar"), SHSE, tr("SHSE")));
-	strList.push_back(CParaDict(CONVENTION, tr("Convention")));
+	strList.push_back(CParaDict("","",CONVENTION, tr("Convention")));
 	strList.push_back(CParaDict(CONVENTION, tr("Convention"), MODIFIEDFOLLOWING, tr("Modified Following")));
 	strList.push_back(CParaDict(CONVENTION, tr("Convention"), FOLLOWING, tr("Following")));
 	strList.push_back(CParaDict(CONVENTION, tr("Convention"), PRECEDING, tr("Preceding")));
-	strList.push_back(CParaDict(DAYCOUNT, tr("DayCount")));
+	strList.push_back(CParaDict("","",DAYCOUNT, tr("DayCount")));
 	strList.push_back(CParaDict(DAYCOUNT, tr("DayCount"), ACT_ACT, tr("Act/Act")));
 	strList.push_back(CParaDict(DAYCOUNT, tr("DayCount"), ACT_365, tr("Act/365")));
 	strList.push_back(CParaDict(DAYCOUNT, tr("DayCount"), ACT_360, tr("Act/360")));
-	strList.push_back(CParaDict(COUPONTYPE, tr("CouponType")));
+	strList.push_back(CParaDict("","",COUPONTYPE, tr("CouponType")));
 	strList.push_back(CParaDict(COUPONTYPE, tr("CouponType"), ZEROCOUPON, tr("ZeroCoupon")));//零息票
 	strList.push_back(CParaDict(COUPONTYPE, tr("CouponType"), FIXEDCOUPON, tr("FixedCoupon")));//固定息票
 	strList.push_back(CParaDict(COUPONTYPE, tr("CouponType"), FLOATCOUPON, tr("FloatCoupon")));//浮动息票
-	strList.push_back(CParaDict(REFERENCEINDEX, tr("ReferenceIndex")/*参考利率*/));
+	strList.push_back(CParaDict("","",REFERENCEINDEX, tr("ReferenceIndex")/*参考利率*/));
 	strList.push_back(CParaDict(REFERENCEINDEX, tr("ReferenceIndex")/*参考利率*/, SHIBOR3M, tr("")));
 	strList.push_back(CParaDict(REFERENCEINDEX, tr("ReferenceIndex")/*参考利率*/, REPO7D, tr("")));
 	strList.push_back(CParaDict(REFERENCEINDEX, tr("ReferenceIndex")/*参考利率*/, DEPO1Y, tr("")));
-	strList.push_back(CParaDict(MARKETTYPE, tr("MarketType")/*市场类型*/));
+	strList.push_back(CParaDict("","",MARKETTYPE, tr("MarketType")/*市场类型*/));
 	strList.push_back(CParaDict(MARKETTYPE, tr("MarketType")/*市场类型*/, IBMONEYMARKET, tr("IBMoneyMarket")));//银行间货币市场
 	strList.push_back(CParaDict(MARKETTYPE, tr("MarketType")/*市场类型*/, IBBONDMARKET, tr("IBBondMarket")));//银行间债券市场
 	strList.push_back(CParaDict(MARKETTYPE, tr("MarketType")/*市场类型*/, SHEXMONEYMARKET, tr("SHEXMoneyMarket")));//上海交易所货币市场
 	strList.push_back(CParaDict(MARKETTYPE, tr("MarketType")/*市场类型*/, SHEXSTOCKMARKET, tr("SHEXStockMarket")));//上海股票交易所市场
-	strList.push_back(CParaDict(ZERORATECOMPOUNDFREQUENCY, tr("ZeroRateCompoundFrequency")/*零息利率复利类型*/));
+	strList.push_back(CParaDict("","",ZERORATECOMPOUNDFREQUENCY, tr("ZeroRateCompoundFrequency")/*零息利率复利类型*/));
 	strList.push_back(CParaDict(ZERORATECOMPOUNDFREQUENCY, tr("ZeroRateCompoundFrequency")/*零息利率复利类型*/, CONTINUOUSCOMPOUND, tr("ContinuousCompound")));//连续复利
 	strList.push_back(CParaDict(ZERORATECOMPOUNDFREQUENCY, tr("ZeroRateCompoundFrequency")/*零息利率复利类型*/, YEARLYCOMPOUND, tr("yearlyCompound")));//年复利
 
@@ -303,7 +303,8 @@ bool MetaDatabase::initParaDict(QMap<QString, CParaDict> &val, QString &err)
 		for (QList<CParaDict>::const_iterator itor = strList.begin();
 			itor != strList.end(); itor++)
 		{
-			QString k = itor->getParaCode().isEmpty() ? itor->getTypeCode() : itor->getParaCode();
+			//QString k = itor->getParaCode().isEmpty() ? itor->getTypeCode() : itor->getParaCode();
+			QString k = itor->getParaCode();
 			val[k] = *itor;
 		}
 		return true;
@@ -338,7 +339,8 @@ bool MetaDatabase::getParadict(QMap<QString, CParaDict> &val, QString &err)
 		if (paraDict.getTypeCode().isEmpty() && paraDict.getParaCode().isEmpty()) {
 			continue;
 		}
-		QString k = paraDict.getParaCode().isEmpty() ? paraDict.getTypeCode() : paraDict.getParaCode();
+		//QString k = paraDict.getParaCode().isEmpty() ? paraDict.getTypeCode() : paraDict.getParaCode();
+		QString k = paraDict.getParaCode();
 		val[k] = paraDict;
 	}
 	if (val.isEmpty())
