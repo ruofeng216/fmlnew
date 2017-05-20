@@ -266,6 +266,15 @@ const QMap<QString, CParaDict>& CParameterSetting::getParadict() const
 	return m_paradict;
 }
 
+bool CParameterSetting::getParaDict(const QString &paraCode, CParaDict &val) {
+	if (m_paradict.contains(paraCode))
+	{
+		val = m_paradict[paraCode];
+		return true;
+	}
+	return false;
+}
+
 bool CParameterSetting::getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val)
 {
 	QString K = paraCode.isEmpty() ? typeCode : paraCode;

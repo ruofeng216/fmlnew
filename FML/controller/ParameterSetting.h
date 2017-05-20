@@ -36,6 +36,7 @@ public:
 
 	///////²ÎÊý×Öµä///////////
 	const QMap<QString, CParaDict>& getParadict()const;
+	bool getParaDict(const QString &paraCode, CParaDict &val);
 	bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val);
 	bool getAllParadict(const QString &typeCode, QMap<QString, CParaDict> &valList);
 	bool setParadict(const CParaDict &val, QString &err);
