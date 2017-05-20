@@ -305,6 +305,7 @@ bool CParameterSetting::setParadict(const CParaDict &val, QString &err)
 	{
 		QString k = val.getParaCode().isEmpty() ? val.getTypeCode() : val.getParaCode();
 		m_paradict[k] = val;
+		emit VIEWSIGNAL->sigParameterChange(val.getTypeCode().isEmpty() ? val.getParaCode(): val.getTypeCode());
 		return true;
 	}
 	return false;
@@ -322,6 +323,7 @@ bool CParameterSetting::removeParadict(const QString &typeCode, const QString &p
 				break;
 			}
 		}
+		emit VIEWSIGNAL->sigParameterChange(typeCode.isEmpty() ? paraCode : typeCode);
 		return true;
 	}
 	return false;
