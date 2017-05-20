@@ -132,48 +132,25 @@ void ParameterDictionary::slotAdd()
 		ShowWarnMessage(tr("add"), tr("The para code already exists").arg(val.getTypeCode()).arg(val.getParaCode()), this);
 		return;
 	}
-	QString k = val.getParaCode().isEmpty() ? val.getTypeCode() : val.getParaCode();
-	if (PARASETCTL->getParadict().contains(k))
-	{
-		ShowWarnMessage(tr("add"), tr("type-code/paracode cant be equal to his-type-code/his-paracode!").arg(val.getTypeCode()).arg(val.getParaCode()), this);
-		return;
-	}
+
 	
 	if (!val.getParaCode().isEmpty())
-	{// 新增参数
-		/*if (val.getParaName().isEmpty())
-		{
-			ShowWarnMessage(tr("add"), tr("paraname cant be empty!"), this);
-			return;
-		}*/
-		/*if (val.getTypeName().isEmpty())
-		{
-			ShowWarnMessage(tr("add"), tr("typename cant be empty!"), this);
-			return;
-		}*/
-		/*if (!PARASETCTL->getParadict().contains(val.getTypeCode()))
+	{
+		if (!PARASETCTL->getParadict().contains(val.getTypeCode()))
 		{
 			ShowWarnMessage(tr("add"), tr("typecode dont exist!"), this);
 			return;
-		}*/
-	}
-	else
-	{//新增类型
-		if (!val.getParaName().isEmpty())
-		{
-			ShowWarnMessage(tr("add"), tr("when add type, paraname should be empty!"), this);
-			return;
 		}
 	}
+	
 	QString err;
 	if (PARASETCTL->setParadict(val, err)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
-		//addData(val);
+		
 		addTree(m_tree, m_model, val.getParaCode(), val.getTypeCode(), val, cols);
 		if (val.getTypeCode().isEmpty() && !m_table.contains(val.getParaCode()))
 			addRow(m_table, m_modelCombobox, val.getTypeCode(), val, colsTable);
 
-		//locateData(val);
 		locator(m_tree, val.getParaCode());
 	} else {
 		ShowErrorMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
@@ -197,26 +174,11 @@ void ParameterDictionary::slotModify()
 		ShowWarnMessage(tr("modify"), tr("param code can not be modified!"), this);
 		return;
 	}
-	if (getCurrentData().getParaCode().isEmpty())
-	{// type
-		if (!val.getParaCode().isEmpty() || !val.getParaName().isEmpty())
-		{
-			ShowWarnMessage(tr("modify"), tr("when modifying type, cant set para!"), this);
-			return;
-		}
-	}
-	else
-	{// para
-		if (val.getParaName().isEmpty())
-		{
-			ShowWarnMessage(tr("modify"), tr("when modifying para, para cant be empty!"), this);
-			return;
-		}
-		if (!PARASETCTL->getParadict().contains(val.getTypeCode()))
-		{
-			ShowWarnMessage(tr("modify"), tr("typecode dont exist!"), this);
-			return;
-		}
+
+	if (!PARASETCTL->getParadict().contains(val.getTypeCode()))
+	{
+		ShowWarnMessage(tr("modify"), tr("typecode dont exist!"), this);
+		return;
 	}
 
 	QString err;
@@ -228,7 +190,6 @@ void ParameterDictionary::slotModify()
 			addRow(m_table, m_modelCombobox, val.getTypeCode(), val, colsTable);
 		}
 			
-	
 		locator(m_tree, val.getParaCode());
 	}
 	else {
@@ -248,15 +209,10 @@ void ParameterDictionary::slotDelete()
 			ShowWarnMessage(tr("delete"), tr("The paradict is not existing!"), this);
 			return;
 		}
-		if (val.getParaCode().isEmpty())
-		{// 删除类型
-			QMap<QString, CParaDict> cld;
-			PARASETCTL->getAllParadict(val.getTypeCode(), cld);
-			if (!cld.isEmpty())
-			{
-				ShowWarnMessage(tr("delete"), tr("The type has children, cant delete!"), this);
-				return;
-			}
+
+		if (hasChildren(m_model, ui.leParaCode->text())) {
+			ShowWarnMessage(tr("delete"), tr("The type has children, cant delete!"), this);
+			return;
 		}
 		
 		QString err;
