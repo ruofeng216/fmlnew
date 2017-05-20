@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QDebug>
 #include "util/util.h"
+#include "viewsignalmanager.h"
 
 CParameterSetting::CParameterSetting()
 {
@@ -179,6 +180,7 @@ bool CParameterSetting::setProduct(const CProduct &val, QString &err)
 {
 	if (METADATABASE->setProduct(val, err)) {
 		m_product[val.getCode()] = val;
+		emit VIEWSIGNAL->sigProductChange();
 		return true;
 	}
 	return false;
@@ -217,6 +219,7 @@ bool CParameterSetting::removeProducts(const QStringList &deleteList, QString &e
 		foreach(const QString &deleteCode, deleteList) {
 			m_product.remove(deleteCode);
 		}
+		emit VIEWSIGNAL->sigProductChange();
 		return true;
 	}
 	return false;

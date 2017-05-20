@@ -21,5 +21,9 @@ signals:
 	// 处理返回/推送
 	void callBackUI(const CMyBasePtr val);
 
-
+	////////////////////////////////////////
+	// 产品变更
+	void sigProductChange();
+	// 参数字典变更
+	void sigParameterChange(const QString &paraCode);
 };
