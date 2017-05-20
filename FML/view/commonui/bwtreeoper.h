@@ -1,6 +1,7 @@
 #pragma once
 
 #include<QStandardItemModel>
+#include "util/datatype.h"
 
 template<class T>
 class BWTreeOper
@@ -8,7 +9,7 @@ class BWTreeOper
 
 public:
 	BWTreeOper() {}
-	~BWTreeOper() {}
+	virtual ~BWTreeOper() {}
 	
 public:
 	bool delRootNode(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel,const QString &val);
@@ -32,22 +33,23 @@ public:
 		);
 
 public:
-	void delTree(QMap<QString,QList<QStandardItem *>> &tree,QStandardItemModel *pGoodsModel,const QString &curCode, const QString &parentCode);
-	void addTree(QMap<QString, QList<QStandardItem *>> &tree,QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, const T &val, const QList<int> cols);
+	virtual void delTree(QMap<QString,QList<QStandardItem *>> &tree,QStandardItemModel *pGoodsModel,const QString &curCode, const QString &parentCode, T t = T());
+	virtual void addTree(QMap<QString, QList<QStandardItem *>> &tree,QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, const T &val, const QList<int> cols);
 
 public:
-	virtual void bwLocate(const QString &code) = 0;
-	virtual bool recordExist(const QString &val) = 0;
-	virtual void bwClear() = 0;
+	virtual void bwLocate(const QString &code, T t=T()) = 0;
+	virtual bool recordExist(const QString &val, T t = T()) = 0;
+	virtual void bwClear(T t = T()) = 0;
 	virtual void packQStandardItem(QList<QStandardItem *> &items, const T &val,const QList<int> cols) = 0;
 	virtual void updateChildNode(const T &val) = 0;
-	virtual T getTFromDB(const QString &code,QString &parentCode) = 0;
-
+	virtual T getTFromDB(const QString &code,QString &parentCode, T t = T()) = 0;
+	virtual QStandardItem *getItem(const QMap<QString, QList<QStandardItem *>> &tree, const QString &code, int nVal, int role = 257, T t = T()) { return NULL; }
 public:
 	void locator(QMap<QString, QList<QStandardItem *>> tree,const QString &code);
 	void locatorItem(QMap<QString, QList<QStandardItem *>> tree,QStandardItem *item);
 	int lastRow(QMap<QString, QList<QStandardItem *>> tree,const QString &curcode);
 
+	
 };
 
 
@@ -154,7 +156,8 @@ void BWTreeOper<T>::delTree(
 	QMap<QString, QList<QStandardItem *>> &tree,
 	QStandardItemModel *pGoodsModel,
 	const QString &curCode,
-	const QString &parentCode)
+	const QString &parentCode,
+	T t)
 {
 	if (parentCode.isEmpty())
 	{// ¸ù½Úµã
@@ -242,3 +245,44 @@ void BWTreeOper<T>::addTree(
 		}
 	}
 }
+
+class ProductTreeOper : virtual public BWTreeOper<CProduct>
+{
+public:
+	virtual void bwLocate(const QString &code, CProduct t = CProduct()) {}
+	virtual bool recordExist(const QString &val, CProduct t = CProduct()) { return true; }
+	virtual void bwClear(CProduct t = CProduct()) {}
+	virtual void packQStandardItem(QList<QStandardItem *> &items, const CProduct &val, const QList<int> cols) {}
+	virtual void updateChildNode(const CProduct &val) {}
+	virtual CProduct getTFromDB(const QString &code, QString &parentCode, CProduct t = CProduct()) { return t; }
+	virtual void delTree(QMap<QString, QList<QStandardItem *>> &tree, 
+		QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, CProduct t = CProduct())
+	{
+		BWTreeOper::delTree(tree, pGoodsModel, curCode, parentCode, t);
+	}
+	virtual void addTree(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, const CProduct &val, const QList<int> cols)
+	{
+		BWTreeOper::addTree(tree, pGoodsModel, curCode, parentCode, val, cols);
+	}
+
+};
+class KeypointTreeOper : virtual public BWTreeOper<CKeypoint>
+{
+public:
+	virtual void bwLocate(const QString &code, CKeypoint t = CKeypoint()) {}
+	virtual bool recordExist(const QString &val, CKeypoint t = CKeypoint()) { return true; }
+	virtual void bwClear(CKeypoint t = CKeypoint()) {}
+	virtual void packQStandardItem(QList<QStandardItem *> &items, const CKeypoint &val, const QList<int> cols) {}
+	virtual void updateChildNode(const CKeypoint &val) {}
+	virtual CKeypoint getTFromDB(const QString &code, QString &parentCode, CKeypoint t = CKeypoint()) { return t; }
+	virtual QStandardItem *getItem(const QMap<QString, QList<QStandardItem *>> &tree, const QString &code, int nVal, int role = 257, CKeypoint t = CKeypoint()) { return NULL; }
+	virtual void delTree(QMap<QString, QList<QStandardItem *>> &tree,
+		QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, CKeypoint t = CKeypoint())
+	{
+		BWTreeOper::delTree(tree, pGoodsModel, curCode, parentCode, t);
+	}
+	virtual void addTree(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, const CKeypoint &val, const QList<int> cols)
+	{
+		BWTreeOper::addTree(tree, pGoodsModel, curCode, parentCode, val, cols);
+	}
+};

@@ -59,10 +59,10 @@ private:
 	/*
 	 BWTreeOper pure virtual function
 	*/
-	void bwLocate(const QString &code);
-	bool recordExist(const QString &val) ;
-	void bwClear() ;
+	void bwLocate(const QString &code, CParaDict t = CParaDict());
+	bool recordExist(const QString &val, CParaDict t = CParaDict()) ;
+	void bwClear(CParaDict t = CParaDict()) ;
 	void packQStandardItem(QList<QStandardItem *> &items, const CParaDict &val, const QList<int> cols) ;
 	void updateChildNode(const CParaDict &val) ;
-	CParaDict getTFromDB(const QString &code, QString &parentCode) ;
+	CParaDict getTFromDB(const QString &code, QString &parentCode, CParaDict t = CParaDict()) ;
 };

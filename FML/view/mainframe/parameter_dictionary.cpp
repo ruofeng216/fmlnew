@@ -326,7 +326,7 @@ void ParameterDictionary::setViewData(const CParaDict &val)
 //BWTreeOper pure virtual function  
 //******************************************************************
 
-void ParameterDictionary::bwLocate(const QString &code) {
+void ParameterDictionary::bwLocate(const QString &code, CParaDict t) {
 	QModelIndexList findIndex = this->m_model->match(this->m_model->index(0, 0), Qt::DisplayRole, code, 1, Qt::MatchRecursive);
 	if (findIndex.size() > 0)
 	{
@@ -339,7 +339,7 @@ void ParameterDictionary::bwLocate(const QString &code) {
 	}
 }
 
-void ParameterDictionary::bwClear() {
+void ParameterDictionary::bwClear(CParaDict t) {
 	ui.leParaCode->setText("");
 	ui.leParaName->setText("");
 	ui.cbTypeCode->setCurrentText("");
@@ -347,13 +347,13 @@ void ParameterDictionary::bwClear() {
 	ui.pteParaExplain->setPlainText("");
 }
 
-bool ParameterDictionary::recordExist(const QString &val) {
+bool ParameterDictionary::recordExist(const QString &val, CParaDict t) {
 	if (PARASETCTL->getParadict().contains(val))
 		return true;
 	return false;
 }
 
-CParaDict ParameterDictionary::getTFromDB(const QString &code, QString &parentCode) {
+CParaDict ParameterDictionary::getTFromDB(const QString &code, QString &parentCode, CParaDict t) {
 	CParaDict val;
 	val = PARASETCTL->getParadict()[code];
 	parentCode = val.getTypeCode();

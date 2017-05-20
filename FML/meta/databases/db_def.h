@@ -78,12 +78,16 @@ constraint uk_paradict UNIQUE(`typecode`,`paracode`)\
 `tenor` varchar(180) NOT NULL, \
 `marketcode` varchar(180), \
 `marketname` varchar(255), \
-`calendar` varchar(180), \
-`convention` varchar(180), \
-`daycount` varchar(180), \
-`spotlag` varchar(180), \
-`couponfrequency` varchar(180), \
-`refindex` varchar(180), \
+`calendarcode` varchar(180), \
+`calendarname` varchar(255), \
+`conventioncode` varchar(180), \
+`conventionname` varchar(255), \
+`daycountcode` varchar(180), \
+`daycountname` varchar(255), \
+`spotlagcode` varchar(180), \
+`spotlagname` varchar(255), \
+`sdate`  int, \
+`edate`  int, \
 constraint pk_markettenor PRIMARY KEY(`kpcode`) \
 );").arg(DB_TBNAME_KEYPOINT)
 
@@ -120,7 +124,7 @@ constraint pk_markettenor PRIMARY KEY(`kpcode`) \
 
 // 关键点定义
 #define DB_SQL_SelectKeypoint QString("SELECT * from %1;").arg(DB_TBNAME_KEYPOINT)
-#define DB_SQL_ReplaceKeypoint QString("replace into %1(kpcode,kpname,productcode,productname,tenor,marketcode,marketname,calendar,convention,daycount,spotlag,couponfrequency,refindex) values(?,?,?,?,?,?,?,?,?,?,?,?,?);").arg(DB_TBNAME_KEYPOINT)
+#define DB_SQL_ReplaceKeypoint QString("replace into %1(kpcode,kpname,productcode,productname,tenor,marketcode,marketname,calendarcode,calendarname,conventioncode,conventionname,daycountcode,daycountname,spotlagcode,spotlagname,sdate,edate) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);").arg(DB_TBNAME_KEYPOINT)
 #define DB_SQL_DeleteKeypoint QString("delete from %1 where `kpcode`=?;").arg(DB_TBNAME_KEYPOINT)
 
 #endif // !TB_OPERATE

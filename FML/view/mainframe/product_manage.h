@@ -59,10 +59,10 @@ private:
 	//* BWTreeOper pure virtual function
 	//*********************************************************************
 public:
-	void bwLocate(const QString &code);
-	void bwClear();
-	bool recordExist(const QString &val);
-	CProduct getTFromDB(const QString &code, QString &parentCode);
+	void bwLocate(const QString &code, CProduct t = CProduct());
+	void bwClear(CProduct t = CProduct());
+	bool recordExist(const QString &val, CProduct t = CProduct());
+	CProduct getTFromDB(const QString &code, QString &parentCode, CProduct t = CProduct());
 	void packQStandardItem(QList<QStandardItem *> &items, const CProduct &val, const QList<int> cols);
 	void updateChildNode(const CProduct &val);
 	

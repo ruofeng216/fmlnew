@@ -565,13 +565,12 @@ bool CKeypoint::operator==(const CKeypoint &val) const
 		m_productname == val.getProductName() &&
 		m_tenor == val.getTenor() &&
 		m_marketcode == val.getMarketCode() &&
-		m_marketname == val.getMarketName() &&
-		m_calendar == val.getCalendar() &&
-		m_convention == val.getConvention() &&
-		m_daycount == val.getDayCount() &&
-		m_spotlat == val.getSpotlat() &&
-		m_couponfrequency == val.getCouponfrequency() &&
-		m_refindex == val.getRefindex();
+		m_calendarcode == val.getCalendarCode() &&
+		m_conventioncode == val.getConventionCode() &&
+		m_daycountcode == val.getDayCountCode() &&
+		m_spotlatcode == val.getSpotlatCode() &&
+		m_sdate == val.getSdate() &&
+		m_edate == val.getEdate();
 }
 void CKeypoint::setKpcode(const QString &val)
 {
@@ -629,53 +628,85 @@ const QString& CKeypoint::getMarketName() const
 {
 	return m_marketname;
 }
-void CKeypoint::setCalendar(const QString &val)
+void CKeypoint::setCalendarCode(const QString &val)
 {
-	m_calendar = val;
+	m_calendarcode = val;
 }
-const QString& CKeypoint::getCalendar() const
+const QString& CKeypoint::getCalendarCode() const
 {
-	return m_calendar;
+	return m_calendarcode;
 }
-void CKeypoint::setConvention(const QString &val)
+void CKeypoint::setCalendarName(const QString &val)
 {
-	m_convention = val;
+	m_calendarname = val;
 }
-const QString& CKeypoint::getConvention() const
+const QString& CKeypoint::getCalendarName() const
 {
-	return m_convention;
+	return m_calendarname;
 }
-void CKeypoint::setDayCount(const QString &val)
+void CKeypoint::setConventionCode(const QString &val)
 {
-	m_daycount = val;
+	m_conventioncode = val;
 }
-const QString& CKeypoint::getDayCount() const
+const QString& CKeypoint::getConventionCode() const
 {
-	return m_daycount;
+	return m_conventioncode;
 }
-void CKeypoint::setSpotlat(const QString &val)
+void CKeypoint::setConventionName(const QString &val)
 {
-	m_spotlat = val;
+	m_conventionname = val;
 }
-const QString& CKeypoint::getSpotlat() const
+const QString& CKeypoint::getConventionName() const
 {
-	return m_spotlat;
+	return m_conventionname;
 }
-void CKeypoint::setCouponfrequency(const QString &val)
+void CKeypoint::setDayCountCode(const QString &val)
 {
-	m_couponfrequency = val;
+	m_daycountcode = val;
 }
-const QString& CKeypoint::getCouponfrequency() const
+const QString& CKeypoint::getDayCountCode() const
 {
-	return m_couponfrequency;
+	return m_daycountcode;
 }
-void CKeypoint::setRefindex(const QString &val)
+void CKeypoint::setDayCountName(const QString &val)
 {
-	m_refindex = val;
+	m_daycountname = val;
 }
-const QString& CKeypoint::getRefindex() const
+const QString& CKeypoint::getDayCountName() const
 {
-	return m_refindex;
+	return m_daycountname;
+}
+void CKeypoint::setSpotlatCode(const QString &val)
+{
+	m_spotlatcode = val;
+}
+const QString& CKeypoint::getSpotlatCode() const
+{
+	return m_spotlatcode;
+}
+void CKeypoint::setSpotlatName(const QString &val)
+{
+	m_spotlatname = val;
+}
+const QString& CKeypoint::getSpotlatName() const
+{
+	return m_spotlatname;
+}
+void CKeypoint::setSdate(const int &val)
+{
+	m_sdate = val;
+}
+const int &CKeypoint::getSdate() const
+{
+	return m_sdate;
+}
+void CKeypoint::setEdate(const int &val)
+{
+	m_edate = val;
+}
+const int &CKeypoint::getEdate() const
+{
+	return m_edate;
 }
 ////////////////////////////////////////////////////////////////
 

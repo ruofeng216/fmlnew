@@ -477,6 +477,9 @@
     <ClCompile Include="view\commonui\xcombobox.cpp">
       <Filter>view\commonui</Filter>
     </ClCompile>
+    <ClCompile Include="view\commonui\bwtreeoper.cpp">
+      <Filter>view\commonui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="fml.qrc">
@@ -708,6 +711,12 @@
     </ClInclude>
     <ClInclude Include="controller\YieldCurveDefinition.h">
       <Filter>controller</Filter>
+    </ClInclude>
+    <ClInclude Include="view\commonui\bwtableoper.h">
+      <Filter>view\commonui</Filter>
+    </ClInclude>
+    <ClInclude Include="view\commonui\bwtreeoper.h">
+      <Filter>view\commonui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

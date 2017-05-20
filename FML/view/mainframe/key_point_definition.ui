@@ -141,7 +141,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbProductCode"/>
+          <widget class="XComboBox" name="cbProductCode"/>
          </item>
         </layout>
        </item>
@@ -319,13 +319,13 @@
           <widget class="QLabel" name="label_11">
            <property name="minimumSize">
             <size>
-             <width>80</width>
+             <width>54</width>
              <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>80</width>
+             <width>54</width>
              <height>16777215</height>
             </size>
            </property>
@@ -338,7 +338,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDateEdit" name="deEnd">
+          <widget class="xDateEdit" name="deEnd">
            <property name="dateTime">
             <datetime>
              <hour>23</hour>
@@ -387,19 +387,26 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbMarket"/>
+          <widget class="QComboBox" name="cbMarket">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_6">
            <property name="minimumSize">
             <size>
-             <width>80</width>
+             <width>54</width>
              <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>80</width>
+             <width>54</width>
              <height>16777215</height>
             </size>
            </property>
@@ -453,13 +460,13 @@
           <widget class="QLabel" name="label_10">
            <property name="minimumSize">
             <size>
-             <width>80</width>
+             <width>54</width>
              <height>0</height>
             </size>
            </property>
            <property name="maximumSize">
             <size>
-             <width>80</width>
+             <width>54</width>
              <height>16777215</height>
             </size>
            </property>
@@ -636,6 +643,16 @@
    <class>XLineEdit</class>
    <extends>QLineEdit</extends>
    <header>xlineedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>xDateEdit</class>
+   <extends>QDateEdit</extends>
+   <header>xdateedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>XComboBox</class>
+   <extends>QComboBox</extends>
+   <header>xcombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

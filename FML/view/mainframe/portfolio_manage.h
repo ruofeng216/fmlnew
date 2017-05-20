@@ -57,10 +57,10 @@ private:
 
 	//*******************************************************************************************
 public:
-	void bwLocate(const QString &code);
-	bool recordExist(const QString &val);
-	CPortfolio getTFromDB(const QString &code, QString &parentCode);
+	void bwLocate(const QString &code, CPortfolio t = CPortfolio());
+	bool recordExist(const QString &val, CPortfolio t = CPortfolio());
+	CPortfolio getTFromDB(const QString &code, QString &parentCode, CPortfolio t = CPortfolio());
 	void packQStandardItem(QList<QStandardItem *> &items, const CPortfolio &val, const QList<int> cols);
 	void updateChildNode(const CPortfolio &val);
-	void bwClear();
+	void bwClear(CPortfolio t = CPortfolio());
 };
