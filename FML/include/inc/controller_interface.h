@@ -58,6 +58,7 @@ public:
 	///////参数管理///////////
 	virtual const QMap<QString, CParaDict>& getParadict() const = 0;
 	virtual bool getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val) = 0;
+	virtual bool getParaDict(const QString &paraCode, CParaDict &val) = 0;
 	virtual bool getAllParadict(const QString &typeCode, QMap<QString, CParaDict> &valList) = 0;
 	virtual bool setParadict(const CParaDict &val, QString &err) = 0;
 	virtual bool removeParadict(const QString &typeCode, const QString &paraCode, QString &err) = 0;

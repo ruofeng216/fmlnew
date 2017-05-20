@@ -266,6 +266,15 @@ const QMap<QString, CParaDict>& CParameterSetting::getParadict() const
 	return m_paradict;
 }
 
+bool CParameterSetting::getParaDict(const QString &paraCode, CParaDict &val) {
+	if (m_paradict.contains(paraCode))
+	{
+		val = m_paradict[paraCode];
+		return true;
+	}
+	return false;
+}
+
 bool CParameterSetting::getParadict(const QString &typeCode, const QString &paraCode, CParaDict &val)
 {
 	QString K = paraCode.isEmpty() ? typeCode : paraCode;
@@ -296,6 +305,7 @@ bool CParameterSetting::setParadict(const CParaDict &val, QString &err)
 	{
 		QString k = val.getParaCode().isEmpty() ? val.getTypeCode() : val.getParaCode();
 		m_paradict[k] = val;
+		emit VIEWSIGNAL->sigParameterChange(val.getTypeCode().isEmpty() ? val.getParaCode(): val.getTypeCode());
 		return true;
 	}
 	return false;
@@ -313,6 +323,7 @@ bool CParameterSetting::removeParadict(const QString &typeCode, const QString &p
 				break;
 			}
 		}
+		emit VIEWSIGNAL->sigParameterChange(typeCode.isEmpty() ? paraCode : typeCode);
 		return true;
 	}
 	return false;
