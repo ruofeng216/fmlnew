@@ -48,10 +48,32 @@ bool ParameterDictionary::checkValid()
 
 	if (ui.leParaName->text().isEmpty())
 	{
-		ui.leParaCode->setError(tr("ParaName cant be empty!"));
+		ui.leParaName->setError(tr("ParaName cant be empty!"));
+		bValid = false;
+	}
+
+	if (ui.cbTypeCode->currentText().isEmpty() && !ui.cbTypeName->text().isEmpty()) {
+		ui.cbTypeName->setError(tr("type code is empty,so type name should be empty also."));
+		bValid = false;
+	}
+
+	if (!ui.leParaCode->text().isEmpty() && (ui.cbTypeCode->currentText() == ui.leParaCode->text())) {
+		ui.cbTypeCode->setError(tr("the para code is eqaul to the type code error!"));
 		bValid = false;
 	}
 	return bValid;
+}
+
+bool ParameterDictionary::checkModify() {
+	if (!ui.leParaCode->text().isEmpty() && !ui.cbTypeCode->currentText().isEmpty()) {
+		if (hasChildren(m_model, ui.leParaCode->text())) {
+			qutil::splitTooltip(tr("type code must be the toppest level!"), 300);
+			ui.cbTypeCode->setError(tr("type code must be the toppest level!"));
+
+			return false;
+		}
+	}
+	return true;
 }
 
 void ParameterDictionary::init()
@@ -161,6 +183,7 @@ void ParameterDictionary::slotAdd()
 void ParameterDictionary::slotModify()
 {
 	if (!checkValid()) return;
+	if (!checkModify())return; 
 
 	QList<int> cols = QList<int>{ 0,1,2,3,4,5 };
 	QList<int> colsTable = QList<int>{ 0 };
@@ -268,7 +291,7 @@ void ParameterDictionary::initDateView()
 	for (int i = 0; i < treeHeader.size(); i++)
 		m_model->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
 	ui.treeView->setModel(m_model);
-	ui.treeView->setColumnWidth(0, 200);
+	ui.treeView->setColumnWidth(0, 260);
 	ui.treeView->setColumnWidth(1, 260);
 
 	ui.treeView->hideColumn(2);

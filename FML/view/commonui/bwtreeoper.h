@@ -2,6 +2,8 @@
 
 #include<QStandardItemModel>
 
+class QStandardItem;
+
 template<class T>
 class BWTreeOper
 {
@@ -10,6 +12,8 @@ public:
 	BWTreeOper() {}
 	~BWTreeOper() {}
 	
+public:
+	bool hasChildren(const QStandardItemModel *pModel, const QString code)const;
 public:
 	bool delRootNode(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel,const QString &val);
 	bool delChildNode(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel, const QString &val);
@@ -241,4 +245,14 @@ void BWTreeOper<T>::addTree(
 
 		}
 	}
+}
+
+template<class T>
+bool BWTreeOper<T>::hasChildren(const QStandardItemModel *pModel, const QString code)const {
+	QList<QStandardItem *>  items = pModel->findItems(code, Qt::MatchExactly);
+	for (auto item : items) {
+		QModelIndex idx = pModel->indexFromItem(item);
+		if (pModel->hasChildren(idx))return true;
+	}
+	return false;
 }

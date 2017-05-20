@@ -29,7 +29,7 @@ public:
 	bool isKeyModify(const CParaDict &newVal);
 	// 提交时，检查相关控件值是否合法。
 	bool checkValid();
-
+	bool checkModify();
 	void init();
 
 public slots:
