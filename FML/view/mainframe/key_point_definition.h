@@ -34,7 +34,7 @@ public:
 	~KeyPointDefinition();
 	QString getKey(const CKeypoint &newVal) const;
 	// 提交时，检查相关控件值是否合法。
-	bool checkValid();
+	bool checkValid(bool opr = true);
 
 	void init();
 
@@ -43,7 +43,7 @@ public slots:
 	void slotAdd();
 	void slotModify();
 	void slotDelete();
-	void slotTreeDoubleClicked(const QModelIndex &index);
+	void slotTreeClicked(const QModelIndex &index);
 
 private slots:
 	// init product
@@ -57,9 +57,6 @@ private:
 	CKeypoint getViewData();
 	QPair<int, QString> parseTenor(const QString& tenor);
 	QString spliceTenor(int num, QString unit);
-	QString getParaNameFromCode(const QString &typecode, const QString &paracode);
-	QList<QStandardItem *> createParentRowItems(const CKeypoint &val);
-	QList<QStandardItem *> createChildtRowItems(const CKeypoint &val);
 	bool isProductExist(const QString &productCode);
 
 
@@ -69,9 +66,7 @@ private:
 	void packQStandardItem(QList<QStandardItem *> &items, const CKeypoint &val, const QList<int> cols);
 	void updateChildNode(const CKeypoint &val);
 	CKeypoint getTFromDB(const QString &code, QString &parentCode, CKeypoint t = CKeypoint());
-	QStandardItem *getItem(const QMap<QString, QList<QStandardItem *>> &tree, const QString &code, int nVal, int role = 257, CKeypoint t = CKeypoint());
-	void delTree(QMap<QString, QList<QStandardItem *>> &tree,
-		QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, CKeypoint t = CKeypoint());
+	QStandardItem *getItem(QMap<QString, QList<QStandardItem *>> &tree, const QString &code, int nVal, int role = 257, CKeypoint t = CKeypoint());
 	void addTree(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, const CKeypoint &val, const QList<int> cols);
 
 	void bwLocate(const QString &code, CProduct t = CProduct());
@@ -80,8 +75,6 @@ private:
 	void packQStandardItem(QList<QStandardItem *> &items, const CProduct &val, const QList<int> cols);
 	void updateChildNode(const CProduct &val);
 	CProduct getTFromDB(const QString &code, QString &parentCode, CProduct t = CProduct());
-	void delTree(QMap<QString, QList<QStandardItem *>> &tree,
-		QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, CProduct t = CProduct());
 	void addTree(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, const CProduct &val, const QList<int> cols);
 
 private:

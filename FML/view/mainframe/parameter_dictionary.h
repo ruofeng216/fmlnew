@@ -28,7 +28,7 @@ public:
 	QString getKey(const CParaDict &newVal) const;
 	bool isKeyModify(const CParaDict &newVal);
 	// 提交时，检查相关控件值是否合法。
-	bool checkValid();
+	bool checkValid(bool opr = true);
 	bool checkModify();
 	void init();
 

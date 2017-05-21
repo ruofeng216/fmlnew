@@ -36,7 +36,7 @@ bool ParameterDictionary::isKeyModify(const CParaDict &newVal)
 		return old.getParaCode() != newVal.getParaCode();
 }
 // 提交时，检查相关控件值是否合法。
-bool ParameterDictionary::checkValid()
+bool ParameterDictionary::checkValid(bool)
 {
 	bool bValid = true;
 	

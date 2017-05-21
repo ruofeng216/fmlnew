@@ -141,7 +141,11 @@
           </widget>
          </item>
          <item>
-          <widget class="XComboBox" name="cbProductCode"/>
+          <widget class="XComboBox" name="cbProductCode">
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -173,7 +177,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="cbProductName"/>
+          <widget class="XLineEdit" name="cbProductName"/>
          </item>
         </layout>
        </item>
@@ -387,12 +391,15 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbMarket">
+          <widget class="XComboBox" name="cbMarket">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
+           </property>
+           <property name="editable">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
@@ -419,7 +426,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbCalendar"/>
+          <widget class="XComboBox" name="cbCalendar">
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -454,7 +465,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbConvention"/>
+          <widget class="XComboBox" name="cbConvention">
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QLabel" name="label_10">
@@ -479,7 +494,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbSpotlag"/>
+          <widget class="XComboBox" name="cbSpotlag">
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
@@ -511,7 +530,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="cbDayCount"/>
+          <widget class="XComboBox" name="cbDayCount">
+           <property name="editable">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>

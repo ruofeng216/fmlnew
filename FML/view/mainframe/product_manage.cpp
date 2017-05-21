@@ -27,7 +27,7 @@ QString ProductManage::getKey(const CProduct &newVal) const
 }
 
 // 提交时，检查相关控件值是否合法。
-bool ProductManage::checkValid()
+bool ProductManage::checkValid(bool)
 {
 	bool bValid = true;
 	if (ui.leCode->text().isEmpty())

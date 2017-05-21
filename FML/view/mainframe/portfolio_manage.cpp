@@ -30,7 +30,7 @@ QString PortfolioManage::getKey(const CPortfolio &newVal) const
 }
 
 // 提交时，检查相关控件值是否合法。
-bool PortfolioManage::checkValid()
+bool PortfolioManage::checkValid(bool)
 {
 	bool bValid = true;
 	if (ui.lineEdit_portcode->text().isEmpty())

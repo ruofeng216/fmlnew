@@ -27,7 +27,7 @@ public:
 	~ProductManage();
 	QString getKey(const CProduct &newVal) const;
 	// 提交时，检查相关控件值是否合法。
-	bool checkValid();
+	bool checkValid(bool opr = true);
 
 	void init();
 

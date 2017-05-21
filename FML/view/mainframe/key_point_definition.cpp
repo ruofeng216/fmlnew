@@ -7,6 +7,15 @@
 #include <QDebug>
 #include <QTableView>
 
+#define FORMATDATE(T) QDate::fromJulianDay(T).toString(YMD)
+#define V_INDEX (Qt::UserRole + 1)
+#define V_CODE (Qt::UserRole + 2)
+#define COLSKP QList<int>()<<eKPCode<<eKPName<<eProductName<<eTenor<<eCalendar<<eConvention<<eDayCount<<eCouponfrequency<<eSdate<<eEdate
+#define COLSMARKET QList<int>()<<eMarket
+#define COLSPRODUCT QList<int>()<<eProductCode
+#define PROCODE "code"
+
+
 KeyPointDefinition::KeyPointDefinition(QWidget *parent)
 	: BodyWidget(parent)
 	, m_model(nullptr)
@@ -14,19 +23,16 @@ KeyPointDefinition::KeyPointDefinition(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	connect(VIEWSIGNAL, &ViewSignalManager::sigProductChange, this, &KeyPointDefinition::initProduct);
-
+	connect(VIEWSIGNAL, &ViewSignalManager::sigProductChange, this, &KeyPointDefinition::initProduct, Qt::QueuedConnection);
+	connect(VIEWSIGNAL, &ViewSignalManager::sigParameterChange, this, &KeyPointDefinition::initParameter, Qt::QueuedConnection);
 	
-	ui.treeView->setAlternatingRowColors(true);
 	connect(ui.pbAdd, SIGNAL(clicked()), this, SLOT(slotAdd()));
 	connect(ui.pbModify, SIGNAL(clicked()), this, SLOT(slotModify()));
 	connect(ui.pbDelete, SIGNAL(clicked()), this, SLOT(slotDelete()));
-	connect(ui.treeView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotTreeDoubleClicked(QModelIndex)));
+	connect(ui.treeView, SIGNAL(clicked(QModelIndex)), this, SLOT(slotTreeClicked(QModelIndex)));
+	
 	init();
 	slotSkinChange();
-	ui.leTenor->setValidator(new QIntValidator(0, 99999, this));
-	ui.deStart->setDate(QDate::currentDate());
-	ui.deEnd->setDate(QDate::currentDate());
 }
 
 KeyPointDefinition::~KeyPointDefinition()
@@ -39,54 +45,85 @@ QString KeyPointDefinition::getKey(const CKeypoint &newVal) const
 }
 
 // 提交时，检查相关控件值是否合法。
-bool KeyPointDefinition::checkValid()
+bool KeyPointDefinition::checkValid(bool opr)
 {
-	return true;
+	bool bValid = true;
+	CKeypoint kp = getViewData();
+	if (kp.getKpcode().isEmpty())
+	{
+		ui.leKPCode->setError(tr("KeyPointCode cant be empty!"));
+		bValid = false;
+	}
+	if (kp.getKpname().isEmpty())
+	{
+		ui.leKPName->setError(tr("KeyPointName cant be empty!"));
+		bValid = false;
+	}
+
+	CProduct cp;
+	bool bexist = PARASETCTL->getProduct(ui.cbProductCode->currentText().trimmed(), cp);
+	if (kp.getProductCode().isEmpty()) 
+	{
+		ui.cbProductCode->setError(tr("ProductCode cant be empty!"));
+		bValid = false;
+	}
+	if (!bexist && opr)
+	{
+		ui.cbProductCode->setError(tr("ProductCode dont exist now, cant add/modify with this code!"));
+		bValid = false;
+	}
+	if (kp.getProductName().isEmpty())
+	{
+		ui.cbProductName->setError(tr("ProductName cant be empty!"));
+		bValid = false;
+	}
+	if (bexist && cp.getName() != kp.getProductName())
+	{
+		ui.cbProductName->setError(tr("ProductName cant be changed!"));
+		bValid = false;
+	}
+	if (ui.leTenor->text().isEmpty())
+	{
+		ui.leTenor->setError(tr("ProductCode cant be empty!"));
+		bValid = false;
+	}
+	if (kp.getEdate() < kp.getSdate())
+	{
+		ui.deEnd->setError(tr("end-time cant be small than start-time!"));
+		bValid = false;
+	}
+	if (!PARASETCTL->getParadict().contains(kp.getMarketCode()) && opr)
+	{
+		ui.cbMarket->setError(tr("MarketCode dont exist now, cant add/modify with this code!"));
+		bValid = false;
+	}
+	if (!PARASETCTL->getParadict().contains(kp.getCalendarCode()) && opr)
+	{
+		ui.cbCalendar->setError(tr("CalendarCode dont exist now, cant add/modify with this code!"));
+		bValid = false;
+	}
+	if (!PARASETCTL->getParadict().contains(kp.getConventionCode()) && opr)
+	{
+		ui.cbConvention->setError(tr("ConventionCode dont exist now, cant add/modify with this code!"));
+		bValid = false;
+	}
+	if (!PARASETCTL->getParadict().contains(kp.getDayCountCode()) && opr)
+	{
+		ui.cbDayCount->setError(tr("DayCountCode dont exist now, cant add/modify with this code!"));
+		bValid = false;
+	}
+	if (!PARASETCTL->getParadict().contains(kp.getSpotlatCode()) && opr)
+	{
+		ui.cbSpotlag->setError(tr("SpotlatCode dont exist now, cant add/modify with this code!"));
+		bValid = false;
+	}
+
+	return bValid;
 }
 
 void KeyPointDefinition::init()
 {
-	CKeypoint oldVal = getViewData();
-	{
-		// 初始化treeView
-		QStringList treeHeader;
-		treeHeader << tr("kpcode") << tr("kpname") << tr("productname") << tr("tenor") << tr("calendar")
-			<< tr("convention") << tr("daycount") << tr("startdate") << tr("enddate");
-		if (m_model) {
-			m_model->clear();
-		} else {
-			m_model = new QStandardItemModel(0, treeHeader.size(), this);
-		}
-
-		m_model->setColumnCount(treeHeader.size());
-		for (int i = 0; i < treeHeader.size(); i++) {
-			m_model->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
-		}
-		const QMap<QString, CKeypoint>& data = YIELDCURVECTL->getKeyPoint();
-		QMap<QString, QStandardItem*> roots;
-		for (auto iter = data.constBegin(); iter != data.constEnd(); ++iter) {
-			if (!roots.contains(iter->getMarketCode())) {
-				QList<QStandardItem*> items = createParentRowItems(*iter);
-				if (items.size() > 0) {
-					m_model->appendRow(items);
-					roots[iter->getMarketCode()] = items[0];
-				}
-			}
-		}
-		for (auto iter = data.constBegin(); iter != data.constEnd(); ++iter) {
-			if (roots.contains(iter->getMarketCode())) {
-				QList<QStandardItem*> items = createChildtRowItems(*iter);
-				if (items.size() > 0) {
-					roots[iter->getMarketCode()]->appendRow(items);
-				}
-			}
-		}
-
-		ui.treeView->setModel(m_model);
-		ui.treeView->setColumnWidth(0, 160);
-		ui.treeView->expandAll();
-	}
-
+	ui.leTenor->setValidator(new QIntValidator(0, 99999, this));
 	{
 		if (!m_pProductModel) m_pProductModel = new QStandardItemModel(0, 1, this);
 		m_pProductModel->setColumnCount(1);
@@ -111,6 +148,33 @@ void KeyPointDefinition::init()
 		// 付息频率
 		initParameter(COUPONFREQUENCY);
 	}
+	{
+		ui.treeView->setAlternatingRowColors(true);
+		// 初始化treeView
+		QStringList treeHeader;
+		treeHeader << tr("kpcode") << tr("kpname") << tr("productname") << tr("tenor") << tr("calendar")
+			<< tr("convention") << tr("daycount") << tr("Couponfrequency") << tr("startdate") << tr("enddate");
+		if (m_model) {
+			m_model->clear();
+		} else {
+			m_model = new QStandardItemModel(0, treeHeader.size(), this);
+		}
+		m_model->setColumnCount(treeHeader.size());
+		for (int i = 0; i < treeHeader.size(); i++) 
+			m_model->setHeaderData(i, Qt::Horizontal, treeHeader[i]);
+
+		const QMap<QString, CKeypoint>& data = YIELDCURVECTL->getKeyPoint();
+		for (auto iter = data.constBegin(); iter != data.constEnd(); ++iter) 
+		{
+			if (!m_tree.contains(iter->getMarketCode()))
+				addTree(m_tree, m_model, iter->getMarketCode(), "", iter.value(), COLSMARKET);
+			addTree(m_tree, m_model, iter->getKpcode(), iter->getMarketCode(), iter.value(), COLSKP);
+		}
+		ui.treeView->setModel(m_model);
+		ui.treeView->setColumnWidth(0, 160);
+		ui.treeView->expandAll();
+		bwClear(CKeypoint());
+	}
 }
 
 void KeyPointDefinition::slotSkinChange()
@@ -127,11 +191,9 @@ void KeyPointDefinition::slotSkinChange()
 
 void KeyPointDefinition::slotAdd()
 {
+	if (!checkValid()) return;
+
 	CKeypoint val = getViewData();
-	if (val.getKpcode().trimmed().isEmpty()) {
-		ShowWarnMessage(tr("add"), tr("kpcode is empty"), this);
-		return;
-	}
 
 	CKeypoint oldVal;
 	if (YIELDCURVECTL->getKeyPoint(val.getKpcode(), oldVal)) {
@@ -139,14 +201,14 @@ void KeyPointDefinition::slotAdd()
 		return;
 	}
 
-	if (!isProductExist(val.getProductCode())) {
-		return;
-	}
-
 	QString err;
 	if (YIELDCURVECTL->setKeyPoint(val, err)) {
 		ShowSuccessMessage(tr("add"), tr("add success."), this);
-		init();
+		// 同步
+		if (!m_tree.contains(val.getMarketCode()))
+			addTree(m_tree, m_model, val.getMarketCode(), "", val, COLSMARKET);
+		addTree(m_tree, m_model, val.getKpcode(), val.getMarketCode(), val, COLSKP);
+		KeypointTreeOper::locator(m_tree, val.getKpcode());
 	} else {
 		ShowErrorMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
 	}
@@ -154,6 +216,8 @@ void KeyPointDefinition::slotAdd()
 
 void KeyPointDefinition::slotModify()
 {
+	if (!checkValid()) return;
+
 	if (getCurrentData().getKpcode().isEmpty()) {
 		ShowWarnMessage(tr("modify"), tr("No selected content can not be modified"), this);
 		return;
@@ -170,13 +234,13 @@ void KeyPointDefinition::slotModify()
 		return;
 	}
 
-	if (!isProductExist(val.getProductCode())) {
-		return;
-	}
 	QString err;
 	if (YIELDCURVECTL->setKeyPoint(val,err)) {
 		ShowSuccessMessage(tr("modify"), tr("modify success."), this);
-		init();
+		if (!m_tree.contains(val.getMarketCode()))
+			addTree(m_tree, m_model, val.getMarketCode(), "", val, COLSMARKET);
+		addTree(m_tree, m_model, val.getKpcode(), val.getMarketCode(), val, COLSKP);
+		KeypointTreeOper::locator(m_tree, val.getKpcode());
 	} else {
 		ShowErrorMessage(tr("modify"), err.isEmpty()?tr("modify fail."):err, this);
 	}
@@ -184,6 +248,8 @@ void KeyPointDefinition::slotModify()
 
 void KeyPointDefinition::slotDelete()
 {
+	if (!checkValid(false)) return;
+
 	if (MessageBoxWidget::Yes == ShowQuestionMessage(tr("delete"), tr("confirm to delete."), this)) {
 		CKeypoint val = getViewData();
 		CKeypoint oldVal;
@@ -194,22 +260,23 @@ void KeyPointDefinition::slotDelete()
 		QString err;
 		if (YIELDCURVECTL->removeKeyPoint(val.getKpcode(), err)) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
-			setViewData(CKeypoint());
-			init();
+			KeypointTreeOper::delTree(m_tree, m_model, val.getKpcode(), val.getMarketCode());
 		} else {
 			ShowErrorMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 		}
+		
 	}
 }
 
-void KeyPointDefinition::slotTreeDoubleClicked(const QModelIndex &index)
+void KeyPointDefinition::slotTreeClicked(const QModelIndex &index)
 {
-	auto getChildData = [this, &index](int col, QString &text, QString &data) {
-		text = ""; data = "";
+	auto getChildData = [this, &index](int col, int &nIndex, QString &text, QString &data) {
+		text = ""; data = ""; nIndex = 0;
 		QModelIndex sibling = index.sibling(index.row(), col);
 		QStandardItem *item = m_model->itemFromIndex(sibling);
 		if (item) {
-			data = item->data().toString();
+			nIndex = item->data(V_INDEX).toInt();
+			data = item->data(V_CODE).toString();
 			text = item->text();
 		}
 	};
@@ -224,7 +291,7 @@ void KeyPointDefinition::slotTreeDoubleClicked(const QModelIndex &index)
 		QStandardItem *item = m_model->itemFromIndex(parentIndex);
 		if (item) {
 			text = item->text();
-			data = item->data().toString();
+			data = item->data(V_CODE).toString();
 		}
 	};
 
@@ -234,31 +301,73 @@ void KeyPointDefinition::slotTreeDoubleClicked(const QModelIndex &index)
 	getParentData(text, data);
 	val.setMarketCode(data);
 	val.setMarketName(text);
-	if (index.parent().isValid()) {
-		getChildData(0, text, data);
-		val.setKpcode(text);
-		getChildData(1, text, data);
-		val.setKpname(text);
-		getChildData(2, text, data);
-		val.setProductCode(data);
-		val.setProductName(text);
-		getChildData(3, text, data);
-		val.setTenor(text.toLower());
-		getChildData(4, text, data);
-		//val.setCalendar(data); // 存放code， 显示name
-		getChildData(5, text, data);
-		//val.setConvention(data);
-		getChildData(6, text, data);
-		//val.setDayCount(data);
-		getChildData(7, text, data); // startDate
-		startDate = text;
-		getChildData(8, text, data); // endDate
-		endDate = text;
+	if (index.parent().isValid()) 
+	{
+		QModelIndex parentIndex = index.parent();
+		if (index.parent().isValid()) {
+			parentIndex = parentIndex.sibling(parentIndex.row(), 0);
+		}
+		else {
+			parentIndex = index.sibling(index.row(), 0);
+		}
+		QStandardItem *item = m_model->itemFromIndex(parentIndex);
+		if (item)
+		{
+			int nIndex = 0;
+			for (int i = 0; i < item->columnCount(); i++)
+			{
+				getChildData(i, nIndex, text, data);
+				if (nIndex == eKPCode)
+				{
+					val.setKpcode(text);
+				}
+				else if (nIndex == eKPName)
+				{
+					val.setKpname(text);
+				}
+				else if (nIndex == eProductName)
+				{
+					val.setProductName(text);
+					val.setProductCode(data);
+				}
+				else if (nIndex == eTenor)
+				{
+					val.setTenor(text);
+				}
+				else if (nIndex == eCalendar)
+				{
+					val.setCalendarName(text);
+					val.setCalendarCode(data);
+				}
+				else if (nIndex == eConvention)
+				{
+					val.setConventionName(text);
+					val.setConventionCode(data);
+				}
+				else if (nIndex == eDayCount)
+				{
+					val.setDayCountName(text);
+					val.setDayCountCode(data);
+				}
+				else if (nIndex == eCouponfrequency)
+				{
+					val.setSpotlatName(text);
+					val.setSpotlatCode(data);
+				}
+				else if (nIndex == eSdate)
+				{
+					int sdate = QDate::fromString(text, YMD).toJulianDay();
+					val.setSdate(sdate);
+				}
+				else if (nIndex == eEdate)
+				{
+					int edate = QDate::fromString(text, YMD).toJulianDay();
+					val.setEdate(edate);
+				}
+			}
+		}
 	}
-
 	setViewData(val);
-	ui.deStart->setDate(QDate::fromString(startDate, YMD));
-	ui.deEnd->setDate(QDate::fromString(endDate, YMD));
 }
 
 void KeyPointDefinition::setViewData(const CKeypoint &val)
@@ -272,19 +381,19 @@ void KeyPointDefinition::setViewData(const CKeypoint &val)
 	ui.rbDay->setChecked(tenor.second == "d");
 	ui.rbMonth->setChecked(tenor.second == "m");
 	ui.rbYear->setChecked(tenor.second == "y");
+	ui.deStart->setDate(val.getSdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(val.getSdate()));
+	ui.deEnd->setDate(val.getEdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(val.getEdate()));
+	ui.cbMarket->setCurrentText(val.getMarketName());
+	ui.cbMarket->setProperty(PROCODE, val.getMarketCode());
+	ui.cbCalendar->setCurrentText(val.getCalendarName());
+	ui.cbCalendar->setProperty(PROCODE, val.getCalendarCode());
+	ui.cbConvention->setCurrentText(val.getConventionName());
+	ui.cbConvention->setProperty(PROCODE, val.getConventionCode());
+	ui.cbSpotlag->setCurrentText(val.getSpotlatName());
+	ui.cbSpotlag->setProperty(PROCODE, val.getSpotlatCode());
+	ui.cbDayCount->setCurrentText(val.getDayCountName());
+	ui.cbDayCount->setProperty(PROCODE, val.getDayCountCode());
 
-	CProduct product;
-	if (PARASETCTL->getProduct(val.getProductCode(), product)) {
-		ui.deStart->setDate(product.getSdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(product.getSdate()));
-		ui.deEnd->setDate(product.getEdate() == 0 ? QDate::currentDate() : QDate::fromJulianDay(product.getEdate()));
-	} else {
-		qWarning() << "get product faild, code:" << val.getProductCode();
-	}
-	ui.cbMarket->setCurrentText(getParaNameFromCode("MarketType", val.getMarketCode()));
-	//ui.cbCalendar->setCurrentText(getParaNameFromCode("Calendar", val.getCalendar()));
-	//ui.cbConvention->setCurrentText(getParaNameFromCode("Convention", val.getConvention()));
-	//ui.cbSpotlag->setCurrentText(getParaNameFromCode("CouponFrequency", val.getSpotlat()));
-	//ui.cbDayCount->setCurrentText(getParaNameFromCode("DayCount", val.getDayCount()));
 	setCurrentData(getViewData()); // 从UI获取，保持与UI一致
 }
 
@@ -303,15 +412,30 @@ CKeypoint KeyPointDefinition::getViewData()
 	} else if (ui.rbYear->isChecked()) {
 		tenor = "y";
 	}
+	 
 	result.setTenor(spliceTenor(ui.leTenor->text().toInt(), tenor));
-	QString strStartDate = ui.deStart->date().toString(YMD);
-	QString strEndDate = ui.deEnd->date().toString(YMD);
-	result.setMarketCode(ui.cbMarket->currentData().toString().trimmed());
+	QString code = ui.cbMarket->property(PROCODE).toString();
+	if (PARASETCTL->getParadict().contains(code)) code = "";
+	result.setMarketCode(code.isEmpty()?ui.cbMarket->currentData().toString().trimmed():code);
 	result.setMarketName(ui.cbMarket->currentText().trimmed());
-	//result.setCalendar(ui.cbCalendar->currentData().toString().trimmed());
-	//result.setConvention(ui.cbConvention->currentData().toString().trimmed());
-	//result.setSpotlat(ui.cbSpotlag->currentData().toString().trimmed());
-	//result.setDayCount(ui.cbDayCount->currentData().toString().trimmed());
+	code = ui.cbCalendar->property(PROCODE).toString();
+	if (PARASETCTL->getParadict().contains(code)) code = "";
+	result.setCalendarCode(code.isEmpty() ?ui.cbCalendar->currentData().toString().trimmed() :code);
+	result.setCalendarName(ui.cbCalendar->currentText().trimmed());
+	code = ui.cbConvention->property(PROCODE).toString();
+	if (PARASETCTL->getParadict().contains(code)) code = "";
+	result.setConventionCode(code.isEmpty() ?ui.cbConvention->currentData().toString().trimmed() :code);
+	result.setConventionName(ui.cbConvention->currentText().trimmed());
+	code = ui.cbSpotlag->property(PROCODE).toString();
+	if (PARASETCTL->getParadict().contains(code)) code = "";
+	result.setSpotlatCode(code.isEmpty() ?ui.cbSpotlag->currentData().toString().trimmed() :code);
+	result.setSpotlatName(ui.cbSpotlag->currentText().trimmed());
+	code = ui.cbDayCount->property(PROCODE).toString();
+	if (PARASETCTL->getParadict().contains(code)) code = "";
+	result.setDayCountCode(code.isEmpty() ?ui.cbDayCount->currentData().toString().trimmed() :code);
+	result.setDayCountName(ui.cbDayCount->currentText().trimmed());
+	result.setSdate(ui.deStart->date().toJulianDay());
+	result.setEdate(ui.deEnd->date().toJulianDay());
 	return result;
 }
 
@@ -329,53 +453,6 @@ QString KeyPointDefinition::spliceTenor(int num, QString unit)
 	return QString("%1%2").arg(num).arg(unit.toLower());
 }
 
-QString KeyPointDefinition::getParaNameFromCode(const QString &typecode, const QString &paracode)
-{
-	CParaDict paradict;
-	if (PARASETCTL->getParadict(typecode, paracode, paradict)) {
-		return paradict.getParaName();
-	}
-	return "";
-}
-QList<QStandardItem *> KeyPointDefinition::createParentRowItems(const CKeypoint &val)
-{
-	QList<QStandardItem *> result;
-	QStandardItem *marketName = new QStandardItem(val.getMarketName());
-	marketName->setData(val.getMarketCode());
-	result.push_back(marketName);
-	return result;
-}
-
-QList<QStandardItem *> KeyPointDefinition::createChildtRowItems(const CKeypoint &val)
-{
-	auto createItem = [](const QString &text, const QString &data = "") -> QStandardItem* {
-		QStandardItem *item = new QStandardItem(text);
-		item->setData(data);
-		return item;
-	};
-
-	QString strStartDate, strEndDate;
-	CProduct product;
-	if (PARASETCTL->getProduct(val.getProductCode(), product)) {
-		strStartDate = QDate::fromJulianDay(product.getSdate()).toString(YMD);
-		strEndDate = QDate::fromJulianDay(product.getEdate()).toString(YMD);
-	} else {
-		qWarning() << "get product failed, code:" << val.getProductCode();
-	}
-
-	QList<QStandardItem *> result;
-	result.push_back(createItem(val.getKpcode()));
-	result.push_back(createItem(val.getKpname()));
-	result.push_back(createItem(val.getProductName(), val.getProductCode()));
-	result.push_back(createItem(val.getTenor().toUpper()));
-	//result.push_back(createItem(getParaNameFromCode("Calendar", val.getCalendar()), val.getCalendar()));
-	//result.push_back(createItem(getParaNameFromCode("Convention", val.getConvention()), val.getConvention()));
-	//result.push_back(createItem(getParaNameFromCode("DayCount", val.getDayCount()), val.getDayCount()));
-	result.push_back(createItem(strStartDate));
-	result.push_back(createItem(strEndDate));
-	return result;
-}
-
 bool KeyPointDefinition::isProductExist(const QString &productCode)
 {
 	CProduct product;
@@ -388,30 +465,18 @@ bool KeyPointDefinition::isProductExist(const QString &productCode)
 
 void KeyPointDefinition::initProduct()
 {
-	//m_pProductModel->clear();
+	m_pProductModel->clear();
 
-	//QList<int> columnlst;
+	QMap<QString, QList<QStandardItem *>> _treeCombobox;
 
-	/*for (int i = 0; i < eEnd; i++)
-		columnlst << i;*/
-
-	
-	/*QMap<QString, CProduct> val = PARASETCTL->getProduct();
+	QMap<QString, CProduct> val = PARASETCTL->getProduct();
 	for (QMap<QString, CProduct>::const_iterator itor = val.begin();
 		itor != val.end(); itor++)
 	{
-		QMap<QString, QList<QStandardItem *>> _treeCombobox;
-		addTree(_treeCombobox, m_pProductModel, itor.value().getCode(), itor.value().getParentCode(), itor.value(), column);
+		addTree(_treeCombobox, m_pProductModel, itor.value().getCode(), itor.value().getParentCode(), itor.value(), COLSPRODUCT);
 	}
-	if (!val.isEmpty())
-	{
-		locator(m_tree, val[val.keys().back()].getCode());
-	}
-	else
-	{
-		bwClear();
-	}
-	((QTreeView *)(ui.cbParentCode->view()))->expandAll();*/
+	
+	((QTreeView *)(ui.cbProductCode->view()))->expandAll();
 }
 
 void KeyPointDefinition::initParameter(const QString &paraCode)
@@ -497,8 +562,8 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 			QStandardItem *p = new QStandardItem(val.getKpcode());
 			childItems.push_back(p);
 			p->setToolTip(p->text());
-			p->setData(i, 0);
-			p->setData(val.getMarketCode(), 1);
+			p->setData(i, V_INDEX);
+			p->setData(val.getMarketCode(), V_CODE);
 			break;
 		}
 		case eKPName:
@@ -506,7 +571,15 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 			QStandardItem *p = new QStandardItem(val.getKpname());
 			childItems.push_back(p);
 			p->setToolTip(p->text());
-			p->setData(i, 0);
+			p->setData(i, V_INDEX);
+			break;
+		}
+		case eProductCode:
+		{
+			QStandardItem *p = new QStandardItem(val.getProductCode());
+			childItems.push_back(p);
+			p->setToolTip(p->text());
+			p->setData(i, V_INDEX);
 			break;
 		}
 		case eProductName:
@@ -514,8 +587,8 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 			QStandardItem *p = new QStandardItem(val.getProductName());
 			childItems.push_back(p);
 			p->setToolTip(p->text());
-			p->setData(i, 0);
-			p->setData(val.getProductCode(), 1);
+			p->setData(i, V_INDEX);
+			p->setData(val.getProductCode(), V_CODE);
 			break;
 		}
 		case eTenor:
@@ -523,24 +596,24 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 			QStandardItem *p = new QStandardItem(val.getTenor());
 			childItems.push_back(p);
 			p->setToolTip(p->text());
-			p->setData(i, 0);
-			p->setData(val.getTenor(), 1);
+			p->setData(i, V_INDEX);
+			p->setData(val.getTenor(), V_CODE);
 			break;
 		}
 		case eSdate:
 		{
-			QStandardItem *p = new QStandardItem(QDate::fromJulianDay(val.getSdate()).toString(YMD));
+			QStandardItem *p = new QStandardItem(FORMATDATE(val.getSdate()));
 			childItems.push_back(p);
 			p->setToolTip(p->text());
-			p->setData(i, 0);
+			p->setData(i, V_INDEX);
 			break;
 		}
 		case eEdate:
 		{
-			QStandardItem *p = new QStandardItem(QDate::fromJulianDay(val.getEdate()).toString(YMD));
+			QStandardItem *p = new QStandardItem(FORMATDATE(val.getEdate()));
 			childItems.push_back(p);
 			p->setToolTip(p->text());
-			p->setData(i, 0);
+			p->setData(i, V_INDEX);
 			break;
 		}
 		case eMarket:
@@ -548,8 +621,8 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 			QStandardItem *p = new QStandardItem(val.getMarketName());
 			childItems.push_back(p);
 			p->setToolTip(qutil::splitTooltip(val.getMarketName(), 200));
-			p->setData(i, 0);
-			p->setData(val.getMarketCode(), 1);
+			p->setData(i, V_INDEX);
+			p->setData(val.getMarketCode(), V_CODE);
 			break;
 		}
 		case eCalendar:
@@ -557,8 +630,8 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 			QStandardItem *p = new QStandardItem(val.getCalendarName());
 			childItems.push_back(p);
 			p->setToolTip(qutil::splitTooltip(val.getCalendarName(), 200));
-			p->setData(i, 0);
-			p->setData(val.getCalendarCode(), 1);
+			p->setData(i, V_INDEX);
+			p->setData(val.getCalendarCode(), V_CODE);
 			break;
 		}
 		case eConvention:
@@ -566,8 +639,8 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 			QStandardItem *p = new QStandardItem(val.getConventionName());
 			childItems.push_back(p);
 			p->setToolTip(qutil::splitTooltip(val.getConventionName(), 200));
-			p->setData(i, 0);
-			p->setData(val.getConventionCode(), 1);
+			p->setData(i, V_INDEX);
+			p->setData(val.getConventionCode(), V_CODE);
 			break;
 		}
 		case eDayCount:
@@ -575,8 +648,8 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 			QStandardItem *p = new QStandardItem(val.getDayCountName());
 			childItems.push_back(p);
 			p->setToolTip(qutil::splitTooltip(val.getDayCountName(), 200));
-			p->setData(i, 0);
-			p->setData(val.getDayCountCode(), 1);
+			p->setData(i, V_INDEX);
+			p->setData(val.getDayCountCode(), V_CODE);
 			break;
 		}
 		case eCouponfrequency:
@@ -584,8 +657,8 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 			QStandardItem *p = new QStandardItem(val.getSpotlatName());
 			childItems.push_back(p);
 			p->setToolTip(qutil::splitTooltip(val.getSpotlatName(), 200));
-			p->setData(i, 0);
-			p->setData(val.getSpotlatCode(), 1);
+			p->setData(i, V_INDEX);
+			p->setData(val.getSpotlatCode(), V_CODE);
 			break;
 		}
 		default:
@@ -595,37 +668,83 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 }
 void KeyPointDefinition::updateChildNode(const CKeypoint &val)
 {
-	QList<int> colsKp = QList<int>{ eKPCode,eKPName,eProductName,eTenor,eCalendar,eConvention,eDayCount,eCouponfrequency,eSdate,eEdate };
-	QList<int> colsProduct = QList<int>{ 0 };
-
 	if (m_tree.contains(val.getKpcode()))
 	{
-		QStandardItem *pMarket = getItem(m_tree, val.getKpcode(), eKPCode, 0);
-		if (pMarket && val.getMarketCode() != pMarket->data(1).toString()) {
+		QStandardItem *pMarket = getItem(m_tree, val.getKpcode(), eKPCode, V_INDEX);
+		if (pMarket && val.getMarketCode() != pMarket->data(V_CODE).toString()) {
 
 			QString code = val.getKpcode();
-			QString oldMarket = pMarket->data(1).toString();
-			CKeypoint del;
-			del.setKpcode(code);
-
-			delTree(m_tree, m_model, code, oldMarket, CKeypoint());
+			QString oldMarket = pMarket->data(V_CODE).toString();
 			
-			addTree(m_tree, m_model, code, val.getMarketCode(), val, colsKp);
+			KeypointTreeOper::delTree(m_tree, m_model, code, oldMarket);
+			if (m_tree.contains(oldMarket) &&
+				!m_tree[oldMarket].isEmpty() &&
+				m_tree[oldMarket].front()->rowCount() == 0)
+			{
+				KeypointTreeOper::delTree(m_tree, m_model, code, "");
+			}
+			
+			if (!m_tree.contains(val.getMarketCode()) && recordExist(val.getMarketCode(), CKeypoint()))
+				addTree(m_tree, m_model, val.getMarketCode(), "", val, COLSMARKET);
+			addTree(m_tree, m_model, code, val.getMarketCode(), val, COLSKP);
 		}
-		/*else if (pMarket && m_tree[val.getParaCode()].size() == eEnd) {
-			m_tree[val.getParaCode()][eTypeCode]->setText(val.getTypeCode());
-			m_tree[val.getParaCode()][eTypeName]->setText(val.getParaName());
-
-			m_tree[val.getParaCode()][eParaName]->setText(val.getParaName());
-			m_tree[val.getParaCode()][eParaExplain]->setText(val.getParaExplain());
-
-			m_tree[val.getParaCode()][eTypeCode]->setToolTip(val.getTypeCode());
-			m_tree[val.getParaCode()][eTypeName]->setToolTip(val.getParaName());
-
-			m_tree[val.getParaCode()][eParaName]->setToolTip(val.getParaName());
-			m_tree[val.getParaCode()][eParaExplain]->setToolTip(val.getParaExplain());
-
-		}*/
+		else if (pMarket) {
+			QStandardItem *p = getItem(m_tree, val.getKpcode(), eKPName, V_INDEX);
+			if (p)
+			{
+				p->setText(val.getKpname());
+				p->setToolTip(val.getKpname());
+			}
+			p = getItem(m_tree, val.getKpcode(), eProductName, V_INDEX);
+			if (p)
+			{
+				p->setText(val.getProductName());
+				p->setToolTip(val.getProductName());
+				p->setData(val.getProductCode(), V_CODE);
+			}
+			p = getItem(m_tree, val.getKpcode(), eTenor, V_INDEX);
+			if (p)
+			{
+				p->setText(val.getTenor());
+				p->setToolTip(val.getTenor());
+			}
+			p = getItem(m_tree, val.getKpcode(), eCalendar, V_INDEX);
+			if (p)
+			{
+				p->setText(val.getCalendarName());
+				p->setToolTip(val.getCalendarName());
+			}
+			p = getItem(m_tree, val.getKpcode(), eConvention, V_INDEX);
+			if (p)
+			{
+				p->setText(val.getConventionName());
+				p->setToolTip(val.getConventionName());
+			}
+			p = getItem(m_tree, val.getKpcode(), eDayCount, V_INDEX);
+			if (p)
+			{
+				p->setText(val.getDayCountName());
+				p->setToolTip(val.getDayCountName());
+			}
+			p = getItem(m_tree, val.getKpcode(), eCouponfrequency, V_INDEX);
+			if (p)
+			{
+				p->setText(val.getSpotlatName());
+				p->setToolTip(val.getSpotlatName());
+			}
+			p = getItem(m_tree, val.getKpcode(), eSdate, V_INDEX);
+			if (p)
+			{
+				p->setText(FORMATDATE(val.getSdate()));
+				p->setToolTip(FORMATDATE(val.getSdate()));
+			}
+			p = getItem(m_tree, val.getKpcode(), eEdate, V_INDEX);
+			if (p)
+			{
+				p->setText(FORMATDATE(val.getEdate()));
+				p->setToolTip(FORMATDATE(val.getEdate()));
+			}
+		}
 	}
 }
 CKeypoint KeyPointDefinition::getTFromDB(const QString &code, QString &parentCode, CKeypoint t)
@@ -636,12 +755,7 @@ CKeypoint KeyPointDefinition::getTFromDB(const QString &code, QString &parentCod
 	parentCode = val.getMarketCode();
 	return val;
 }
-void KeyPointDefinition::delTree(QMap<QString, QList<QStandardItem *>> &tree,
-	QStandardItemModel *pGoodsModel, const QString &curCode,
-	const QString &parentCode, CKeypoint t)
-{
-	KeypointTreeOper::delTree(tree, pGoodsModel, curCode, parentCode, t);
-}
+
 void KeyPointDefinition::addTree(QMap<QString, QList<QStandardItem *>> &tree, 
 	QStandardItemModel *pGoodsModel, const QString &curCode, 
 	const QString &parentCode, const CKeypoint &val, const QList<int> cols)
@@ -667,12 +781,12 @@ void KeyPointDefinition::packQStandardItem(QList<QStandardItem *> &childItems, c
 	if (val.getCode().isEmpty() || val.getName().isEmpty()) {
 		return;
 	}
-	if (cols.contains(0))
+	if (cols.contains(eProductCode))
 	{
 		QStandardItem *p = new QStandardItem(val.getCode());
 		childItems.push_back(p);
 		p->setToolTip(p->text());
-		p->setData(0, 0);
+		p->setData(eProductCode, V_CODE);
 	}
 }
 void KeyPointDefinition::updateChildNode(const CProduct &val)
@@ -686,12 +800,7 @@ CProduct KeyPointDefinition::getTFromDB(const QString &code, QString &parentCode
 	parentCode = val.getParentCode();
 	return val;
 }
-void KeyPointDefinition::delTree(QMap<QString, QList<QStandardItem *>> &tree,
-	QStandardItemModel *pGoodsModel, const QString &curCode, 
-	const QString &parentCode, CProduct t)
-{
-	ProductTreeOper::delTree(tree, pGoodsModel, curCode, parentCode, t);
-}
+
 void KeyPointDefinition::addTree(QMap<QString, QList<QStandardItem *>> &tree, 
 	QStandardItemModel *pGoodsModel, const QString &curCode, 
 	const QString &parentCode, const CProduct &val, const QList<int> cols)
@@ -699,13 +808,15 @@ void KeyPointDefinition::addTree(QMap<QString, QList<QStandardItem *>> &tree,
 	ProductTreeOper::addTree(tree, pGoodsModel, curCode, parentCode, val, cols);
 }
 
-QStandardItem *KeyPointDefinition::getItem(const QMap<QString, QList<QStandardItem *>> &tree,
+QStandardItem *KeyPointDefinition::getItem(QMap<QString, QList<QStandardItem *>> &tree,
 	const QString &code, int nVal, int role, CKeypoint t)
 {
 	if (tree.contains(code))
 	{
-		foreach(QStandardItem *p, tree[code])
+		for (QList<QStandardItem *>::iterator itor = tree[code].begin();
+			itor != tree[code].end(); itor++)
 		{
+			auto p = *itor;
 			if (p && p->data(role).toInt() == nVal)
 				return p;
 		}

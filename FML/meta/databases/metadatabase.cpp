@@ -427,7 +427,7 @@ bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val, QString &err)
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
 	QVariantList paramList;
 	QStringList fieldList;
-	fieldList << "kpcode" << "kpname" << "productcode" << "productname" << "tenor" << "marketcode" << "marketname" << "calendar" << "convention" << "daycount" << "spotlag" << "sdate" << "edate";
+	fieldList << "kpcode" << "kpname" << "productcode" << "productname" << "tenor" << "marketcode" << "marketname" << "calendarcode" << "calendarname" << "conventioncode" << "conventionname" << "daycountcode" << "daycountname" << "spotlagcode" << "spotlagname" << "sdate" << "edate";
 	QList<QVariantList> results;
 	bool ret = m_DbMgr->QueryFields(DB_SQL_SelectKeypoint, paramList, fieldList, results);
 	if (!ret)
@@ -438,7 +438,7 @@ bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val, QString &err)
 	
 	for (int i = 0; i < results.size(); i++) {
 		const QVariantList &valList = results[i];
-		if (valList.size() != 13) {
+		if (valList.size() != 17) {
 			continue;
 		}
 		CKeypoint keypoint;
