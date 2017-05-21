@@ -254,33 +254,45 @@ public:
 	const QString& getMarketCode() const;
 	void setMarketName(const QString &val);
 	const QString& getMarketName() const;
-	void setCalendar(const QString &val);
-	const QString& getCalendar() const;
-	void setConvention(const QString &val);
-	const QString& getConvention() const;
-	void setDayCount(const QString &val);
-	const QString& getDayCount() const;
-	void setSpotlat(const QString &val);
-	const QString& getSpotlat() const;
-	void setCouponfrequency(const QString &val);
-	const QString& getCouponfrequency() const;
-	void setRefindex(const QString &val);
-	const QString& getRefindex() const;
+	void setCalendarCode(const QString &val);
+	const QString& getCalendarCode() const;
+	void setCalendarName(const QString &val);
+	const QString& getCalendarName() const;
+	void setConventionCode(const QString &val);
+	const QString& getConventionCode() const;
+	void setConventionName(const QString &val);
+	const QString& getConventionName() const;
+	void setDayCountCode(const QString &val);
+	const QString& getDayCountCode() const;
+	void setDayCountName(const QString &val);
+	const QString& getDayCountName() const;
+	void setSpotlatCode(const QString &val);
+	const QString& getSpotlatCode() const;
+	void setSpotlatName(const QString &val);
+	const QString& getSpotlatName() const;
+	void setSdate(const int &sdate);
+	const int &getSdate() const;
+	void setEdate(const int &edate);
+	const int &getEdate() const;
 
 private:
-	QString m_kpcode;
-	QString m_kpname;
-	QString m_productcode;
-	QString m_productname;
-	QString m_tenor;
-	QString m_marketcode;
-	QString m_marketname;
-	QString m_calendar;
-	QString m_convention;
-	QString m_daycount;
-	QString m_spotlat;
-	QString m_couponfrequency;
-	QString m_refindex;
+	QString m_kpcode;      // 关键点code
+	QString m_kpname;      // 关键点名称
+	QString m_productcode; // 产品code
+	QString m_productname; // 产品名称
+	QString m_tenor;       // 期限
+	QString m_marketcode;  // 市场code
+	QString m_marketname;  // 市场名称
+	QString m_calendarcode;    // 日历code
+	QString m_calendarname;    // 日历名称
+	QString m_conventioncode;  // 假日调整 计息日调整code
+	QString m_conventionname;  // 假日调整 计息日调整名称
+	QString m_daycountcode;    // 天数计数code
+	QString m_daycountname;    // 天数计数名称
+	QString m_spotlatcode;     // 交割天数 付息频率code
+	QString m_spotlatname;     // 交割天数 付息频率名称
+	int m_sdate;              
+	int m_edate;
 };
 ///////////////////////////////////////////////////////////
 // demo

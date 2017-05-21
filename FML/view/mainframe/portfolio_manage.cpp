@@ -30,7 +30,7 @@ QString PortfolioManage::getKey(const CPortfolio &newVal) const
 }
 
 // 提交时，检查相关控件值是否合法。
-bool PortfolioManage::checkValid()
+bool PortfolioManage::checkValid(bool)
 {
 	bool bValid = true;
 	if (ui.lineEdit_portcode->text().isEmpty())
@@ -276,7 +276,7 @@ void PortfolioManage::setViewData(const CPortfolio &val)
 //********************************************************************
 //* defime BWTreeOper virtual function  here
 //********************************************************************
-void PortfolioManage::bwLocate(const QString &code) {
+void PortfolioManage::bwLocate(const QString &code, CPortfolio t) {
 	QModelIndexList findIndex = this->m_pGoodsModel->match(this->m_pGoodsModel->index(0, 0), Qt::DisplayRole, code, 1, Qt::MatchRecursive | Qt::MatchExactly);
 	if (findIndex.size() > 0)
 	{
@@ -289,14 +289,14 @@ void PortfolioManage::bwLocate(const QString &code) {
 	}
 }
 
-bool PortfolioManage::recordExist(const QString &val){
+bool PortfolioManage::recordExist(const QString &val, CPortfolio t){
 	if (PARASETCTL->getPortfolio().contains(val))
 		return true;
 	else
 		return false;
 }
 
-CPortfolio PortfolioManage::getTFromDB(const QString &code,QString &parentCode) {
+CPortfolio PortfolioManage::getTFromDB(const QString &code,QString &parentCode, CPortfolio t) {
 	CPortfolio val;
 	val=PARASETCTL->getPortfolio()[code];
 	parentCode = val.getParentcode();
@@ -429,7 +429,7 @@ void PortfolioManage::updateChildNode(const CPortfolio &val) {
 	}
 }
 
-void PortfolioManage::bwClear()
+void PortfolioManage::bwClear(CPortfolio t)
 {
 	ui.lineEdit_portcode->setText("");
 	ui.lineEdit_portname->setText("");

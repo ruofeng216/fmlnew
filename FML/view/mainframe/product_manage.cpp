@@ -27,7 +27,7 @@ QString ProductManage::getKey(const CProduct &newVal) const
 }
 
 // 提交时，检查相关控件值是否合法。
-bool ProductManage::checkValid()
+bool ProductManage::checkValid(bool)
 {
 	bool bValid = true;
 	if (ui.leCode->text().isEmpty())
@@ -273,7 +273,7 @@ void ProductManage::setViewData(const CProduct &val)
 //********************************************************************
 //* define BWTreeOper virtual function  here
 //********************************************************************
-void ProductManage::bwLocate(const QString &code) {
+void ProductManage::bwLocate(const QString &code, CProduct t) {
 	QModelIndexList findIndex = this->m_pGoodsModel->match(this->m_pGoodsModel->index(0, 0), Qt::DisplayRole, code, 1, Qt::MatchRecursive | Qt::MatchExactly);
 	if (findIndex.size() > 0)
 	{
@@ -286,7 +286,7 @@ void ProductManage::bwLocate(const QString &code) {
 	}
 }
 
-void ProductManage::bwClear() {
+void ProductManage::bwClear(CProduct t) {
 	ui.leCode->setText("");
 	ui.leName->setText("");
 	ui.deStart->setDate(QDate::currentDate());
@@ -298,14 +298,14 @@ void ProductManage::bwClear() {
 	setCurrentData(getViewData());
 }
 
-bool ProductManage::recordExist(const QString &val) {
+bool ProductManage::recordExist(const QString &val, CProduct t) {
 	if (PARASETCTL->getProduct().contains(val))
 		return true;
 	else
 		return false;
 }
 
-CProduct ProductManage::getTFromDB(const QString &code, QString &parentCode) {
+CProduct ProductManage::getTFromDB(const QString &code, QString &parentCode, CProduct t) {
 	CProduct val;
 	val = PARASETCTL->getProduct()[code];
 	parentCode = val.getParentCode();

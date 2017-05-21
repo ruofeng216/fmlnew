@@ -319,6 +319,7 @@
     <ClCompile Include="qmpreload.cpp" />
     <ClCompile Include="viewsignalmanager\viewsignalmanager.cpp" />
     <ClCompile Include="view\commonui\bodywidget.cpp" />
+    <ClCompile Include="view\commonui\bwtreeoper.cpp" />
     <ClCompile Include="view\commonui\draginouttabbar.cpp" />
     <ClCompile Include="view\commonui\draginouttabwidget.cpp" />
     <ClCompile Include="view\commonui\drop_widget.cpp" />
@@ -997,6 +998,8 @@
     <ClInclude Include="include\util\fml_style.h" />
     <ClInclude Include="include\util\log.h" />
     <ClInclude Include="include\util\skin_config.h" />
+    <ClInclude Include="view\commonui\bwtableoper.h" />
+    <ClInclude Include="view\commonui\bwtreeoper.h" />
     <CustomBuild Include="view\commonui\xcombobox.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Moc%27ing xcombobox.h...</Message>

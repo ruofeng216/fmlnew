@@ -29,7 +29,7 @@ public:
 	QString getKey(const CPortfolio &newVal) const;
 
 	// 提交时，检查相关控件值是否合法。
-	bool checkValid();
+	bool checkValid(bool opr = true);
 
 	void init();
 
@@ -57,10 +57,10 @@ private:
 
 	//*******************************************************************************************
 public:
-	void bwLocate(const QString &code);
-	bool recordExist(const QString &val);
-	CPortfolio getTFromDB(const QString &code, QString &parentCode);
+	void bwLocate(const QString &code, CPortfolio t = CPortfolio());
+	bool recordExist(const QString &val, CPortfolio t = CPortfolio());
+	CPortfolio getTFromDB(const QString &code, QString &parentCode, CPortfolio t = CPortfolio());
 	void packQStandardItem(QList<QStandardItem *> &items, const CPortfolio &val, const QList<int> cols);
 	void updateChildNode(const CPortfolio &val);
-	void bwClear();
+	void bwClear(CPortfolio t = CPortfolio());
 };

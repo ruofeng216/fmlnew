@@ -21,7 +21,7 @@ public:
 	void slotSetNotNull(QLineEdit* les);
 
 	// 提交时，检查相关控件值是否合法。
-	virtual bool checkValid() = 0;
+	virtual bool checkValid(bool opr = true) = 0;
 
 private:
 	T m_data;

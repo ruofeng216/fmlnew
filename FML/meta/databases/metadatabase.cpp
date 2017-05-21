@@ -427,7 +427,7 @@ bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val, QString &err)
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
 	QVariantList paramList;
 	QStringList fieldList;
-	fieldList << "kpcode" << "kpname" << "productcode" << "productname" << "tenor" << "marketcode" << "marketname" << "calendar" << "convention" << "daycount" << "spotlag" << "couponfrequency" << "refindex";
+	fieldList << "kpcode" << "kpname" << "productcode" << "productname" << "tenor" << "marketcode" << "marketname" << "calendarcode" << "calendarname" << "conventioncode" << "conventionname" << "daycountcode" << "daycountname" << "spotlagcode" << "spotlagname" << "sdate" << "edate";
 	QList<QVariantList> results;
 	bool ret = m_DbMgr->QueryFields(DB_SQL_SelectKeypoint, paramList, fieldList, results);
 	if (!ret)
@@ -438,7 +438,7 @@ bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val, QString &err)
 	
 	for (int i = 0; i < results.size(); i++) {
 		const QVariantList &valList = results[i];
-		if (valList.size() != 13) {
+		if (valList.size() != 17) {
 			continue;
 		}
 		CKeypoint keypoint;
@@ -449,12 +449,16 @@ bool MetaDatabase::getKeypoint(QMap<QString, CKeypoint> &val, QString &err)
 		keypoint.setTenor(valList.at(4).toString());
 		keypoint.setMarketCode(valList.at(5).toString());
 		keypoint.setMarketName(valList.at(6).toString());
-		keypoint.setCalendar(valList.at(7).toString());
-		keypoint.setConvention(valList.at(8).toString());
-		keypoint.setDayCount(valList.at(9).toString());
-		keypoint.setSpotlat(valList.at(10).toString());
-		keypoint.setCouponfrequency(valList.at(11).toString());
-		keypoint.setRefindex(valList.at(12).toString());
+		keypoint.setCalendarCode(valList.at(7).toString());
+		keypoint.setCalendarName(valList.at(8).toString());
+		keypoint.setConventionCode(valList.at(9).toString());
+		keypoint.setConventionName(valList.at(10).toString());
+		keypoint.setDayCountCode(valList.at(11).toString());
+		keypoint.setDayCountName(valList.at(12).toString());
+		keypoint.setSpotlatCode(valList.at(13).toString());
+		keypoint.setSpotlatName(valList.at(14).toString());
+		keypoint.setSdate(valList.at(15).toInt());
+		keypoint.setEdate(valList.at(16).toInt());
 		if (keypoint.getKpcode().isEmpty() || keypoint.getTenor().isEmpty()) {
 			continue;
 		}
@@ -469,7 +473,8 @@ bool MetaDatabase::setKeypoint(const QList<CKeypoint> &valList, QString &err)
 	W_RETURN_VAL_IF_FAIL(NULL != m_DbMgr, false);
 	QList<QVariantList> allParamList;
 	QVariantList kpcodeList, kpnameList, productcodeList, productnameList, tenorList, marketcodeList, 
-		marketnameList, calendarList, conventionList, daycountList, spotlagList, couponfrequencyList, refindexList;
+		marketnameList, calendarCodeList, calendarNameList, conventionCodeList, conventionNameList, 
+		daycountCodeList, daycountNameList, spotlagCodeList, spotlagNameList, sdateList, edateList;
 	foreach(const CKeypoint &val, valList) {
 		kpcodeList << val.getKpcode();
 		kpnameList << val.getKpname();
@@ -478,15 +483,21 @@ bool MetaDatabase::setKeypoint(const QList<CKeypoint> &valList, QString &err)
 		tenorList << val.getTenor();
 		marketcodeList << val.getMarketCode();
 		marketnameList << val.getMarketName();
-		calendarList << val.getCalendar();
-		conventionList << val.getConvention();
-		daycountList << val.getDayCount();
-		spotlagList << val.getSpotlat();
-		couponfrequencyList << val.getCouponfrequency();
-		refindexList << val.getRefindex();
+		calendarCodeList << val.getCalendarCode();
+		calendarNameList << val.getCalendarName();
+		conventionCodeList << val.getConventionCode();
+		conventionNameList << val.getConventionName();
+		daycountCodeList << val.getDayCountCode();
+		daycountNameList << val.getDayCountName();
+		spotlagCodeList << val.getSpotlatCode();
+		spotlagNameList << val.getSpotlatName();
+		sdateList << val.getSdate();
+		edateList << val.getEdate();
 	}
 	allParamList << kpcodeList << kpnameList << productcodeList << productnameList << tenorList << marketcodeList
-		<< marketnameList << calendarList << conventionList << daycountList << spotlagList << couponfrequencyList << refindexList;
+		<< marketnameList << calendarCodeList << calendarNameList << conventionCodeList << conventionNameList 
+		<< daycountCodeList << daycountNameList << spotlagCodeList << spotlagNameList 
+		<< sdateList << edateList;
 	if (m_DbMgr->ExecuteBatchSQL(DB_SQL_ReplaceKeypoint, allParamList))
 		return true;
 	err = m_DbMgr->lastError();

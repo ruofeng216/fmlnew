@@ -28,7 +28,7 @@ QString FinancialCalendar::getKey(const CFinancialCalendar &newVal) const
 }
 
 // 提交时，检查相关控件值是否合法。
-bool FinancialCalendar::checkValid()
+bool FinancialCalendar::checkValid(bool)
 {
 	bool bValid = true;
 	if (ui.dateEdit->date().year() != ui.lineEdit_year->text().toInt())
