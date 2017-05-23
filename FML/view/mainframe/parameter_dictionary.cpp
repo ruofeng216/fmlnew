@@ -80,7 +80,7 @@ void ParameterDictionary::init()
 {
 	{
 		ui.cbTypeCode->view()->setAlternatingRowColors(true);
-		connect(ui.cbTypeCode, static_cast<void(QComboBox::*)(const QString &)>(&QComboBox::currentIndexChanged),
+		connect(ui.cbTypeCode, static_cast<void(QComboBox::*)(const QString &)>(&QComboBox::currentTextChanged),
 			[this](const QString &text) 
 		{
 			if (PARASETCTL->getParadict().contains(text))
@@ -131,16 +131,6 @@ void ParameterDictionary::slotAdd()
 	if (PARASETCTL->getParadict(val.getTypeCode(), val.getParaCode(), oldVal)) {
 		ShowWarnMessage(tr("add"), tr("The para code already exists").arg(val.getTypeCode()).arg(val.getParaCode()), this);
 		return;
-	}
-
-	
-	if (!val.getParaCode().isEmpty())
-	{
-		if (!PARASETCTL->getParadict().contains(val.getTypeCode()))
-		{
-			ShowWarnMessage(tr("add"), tr("typecode dont exist!"), this);
-			return;
-		}
 	}
 	
 	QString err;

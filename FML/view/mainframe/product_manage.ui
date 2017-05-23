@@ -136,7 +136,7 @@
         </widget>
        </item>
        <item>
-        <widget class="XComboBox" name="cbParentCode">
+        <widget class="TreeComboBox" name="cbParentCode">
          <property name="editable">
           <bool>true</bool>
          </property>
@@ -452,9 +452,9 @@
    <header>xdateedit.h</header>
   </customwidget>
   <customwidget>
-   <class>XComboBox</class>
+   <class>TreeComboBox</class>
    <extends>QComboBox</extends>
-   <header>xcombobox.h</header>
+   <header>treecombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

@@ -67,6 +67,8 @@ typedef enum e_ErrType
 /////////////////////////////////////////////////////
 //重要字段
 #pragma region CF
+//交割天数
+#define SPOTLAG "SpotLag"
 // 付息频率
 #define COUPONFREQUENCY  "CouponFrequency"
 // 按季

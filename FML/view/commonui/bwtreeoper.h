@@ -267,11 +267,13 @@ public:
 	virtual void packQStandardItem(QList<QStandardItem *> &items, const CProduct &val, const QList<int> cols) {}
 	virtual void updateChildNode(const CProduct &val) {}
 	virtual CProduct getTFromDB(const QString &code, QString &parentCode, CProduct t = CProduct()) { return t; }
+	
 	virtual void delTree(QMap<QString, QList<QStandardItem *>> &tree, 
 		QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode)
 	{
 		BWTreeOper::delTree(tree, pGoodsModel, curCode, parentCode);
 	}
+	
 	virtual void addTree(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode, const CProduct &val, const QList<int> cols)
 	{
 		BWTreeOper::addTree(tree, pGoodsModel, curCode, parentCode, val, cols);
@@ -288,6 +290,7 @@ public:
 	virtual void updateChildNode(const CKeypoint &val) {}
 	virtual CKeypoint getTFromDB(const QString &code, QString &parentCode, CKeypoint t = CKeypoint()) { return t; }
 	virtual QStandardItem *getItem(QMap<QString, QList<QStandardItem *>> &tree, const QString &code, int nVal, int role = 257, CKeypoint t = CKeypoint()) { return NULL; }
+	
 	virtual void delTree(QMap<QString, QList<QStandardItem *>> &tree,
 		QStandardItemModel *pGoodsModel, const QString &curCode, const QString &parentCode)
 	{

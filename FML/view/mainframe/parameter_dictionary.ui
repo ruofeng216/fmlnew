@@ -136,7 +136,7 @@
         </widget>
        </item>
        <item>
-        <widget class="XComboBox" name="cbTypeCode">
+        <widget class="TreeComboBox" name="cbTypeCode">
          <property name="editable">
           <bool>true</bool>
          </property>
@@ -348,9 +348,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>XComboBox</class>
+   <class>TreeComboBox</class>
    <extends>QComboBox</extends>
-   <header>xcombobox.h</header>
+   <header>treecombobox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

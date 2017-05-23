@@ -82,6 +82,7 @@ bool KeyPointDefinition::checkValid(bool opr)
 		ui.cbProductName->setError(tr("ProductName cant be changed!"));
 		bValid = false;
 	}
+
 	if (ui.leTenor->text().isEmpty())
 	{
 		ui.leTenor->setError(tr("ProductCode cant be empty!"));
@@ -92,11 +93,13 @@ bool KeyPointDefinition::checkValid(bool opr)
 		ui.deEnd->setError(tr("end-time cant be small than start-time!"));
 		bValid = false;
 	}
+	
 	if (!PARASETCTL->getParadict().contains(kp.getMarketCode()) && opr)
 	{
 		ui.cbMarket->setError(tr("MarketCode dont exist now, cant add/modify with this code!"));
 		bValid = false;
 	}
+	
 	if (!PARASETCTL->getParadict().contains(kp.getCalendarCode()) && opr)
 	{
 		ui.cbCalendar->setError(tr("CalendarCode dont exist now, cant add/modify with this code!"));
@@ -145,8 +148,8 @@ void KeyPointDefinition::init()
 		initParameter(CONVENTION);
 		// 天数计数
 		initParameter(DAYCOUNT);
-		// 付息频率
-		initParameter(COUPONFREQUENCY);
+		// 交割天数
+		initParameter(SPOTLAG);
 	}
 	{
 		ui.treeView->setAlternatingRowColors(true);
@@ -192,7 +195,7 @@ void KeyPointDefinition::slotSkinChange()
 void KeyPointDefinition::slotAdd()
 {
 	if (!checkValid()) return;
-
+	
 	CKeypoint val = getViewData();
 
 	CKeypoint oldVal;
@@ -212,6 +215,7 @@ void KeyPointDefinition::slotAdd()
 	} else {
 		ShowErrorMessage(tr("add"), err.isEmpty()?tr("add fail."):err, this);
 	}
+	
 }
 
 void KeyPointDefinition::slotModify()
@@ -261,6 +265,9 @@ void KeyPointDefinition::slotDelete()
 		if (YIELDCURVECTL->removeKeyPoint(val.getKpcode(), err)) {
 			ShowSuccessMessage(tr("delete"), tr("delete success."), this);
 			KeypointTreeOper::delTree(m_tree, m_model, val.getKpcode(), val.getMarketCode());
+			if (!KeypointTreeOper::hasChildren(m_model, val.getMarketName())) {
+				KeypointTreeOper::delTree(m_tree, m_model, val.getMarketCode(), "");
+			}
 		} else {
 			ShowErrorMessage(tr("delete"), err.isEmpty()?tr("delete fail."):err, this);
 		}
@@ -400,6 +407,7 @@ void KeyPointDefinition::setViewData(const CKeypoint &val)
 CKeypoint KeyPointDefinition::getViewData()
 {
 	CKeypoint result;
+	
 	result.setKpcode(ui.leKPCode->text().trimmed());
 	result.setKpname(ui.leKPName->text().trimmed());
 	result.setProductCode(ui.cbProductCode->currentText().trimmed());
@@ -416,6 +424,7 @@ CKeypoint KeyPointDefinition::getViewData()
 	result.setTenor(spliceTenor(ui.leTenor->text().toInt(), tenor));
 	QString code = ui.cbMarket->property(PROCODE).toString();
 	if (PARASETCTL->getParadict().contains(code)) code = "";
+	
 	result.setMarketCode(code.isEmpty()?ui.cbMarket->currentData().toString().trimmed():code);
 	result.setMarketName(ui.cbMarket->currentText().trimmed());
 	code = ui.cbCalendar->property(PROCODE).toString();
@@ -487,6 +496,7 @@ void KeyPointDefinition::initParameter(const QString &paraCode)
 		if (PARASETCTL->getAllParadict(typeCode, paraList)) {
 			foreach(const CParaDict &para, paraList) {
 				cb->addItem(para.getParaName().trimmed(), para.getParaCode().trimmed());
+				qDebug() << "------" << typeCode << para.getParaName().trimmed() << para.getParaCode().trimmed() << "------";
 			}
 		}
 	};
@@ -494,22 +504,27 @@ void KeyPointDefinition::initParameter(const QString &paraCode)
 	if (paraCode == MARKETTYPE)
 	{// 市场
 		initParaList(ui.cbMarket, MARKETTYPE);
+		ui.cbMarket->setEditable(false);
 	}
 	else if (paraCode == CALENDAR)
 	{// 日历
 		initParaList(ui.cbCalendar, CALENDAR);
+		ui.cbCalendar->setEditable(false);
 	}
 	else if (paraCode == CONVENTION)
 	{// 计息日调整
 		initParaList(ui.cbConvention, CONVENTION);
+		ui.cbConvention->setEditable(false);
 	}
 	else if (paraCode == DAYCOUNT)
 	{// 天数计数
 		initParaList(ui.cbDayCount, DAYCOUNT);
+		ui.cbDayCount->setEditable(false);
 	}
-	else if (paraCode == COUPONFREQUENCY)
+	else if (paraCode == SPOTLAG)
 	{// 付息频率
-		initParaList(ui.cbSpotlag, COUPONFREQUENCY);
+		initParaList(ui.cbSpotlag, SPOTLAG);
+		ui.cbSpotlag->setEditable(false);
 	}
 }
 
