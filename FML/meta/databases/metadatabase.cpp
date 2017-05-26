@@ -297,6 +297,11 @@ bool MetaDatabase::initParaDict(QMap<QString, CParaDict> &val, QString &err)
 	strList.push_back(CParaDict("","",ZERORATECOMPOUNDFREQUENCY, tr("ZeroRateCompoundFrequency")/*零息利率复利类型*/));
 	strList.push_back(CParaDict(ZERORATECOMPOUNDFREQUENCY, tr("ZeroRateCompoundFrequency")/*零息利率复利类型*/, CONTINUOUSCOMPOUND, tr("ContinuousCompound")));//连续复利
 	strList.push_back(CParaDict(ZERORATECOMPOUNDFREQUENCY, tr("ZeroRateCompoundFrequency")/*零息利率复利类型*/, YEARLYCOMPOUND, tr("yearlyCompound")));//年复利
+	strList.push_back(CParaDict("", "", SPOTLAG,tr("SpotLag")));
+	strList.push_back(CParaDict(SPOTLAG,tr("SpotLag"),TADD0,tr("T+0")));
+	strList.push_back(CParaDict(SPOTLAG, tr("SpotLag"), TADD1, tr("T+1")));
+	strList.push_back(CParaDict(SPOTLAG, tr("SpotLag"), TADD2, tr("T+2")));
+
 
 	if (METADATABASE->setParadict(strList, err))
 	{

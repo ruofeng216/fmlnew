@@ -277,35 +277,13 @@ void KeyPointDefinition::slotDelete()
 
 void KeyPointDefinition::slotTreeClicked(const QModelIndex &index)
 {
-	auto getChildData = [this, &index](int col, int &nIndex, QString &text, QString &data) {
-		text = ""; data = ""; nIndex = 0;
-		QModelIndex sibling = index.sibling(index.row(), col);
-		QStandardItem *item = m_model->itemFromIndex(sibling);
-		if (item) {
-			nIndex = item->data(V_INDEX).toInt();
-			data = item->data(V_CODE).toString();
-			text = item->text();
-		}
-	};
-	auto getParentData = [this, &index](QString &text, QString &data) {
-		text = ""; data = "";
-		QModelIndex parentIndex = index.parent();
-		if (index.parent().isValid()) {
-			parentIndex = parentIndex.sibling(parentIndex.row(), 0);
-		} else {
-			parentIndex = index.sibling(index.row(), 0);
-		}
-		QStandardItem *item = m_model->itemFromIndex(parentIndex);
-		if (item) {
-			text = item->text();
-			data = item->data(V_CODE).toString();
-		}
-	};
 
 	QString text, data; // text:UI上展示的名称，data：对应的代码
 	CKeypoint val;
 	QString startDate, endDate;
-	getParentData(text, data);
+	
+	KeypointTreeOper::getParentData(m_model, index, text, data,V_CODE);
+	
 	val.setMarketCode(data);
 	val.setMarketName(text);
 	if (index.parent().isValid()) 
@@ -323,7 +301,8 @@ void KeyPointDefinition::slotTreeClicked(const QModelIndex &index)
 			int nIndex = 0;
 			for (int i = 0; i < item->columnCount(); i++)
 			{
-				getChildData(i, nIndex, text, data);
+				
+				KeypointTreeOper::getChildData(m_model, index, i, nIndex, text, data,V_INDEX,V_CODE);
 				if (nIndex == eKPCode)
 				{
 					val.setKpcode(text);

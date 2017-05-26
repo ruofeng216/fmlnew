@@ -15,6 +15,8 @@ public:
 	
 public:
 	bool hasChildren(const QStandardItemModel *pModel, const QString code)const;
+	void getChildData(const QStandardItemModel *pModel, const QModelIndex modelIdx, int col, int &nIndex, QString &text, QString &data, const int itemIdxNo, const int itemDataNo);
+	void getParentData(const QStandardItemModel *pModel, const QModelIndex modelIdx, QString &text, QString &data, const int itemDataNo);
 public:
 	bool delRootNode(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel,const QString &val);
 	bool delChildNode(QMap<QString, QList<QStandardItem *>> &tree, QStandardItemModel *pGoodsModel, const QString &val);
@@ -301,3 +303,42 @@ public:
 		BWTreeOper::addTree(tree, pGoodsModel, curCode, parentCode, val, cols);
 	}
 };
+
+template<class T>
+void BWTreeOper<T>::getChildData(const QStandardItemModel *pModel, 
+		const QModelIndex modelIdx, 
+		int col, 
+		int &itemIdx, 
+		QString &itemText, 
+		QString &itemData,
+		const int itemIdxNo,
+		int itemDataNo) 
+{
+	itemText = ""; itemData = ""; itemIdx = 0;
+	QModelIndex sibling = modelIdx.sibling(modelIdx.row(), col);
+	QStandardItem *item = pModel->itemFromIndex(sibling);
+	if (item) {
+		//itemIdx = item->data(Qt::UserRole + 1).toInt();
+		//itemData = item->data(Qt::UserRole + 2).toString();
+		itemIdx = item->data(itemIdxNo).toInt();
+		itemData = item->data(itemDataNo).toString();
+		itemText = item->text();
+	}
+}
+
+template<class T>
+void BWTreeOper<T>::getParentData(const QStandardItemModel *pModel, const QModelIndex modelIdx, QString &itemText, QString &itemData,const int itemDataNo) {
+	itemText = ""; itemData = "";
+	QModelIndex parentIndex = modelIdx.parent();
+	if (modelIdx.parent().isValid()) {
+		parentIndex = parentIndex.sibling(parentIndex.row(), 0);
+	}
+	else {
+		parentIndex = modelIdx.sibling(modelIdx.row(), 0);
+	}
+	QStandardItem *item = pModel->itemFromIndex(parentIndex);
+	if (item) {
+		itemText = item->text();
+		itemData = item->data(itemDataNo).toString();
+	}
+}
