@@ -69,6 +69,22 @@ typedef enum e_ErrType
 #pragma region CF
 //交割天数
 #define SPOTLAG "SpotLag"
+#define TADD0 "TADD0"
+#define TADD1 "TADD1"
+#define TADD2 "TADD2"
+
+// 零息曲线插值方法
+#define ZEROCOUPONCURVE "ZeroCouponCurveInterpolation"
+#define Z1 "ZM1"
+#define Z2 "ZM2"
+#define Z3 "ZM3"
+
+// 折现曲线插值方法
+#define DiscountCurve "DiscountCurveInterpolation"
+#define D1 "DM1"
+#define D2 "DM2"
+#define D3 "DM3"
+
 // 付息频率
 #define COUPONFREQUENCY  "CouponFrequency"
 // 按季
